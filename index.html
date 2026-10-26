@@ -14,204 +14,233 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@500;600;700&family=Montserrat:wght@700;800&family=Barlow:wght@400;500;600&display=swap">
+<script>
+/* Thème choisi avant le premier rendu, pour éviter un flash */
+(function(){ var t = null; try { t = localStorage.getItem('saison.theme'); } catch(e) {}
+  if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', t); })();
+</script>
 <style>
-/* Mobile : une colonne (titre, chiffres, semaine en cours, saison). PC : deux colonnes, la semaine à gauche (fixe), la saison à droite. */
+/* Quatre pages : Semaine (accueil), Saison, Courses, Renfo. Onglets en bas sur mobile, en haut sur PC. Une colonne lisible. */
 :root{
-  color-scheme:dark;
-  --bg:#0B1011; --card:#121819; --card-2:#192122; --line:#222C2D;
-  --ink:#E9EEED; --muted:#8A9B98; --faint:#56645F;
+  --bg:#0B1011; --card:#131A1B; --card-2:#1B2425; --line:#222C2D;
+  --ink:#E9EEED; --muted:#8A9B98; --faint:#56645F; --nav:rgba(11,16,17,.92);
   --p0:#E2A469; --pr:#7E8F8C; --p1:#4F9BD9; --p2:#35C9A6; --p3:#E5735C; --p4:#C9B8FF;
-  --title:#4A93D9;
-  --brand:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  --title:#4A93D9; --on-accent:#06211C;
   --display:'Antonio','Arial Narrow',sans-serif;
+  --brand:'Montserrat','Helvetica Neue',Arial,sans-serif;
   --body:'Barlow','Helvetica Neue',Arial,sans-serif;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#F3F5F4; --card:#FFFFFF; --card-2:#E8EDEC; --line:#DCE3E1;
+  --ink:#152021; --muted:#5E6D6A; --faint:#9AA7A4; --nav:rgba(243,245,244,.94);
+  --p0:#B26A22; --pr:#6B7A77; --p1:#2B72BA; --p2:#0F8469; --p3:#C24B34; --p4:#6E55CF;
+  --title:#1F6FB8; --on-accent:#FFFFFF;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{background:var(--bg)}
-body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%;
-  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%;transition:background .2s,color .2s}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
 :focus-visible{outline:2px solid var(--p2);outline-offset:2px;border-radius:6px}
 
-.app{max-width:560px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-block:26px 96px;display:grid;gap:26px}
-.side,.main{display:flex;flex-direction:column;gap:22px;min-width:0}
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px max(18px,env(safe-area-inset-right,0px)) 10px max(18px,env(safe-area-inset-left,0px))}
+.brand{font-family:var(--brand);font-weight:800;text-transform:uppercase;color:var(--title);line-height:.9;font-size:15px;letter-spacing:.01em}
+.brand span{display:block;text-align:right;font-size:11px}
+.cd{margin-left:auto;font-family:var(--display);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.theme{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);flex:none}
+.theme svg{width:17px;height:17px}
 
-/* Titre */
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:8px 12px;flex-wrap:wrap}
-.head > div:first-child{min-width:0}
-.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-h1{margin:0;display:inline-block;font-family:var(--brand);font-weight:800;text-transform:uppercase;line-height:.95;color:var(--title)}
-h1 .t1{display:block;font-size:clamp(34px,10.4vw,46px);letter-spacing:.01em}
-h1 .t2{display:block;text-align:right;font-size:clamp(22px,6.6vw,30px);letter-spacing:.02em}
-h1 .t3{display:block;text-align:right;font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.24em;color:var(--muted);margin-top:4px}
-.cd{text-align:right;flex:none}
-.cd b{display:block;font-family:var(--display);font-size:34px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
-.cd span{font-size:11px;color:var(--muted);letter-spacing:.06em}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--nav);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 8px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--faint)}
+.tab svg{width:22px;height:22px}
+.tab[aria-current="page"]{color:var(--p2)}
 
-/* Chiffres */
+.page{max-width:760px;margin:0 auto;padding:22px max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 96px) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:22px}
+.page-h{display:flex;flex-direction:column;gap:4px}
+.eyebrow{margin:0;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.page-h h1{margin:0;font-family:var(--display);font-size:34px;font-weight:600;text-transform:uppercase;line-height:1;letter-spacing:.01em}
+.sub{margin:0;font-size:13.5px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.goal{padding:12px 14px}
+.goal .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.goal .v{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums;margin:2px 0 8px}
+.goal .v small{font-family:var(--body);font-size:12px;color:var(--muted);font-weight:500}
+.trk{height:5px;background:var(--card-2);border-radius:3px;overflow:hidden}
+.trk i{display:block;height:100%;background:var(--c,var(--p2));border-radius:3px}
+.todo{list-style:none;margin:0;padding:2px 14px}
+.todo li{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+.todo li:last-child{border-bottom:0}
+.chk{flex:1;min-width:0;display:grid;grid-template-columns:22px 42px 1fr;gap:10px;align-items:start;padding:13px 0;font-size:14.5px}
+.box{width:21px;height:21px;border-radius:6px;border:1.5px solid var(--faint);display:grid;place-items:center;transition:background .15s,border-color .15s}
+.box svg{width:13px;height:13px;opacity:0;stroke:var(--on-accent)}
+.chk.done .box{background:var(--p2);border-color:var(--p2)}
+.chk.done .box svg{opacity:1}
+.dj{font-family:var(--display);font-size:14.5px;text-transform:uppercase;letter-spacing:.04em;line-height:1.3}
+.dj small{display:block;font-family:var(--body);font-size:11px;color:var(--muted);text-transform:none;letter-spacing:0}
+.chk.today .dj{color:var(--p2)}
+.chk.done .ds{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint)}
+.go{flex:none;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--p2);border:1px solid var(--p2);border-radius:14px;padding:5px 10px}
+.today-card{padding:14px 16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.today-card .k{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--p2)}
+.today-card .t{font-size:17px;font-weight:500;line-height:1.4}
+.note{font-size:13px;color:var(--muted);padding:12px 14px;border-left:3px solid var(--p2);background:var(--card);border-radius:0 10px 10px 0}
+.note b{color:var(--ink);font-weight:600}
+
+.hero h1{margin:0;font-family:var(--brand);font-weight:800;text-transform:uppercase;color:var(--title);line-height:.95;display:inline-block}
+.hero .t1{display:block;font-size:clamp(34px,10vw,52px)}
+.hero .t2{display:block;text-align:right;font-size:clamp(22px,6.4vw,34px)}
+.hero .t3{display:block;text-align:right;font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.24em;color:var(--muted);margin-top:4px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .stat{padding:10px 0}
 .stat + .stat{padding-left:14px;border-left:1px solid var(--line)}
 .stat .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.stat .v{font-family:var(--display);font-size:24px;font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums}
+.stat .v{font-family:var(--display);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
 .stat .v small{font-family:var(--body);font-size:11.5px;color:var(--muted);font-weight:500}
-
-/* Sections */
-.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 8px}
-.sec-h h2{margin:0;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.sec-h span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-
-/* Semaine en cours */
-.week-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 14px}
-.todo{list-style:none;margin:0;padding:0}
-.todo li{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
-.todo li:last-child{border-bottom:0}
-.chk{flex:1;min-width:0;display:grid;grid-template-columns:22px 44px 1fr;gap:10px;align-items:start;padding:11px 0;font-size:14px}
-.box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--faint);display:grid;place-items:center;margin-top:1px;transition:background .15s,border-color .15s}
-.box svg{width:13px;height:13px;opacity:0}
-.chk.done .box{background:var(--p2);border-color:var(--p2)}
-.chk.done .box svg{opacity:1}
-.dj{font-family:var(--display);font-size:14px;text-transform:uppercase;letter-spacing:.04em;line-height:1.35;color:var(--ink)}
-.dj small{display:block;font-family:var(--body);font-size:10.5px;color:var(--muted);text-transform:none;letter-spacing:0}
-.chk.today .dj{color:var(--p2)}
-.ds{line-height:1.45}
-.chk.done .ds{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint)}
-.go{flex:none;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--p2);border:1px solid color-mix(in srgb,var(--p2) 45%,var(--line));border-radius:14px;padding:5px 10px}
-.daily{font-size:12.5px;color:var(--muted);margin:10px 2px 0}
-
-/* Saison */
-.phases{display:flex;flex-direction:column}
-.phase{border-top:1px solid var(--line)}
-.phase:last-child{border-bottom:1px solid var(--line)}
-.ph-btn{display:block;width:100%;padding:14px 0 13px}
-.ph-top{display:flex;align-items:baseline;gap:10px}
-.dot{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none;transform:translateY(-2px)}
-.ph-name{font-family:var(--display);font-weight:600;font-size:21px;text-transform:uppercase;letter-spacing:.02em;line-height:1;white-space:nowrap}
+.tl{display:flex;gap:3px;height:8px;border-radius:4px;overflow:hidden}
+.tl i{display:block;height:100%;opacity:.3}
+.tl i.on{opacity:1}
+.phase{border-bottom:1px solid var(--line)}
+.ph-btn{display:grid;grid-template-columns:10px 1fr auto 10px;gap:4px 12px;align-items:center;width:100%;padding:15px 0}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.ph-name{font-family:var(--display);font-weight:600;font-size:20px;text-transform:uppercase;letter-spacing:.02em;line-height:1}
 .phase.current .ph-name{color:var(--c)}
-.phase.future .ph-name{color:var(--ink)}
 .phase.past .ph-name{color:var(--muted)}
-.ph-date{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.chev{width:7px;height:7px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translateY(-3px);transition:transform .2s;flex:none;margin-left:6px}
-.phase.open .chev{transform:rotate(-135deg) translateY(-1px)}
-.ph-sub{font-size:12.5px;color:var(--muted);margin:5px 0 0 19px}
-.ph-meta{margin:8px 0 0 19px}
-.bar2{display:grid;grid-template-columns:28px 1fr auto;gap:6px 10px;align-items:center;font-size:12px}
+.ph-date{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chev{width:7px;height:7px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.phase.open .chev{transform:rotate(-135deg)}
+.ph-sub{grid-column:2 / 4;font-size:12.5px;color:var(--muted)}
+.ph-body{padding:0 0 18px 22px;display:flex;flex-direction:column;gap:16px}
+.ph-body h3{margin:0 0 6px;font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.bar2{display:grid;grid-template-columns:28px 1fr auto;gap:6px 10px;align-items:center;font-size:12.5px}
 .bar2 .l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.trk{height:4px;background:var(--card-2);border-radius:3px;overflow:hidden}
-.trk i{display:block;height:100%;background:var(--c);border-radius:3px}
-.bar2 .n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar2 .n{font-variant-numeric:tabular-nums}
 .bar2 .n span{color:var(--muted)}
-.soon{font-size:12px;color:var(--faint)}
-.races{display:flex;flex-direction:column;gap:3px;margin:8px 0 0 19px}
-.race{display:flex;align-items:baseline;gap:10px;font-size:13.5px}
-.race .d{font-family:var(--display);font-size:14px;min-width:50px;font-variant-numeric:tabular-nums;color:var(--muted)}
-.race .rn{font-weight:500;min-width:0}
-.race.key .rn{font-weight:600}
-.race.key .rn::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c);margin-left:6px;transform:translateY(-2px)}
-.race .rn em{font-style:normal;color:var(--muted);font-size:12px}
-.race .f{margin-left:auto;color:var(--muted);font-size:12px;white-space:nowrap}
-.race .res{margin-left:auto;font-size:12px;font-weight:600;white-space:nowrap}
-
-.ph-body{margin:4px 0 16px 19px;display:flex;flex-direction:column;gap:16px}
-.ph-body h3{margin:0 0 6px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.wk-type{display:grid;grid-template-columns:36px 1fr;gap:4px 10px;font-size:13px;margin:0}
+.wk-type{display:grid;grid-template-columns:36px 1fr;gap:4px 10px;font-size:13.5px;margin:0}
 .wk-type dt{font-family:var(--display);color:var(--c);text-transform:uppercase}
 .wk-type dd{margin:0}
-.focus{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;font-size:13px}
+.focus{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;font-size:13.5px}
 .focus li{position:relative;padding-left:14px}
 .focus li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:2px;background:var(--c)}
 .wks{display:flex;flex-direction:column;gap:7px}
-.wkr{display:grid;grid-template-columns:42px 1fr 112px;gap:10px;align-items:center;font-size:12px}
+.wkr{display:grid;grid-template-columns:42px 1fr 112px;gap:10px;align-items:center;font-size:12.5px}
 .wkr .wd{color:var(--muted);font-variant-numeric:tabular-nums}
 .wkr .wb{position:relative;height:6px;background:var(--card-2);border-radius:3px}
 .wkr .wb i{position:absolute;left:0;top:0;bottom:0;background:var(--c);border-radius:3px}
-.wkr .wb b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.5}
+.wkr .wb b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.45}
 .wkr .wv{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .wkr .wv span{color:var(--muted)}
 .wkr.fut{opacity:.45}
-.wkn{font-size:11.5px;color:var(--muted);margin:-3px 0 0 52px}
+.wkn{font-size:12px;color:var(--muted);margin:-3px 0 0 52px}
 
-/* Course finale */
-.final{border-radius:14px;padding:16px;background:linear-gradient(140deg,color-mix(in srgb,var(--title) 22%,var(--card)) 0%,var(--card) 65%);border:1px solid color-mix(in srgb,var(--title) 35%,var(--line))}
+.races{display:flex;flex-direction:column}
+.race{display:grid;grid-template-columns:54px 1fr auto;gap:2px 12px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
+.race .d{font-family:var(--display);font-size:16px;font-variant-numeric:tabular-nums}
+.race .rn{font-weight:600;font-size:15px}
+.race .rn em{font-style:normal;font-weight:400;color:var(--muted);font-size:12.5px}
+.race .f{grid-column:2;font-size:12.5px;color:var(--muted)}
+.race .r{grid-row:1 / 3;grid-column:3;text-align:right;font-size:12.5px;color:var(--muted);white-space:nowrap;align-self:center}
+.race .r b{display:block;font-family:var(--display);font-size:17px;color:var(--ink);font-weight:600}
+.race.key .rn::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-left:7px;transform:translateY(-2px)}
+.race.past .d,.race.past .rn{color:var(--muted)}
+.final{border-radius:16px;padding:18px;background:linear-gradient(140deg,color-mix(in srgb,var(--title) 20%,var(--card)) 0%,var(--card) 70%);border:1px solid color-mix(in srgb,var(--title) 35%,var(--line))}
 .final .fn{font-family:var(--brand);font-weight:800;font-size:22px;text-transform:uppercase;color:var(--title);line-height:1}
-.final .fd{font-family:var(--display);font-size:16px;margin-top:6px}
-.final .ff{font-size:12.5px;color:var(--muted);margin-top:4px}
+.final .fd{font-family:var(--display);font-size:17px;margin-top:8px}
+.final .ff{font-size:13px;color:var(--muted);margin-top:4px}
+.rules{margin:0;font-size:12px;color:var(--muted);text-align:center}
+.rules b{color:var(--ink)}
+.sync{margin:0;font-size:11.5px;color:var(--faint);text-align:center}
 
-.foot{font-size:11.5px;color:var(--faint);text-align:center;display:flex;flex-direction:column;gap:4px}
-.foot b{color:var(--muted);font-weight:600}
+.page.rf{max-width:none;padding:0;gap:0;height:calc(100dvh - 57px - env(safe-area-inset-top,0px) - 62px - env(safe-area-inset-bottom,0px))}
+.page.rf iframe{flex:1;width:100%;border:0;background:var(--bg)}
 
-/* Renfo */
-.fab{position:fixed;right:max(18px,calc(env(safe-area-inset-right,0px) + 18px));bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:20;display:flex;align-items:center;gap:8px;background:var(--p2);color:#06211C;font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.05em;text-transform:uppercase;padding:12px 18px 11px;border-radius:30px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
-.fab svg{width:18px;height:18px}
-.rf{position:fixed;inset:0;z-index:40;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
-.rf-panel{flex:1;display:flex;flex-direction:column;min-height:0}
-.rf-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-bottom:1px solid var(--line)}
-.rf-bar h2{margin:0;font-family:var(--display);font-size:20px;font-weight:600;text-transform:uppercase;color:var(--p2)}
-.rf-bar button{font-size:14px;color:var(--muted)}
-.rf iframe{flex:1;width:100%;border:0;background:var(--bg)}
+.wk-grid{display:flex;flex-direction:column;gap:16px}
+.wk-grid > div{display:flex;flex-direction:column;gap:16px}
 
-/* PC */
-@media (min-width:960px){
-  .app{max-width:1160px;grid-template-columns:400px 1fr;gap:56px;padding-block:48px 64px;align-items:start}
-  .side{position:sticky;top:32px}
-  h1 .t1{font-size:54px}
-  h1 .t2{font-size:35px}
-  .phase .ph-btn:hover .ph-name{color:var(--c)}
-  .fab{right:32px;bottom:32px}
-  .rf{background:rgba(5,8,8,.72);align-items:center;justify-content:center;padding:32px}
-  .rf-panel{flex:none;width:460px;height:min(860px,92vh);background:var(--bg);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+@media (min-width:900px){
+  .top-in{max-width:1000px;padding-inline:32px}
+  .brand{font-size:18px}
+  .tabs{position:static;background:none;border:0;padding:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .tabs-in{max-width:none;margin:0 0 0 28px;display:flex;gap:4px}
+  .tab{flex-direction:row;gap:8px;padding:8px 14px;border-radius:20px;font-size:13px;color:var(--muted)}
+  .tab svg{width:17px;height:17px}
+  .tab[aria-current="page"]{background:var(--card-2);color:var(--ink)}
+  .page{max-width:1000px;padding:36px 32px 64px}
+  .wk-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
+  #p-saison,#p-courses{max-width:760px}
+  .page.rf{height:calc(100dvh - 57px);max-width:520px;margin:0 auto;border-inline:1px solid var(--line)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<div class="app">
-  <aside class="side">
-    <div class="head">
-      <div>
-        <p class="eyebrow">Saison 2026 – 2027</p>
-        <h1><span class="t1">Restonica</span><span class="t2">Trail</span><span class="t3">Corsica · 69 km</span></h1>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">Restonica<span>Trail</span></div>
+    <nav class="tabs" aria-label="Pages">
+      <div class="tabs-in">
+        <button class="tab" data-p="semaine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M8.5 15l2 2 4-4"/></svg>Semaine</button>
+        <button class="tab" data-p="saison"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-10 4 6 3-4 5 8z"/></svg>Saison</button>
+        <button class="tab" data-p="courses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>Courses</button>
+        <button class="tab" data-p="renfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="6"/></svg>Renfo</button>
       </div>
-      <div class="cd"><b id="cd">—</b><span>avant le départ</span></div>
-    </div>
-
-    <div class="stats" id="stats"></div>
-
-    <section id="week"></section>
-
-    <div class="final">
-      <div class="fn">Restonica Trail</div>
-      <div class="fd">Samedi 10 juillet 2027 · 2h00 · Corte</div>
-      <div class="ff">69 km · 3 950 m D+ · frontale 500 lm · 60-70 g de glucides/h</div>
-    </div>
-  </aside>
-
-  <main class="main">
-    <section>
-      <div class="sec-h"><h2>La saison</h2><span id="cur"></span></div>
-      <div class="phases" id="phases"></div>
-    </section>
-    <div class="foot">
-      <div><b>141</b> max en footing · VFC <b>&lt; 70</b> = journée facile · aine et dos <b>≤ 3/10</b></div>
-      <div id="sync">Chargement…</div>
-    </div>
-  </main>
-</div>
-
-<button class="fab" id="rfbtn" aria-label="Ouvrir le renfo">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="6"/></svg>
-  Renfo
-</button>
-
-<div class="rf" id="rf" hidden>
-  <div class="rf-panel">
-    <div class="rf-bar"><h2>Renfo</h2><button id="rf-close">Fermer</button></div>
-    <iframe id="rf-frame" title="Carnet de renfo"></iframe>
+    </nav>
+    <div class="cd" id="cd">—</div>
+    <button class="theme" id="theme" aria-label="Changer de thème"></button>
   </div>
-</div>
+</header>
+
+<main class="page" id="p-semaine" hidden>
+  <div class="page-h">
+    <p class="eyebrow" id="w-eyebrow"></p>
+    <h1>Cette semaine</h1>
+    <p class="sub" id="w-dates"></p>
+  </div>
+  <div class="wk-grid">
+    <div>
+      <div class="today-card card" id="w-today"></div>
+      <div class="card"><ul class="todo" id="w-list"></ul></div>
+    </div>
+    <div>
+      <div class="goals" id="w-goals"></div>
+      <div class="note" id="w-daily" hidden></div>
+      <p class="rules"><b>141</b> max en footing · VFC <b>&lt; 70</b> = journée facile · aine et dos <b>≤ 3/10</b></p>
+    </div>
+  </div>
+</main>
+
+<main class="page" id="p-saison" hidden>
+  <div class="hero"><h1><span class="t1">Restonica</span><span class="t2">Trail</span><span class="t3">Corsica · 69 km</span></h1></div>
+  <div class="stats" id="s-stats"></div>
+  <div class="tl" id="s-tl" aria-hidden="true"></div>
+  <div id="s-phases"></div>
+  <p class="sync" id="sync">Chargement…</p>
+</main>
+
+<main class="page" id="p-courses" hidden>
+  <div class="page-h">
+    <p class="eyebrow">Saison 2026 – 2027</p>
+    <h1>Courses</h1>
+    <p class="sub">Le point marque les courses qui comptent le plus.</p>
+  </div>
+  <div class="races" id="c-list"></div>
+  <div class="final">
+    <div class="fn">Restonica Trail</div>
+    <div class="fd">Samedi 10 juillet 2027 · 2h00 · Corte</div>
+    <div class="ff">69 km · 3 950 m D+ · frontale 500 lm · 60-70 g de glucides/h</div>
+  </div>
+</main>
+
+<main class="page rf" id="p-renfo" hidden>
+  <iframe id="rf-frame" title="Carnet de renfo"></iframe>
+</main>
 
 <script src="plan.js"></script>
 <script>
@@ -220,17 +249,20 @@ const fmt = d => String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()
 const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 const nf = n => Math.round(n).toLocaleString('fr-FR');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const DAY = 86400000;
-const $ = id => document.getElementById(id);
+const DAY = 86400000, $ = id => document.getElementById(id);
+const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 
-let WEEKS = {}, RESULTS = {}, PLANS = {}, MAJ = '';
+let WEEKS = {}, RESULTS = {}, PLANS = {};
 let today = new Date(); today.setHours(0,0,0,0);
-let open = null; try { open = localStorage.getItem('saison.open'); } catch(e) {}
+let open = null;
 const S0 = D('2026-10-26'), RACE = D('2027-07-10');
+const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch(e) { return d; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} };
 
 const status = p => today < D(p.start) ? 'future' : (today > D(p.end) ? 'past' : 'current');
-const current = () => PHASES.find(p => status(p) === 'current');
-const monday = () => iso(new Date(today.getTime() - ((today.getDay()+6)%7)*DAY));
+const current = () => PHASES.find(p => !p.pre && status(p) === 'current');
+const monday = () => new Date(today.getTime() - ((today.getDay()+6)%7)*DAY);
+const weekNo = () => Math.max(1, Math.min(37, Math.floor((today - S0)/(7*DAY)) + 1));
 function weeksOf(p){
   const out = []; for (let t = D(p.start).getTime(); t <= D(p.end).getTime(); t += 7*DAY) out.push(new Date(t));
   return out.map((w,i,a) => { const r = a.length > 1 ? i/(a.length-1) : 0;
@@ -241,23 +273,6 @@ function tally(p){
   weeksOf(p).filter(w => w.start <= today).forEach(w => { tKm+=w.tKm; tDp+=w.tDp; const a = WEEKS[w.key]; if (a){ km+=+a.km||0; dp+=+a.dplus||0; } });
   return { km, dp, tKm, tDp };
 }
-
-/* Semaine en cours : plan de data.json + coches locales */
-function weekPlan(){
-  const mon = monday(); let w;
-  if (PLANS[mon] && Array.isArray(PLANS[mon].jours)) w = JSON.parse(JSON.stringify(PLANS[mon]));
-  else { const p = current(); w = { jours:(p ? p.week : []).map(([j,s]) => ({ jour:j, seance:s })) }; }
-  let c = {}; try { c = JSON.parse(localStorage.getItem('saison.coches.' + mon) || '{}'); } catch(e) {}
-  w.jours.forEach((j,i) => { j.fait = !!c[i]; });
-  return w;
-}
-function toggleDay(i){
-  const mon = monday(); let c = {};
-  try { c = JSON.parse(localStorage.getItem('saison.coches.' + mon) || '{}'); } catch(e) {}
-  c[i] = !c[i];
-  try { localStorage.setItem('saison.coches.' + mon, JSON.stringify(c)); } catch(e) {}
-  renderWeek();
-}
 function renfoId(s){
   s = String(s).toLowerCase();
   if (s.includes('post-course')) return 'postcourse';
@@ -267,121 +282,168 @@ function renfoId(s){
   return null;
 }
 
-/* Rendu */
-function renderTop(){
-  const d = Math.ceil((RACE - today)/DAY);
-  $('cd').textContent = d > 0 ? 'J-' + d : (d === 0 ? 'Jour J' : 'Fini');
+/* ---------- Thème ---------- */
+const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
+const MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  document.querySelector('meta[name="theme-color"]').content = t === 'light' ? '#F3F5F4' : '#0B1011';
+  $('theme').innerHTML = t === 'light' ? MOON : SUN;
+  $('theme').setAttribute('aria-label', t === 'light' ? 'Passer en sombre' : 'Passer en clair');
+  try { $('rf-frame').contentDocument.documentElement.setAttribute('data-theme', t); } catch(e) {}
+}
+$('theme').onclick = () => {
+  const t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  try { localStorage.setItem('saison.theme', t); } catch(e) {}
+  applyTheme(t);
+};
+applyTheme(document.documentElement.getAttribute('data-theme'));
+
+/* ---------- Semaine ---------- */
+function weekPlan(){
+  const mon = iso(monday()); let w;
+  if (PLANS[mon] && Array.isArray(PLANS[mon].jours)) w = JSON.parse(JSON.stringify(PLANS[mon]));
+  else { const p = current(); w = { jours:(p ? p.week : []).map(([j,s]) => ({ jour:j, seance:s })) }; }
+  const c = lsGet('saison.coches.' + mon, {});
+  w.jours.forEach((j,i) => { j.fait = !!c[i]; });
+  return w;
+}
+function toggleDay(i){
+  const k = 'saison.coches.' + iso(monday()), c = lsGet(k, {});
+  c[i] = !c[i]; lsSet(k, c); renderWeek();
+}
+function renderWeek(){
+  const p = current(), mon = monday(), w = weekPlan(), ti = (today.getDay()+6)%7;
+  $('w-eyebrow').textContent = 'Semaine ' + weekNo() + ' / 37' + (p ? ' · ' + p.name : '');
+  $('w-dates').textContent = 'Du ' + fmt(mon) + ' au ' + fmt(new Date(mon.getTime() + 6*DAY)) + ' · ' + w.jours.filter(j => j.fait).length + ' / ' + w.jours.length + ' fait';
+
+  const tj = w.jours[ti], rid = tj && renfoId(tj.seance);
+  $('w-today').hidden = !tj;
+  $('w-today').innerHTML = tj ? '<div class="k">Aujourd\'hui · ' + JOURS[ti] + '</div><div class="t">' + esc(tj.seance) + '</div>' +
+    (rid && !tj.fait ? '<button class="go" data-s="' + rid + '">Lancer la séance</button>' : '') : '';
+
+  $('w-list').innerHTML = w.jours.map((j,i) => {
+    const d = new Date(mon.getTime() + i*DAY), r = renfoId(j.seance);
+    return '<li><button class="chk' + (j.fait ? ' done' : '') + (i === ti ? ' today' : '') + '" data-i="' + i + '" aria-pressed="' + j.fait + '">' +
+      '<span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
+      '<span class="dj">' + esc(j.jour) + '<small>' + fmt(d) + '</small></span><span class="ds">' + esc(j.seance) + '</span></button>' +
+      (r && !j.fait && i !== ti ? '<button class="go" data-s="' + r + '">Lancer</button>' : '') + '</li>';
+  }).join('');
+
+  const wk = p ? weeksOf(p).find(x => x.key === iso(mon)) : null, a = WEEKS[iso(mon)] || {};
+  const goal = (k, v, t, u) => '<div class="goal card"><div class="k">' + k + ' de la semaine</div><div class="v">' + nf(v) + (t ? ' <small>/ ' + nf(t) + ' ' + u + '</small>' : '') + '</div>' +
+    '<div class="trk"><i style="width:' + (t ? Math.min(100, v/t*100) : 0).toFixed(1) + '%"></i></div></div>';
+  $('w-goals').innerHTML = goal('Km', +a.km||0, wk && wk.tKm, 'km') + goal('D+', +a.dplus||0, wk && wk.tDp, 'm');
+  $('w-daily').hidden = !w.quotidien;
+  if (w.quotidien) $('w-daily').innerHTML = '<b>Chaque jour</b> · ' + esc(w.quotidien);
+
+  document.querySelectorAll('#p-semaine .chk').forEach(b => b.onclick = () => toggleDay(+b.dataset.i));
+  document.querySelectorAll('#p-semaine .go').forEach(b => b.onclick = () => openRenfo(b.dataset.s));
+}
+
+/* ---------- Saison ---------- */
+function bar(l, v, t){
+  return '<span class="l">' + l + '</span><div class="trk"><i style="width:' + (t > 0 ? Math.min(100, v/t*100) : 0).toFixed(1) + '%"></i></div><span class="n">' + nf(v) + ' <span>/ ' + nf(t) + '</span></span>';
+}
+function renderSeason(){
   let km=0, dp=0, tKm=0, tDp=0;
   PHASES.filter(p => !p.pre).forEach(p => { const t = tally(p); km+=t.km; dp+=t.dp; tKm+=t.tKm; tDp+=t.tDp; });
-  const wk = Math.max(1, Math.min(37, Math.floor((today - S0)/(7*DAY)) + 1));
-  $('stats').innerHTML =
-    '<div class="stat"><div class="k">Semaine</div><div class="v">' + wk + ' <small>/ 37</small></div></div>' +
+  $('s-stats').innerHTML =
+    '<div class="stat"><div class="k">Semaine</div><div class="v">' + weekNo() + ' <small>/ 37</small></div></div>' +
     '<div class="stat"><div class="k">Km</div><div class="v">' + nf(km) + ' <small>/ ' + nf(tKm) + '</small></div></div>' +
     '<div class="stat"><div class="k">D+ (m)</div><div class="v">' + nf(dp) + ' <small>/ ' + nf(tDp) + '</small></div></div>';
-  const c = current(); $('cur').textContent = c ? c.name + ' en cours' : '';
-}
+  $('s-tl').innerHTML = PHASES.filter(p => !p.pre).map(p => '<i class="' + (status(p) !== 'future' ? 'on' : '') + '" style="flex:' + ((D(p.end)-D(p.start))/DAY + 1) + ';background:var(' + p.c + ')"></i>').join('');
 
-function renderWeek(){
-  const w = weekPlan(), mon = D(monday()), ti = (today.getDay()+6)%7, done = w.jours.filter(j => j.fait).length;
-  $('week').innerHTML = '<div class="sec-h"><h2>Cette semaine</h2><span>' + done + ' / ' + w.jours.length + '</span></div>' +
-    '<div class="week-card"><ul class="todo">' + w.jours.map((j,i) => {
-      const d = new Date(mon.getTime() + i*DAY), rid = renfoId(j.seance);
-      return '<li><button class="chk' + (j.fait ? ' done' : '') + (i === ti ? ' today' : '') + '" data-i="' + i + '" aria-pressed="' + j.fait + '">' +
-        '<span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#06211C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
-        '<span class="dj">' + esc(j.jour) + '<small>' + fmt(d) + '</small></span><span class="ds">' + esc(j.seance) + '</span></button>' +
-        (rid && !j.fait ? '<button class="go" data-s="' + rid + '">Lancer</button>' : '') + '</li>';
-    }).join('') + '</ul></div>' + (w.quotidien ? '<p class="daily">Chaque jour : ' + esc(w.quotidien) + '</p>' : '');
-  $('week').querySelectorAll('.chk').forEach(b => b.onclick = () => toggleDay(+b.dataset.i));
-  $('week').querySelectorAll('.go').forEach(b => b.onclick = () => openRenfo(b.dataset.s));
-}
-
-function bar(l, v, t){
-  const pct = t > 0 ? Math.min(100, v/t*100) : 0;
-  return '<span class="l">' + l + '</span><div class="trk"><i style="width:' + pct.toFixed(1) + '%"></i></div><span class="n">' + nf(v) + ' <span>/ ' + nf(t) + '</span></span>';
-}
-function raceRow(k){
-  const r = RACES[k], res = RESULTS[k];
-  const right = res && (res.temps || res.place) ? '<span class="res">' + esc([res.temps, res.place].filter(Boolean).join(' · ')) + '</span>' : '<span class="f">' + esc(r.f) + '</span>';
-  return '<div class="race' + (r.key ? ' key' : '') + '"><span class="d">' + esc(r.label) + '</span><span class="rn">' + esc(r.name) + (r.note ? ' <em>' + esc(r.note) + '</em>' : '') + '</span>' + right + '</div>';
-}
-function renderPhases(){
-  $('phases').innerHTML = PHASES.map(p => {
+  $('s-phases').innerHTML = PHASES.map(p => {
     const st = status(p), t = tally(p), isOpen = open === p.id;
-    let meta;
-    if (p.pre) meta = '<div class="soon">' + nf(t.km) + ' km · ' + nf(t.dp) + ' m D+ sur 4 semaines</div>';
-    else if (st === 'future'){ const n = Math.ceil((D(p.start) - today)/(7*DAY)); meta = '<div class="soon">Dans ' + n + ' semaine' + (n>1?'s':'') + '</div>'; }
-    else meta = '<div class="bar2">' + bar('Km', t.km, t.tKm) + bar('D+', t.dp, t.tDp) + '</div>';
     let body = '';
     if (isOpen){
-      const weeks = weeksOf(p);
-      const max = Math.max(1, ...weeks.map(w => Math.max(w.tKm, +(WEEKS[w.key]||{}).km||0))) * 1.1;
+      const weeks = weeksOf(p), max = Math.max(1, ...weeks.map(w => Math.max(w.tKm, +(WEEKS[w.key]||{}).km||0))) * 1.1;
       const rows = weeks.map(w => {
-        const a = WEEKS[w.key], km = a ? +a.km||0 : 0, dp = a ? +a.dplus||0 : 0;
+        const a = WEEKS[w.key], k = a ? +a.km||0 : 0, d = a ? +a.dplus||0 : 0;
         return '<div class="wkr' + (w.start > today ? ' fut' : '') + '"><span class="wd">' + fmt(w.start) + '</span>' +
-          '<div class="wb"><i style="width:' + (km/max*100).toFixed(1) + '%"></i>' + (p.pre ? '' : '<b style="left:calc(' + (w.tKm/max*100).toFixed(1) + '% - 1px)"></b>') + '</div>' +
-          '<span class="wv">' + (a ? nf(km) + ' km · ' + nf(dp) + ' m' : '<span>' + nf(w.tKm) + ' km · ' + nf(w.tDp) + ' m</span>') + '</span></div>' +
+          '<div class="wb"><i style="width:' + (k/max*100).toFixed(1) + '%"></i>' + (p.pre ? '' : '<b style="left:calc(' + (w.tKm/max*100).toFixed(1) + '% - 1px)"></b>') + '</div>' +
+          '<span class="wv">' + (a ? nf(k) + ' km · ' + nf(d) + ' m' : '<span>' + nf(w.tKm) + ' km · ' + nf(w.tDp) + ' m</span>') + '</span></div>' +
           (a && a.note ? '<div class="wkn">' + esc(a.note) + '</div>' : '');
       }).join('');
       body = '<div class="ph-body">' +
-        (st !== 'current' && p.week.length ? '<div><h3>Semaine type</h3><dl class="wk-type">' + p.week.map(([j,s]) => '<dt>' + j + '</dt><dd>' + esc(s) + '</dd>').join('') + '</dl></div>' : '') +
+        (!p.pre && st !== 'future' ? '<div class="bar2">' + bar('Km', t.km, t.tKm) + bar('D+', t.dp, t.tDp) + '</div>' : '') +
+        (p.week.length ? '<div><h3>Semaine type</h3><dl class="wk-type">' + p.week.map(([j,s]) => '<dt>' + j + '</dt><dd>' + esc(s) + '</dd>').join('') + '</dl></div>' : '') +
         '<div><h3>Points clés</h3><ul class="focus">' + p.focus.map(f => '<li>' + esc(f) + '</li>').join('') + '</ul></div>' +
         '<div><h3>Semaine par semaine</h3><div class="wks">' + rows + '</div></div></div>';
     }
     return '<div class="phase ' + st + (isOpen ? ' open' : '') + '" style="--c:var(' + p.c + ')">' +
-      '<button class="ph-btn" data-id="' + p.id + '" aria-expanded="' + isOpen + '">' +
-        '<div class="ph-top"><span class="dot"></span><span class="ph-name">' + esc(p.name) + '</span><span class="ph-date">' + fmt(D(p.start)) + ' → ' + fmt(D(p.end)) + '</span><span class="chev"></span></div>' +
-        '<div class="ph-sub">' + esc(p.sub) + '</div>' +
-        '<div class="ph-meta">' + meta + '</div>' +
-        (p.races.length ? '<div class="races">' + p.races.map(raceRow).join('') + '</div>' : '') +
-      '</button>' + body + '</div>';
+      '<button class="ph-btn" data-id="' + p.id + '" aria-expanded="' + isOpen + '"><span class="dot"></span><span class="ph-name">' + esc(p.name) + '</span>' +
+      '<span class="ph-date">' + fmt(D(p.start)) + ' → ' + fmt(D(p.end)) + '</span><span class="chev"></span><span class="ph-sub">' + esc(p.sub) + '</span></button>' + body + '</div>';
   }).join('');
-  $('phases').querySelectorAll('.ph-btn').forEach(b => b.onclick = () => {
-    open = open === b.dataset.id ? null : b.dataset.id;
-    try { open ? localStorage.setItem('saison.open', open) : localStorage.removeItem('saison.open'); } catch(e) {}
-    renderPhases();
-  });
+  document.querySelectorAll('#s-phases .ph-btn').forEach(b => b.onclick = () => { open = open === b.dataset.id ? null : b.dataset.id; renderSeason(); });
 }
-function render(){ renderTop(); renderWeek(); renderPhases(); }
-if (open === null){ const c = current(); open = c ? c.id : null; }
 
-/* Données */
-function apply(d, label){
-  WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {};
-  $('sync').textContent = label + (d.maj || '—');
+/* ---------- Courses ---------- */
+function renderRaces(){
+  const colorOf = k => { const p = PHASES.find(x => x.races.includes(k)); return p ? p.c : '--p2'; };
+  $('c-list').innerHTML = Object.entries(RACES).sort((a,b) => a[1].d.localeCompare(b[1].d)).map(([k,r]) => {
+    const res = RESULTS[k], past = D(r.d) < today, days = Math.ceil((D(r.d) - today)/DAY);
+    const right = res && (res.temps || res.place) ? '<b>' + esc(res.temps || '') + '</b>' + esc(res.place || '') : (past ? '' : '<b>J-' + days + '</b>');
+    return '<div class="race' + (r.key ? ' key' : '') + (past ? ' past' : '') + '" style="--c:var(' + colorOf(k) + ')"><span class="d">' + esc(r.label) + '</span>' +
+      '<span class="rn">' + esc(r.name) + (r.note ? ' <em>' + esc(r.note) + '</em>' : '') + '</span><span class="r">' + right + '</span>' +
+      '<span class="f">' + esc(r.f) + '</span></div>';
+  }).join('');
 }
-async function loadData(){
-  today = new Date(); today.setHours(0,0,0,0);
-  try {
-    const r = await fetch('data.json?t=' + Date.now(), { cache:'no-store' });
-    if (!r.ok) throw new Error(r.status);
-    const d = await r.json(); apply(d, 'Mis à jour le ');
-    try { localStorage.setItem('saison.data', JSON.stringify(d)); } catch(e) {}
-  } catch(e) {
-    try { const d = JSON.parse(localStorage.getItem('saison.data') || 'null'); if (d) apply(d, 'Hors ligne · données du '); else $('sync').textContent = 'Pas de données'; } catch(_) {}
-  }
-  render();
-}
-render(); loadData();
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') loadData(); });
 
-/* Renfo */
+/* ---------- Navigation ---------- */
+const PAGES = ['semaine','saison','courses','renfo'];
+function go(p){
+  if (!PAGES.includes(p)) p = 'semaine';
+  PAGES.forEach(x => { $('p-' + x).hidden = x !== p; });
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-current', t.dataset.p === p ? 'page' : 'false'));
+  if (p === 'renfo') loadRenfo();
+  if (location.hash !== '#' + p) history.replaceState(null, '', '#' + p);
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => go(t.dataset.p));
+window.addEventListener('hashchange', () => go(location.hash.slice(1)));
+
+/* ---------- Renfo ---------- */
 let rfLoaded = null;
-async function openRenfo(id){
-  const fr = $('rf-frame'); $('rf').hidden = false; document.body.style.overflow = 'hidden';
-  if (!rfLoaded) rfLoaded = new Promise(r => { fr.onload = r; fr.src = 'renfo.html'; });
-  await rfLoaded;
-  if (id) { try { fr.contentWindow.start(id); } catch(e) {} }
+function loadRenfo(){
+  const fr = $('rf-frame');
+  if (!rfLoaded) rfLoaded = new Promise(r => { fr.onload = () => { applyTheme(document.documentElement.getAttribute('data-theme')); r(); }; fr.src = 'renfo.html'; });
+  return rfLoaded;
 }
-function closeRenfo(){ $('rf').hidden = true; document.body.style.overflow = ''; }
-$('rfbtn').onclick = () => openRenfo();
-$('rf-close').onclick = closeRenfo;
-$('rf').addEventListener('click', e => { if (e.target === $('rf')) closeRenfo(); });
+async function openRenfo(id){
+  go('renfo'); await loadRenfo();
+  try { $('rf-frame').contentWindow.start(id); } catch(e) {}
+}
 window.addEventListener('message', e => {
   const m = e.data; if (!m || m.type !== 'renfo-done' || e.source !== $('rf-frame').contentWindow) return;
   const ti = (today.getDay()+6)%7, j = weekPlan().jours[ti];
   if (j && !j.fait && renfoId(j.seance) === m.id) toggleDay(ti);
 });
 
+/* ---------- Données ---------- */
+function render(){
+  const d = Math.ceil((RACE - today)/DAY);
+  $('cd').textContent = d > 0 ? 'J-' + d : 'Jour J';
+  if (open === null){ const c = current(); open = c ? c.id : null; }
+  renderWeek(); renderSeason(); renderRaces();
+}
+function apply(d, label){ WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; $('sync').textContent = label + (d.maj || '—'); }
+async function loadData(){
+  today = new Date(); today.setHours(0,0,0,0);
+  try {
+    const r = await fetch('data.json?t=' + Date.now(), { cache:'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json(); apply(d, 'Données mises à jour le '); lsSet('saison.data', d);
+  } catch(e) {
+    const d = lsGet('saison.data', null);
+    if (d) apply(d, 'Hors ligne · données du '); else $('sync').textContent = 'Pas de données';
+  }
+  render();
+}
+go(location.hash.slice(1));
+render(); loadData();
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') loadData(); });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
 </body></html>
