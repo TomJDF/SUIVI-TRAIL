@@ -7,343 +7,255 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Saison">
+<title>Saison Restonica 69</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
-<title>Saison Restonica 69</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>
-/* Layout: one phone column — header with the season strip, then one card per training block that opens on tap; the race closes the page. Single dark look, same as the lock-screen image. */
+/* Mobile : une colonne (titre, chiffres, semaine en cours, saison). PC : deux colonnes, la semaine à gauche (fixe), la saison à droite. */
 :root{
   color-scheme:dark;
-  --bg:#0B1011; --bg-top:#16201F; --card:#141B1C; --card-2:#1A2324; --line:#243031;
-  --ink:#E9EEED; --muted:#8A9B98; --faint:#5C6B69;
+  --bg:#0B1011; --card:#121819; --card-2:#192122; --line:#222C2D;
+  --ink:#E9EEED; --muted:#8A9B98; --faint:#56645F;
   --p0:#E2A469; --pr:#7E8F8C; --p1:#4F9BD9; --p2:#35C9A6; --p3:#E5735C; --p4:#C9B8FF;
-  --good:#35C9A6; --low:#E2A469;
+  --title:#E5735C;
   --display:'Antonio','Arial Narrow',sans-serif;
   --body:'Barlow','Helvetica Neue',Arial,sans-serif;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{background:var(--bg)}
-body{margin:0;background:radial-gradient(120% 40% at 50% 0%,var(--bg-top) 0%,var(--bg) 70%) var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.wrap{max-width:520px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 40px;display:flex;flex-direction:column;gap:8px}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
-:focus-visible{outline:2px solid var(--p2);outline-offset:2px;border-radius:8px}
+:focus-visible{outline:2px solid var(--p2);outline-offset:2px;border-radius:6px}
 
-.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(38px,11vw,48px);line-height:.92;text-transform:uppercase;margin:6px 0 0;text-wrap:balance}
-h1 span{color:var(--p3)}
-.goal{margin:8px 0 0;font-size:13.5px;color:var(--muted)}
-.goal b{color:var(--ink);font-weight:600}
+.app{max-width:560px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-block:26px 96px;display:grid;gap:26px}
+.side,.main{display:flex;flex-direction:column;gap:22px;min-width:0}
 
-.strip{position:relative;margin-top:16px}
-.bars{display:flex;gap:2px;height:9px;border-radius:5px;overflow:hidden}
-.bars i{display:block;height:100%}
-.now{position:absolute;top:-5px;width:2px;height:19px;background:var(--ink);border-radius:2px;box-shadow:0 0 0 2px var(--bg)}
-.months{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+/* Titre */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:8px 12px;flex-wrap:wrap}
+.head > div:first-child{min-width:0}
+.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+h1{margin:0;font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.86;letter-spacing:-.005em}
+h1 .t1{display:block;font-size:clamp(46px,14vw,64px);color:var(--title)}
+h1 .t2{display:block;font-size:clamp(22px,6.4vw,28px);color:var(--ink);letter-spacing:.14em;margin-top:6px}
+.cd{text-align:right;flex:none}
+.cd b{display:block;font-family:var(--display);font-size:34px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.cd span{font-size:11px;color:var(--muted);letter-spacing:.06em}
 
-.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0 6px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
-.stat .k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.stat .v{font-family:var(--display);font-size:22px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums;margin-top:2px}
-.stat .v small{font-family:var(--body);font-size:11px;color:var(--muted);font-weight:500}
+/* Chiffres */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:10px 0}
+.stat + .stat{padding-left:14px;border-left:1px solid var(--line)}
+.stat .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--display);font-size:24px;font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums}
+.stat .v small{font-family:var(--body);font-size:11.5px;color:var(--muted);font-weight:500}
 
-.phase{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.phase::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
-.phase.current{border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
-.phase.past{opacity:.92}
-.head{display:block;width:100%;padding:11px 13px 11px 17px}
-.top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.name{font-family:var(--display);font-weight:600;font-size:19px;text-transform:uppercase;letter-spacing:.02em;color:var(--c);display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0}
-.pill{font-family:var(--body);font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border-radius:20px;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
-.dates{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;align-items:center;gap:6px}
-.chev{display:inline-block;width:8px;height:8px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
-.phase.open .chev{transform:rotate(-135deg) translateY(-1px)}
-.sub{font-size:12px;color:var(--muted);margin-top:1px}
+/* Sections */
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 8px}
+.sec-h h2{margin:0;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.sec-h span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 
-.prog{display:grid;grid-template-columns:auto 1fr auto;gap:4px 8px;align-items:center;margin-top:8px;font-size:11.5px}
-.prog .l{color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase;width:24px}
-.track{height:6px;background:var(--card-2);border-radius:4px;overflow:hidden;position:relative}
-.track i{display:block;height:100%;border-radius:4px;background:var(--c)}
-.prog .n{font-variant-numeric:tabular-nums;white-space:nowrap}
-.prog .n span{color:var(--muted)}
-.later{font-size:11.5px;color:var(--faint);margin-top:6px}
-
-.races{display:flex;flex-direction:column;gap:3px;margin-top:8px}
-.race{display:flex;align-items:baseline;gap:8px;font-size:13px}
-.race .d{font-family:var(--display);font-size:13.5px;min-width:46px;font-variant-numeric:tabular-nums}
-.race .rn{font-weight:600;min-width:0}
-.race .rn em{font-style:normal;font-weight:400;color:var(--muted);font-size:11.5px}
-.race .f{color:var(--muted);font-size:11.5px;margin-left:auto;white-space:nowrap}
-.race.key .rn::after{content:" \25CF";color:var(--c);font-size:9px}
-.res{font-size:11px;font-weight:600;color:var(--ink);background:var(--card-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;margin-left:auto;white-space:nowrap}
-
-.body{padding:2px 13px 14px 17px;display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);margin-top:2px;padding-top:12px}
-.body h3{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
-.week{display:grid;grid-template-columns:34px 1fr;gap:5px 10px;font-size:13px;margin:0}
-.week dt{font-family:var(--display);font-size:13px;color:var(--c);text-transform:uppercase;letter-spacing:.04em}
-.week dd{margin:0;color:var(--ink)}
-.focus{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;font-size:13px}
-.focus li{position:relative;padding-left:14px;color:var(--ink)}
-.focus li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:2px;background:var(--c);border-radius:2px}
-
-.wk{display:flex;flex-direction:column;gap:6px}
-.wkrow{display:grid;grid-template-columns:48px 1fr 108px;gap:8px;align-items:center;font-size:12px}
-.wkrow .wd{font-variant-numeric:tabular-nums;color:var(--muted)}
-.wkrow .wb{position:relative;height:8px;background:var(--card-2);border-radius:4px}
-.wkrow .wb i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--c)}
-.wkrow .wb b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.55;border-radius:1px}
-.wkrow .wv{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
-.wkrow .wv span{color:var(--muted)}
-.wkrow.future{opacity:.45}
-.wknote{font-size:11.5px;color:var(--muted);margin:-2px 0 0 56px}
-.legend{font-size:11px;color:var(--faint)}
-
-.final{background:linear-gradient(135deg,#2A1814,var(--card) 70%);border:1px solid #5A2E25;border-radius:14px;padding:13px 15px;margin-top:2px}
-.final .t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.final .n{font-family:var(--display);font-weight:700;font-size:24px;text-transform:uppercase;color:var(--p3);line-height:1}
-.final .d{font-family:var(--display);font-size:16px;white-space:nowrap}
-.final .f{font-size:12.5px;color:var(--muted);margin-top:4px}
-.final .cd{font-family:var(--display);font-size:13px;letter-spacing:.06em;color:var(--ink);margin-top:6px}
-
-.rules{font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px}
-.rules b{color:var(--ink);font-weight:600}
-.sync{font-size:10.5px;color:var(--faint);text-align:center}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* ---------- Semaine en cours ---------- */
-.todo{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
-.todo li{display:block}
-.chk{display:grid;grid-template-columns:24px 50px 1fr;gap:10px;align-items:start;width:100%;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
-.todo li:last-child .chk{border-bottom:0}
-.box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--faint);display:grid;place-items:center;margin-top:-1px;transition:background .15s ease,border-color .15s ease}
-.box svg{width:14px;height:14px;opacity:0}
-.chk.done .box{background:var(--c);border-color:var(--c)}
+/* Semaine en cours */
+.week-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 14px}
+.todo{list-style:none;margin:0;padding:0}
+.todo li{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+.todo li:last-child{border-bottom:0}
+.chk{flex:1;min-width:0;display:grid;grid-template-columns:22px 44px 1fr;gap:10px;align-items:start;padding:11px 0;font-size:14px}
+.box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--faint);display:grid;place-items:center;margin-top:1px;transition:background .15s,border-color .15s}
+.box svg{width:13px;height:13px;opacity:0}
+.chk.done .box{background:var(--p2);border-color:var(--p2)}
 .chk.done .box svg{opacity:1}
-.chk .dj{font-family:var(--display);font-size:13.5px;color:var(--c);text-transform:uppercase;letter-spacing:.04em;line-height:1.5}
-.chk .dj small{display:block;font-family:var(--body);font-size:10.5px;color:var(--muted);text-transform:none;letter-spacing:0;line-height:1.1}
-.chk .ds{color:var(--ink);line-height:1.45}
+.dj{font-family:var(--display);font-size:14px;text-transform:uppercase;letter-spacing:.04em;line-height:1.35;color:var(--ink)}
+.dj small{display:block;font-family:var(--body);font-size:10.5px;color:var(--muted);text-transform:none;letter-spacing:0}
+.chk.today .dj{color:var(--p2)}
+.ds{line-height:1.45}
 .chk.done .ds{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint)}
-.chk.today .dj::after{content:" \25CF";font-size:8px;vertical-align:middle}
-.wkhead{display:flex;justify-content:space-between;align-items:baseline}
-.wkhead span{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
-.daily{font-size:12px;color:var(--muted);margin:8px 0 0}
+.go{flex:none;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--p2);border:1px solid color-mix(in srgb,var(--p2) 45%,var(--line));border-radius:14px;padding:5px 10px}
+.daily{font-size:12.5px;color:var(--muted);margin:10px 2px 0}
 
-/* ---------- Renfo ---------- */
-.dock{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:20;display:flex;gap:8px}
-.fab.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
-.rf{position:fixed;inset:0;z-index:40;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
-.rf-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
-.rf-bar h2{font-family:var(--display);font-size:20px;font-weight:600;text-transform:uppercase;margin:0;color:var(--p0)}
-.rf iframe{flex:1;width:100%;border:0;background:var(--bg)}
-.todo li{display:flex;align-items:center;gap:8px}
-.todo li .chk{flex:1;min-width:0}
-.go{flex:none;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--c);border:1px solid color-mix(in srgb,var(--c) 50%,var(--line));border-radius:14px;padding:4px 9px}
+/* Saison */
+.phases{display:flex;flex-direction:column}
+.phase{border-top:1px solid var(--line)}
+.phase:last-child{border-bottom:1px solid var(--line)}
+.ph-btn{display:block;width:100%;padding:14px 0 13px}
+.ph-top{display:flex;align-items:baseline;gap:10px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none;transform:translateY(-2px)}
+.ph-name{font-family:var(--display);font-weight:600;font-size:21px;text-transform:uppercase;letter-spacing:.02em;line-height:1;white-space:nowrap}
+.phase.current .ph-name{color:var(--c)}
+.phase.future .ph-name{color:var(--ink)}
+.phase.past .ph-name{color:var(--muted)}
+.ph-date{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chev{width:7px;height:7px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translateY(-3px);transition:transform .2s;flex:none;margin-left:6px}
+.phase.open .chev{transform:rotate(-135deg) translateY(-1px)}
+.ph-sub{font-size:12.5px;color:var(--muted);margin:5px 0 0 19px}
+.ph-meta{margin:8px 0 0 19px}
+.bar2{display:grid;grid-template-columns:28px 1fr auto;gap:6px 10px;align-items:center;font-size:12px}
+.bar2 .l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.trk{height:4px;background:var(--card-2);border-radius:3px;overflow:hidden}
+.trk i{display:block;height:100%;background:var(--c);border-radius:3px}
+.bar2 .n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar2 .n span{color:var(--muted)}
+.soon{font-size:12px;color:var(--faint)}
+.races{display:flex;flex-direction:column;gap:3px;margin:8px 0 0 19px}
+.race{display:flex;align-items:baseline;gap:10px;font-size:13.5px}
+.race .d{font-family:var(--display);font-size:14px;min-width:50px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.race .rn{font-weight:500;min-width:0}
+.race.key .rn{font-weight:600}
+.race.key .rn::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c);margin-left:6px;transform:translateY(-2px)}
+.race .rn em{font-style:normal;color:var(--muted);font-size:12px}
+.race .f{margin-left:auto;color:var(--muted);font-size:12px;white-space:nowrap}
+.race .res{margin-left:auto;font-size:12px;font-weight:600;white-space:nowrap}
 
-/* ---------- Coach (chat) ---------- */
-.fab{display:flex;align-items:center;gap:8px;background:var(--p2);color:#06211C;font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase;padding:12px 18px 11px;border-radius:30px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.ph-body{margin:4px 0 16px 19px;display:flex;flex-direction:column;gap:16px}
+.ph-body h3{margin:0 0 6px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.wk-type{display:grid;grid-template-columns:36px 1fr;gap:4px 10px;font-size:13px;margin:0}
+.wk-type dt{font-family:var(--display);color:var(--c);text-transform:uppercase}
+.wk-type dd{margin:0}
+.focus{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;font-size:13px}
+.focus li{position:relative;padding-left:14px}
+.focus li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:2px;background:var(--c)}
+.wks{display:flex;flex-direction:column;gap:7px}
+.wkr{display:grid;grid-template-columns:42px 1fr 112px;gap:10px;align-items:center;font-size:12px}
+.wkr .wd{color:var(--muted);font-variant-numeric:tabular-nums}
+.wkr .wb{position:relative;height:6px;background:var(--card-2);border-radius:3px}
+.wkr .wb i{position:absolute;left:0;top:0;bottom:0;background:var(--c);border-radius:3px}
+.wkr .wb b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.5}
+.wkr .wv{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wkr .wv span{color:var(--muted)}
+.wkr.fut{opacity:.45}
+.wkn{font-size:11.5px;color:var(--muted);margin:-3px 0 0 52px}
+
+/* Course finale */
+.final{border-radius:14px;padding:16px;background:linear-gradient(140deg,color-mix(in srgb,var(--title) 22%,var(--card)) 0%,var(--card) 65%);border:1px solid color-mix(in srgb,var(--title) 35%,var(--line))}
+.final .fn{font-family:var(--display);font-weight:700;font-size:26px;text-transform:uppercase;color:var(--title);line-height:1}
+.final .fd{font-family:var(--display);font-size:16px;margin-top:6px}
+.final .ff{font-size:12.5px;color:var(--muted);margin-top:4px}
+
+.foot{font-size:11.5px;color:var(--faint);text-align:center;display:flex;flex-direction:column;gap:4px}
+.foot b{color:var(--muted);font-weight:600}
+
+/* Renfo */
+.fab{position:fixed;right:max(18px,calc(env(safe-area-inset-right,0px) + 18px));bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:20;display:flex;align-items:center;gap:8px;background:var(--p2);color:#06211C;font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.05em;text-transform:uppercase;padding:12px 18px 11px;border-radius:30px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
 .fab svg{width:18px;height:18px}
-.sheet{position:fixed;inset:0;z-index:30;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
-.sh-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
-.sh-head h2{font-family:var(--display);font-size:22px;font-weight:600;text-transform:uppercase;margin:0;color:var(--p2)}
-.sh-head p{margin:0;font-size:11.5px;color:var(--muted)}
-.close{font-size:14px;color:var(--muted);padding:8px 4px}
-.msgs{flex:1;overflow-y:auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:10px}
-.msg{max-width:86%;padding:9px 12px;border-radius:14px;font-size:14.5px;line-height:1.45;overflow-wrap:anywhere}
-.msg.u{align-self:flex-end;background:var(--card-2);border:1px solid var(--line);border-bottom-right-radius:4px}
-.msg.a{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
-.msg.a p{margin:0 0 6px}.msg.a p:last-child{margin:0}
-.msg.a ul{margin:4px 0 6px;padding-left:18px}
-.msg .img{display:block;max-width:180px;border-radius:8px;margin-bottom:6px}
-.msg .tag{display:inline-block;font-size:11px;color:var(--muted);margin-bottom:4px}
-.act{align-self:flex-start;font-size:11.5px;color:var(--p2);padding-left:4px}
-.empty{color:var(--muted);font-size:13.5px;text-align:center;margin:auto 0;padding:0 10px}
-.empty b{color:var(--ink)}
-.composer{border-top:1px solid var(--line);padding:10px max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 10px) max(12px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:8px;background:var(--bg)}
-.preview{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-.preview img{width:44px;height:44px;object-fit:cover;border-radius:6px}
-.preview button{color:var(--p3);font-size:12px}
-.row{display:flex;align-items:flex-end;gap:8px}
-.row textarea{flex:1;min-width:0;resize:none;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:10px 14px;font:inherit;font-size:15px;line-height:1.35;max-height:120px}
-.icon-btn{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);color:var(--muted)}
-.icon-btn svg{width:19px;height:19px}
-.send{background:var(--p2);border-color:var(--p2);color:#06211C}
-.send[disabled]{opacity:.4}
-.quick{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
-.quick button{flex:none;font-size:12px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:5px 11px}
+.rf{position:fixed;inset:0;z-index:40;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.rf-panel{flex:1;display:flex;flex-direction:column;min-height:0}
+.rf-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-bottom:1px solid var(--line)}
+.rf-bar h2{margin:0;font-family:var(--display);font-size:20px;font-weight:600;text-transform:uppercase;color:var(--p2)}
+.rf-bar button{font-size:14px;color:var(--muted)}
+.rf iframe{flex:1;width:100%;border:0;background:var(--bg)}
+
+/* PC */
+@media (min-width:960px){
+  .app{max-width:1160px;grid-template-columns:400px 1fr;gap:56px;padding-block:48px 64px;align-items:start}
+  .side{position:sticky;top:32px}
+  h1 .t1{font-size:72px}
+  h1 .t2{font-size:30px}
+  .phase .ph-btn:hover .ph-name{color:var(--c)}
+  .fab{right:32px;bottom:32px}
+  .rf{background:rgba(5,8,8,.72);align-items:center;justify-content:center;padding:32px}
+  .rf-panel{flex:none;width:460px;height:min(860px,92vh);background:var(--bg);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head><body>
-<div class="wrap" id="app">
-  <p class="eyebrow">Saison 2026 – 2027</p>
-  <h1>Cap sur la<br><span>Restonica 69</span></h1>
+</head>
+<body>
 
-  <div class="summary" id="summary"></div>
-  <div id="phases" style="display:flex;flex-direction:column;gap:7px"></div>
+<div class="app">
+  <aside class="side">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Saison 2026 – 2027</p>
+        <h1><span class="t1">Restonica</span><span class="t2">Trail · 69 km</span></h1>
+      </div>
+      <div class="cd"><b id="cd">—</b><span>avant le départ</span></div>
+    </div>
 
-  <div class="final">
-    <div class="t"><span class="n">Restonica Trail</span><span class="d">10/07 · 2h00</span></div>
-    <div class="f">69 km · 3 950 m D+ · frontale 500 lm · 60-70 g glucides/h</div>
-    <div class="cd" id="countdown"></div>
-  </div>
+    <div class="stats" id="stats"></div>
 
-  <p class="rules"><b>141</b> max en footing · VFC <b>&lt; 70</b> = facile · aine/dos <b>≤ 3/10</b></p>
-  <p class="sync" id="sync">Plan seul · les semaines réalisées s'afficheront ici</p>
-  <div style="height:64px"></div>
+    <section id="week"></section>
+
+    <div class="final">
+      <div class="fn">Restonica Trail</div>
+      <div class="fd">Samedi 10 juillet 2027 · 2h00 · Corte</div>
+      <div class="ff">69 km · 3 950 m D+ · frontale 500 lm · 60-70 g de glucides/h</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section>
+      <div class="sec-h"><h2>La saison</h2><span id="cur"></span></div>
+      <div class="phases" id="phases"></div>
+    </section>
+    <div class="foot">
+      <div><b>141</b> max en footing · VFC <b>&lt; 70</b> = journée facile · aine et dos <b>≤ 3/10</b></div>
+      <div id="sync">Chargement…</div>
+    </div>
+  </main>
 </div>
 
-<div class="dock">
-<button class="fab alt" id="rfbtn" aria-label="Ouvrir le renfo">
+<button class="fab" id="rfbtn" aria-label="Ouvrir le renfo">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="6"/></svg>
   Renfo
 </button>
-</div>
 
 <div class="rf" id="rf" hidden>
-  <div class="rf-bar"><h2>Renfo</h2><button class="close" id="rf-close">Retour à la saison</button></div>
-  <iframe id="rf-frame" title="Carnet de renfo"></iframe>
+  <div class="rf-panel">
+    <div class="rf-bar"><h2>Renfo</h2><button id="rf-close">Fermer</button></div>
+    <iframe id="rf-frame" title="Carnet de renfo"></iframe>
+  </div>
 </div>
 
-
+<script src="plan.js"></script>
 <script>
-/* ---------- Le plan (fixe) ---------- */
 const D = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
 const fmt = d => String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
-const DAY = 86400000;
-
-const PHASES = [
-  { id:'pre', name:'Avant le plan', c:'--pr', start:'2026-09-28', end:'2026-10-25', km:[0,0], dp:[0,0], pre:true,
-    sub:'Les 4 semaines qui ont lancé la saison',
-    week:[],
-    focus:['Vameval : FC max 181, VMA 17,5-18 km/h','U Periplu : 16e sur 114, 91 % de FC max pendant 1h45','Point de départ : environ 35 km et 1 200 m de D+ par semaine','Alerte : footings faciles qui partent vers 150, aine droite qui tire'],
-    races:['pv5k','periplu'] },
-  { id:'nov', name:'Bloc novembre', c:'--p0', start:'2026-10-26', end:'2026-11-29', km:[30,40], dp:[1000,1800],
-    sub:'30-40 km/sem · calmer l\'aine',
-    week:[['Lun','Renfo hanches (sans Copenhagen)'],['Mar','GUMP, footing sous 141'],['Mer','CAB : côtes, pas de sprint'],['Jeu','Renfo mollets'],['Ven','Footing 40 min sous 141'],['Sam','Sortie montagne'],['Dim','Repos ou marche']],
-    focus:['Serrage adducteurs tous les jours, test du matin','Calvi à fond, départ contrôlé, puis 165-170','14-15/11 : reco du San Parteu ou deux tours de Zucca','San Parteu : montée 145-155, descentes gardées'],
-    races:['calvi','parteu'] },
-  { id:'recup', name:'Récup', c:'--pr', start:'2026-11-30', end:'2026-12-13', km:[25,25], dp:[500,500],
-    sub:'Footings courts, randos, point aine et dos',
-    week:[['Lun','Renfo léger'],['Mar','GUMP tranquille'],['Mer','Footing ou vélo'],['Jeu','Mobilité'],['Ven','Repos'],['Sam','Rando'],['Dim','Libre']],
-    focus:['Faire le point sur l\'aine et le dos','Rien d\'intense, on recharge'],
-    races:[] },
-  { id:'base', name:'Base hiver', c:'--p1', start:'2026-12-14', end:'2027-02-14', km:[35,50], dp:[1000,1500],
-    sub:'35 → 50 km/sem · 80 % sous 141 · renfo lourd',
-    week:[['Lun','Renfo hanches'],['Mar','GUMP, footing sous 141'],['Mer','CAB : VMA (30/30, 400, 1000)'],['Jeu','Renfo mollets + 30 min faciles'],['Ven','Repos ou vélo'],['Sam','Sortie montagne 2h30 → 3h30'],['Dim','Repos ou rando']],
-    focus:['Le volume facile développe les muscles, ton vrai point faible','Renfo lourd : descente de box et SLRDL lestés jusqu\'à 16 kg','Courses courtes = la séance de qualité de la semaine','Une semaine sur quatre allégée de 30 %'],
-    races:['cross','blanc','mandria'] },
-  { id:'constr', name:'Construction', c:'--p2', start:'2027-02-15', end:'2027-04-11', km:[45,60], dp:[1500,2200],
-    sub:'45 → 60 km/sem · seuil en côte · SL jusqu\'à 5h',
-    week:[['Lun','Renfo hanches'],['Mar','GUMP, footing sous 141'],['Mer','CAB : seuil en côte, 4 × 8 min à 160-165'],['Jeu','Renfo mollets + 45 min faciles'],['Ven','Repos ou vélo'],['Sam','Sortie longue 3h30 → 5h'],['Dim','1h30 facile']],
-    focus:['Nutrition 60-70 g/h sur chaque sortie de plus de 2h30','Premiers week-ends doublés','Renfo : fente bulgare, step-down lent, sauts sur box'],
-    races:['monte'] },
-  { id:'spe', name:'Spécifique', c:'--p3', start:'2027-04-12', end:'2027-06-13', km:[55,70], dp:[2200,3000],
-    sub:'55 → 70 km/sem · terrain Corte · sorties de nuit',
-    week:[['Lun','Renfo hanches (plus léger)'],['Mar','GUMP, footing sous 141'],['Mer','CAB : seuil en côte ou descente rapide'],['Jeu','Renfo mollets + 45 min faciles'],['Ven','Repos'],['Sam','Sortie longue 5h → 7h'],['Dim','1h30 → 3h en montagne']],
-    focus:['Reconnaissances autour de Corte dès que la neige le permet','Trois sorties qui partent vers 2h-3h du matin','Week-ends choc : 1 500 m puis 1 000 m de D+','Gravona en gérant, Pietralba à 145-150 de FC'],
-    races:['gravona','venaco','pietralba'] },
-  { id:'aff', name:'Affûtage', c:'--p4', start:'2027-06-14', end:'2027-07-10', km:[45,25], dp:[1500,800],
-    sub:'Volume −30 puis −50 % · sommeil · rien de nouveau',
-    week:[['Lun','Renfo mobilité et activation'],['Mar','Footing court'],['Mer','Rappel d\'intensité court'],['Jeu','Footing court'],['Ven','Repos'],['Sam','Sortie 2h-3h max'],['Dim','Repos']],
-    focus:['Matériel et nutrition figés','Dernière semaine : grosses nuits du lundi au jeudi','Sieste le vendredi après-midi avant le départ de 2h'],
-    races:[] }
-];
-
-const RACES = {
-  pv5k:     { d:'2026-10-04', label:'04/10',   name:'5 km Porto-Vecchio', f:'5 km route' },
-  periplu:  { d:'2026-10-18', label:'18/10',   name:'U Periplu', f:'11 km · 1 060 D+' },
-  calvi:    { d:'2026-11-07', label:'07/11',   name:'Trail in Calvi', f:'10 km · 350 D+' },
-  parteu:   { d:'2026-11-29', label:'29/11',   name:'San Parteu', f:'23 km · 1 958 D+', key:true },
-  cross:    { d:'2027-01-24', label:'24/01',   name:'Cross de Corte', f:'cross' },
-  blanc:    { d:'2027-02-06', label:'déb. fév', name:'Trail blanc', f:'18 km · 650 D+' },
-  mandria:  { d:'2027-02-14', label:'~15/02',  name:'Mandrialinca', f:'9 km · 900 D+' },
-  monte:    { d:'2027-03-29', label:'29/03',   name:'Trail di Monte', f:'13 km · 800 D+' },
-  gravona:  { d:'2027-04-18', label:'18/04',   name:'Gravona', f:'42 km · 2 550 D+', key:true },
-  venaco:   { d:'2027-05-02', label:'déb. mai', name:'Venaco', f:'19 km · 2 000 D+' },
-  pietralba:{ d:'2027-06-06', label:'06/06',   name:'Pietralba', note:'en contrôle', f:'44 km · 3 000 D+', key:true }
-};
-
-/* ---------- Données réalisées (db) ---------- */
-let WEEKS = {};    // "2026-10-26" -> {km, dplus, note}
-let RESULTS = {};  // "calvi" -> {temps, place, note}
-let open = null;
-try { open = localStorage.getItem('saison.open'); } catch(e) {}
-
-const today = new Date(); today.setHours(0,0,0,0);
 const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 const nf = n => Math.round(n).toLocaleString('fr-FR');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DAY = 86400000;
+const $ = id => document.getElementById(id);
 
+let WEEKS = {}, RESULTS = {}, PLANS = {}, MAJ = '';
+let today = new Date(); today.setHours(0,0,0,0);
+let open = null; try { open = localStorage.getItem('saison.open'); } catch(e) {}
+const S0 = D('2026-10-26'), RACE = D('2027-07-10');
+
+const status = p => today < D(p.start) ? 'future' : (today > D(p.end) ? 'past' : 'current');
+const current = () => PHASES.find(p => status(p) === 'current');
+const monday = () => iso(new Date(today.getTime() - ((today.getDay()+6)%7)*DAY));
 function weeksOf(p){
-  const out = [], s = D(p.start), e = D(p.end);
-  for (let t = s.getTime(); t <= e.getTime(); t += 7*DAY) out.push(new Date(t));
-  return out.map((w,i,a) => {
-    const r = a.length > 1 ? i/(a.length-1) : 0;
-    return { start:w, key:iso(w), tKm: p.km[0] + (p.km[1]-p.km[0])*r, tDp: p.dp[0] + (p.dp[1]-p.dp[0])*r };
-  });
-}
-function status(p){
-  const s = D(p.start), e = D(p.end);
-  if (today < s) return 'future';
-  if (today > e) return 'past';
-  return 'current';
+  const out = []; for (let t = D(p.start).getTime(); t <= D(p.end).getTime(); t += 7*DAY) out.push(new Date(t));
+  return out.map((w,i,a) => { const r = a.length > 1 ? i/(a.length-1) : 0;
+    return { start:w, key:iso(w), tKm:p.km[0]+(p.km[1]-p.km[0])*r, tDp:p.dp[0]+(p.dp[1]-p.dp[0])*r }; });
 }
 function tally(p){
-  const ws = weeksOf(p).filter(w => w.start <= today);
   let km=0, dp=0, tKm=0, tDp=0;
-  ws.forEach(w => { tKm += w.tKm; tDp += w.tDp; const a = WEEKS[w.key]; if (a){ km += +a.km||0; dp += +a.dplus||0; } });
-  return { km, dp, tKm, tDp, n: ws.length };
+  weeksOf(p).filter(w => w.start <= today).forEach(w => { tKm+=w.tKm; tDp+=w.tDp; const a = WEEKS[w.key]; if (a){ km+=+a.km||0; dp+=+a.dplus||0; } });
+  return { km, dp, tKm, tDp };
 }
 
-/* ---------- Rendu ---------- */
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const S0 = D('2026-10-26'), S1 = D('2027-07-10');
-
-function renderStrip(){
-  const total = S1 - S0;
-  document.getElementById('bars').innerHTML = PHASES.filter(p => !p.pre).map(p => {
-    const w = (D(p.end) - D(p.start) + DAY) / total;
-    return '<i style="flex:' + w.toFixed(4) + ';background:var(' + p.c + ')"></i>';
-  }).join('');
-  const now = document.getElementById('now');
-  if (today >= S0 && today <= S1){
-    now.hidden = false;
-    now.style.left = 'calc(' + ((today - S0)/total*100).toFixed(2) + '% - 1px)';
-  }
+/* Semaine en cours : plan de data.json + coches locales */
+function weekPlan(){
+  const mon = monday(); let w;
+  if (PLANS[mon] && Array.isArray(PLANS[mon].jours)) w = JSON.parse(JSON.stringify(PLANS[mon]));
+  else { const p = current(); w = { jours:(p ? p.week : []).map(([j,s]) => ({ jour:j, seance:s })) }; }
+  let c = {}; try { c = JSON.parse(localStorage.getItem('saison.coches.' + mon) || '{}'); } catch(e) {}
+  w.jours.forEach((j,i) => { j.fait = !!c[i]; });
+  return w;
 }
-
-function renderSummary(){
-  let km=0, dp=0, tKm=0, tDp=0;
-  PHASES.filter(p => !p.pre).forEach(p => { const t = tally(p); km+=t.km; dp+=t.dp; tKm+=t.tKm; tDp+=t.tDp; });
-  const wk = Math.max(1, Math.min(37, Math.floor((today - S0)/(7*DAY)) + 1));
-  const cur = PHASES.find(p => status(p) === 'current');
-  document.getElementById('summary').innerHTML =
-    '<div class="stat"><div class="k">Semaine</div><div class="v">' + wk + ' <small>/ 37</small></div></div>' +
-    '<div class="stat"><div class="k">Km saison</div><div class="v">' + nf(km) + ' <small>/ ' + nf(tKm) + '</small></div></div>' +
-    '<div class="stat"><div class="k">D+ saison</div><div class="v">' + nf(dp) + ' <small>/ ' + nf(tDp) + '</small></div></div>';
-  const d = Math.ceil((S1 - today)/DAY);
-  document.getElementById('countdown').textContent = d > 0 ? 'J-' + d + (cur ? ' · ' + cur.name.toLowerCase() + ' en cours' : '') : (d === 0 ? 'C\'est aujourd\'hui' : 'Course passée');
+function toggleDay(i){
+  const mon = monday(); let c = {};
+  try { c = JSON.parse(localStorage.getItem('saison.coches.' + mon) || '{}'); } catch(e) {}
+  c[i] = !c[i];
+  try { localStorage.setItem('saison.coches.' + mon, JSON.stringify(c)); } catch(e) {}
+  renderWeek();
 }
-
-function bar(label, v, t){
-  const pct = t > 0 ? Math.min(100, v/t*100) : 0;
-  return '<span class="l">' + label + '</span><div class="track"><i style="width:' + pct.toFixed(1) + '%"></i></div>' +
-         '<span class="n">' + nf(v) + ' <span>/ ' + nf(t) + '</span></span>';
-}
-
-function raceRow(k, colorVar){
-  const r = RACES[k], res = RESULTS[k];
-  const right = res && (res.temps || res.place)
-    ? '<span class="res">' + esc([res.temps, res.place].filter(Boolean).join(' · ')) + '</span>'
-    : '<span class="f">' + esc(r.f) + '</span>';
-  return '<div class="race' + (r.key ? ' key' : '') + '"><span class="d">' + esc(r.label) + '</span>' +
-         '<span class="rn">' + esc(r.name) + (r.note ? ' <em>' + esc(r.note) + '</em>' : '') + '</span>' + right + '</div>';
-}
-
-let PLANS = {};
 function renfoId(s){
   s = String(s).toLowerCase();
   if (s.includes('post-course')) return 'postcourse';
@@ -352,130 +264,122 @@ function renfoId(s){
   if (s.includes('mobilit')) return 'mobilite';
   return null;
 }
-let rfLoaded = null;
-async function openRenfo(id){
-  const rf = document.getElementById('rf'), fr = document.getElementById('rf-frame');
-  rf.hidden = false; document.body.style.overflow = 'hidden';
-  if (!rfLoaded){
-    rfLoaded = new Promise(r => { fr.onload = r; fr.src = 'renfo.html'; });
-  }
-  try { await rfLoaded; } catch(e) { rfLoaded = null; return; }
-  if (id) { try { fr.contentWindow.start(id); } catch(e) {} }
+
+/* Rendu */
+function renderTop(){
+  const d = Math.ceil((RACE - today)/DAY);
+  $('cd').textContent = d > 0 ? 'J-' + d : (d === 0 ? 'Jour J' : 'Fini');
+  let km=0, dp=0, tKm=0, tDp=0;
+  PHASES.filter(p => !p.pre).forEach(p => { const t = tally(p); km+=t.km; dp+=t.dp; tKm+=t.tKm; tDp+=t.tDp; });
+  const wk = Math.max(1, Math.min(37, Math.floor((today - S0)/(7*DAY)) + 1));
+  $('stats').innerHTML =
+    '<div class="stat"><div class="k">Semaine</div><div class="v">' + wk + ' <small>/ 37</small></div></div>' +
+    '<div class="stat"><div class="k">Km</div><div class="v">' + nf(km) + ' <small>/ ' + nf(tKm) + '</small></div></div>' +
+    '<div class="stat"><div class="k">D+ (m)</div><div class="v">' + nf(dp) + ' <small>/ ' + nf(tDp) + '</small></div></div>';
+  const c = current(); $('cur').textContent = c ? c.name + ' en cours' : '';
 }
-function closeRenfo(){ document.getElementById('rf').hidden = true; document.body.style.overflow = ''; }
-window.addEventListener('message', e => {
-  const m = e.data;
-  if (!m || m.type !== 'renfo-done' || e.source !== document.getElementById('rf-frame').contentWindow) return;
-  const ti = (today.getDay()+6)%7, j = weekPlan().jours[ti];
-  if (j && !j.fait && renfoId(j.seance) === m.id) toggleDay(ti);
-});
-function monday(){ return iso(new Date(today.getTime() - ((today.getDay()+6)%7)*DAY)); }
-function weekPlan(){
-  const mon = monday();
-  let w;
-  if (PLANS[mon] && Array.isArray(PLANS[mon].jours)) w = JSON.parse(JSON.stringify(PLANS[mon]));
-  else { const p = PHASES.find(x => status(x) === 'current'); w = { jours: (p ? p.week : []).map(([j,s]) => ({ jour:j, seance:s, fait:false })) }; }
-  let c = {}; try { c = JSON.parse(localStorage.getItem('saison.coches.' + mon) || '{}'); } catch(e) {}
-  w.jours.forEach((j,i) => { if (c[i] !== undefined) j.fait = c[i]; });
-  return w;
-}
-function weekNowHtml(){
-  const w = weekPlan(), mon = D(monday()), done = w.jours.filter(j => j.fait).length;
-  const ti = (today.getDay()+6)%7;
-  return '<div><div class="wkhead"><h3>Semaine en cours</h3><span>' + done + ' / ' + w.jours.length + ' fait</span></div><ul class="todo">' +
-    w.jours.map((j,i) => {
-      const d = new Date(mon.getTime() + i*DAY);
-      return '<li><button class="chk' + (j.fait ? ' done' : '') + (i === ti ? ' today' : '') + '" data-i="' + i + '" aria-pressed="' + !!j.fait + '">' +
-        '<span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#06211C" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
+
+function renderWeek(){
+  const w = weekPlan(), mon = D(monday()), ti = (today.getDay()+6)%7, done = w.jours.filter(j => j.fait).length;
+  $('week').innerHTML = '<div class="sec-h"><h2>Cette semaine</h2><span>' + done + ' / ' + w.jours.length + '</span></div>' +
+    '<div class="week-card"><ul class="todo">' + w.jours.map((j,i) => {
+      const d = new Date(mon.getTime() + i*DAY), rid = renfoId(j.seance);
+      return '<li><button class="chk' + (j.fait ? ' done' : '') + (i === ti ? ' today' : '') + '" data-i="' + i + '" aria-pressed="' + j.fait + '">' +
+        '<span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#06211C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
         '<span class="dj">' + esc(j.jour) + '<small>' + fmt(d) + '</small></span><span class="ds">' + esc(j.seance) + '</span></button>' +
-        (renfoId(j.seance) && !j.fait ? '<button class="go" data-s="' + renfoId(j.seance) + '">Lancer</button>' : '') + '</li>';
-    }).join('') + '</ul>' + (w.quotidien ? '<p class="daily">Chaque jour : ' + esc(w.quotidien) + '</p>' : '') + '</div>';
-}
-async function toggleDay(i){
-  const mon = monday(), w = JSON.parse(JSON.stringify(weekPlan()));
-  if (!w.jours[i]) return;
-  let c = {}; try { c = JSON.parse(localStorage.getItem('saison.coches.' + mon) || '{}'); } catch(e) {}
-  c[i] = !w.jours[i].fait;
-  try { localStorage.setItem('saison.coches.' + mon, JSON.stringify(c)); } catch(e) {}
-  renderPhases();
+        (rid && !j.fait ? '<button class="go" data-s="' + rid + '">Lancer</button>' : '') + '</li>';
+    }).join('') + '</ul></div>' + (w.quotidien ? '<p class="daily">Chaque jour : ' + esc(w.quotidien) + '</p>' : '');
+  $('week').querySelectorAll('.chk').forEach(b => b.onclick = () => toggleDay(+b.dataset.i));
+  $('week').querySelectorAll('.go').forEach(b => b.onclick = () => openRenfo(b.dataset.s));
 }
 
+function bar(l, v, t){
+  const pct = t > 0 ? Math.min(100, v/t*100) : 0;
+  return '<span class="l">' + l + '</span><div class="trk"><i style="width:' + pct.toFixed(1) + '%"></i></div><span class="n">' + nf(v) + ' <span>/ ' + nf(t) + '</span></span>';
+}
+function raceRow(k){
+  const r = RACES[k], res = RESULTS[k];
+  const right = res && (res.temps || res.place) ? '<span class="res">' + esc([res.temps, res.place].filter(Boolean).join(' · ')) + '</span>' : '<span class="f">' + esc(r.f) + '</span>';
+  return '<div class="race' + (r.key ? ' key' : '') + '"><span class="d">' + esc(r.label) + '</span><span class="rn">' + esc(r.name) + (r.note ? ' <em>' + esc(r.note) + '</em>' : '') + '</span>' + right + '</div>';
+}
 function renderPhases(){
-  const box = document.getElementById('phases');
-  box.innerHTML = PHASES.map(p => {
+  $('phases').innerHTML = PHASES.map(p => {
     const st = status(p), t = tally(p), isOpen = open === p.id;
-    const pill = st === 'current' ? '<span class="pill">En cours</span>' : (st === 'past' ? '<span class="pill" style="opacity:.7">Fait</span>' : '');
-    let prog = '';
-    if (p.pre){
-      prog = '<div class="later" style="color:var(--muted)">' + nf(t.km) + ' km · ' + nf(t.dp) + ' m D+ sur 4 semaines</div>';
-    } else if (st === 'future'){
-      const n = Math.ceil((D(p.start) - today)/(7*DAY));
-      prog = '<div class="later">Dans ' + n + ' semaine' + (n>1?'s':'') + '</div>';
-    } else {
-      prog = '<div class="prog">' + bar('Km', t.km, t.tKm) + bar('D+', t.dp, t.tDp) + '</div>';
-    }
-    const races = p.races.length ? '<div class="races">' + p.races.map(k => raceRow(k)).join('') + '</div>' : '';
-
+    let meta;
+    if (p.pre) meta = '<div class="soon">' + nf(t.km) + ' km · ' + nf(t.dp) + ' m D+ sur 4 semaines</div>';
+    else if (st === 'future'){ const n = Math.ceil((D(p.start) - today)/(7*DAY)); meta = '<div class="soon">Dans ' + n + ' semaine' + (n>1?'s':'') + '</div>'; }
+    else meta = '<div class="bar2">' + bar('Km', t.km, t.tKm) + bar('D+', t.dp, t.tDp) + '</div>';
     let body = '';
     if (isOpen){
       const weeks = weeksOf(p);
-      const maxKm = Math.max(...weeks.map(w => Math.max(w.tKm, +(WEEKS[w.key]||{}).km||0))) * 1.1;
+      const max = Math.max(1, ...weeks.map(w => Math.max(w.tKm, +(WEEKS[w.key]||{}).km||0))) * 1.1;
       const rows = weeks.map(w => {
-        const a = WEEKS[w.key], fut = w.start > today;
-        const km = a ? +a.km||0 : 0, dp = a ? +a.dplus||0 : 0;
-        const val = a ? nf(km) + ' km · ' + nf(dp) + ' m' : '<span>' + nf(w.tKm) + ' km · ' + nf(w.tDp) + ' m</span>';
-        return '<div class="wkrow' + (fut ? ' future' : '') + '"><span class="wd">' + fmt(w.start) + '</span>' +
-               '<div class="wb"><i style="width:' + (km/maxKm*100).toFixed(1) + '%"></i>' + (p.pre ? '' : '<b style="left:calc(' + (w.tKm/maxKm*100).toFixed(1) + '% - 1px)"></b>') + '</div>' +
-               '<span class="wv">' + val + '</span></div>' +
-               (a && a.note ? '<div class="wknote">' + esc(a.note) + '</div>' : '');
+        const a = WEEKS[w.key], km = a ? +a.km||0 : 0, dp = a ? +a.dplus||0 : 0;
+        return '<div class="wkr' + (w.start > today ? ' fut' : '') + '"><span class="wd">' + fmt(w.start) + '</span>' +
+          '<div class="wb"><i style="width:' + (km/max*100).toFixed(1) + '%"></i>' + (p.pre ? '' : '<b style="left:calc(' + (w.tKm/max*100).toFixed(1) + '% - 1px)"></b>') + '</div>' +
+          '<span class="wv">' + (a ? nf(km) + ' km · ' + nf(dp) + ' m' : '<span>' + nf(w.tKm) + ' km · ' + nf(w.tDp) + ' m</span>') + '</span></div>' +
+          (a && a.note ? '<div class="wkn">' + esc(a.note) + '</div>' : '');
       }).join('');
-      body = '<div class="body">' +
-        (st === 'current' ? weekNowHtml() : '') + (st !== 'current' && p.week.length ? '<div><h3>Semaine type</h3><dl class="week">' + p.week.map(([j,s]) => '<dt>' + j + '</dt><dd>' + esc(s) + '</dd>').join('') + '</dl></div>' : '') +
+      body = '<div class="ph-body">' +
+        (st !== 'current' && p.week.length ? '<div><h3>Semaine type</h3><dl class="wk-type">' + p.week.map(([j,s]) => '<dt>' + j + '</dt><dd>' + esc(s) + '</dd>').join('') + '</dl></div>' : '') +
         '<div><h3>Points clés</h3><ul class="focus">' + p.focus.map(f => '<li>' + esc(f) + '</li>').join('') + '</ul></div>' +
-        '<div><h3>Semaine par semaine</h3><div class="wk">' + rows + '</div>' +
-        '<p class="legend" style="margin:8px 0 0">Barre = km réalisés · trait = objectif · en gris : objectif (km · D+) des semaines sans données</p></div>' +
-        '</div>';
+        '<div><h3>Semaine par semaine</h3><div class="wks">' + rows + '</div></div></div>';
     }
-    return '<section class="phase ' + st + (isOpen ? ' open' : '') + '" style="--c:var(' + p.c + ')">' +
-      '<button class="head" data-id="' + p.id + '" aria-expanded="' + isOpen + '">' +
-        '<div class="top"><span class="name">' + esc(p.name) + pill + '</span>' +
-        '<span class="dates">' + fmt(D(p.start)) + ' → ' + fmt(D(p.end)) + '<span class="chev"></span></span></div>' +
-        '<div class="sub">' + esc(p.sub) + '</div>' + prog + races +
-      '</button>' + body + '</section>';
+    return '<div class="phase ' + st + (isOpen ? ' open' : '') + '" style="--c:var(' + p.c + ')">' +
+      '<button class="ph-btn" data-id="' + p.id + '" aria-expanded="' + isOpen + '">' +
+        '<div class="ph-top"><span class="dot"></span><span class="ph-name">' + esc(p.name) + '</span><span class="ph-date">' + fmt(D(p.start)) + ' → ' + fmt(D(p.end)) + '</span><span class="chev"></span></div>' +
+        '<div class="ph-sub">' + esc(p.sub) + '</div>' +
+        '<div class="ph-meta">' + meta + '</div>' +
+        (p.races.length ? '<div class="races">' + p.races.map(raceRow).join('') + '</div>' : '') +
+      '</button>' + body + '</div>';
   }).join('');
-  box.querySelectorAll('.head').forEach(b => b.addEventListener('click', () => {
+  $('phases').querySelectorAll('.ph-btn').forEach(b => b.onclick = () => {
     open = open === b.dataset.id ? null : b.dataset.id;
     try { open ? localStorage.setItem('saison.open', open) : localStorage.removeItem('saison.open'); } catch(e) {}
     renderPhases();
-  }));
-  box.querySelectorAll('.chk').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); toggleDay(+b.dataset.i); }));
-  box.querySelectorAll('.go').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); openRenfo(b.dataset.s); }));
+  });
 }
+function render(){ renderTop(); renderWeek(); renderPhases(); }
+if (open === null){ const c = current(); open = c ? c.id : null; }
 
-function render(){ renderSummary(); renderPhases(); }
-if (open === null){ const c = PHASES.find(p => status(p) === 'current'); open = c ? c.id : null; }
-render();
-
-/* ---------- Données (data.json, mis à jour par Claude) ---------- */
-const $ = id => document.getElementById(id);
+/* Données */
+function apply(d, label){
+  WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {};
+  $('sync').textContent = label + (d.maj || '—');
+}
 async function loadData(){
+  today = new Date(); today.setHours(0,0,0,0);
   try {
-    const r = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
+    const r = await fetch('data.json?t=' + Date.now(), { cache:'no-store' });
     if (!r.ok) throw new Error(r.status);
-    const d = await r.json();
-    WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {};
-    document.getElementById('sync').textContent = 'Mis à jour le ' + (d.maj || '—');
+    const d = await r.json(); apply(d, 'Mis à jour le ');
     try { localStorage.setItem('saison.data', JSON.stringify(d)); } catch(e) {}
   } catch(e) {
-    try { const d = JSON.parse(localStorage.getItem('saison.data') || 'null'); if (d){ WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; document.getElementById('sync').textContent = 'Hors ligne · données du ' + (d.maj || '—'); } } catch(_) {}
+    try { const d = JSON.parse(localStorage.getItem('saison.data') || 'null'); if (d) apply(d, 'Hors ligne · données du '); else $('sync').textContent = 'Pas de données'; } catch(_) {}
   }
   render();
 }
-loadData();
+render(); loadData();
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') loadData(); });
+
+/* Renfo */
+let rfLoaded = null;
+async function openRenfo(id){
+  const fr = $('rf-frame'); $('rf').hidden = false; document.body.style.overflow = 'hidden';
+  if (!rfLoaded) rfLoaded = new Promise(r => { fr.onload = r; fr.src = 'renfo.html'; });
+  await rfLoaded;
+  if (id) { try { fr.contentWindow.start(id); } catch(e) {} }
+}
+function closeRenfo(){ $('rf').hidden = true; document.body.style.overflow = ''; }
 $('rfbtn').onclick = () => openRenfo();
 $('rf-close').onclick = closeRenfo;
+$('rf').addEventListener('click', e => { if (e.target === $('rf')) closeRenfo(); });
+window.addEventListener('message', e => {
+  const m = e.data; if (!m || m.type !== 'renfo-done' || e.source !== $('rf-frame').contentWindow) return;
+  const ti = (today.getDay()+6)%7, j = weekPlan().jours[ti];
+  if (j && !j.fait && renfoId(j.seance) === m.id) toggleDay(ti);
+});
+
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
-
 </body></html>

@@ -1,0 +1,53 @@
+/* Le plan de saison (fixe). Les données réalisées sont dans data.json. */
+const PHASES = [
+  { id:'pre', name:'Avant le plan', c:'--pr', start:'2026-09-28', end:'2026-10-25', km:[0,0], dp:[0,0], pre:true,
+    sub:'Les 4 semaines qui ont lancé la saison',
+    week:[],
+    focus:['Vameval : FC max 181, VMA 17,5-18 km/h','U Periplu : 16e sur 114, 91 % de FC max pendant 1h45','Point de départ : environ 35 km et 1 200 m de D+ par semaine','Alerte : footings faciles qui partent vers 150, aine droite qui tire'],
+    races:['pv5k','periplu'] },
+  { id:'nov', name:'Bloc novembre', c:'--p0', start:'2026-10-26', end:'2026-11-29', km:[30,40], dp:[1000,1800],
+    sub:'30-40 km/sem · calmer l\'aine',
+    week:[['Lun','Renfo hanches (sans Copenhagen)'],['Mar','GUMP, footing sous 141'],['Mer','CAB : côtes, pas de sprint'],['Jeu','Renfo mollets'],['Ven','Footing 40 min sous 141'],['Sam','Sortie montagne'],['Dim','Repos ou marche']],
+    focus:['Serrage adducteurs tous les jours, test du matin','Calvi à fond, départ contrôlé, puis 165-170','14-15/11 : reco du San Parteu ou deux tours de Zucca','San Parteu : montée 145-155, descentes gardées'],
+    races:['calvi','parteu'] },
+  { id:'recup', name:'Récup', c:'--pr', start:'2026-11-30', end:'2026-12-13', km:[25,25], dp:[500,500],
+    sub:'Footings courts, randos, point aine et dos',
+    week:[['Lun','Renfo léger'],['Mar','GUMP tranquille'],['Mer','Footing ou vélo'],['Jeu','Mobilité'],['Ven','Repos'],['Sam','Rando'],['Dim','Libre']],
+    focus:['Faire le point sur l\'aine et le dos','Rien d\'intense, on recharge'],
+    races:[] },
+  { id:'base', name:'Base hiver', c:'--p1', start:'2026-12-14', end:'2027-02-14', km:[35,50], dp:[1000,1500],
+    sub:'35 → 50 km/sem · 80 % sous 141 · renfo lourd',
+    week:[['Lun','Renfo hanches'],['Mar','GUMP, footing sous 141'],['Mer','CAB : VMA (30/30, 400, 1000)'],['Jeu','Renfo mollets + 30 min faciles'],['Ven','Repos ou vélo'],['Sam','Sortie montagne 2h30 → 3h30'],['Dim','Repos ou rando']],
+    focus:['Le volume facile développe les muscles, ton vrai point faible','Renfo lourd : descente de box et SLRDL lestés jusqu\'à 16 kg','Courses courtes = la séance de qualité de la semaine','Une semaine sur quatre allégée de 30 %'],
+    races:['cross','blanc','mandria'] },
+  { id:'constr', name:'Construction', c:'--p2', start:'2027-02-15', end:'2027-04-11', km:[45,60], dp:[1500,2200],
+    sub:'45 → 60 km/sem · seuil en côte · SL jusqu\'à 5h',
+    week:[['Lun','Renfo hanches'],['Mar','GUMP, footing sous 141'],['Mer','CAB : seuil en côte, 4 × 8 min à 160-165'],['Jeu','Renfo mollets + 45 min faciles'],['Ven','Repos ou vélo'],['Sam','Sortie longue 3h30 → 5h'],['Dim','1h30 facile']],
+    focus:['Nutrition 60-70 g/h sur chaque sortie de plus de 2h30','Premiers week-ends doublés','Renfo : fente bulgare, step-down lent, sauts sur box'],
+    races:['monte'] },
+  { id:'spe', name:'Spécifique', c:'--p3', start:'2027-04-12', end:'2027-06-13', km:[55,70], dp:[2200,3000],
+    sub:'55 → 70 km/sem · terrain Corte · sorties de nuit',
+    week:[['Lun','Renfo hanches (plus léger)'],['Mar','GUMP, footing sous 141'],['Mer','CAB : seuil en côte ou descente rapide'],['Jeu','Renfo mollets + 45 min faciles'],['Ven','Repos'],['Sam','Sortie longue 5h → 7h'],['Dim','1h30 → 3h en montagne']],
+    focus:['Reconnaissances autour de Corte dès que la neige le permet','Trois sorties qui partent vers 2h-3h du matin','Week-ends choc : 1 500 m puis 1 000 m de D+','Gravona en gérant, Pietralba à 145-150 de FC'],
+    races:['gravona','venaco','pietralba'] },
+  { id:'aff', name:'Affûtage', c:'--p4', start:'2027-06-14', end:'2027-07-10', km:[45,25], dp:[1500,800],
+    sub:'Volume −30 puis −50 % · sommeil · rien de nouveau',
+    week:[['Lun','Renfo mobilité et activation'],['Mar','Footing court'],['Mer','Rappel d\'intensité court'],['Jeu','Footing court'],['Ven','Repos'],['Sam','Sortie 2h-3h max'],['Dim','Repos']],
+    focus:['Matériel et nutrition figés','Dernière semaine : grosses nuits du lundi au jeudi','Sieste le vendredi après-midi avant le départ de 2h'],
+    races:[] }
+];
+
+const RACES = {
+  pv5k:     { d:'2026-10-04', label:'04/10',   name:'5 km Porto-Vecchio', f:'5 km route' },
+  periplu:  { d:'2026-10-18', label:'18/10',   name:'U Periplu', f:'11 km · 1 060 D+' },
+  calvi:    { d:'2026-11-07', label:'07/11',   name:'Trail in Calvi', f:'10 km · 350 D+' },
+  parteu:   { d:'2026-11-29', label:'29/11',   name:'San Parteu', f:'23 km · 1 958 D+', key:true },
+  cross:    { d:'2027-01-24', label:'24/01',   name:'Cross de Corte', f:'cross' },
+  blanc:    { d:'2027-02-06', label:'déb. fév', name:'Trail blanc', f:'18 km · 650 D+' },
+  mandria:  { d:'2027-02-14', label:'~15/02',  name:'Mandrialinca', f:'9 km · 900 D+' },
+  monte:    { d:'2027-03-29', label:'29/03',   name:'Trail di Monte', f:'13 km · 800 D+' },
+  gravona:  { d:'2027-04-18', label:'18/04',   name:'Gravona', f:'42 km · 2 550 D+', key:true },
+  venaco:   { d:'2027-05-02', label:'déb. mai', name:'Venaco', f:'19 km · 2 000 D+' },
+  pietralba:{ d:'2027-06-06', label:'06/06',   name:'Pietralba', note:'en contrôle', f:'44 km · 3 000 D+', key:true }
+};
+
