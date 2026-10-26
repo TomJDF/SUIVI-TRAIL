@@ -1,0 +1,868 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}[hidden]{display:none!important}.foot{display:none}</style></head><body><title>Carnet de renfo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* Layout: single column, one exercise filling the screen at a time, sticky header for progress, rest timer as a full overlay. */
+:root{
+  --bg:#EFF2F1;
+  --surface:#FFFFFF;
+  --surface-2:#E6EBE9;
+  --ink:#14191A;
+  --muted:#64716F;
+  --line:#D6DEDC;
+  --accent:#0B6E5B;
+  --accent-soft:#D7EBE5;
+  --accent-ink:#FFFFFF;
+  --flag:#9A5214;
+  --flag-soft:#F7E8D7;
+  --shadow:0 1px 2px rgba(20,25,26,.06),0 8px 24px rgba(20,25,26,.06);
+
+  --display:'Antonio','Haettenschweiler','Arial Narrow',sans-serif;
+  --body:'Barlow','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1314;
+    --surface:#171E1F;
+    --surface-2:#1F292A;
+    --ink:#E8EDEC;
+    --muted:#8DA09C;
+    --line:#2A3536;
+    --accent:#35C9A6;
+    --accent-soft:#113A32;
+    --accent-ink:#06211C;
+    --flag:#E2A469;
+    --flag-soft:#38291A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1314;
+  --surface:#171E1F;
+  --surface-2:#1F292A;
+  --ink:#E8EDEC;
+  --muted:#8DA09C;
+  --line:#2A3536;
+  --accent:#35C9A6;
+  --accent-soft:#113A32;
+  --accent-ink:#06211C;
+  --flag:#E2A469;
+  --flag-soft:#38291A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3{margin:0;text-wrap:balance}
+
+.app{min-height:100%;display:flex;flex-direction:column}
+.screen{display:flex;flex-direction:column;flex:1;min-height:0}
+.screen[hidden]{display:none!important}
+
+.wrap{width:100%;max-width:560px;margin:0 auto;padding-inline:18px}
+
+/* ---------- Home ---------- */
+.masthead{padding-block:34px 20px}
+.mark{display:block;width:64px;height:64px;border-radius:15px;margin-bottom:18px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.eyebrow{
+  font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 6px
+}
+.masthead h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(38px,12vw,54px);
+  line-height:.92;letter-spacing:-.01em;text-transform:uppercase
+}
+.masthead p{margin:10px 0 0;color:var(--muted);font-size:15px;max-width:34em}
+
+.rules{
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:16px 18px;margin-bottom:26px
+}
+.rules h2{
+  font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:10px
+}
+.rules ol{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.rules li{display:flex;gap:11px;align-items:baseline;font-size:14.5px}
+.rules .n{
+  font-family:var(--display);font-size:17px;color:var(--accent);
+  min-width:16px;font-variant-numeric:tabular-nums
+}
+
+.sessions{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.card{
+  display:block;width:100%;text-align:left;background:var(--surface);
+  border:1px solid var(--line);border-radius:4px;padding:16px 18px;
+  transition:border-color .15s ease, transform .15s ease
+}
+.card:hover{border-color:var(--accent)}
+.card:active{transform:translateY(1px)}
+.card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card h3{
+  font-family:var(--display);text-transform:uppercase;font-weight:600;
+  font-size:26px;line-height:1;letter-spacing:.005em
+}
+.card .day{
+  font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);white-space:nowrap
+}
+.card .meta{margin-top:7px;color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums}
+
+.resume{
+  display:flex;width:100%;gap:12px;align-items:center;justify-content:space-between;
+  background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;
+  padding:14px 18px;margin-bottom:14px;text-align:left
+}
+.resume strong{font-weight:600}
+.resume span{color:var(--muted);font-size:13.5px;display:block}
+.resume .go{font-family:var(--display);text-transform:uppercase;color:var(--accent);font-size:17px}
+
+.optrow{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:14px 18px;margin-bottom:34px
+}
+.optrow .lbl{font-size:14.5px;font-weight:500}
+.optrow .sub{color:var(--muted);font-size:12.5px;margin-top:2px}
+.sw{
+  position:relative;flex:none;width:50px;height:29px;border-radius:30px;
+  background:var(--surface-2);border:1px solid var(--line);transition:background .18s ease
+}
+.sw::after{
+  content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;
+  background:var(--muted);transition:transform .18s ease,background .18s ease
+}
+.sw[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.sw[aria-pressed="true"]::after{transform:translateX(21px);background:var(--accent)}
+
+/* ---------- Session ---------- */
+.bar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:5;
+  background:var(--bg);border-bottom:1px solid var(--line)
+}
+.bar-in{display:flex;align-items:center;gap:14px;padding-block:12px}
+.back{
+  background:none;border:none;padding:6px 10px 6px 0;color:var(--muted);
+  font-size:14px;font-weight:500;flex:none
+}
+.bar h2{
+  font-family:var(--display);text-transform:uppercase;font-size:20px;font-weight:600;
+  line-height:1;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
+.tour{
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-variant-numeric:tabular-nums;flex:none
+}
+.track{height:3px;background:var(--line)}
+.track i{display:block;height:100%;background:var(--accent);transition:width .25s ease}
+
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:26px 18px}
+.block-label{
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px
+}
+.ex-name{
+  font-family:var(--display);text-transform:uppercase;font-weight:700;
+  font-size:clamp(30px,8.5vw,42px);line-height:.98;letter-spacing:.004em
+}
+
+.side{
+  display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+  padding:5px 11px 4px;border-radius:3px;
+  font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase
+}
+.side.g{background:var(--flag-soft);color:var(--flag)}
+.side.d{background:var(--surface-2);color:var(--muted)}
+.side .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+
+.dose{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  margin-top:18px;padding-top:18px;border-top:1px solid var(--line)
+}
+.dose .big{
+  font-family:var(--display);font-size:54px;line-height:.85;font-weight:700;
+  font-variant-numeric:tabular-nums;color:var(--accent)
+}
+.dose .unit{font-size:15px;color:var(--muted);font-weight:500}
+.dose .load{
+  font-size:13px;color:var(--muted);border:1px solid var(--line);
+  border-radius:3px;padding:3px 9px
+}
+
+.warn{
+  margin-top:16px;background:var(--flag-soft);border-left:3px solid var(--flag);
+  padding:11px 14px;font-size:14px;color:var(--ink);border-radius:0 3px 3px 0
+}
+
+.cues{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.cues li{
+  position:relative;padding-left:16px;font-size:14.5px;color:var(--muted);line-height:1.45
+}
+.cues li::before{
+  content:"";position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--muted)
+}
+
+/* Timer */
+.timer{display:flex;flex-direction:column;align-items:center;margin-top:20px}
+.ring{width:min(220px,62vw);max-width:100%;aspect-ratio:1;position:relative}
+.ring svg{width:100%;height:100%;display:block}
+.ring .num{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:700;font-size:clamp(50px,17vw,68px);
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em
+}
+
+/* Actions */
+.actions{
+  position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 62%,transparent);
+  padding-block:14px;padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))
+}
+.btn{
+  width:100%;border:none;border-radius:4px;background:var(--accent);color:var(--accent-ink);
+  font-family:var(--display);text-transform:uppercase;font-size:21px;font-weight:600;
+  letter-spacing:.03em;padding:15px 18px 13px;transition:transform .12s ease,filter .15s ease
+}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{
+  background:transparent;color:var(--muted);border:1px solid var(--line);
+  font-family:var(--body);font-size:14px;font-weight:500;letter-spacing:0;
+  text-transform:none;padding:11px 18px;margin-top:9px
+}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Rest overlay */
+.rest{
+  position:fixed;inset:0;z-index:20;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))
+}
+.rest .lbl{
+  font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:22px
+}
+.rest .next{
+  margin-top:26px;text-align:center;color:var(--muted);font-size:14px;max-width:24em
+}
+.rest .next b{
+  display:block;color:var(--ink);font-family:var(--display);text-transform:uppercase;
+  font-size:21px;font-weight:600;margin-top:3px;line-height:1.1
+}
+.rest .btn{max-width:420px;margin-top:28px}
+
+/* Done */
+.done{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:40px}
+.done h2{
+  font-family:var(--display);text-transform:uppercase;font-weight:700;
+  font-size:clamp(34px,10vw,48px);line-height:.95
+}
+.done p{color:var(--muted);margin:14px 0 0;font-size:15px}
+.recap{
+  margin-top:26px;background:var(--surface);border:1px solid var(--line);
+  border-radius:4px;padding:16px 18px
+}
+.recap h3{
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;font-family:var(--body)
+}
+.recap ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.recap li{display:flex;justify-content:space-between;gap:14px;font-size:14.5px}
+.recap li span{color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+
+.foot{padding-block:22px 34px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="app">
+
+  <!-- ====================== HOME ====================== -->
+  <section class="screen" id="home">
+    <div class="wrap">
+      <div class="masthead">
+        <svg class="mark" viewBox="0 0 1024 1024" role="img" aria-label="Carnet de renfo">
+          <defs>
+            <radialGradient id="mg" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#16201F"/><stop offset="1" stop-color="#07090A"/></radialGradient>
+            <linearGradient id="mt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D9DEDD"/></linearGradient>
+            <clipPath id="mb"><rect x="0" y="0" width="1024" height="846"/></clipPath>
+          </defs>
+          <rect width="1024" height="1024" fill="url(#mg)"/>
+          <path d="M330 520 C318 330 360 248 512 248 C664 248 706 330 694 520" fill="none" stroke="url(#mt)" stroke-width="60" stroke-linecap="round"/>
+          <circle cx="512" cy="626" r="246" fill="url(#mt)" clip-path="url(#mb)"/>
+          <polyline points="318,712 432,574 496,640 594,512 708,712" fill="none" stroke="#07090A" stroke-width="42" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <p class="eyebrow">Hanche droite raide · fessier gauche muet · aine droite à ménager</p>
+        <h1>Carnet<br>de renfo</h1>
+        <p>Les séances telles qu'on les a réglées. Les séries, les côtés et les récups sont déjà dedans.</p>
+      </div>
+
+      <div class="rules">
+        <h2>Les trois règles</h2>
+        <ol>
+          <li><span class="n">1</span><span>Toujours commencer par la <strong>gauche</strong>.</span></li>
+          <li><span class="n">2</span><span>Le nombre de répétitions se cale sur la gauche. Si elle fait 6, la droite fait 6.</span></li>
+          <li><span class="n">3</span><span>Dès que le dos lance en bas à droite, la série s'arrête. Trois reps avec la fesse valent mieux que huit avec le dos.</span></li>
+          <li><span class="n">4</span><span>Sur tout ce qui ouvre la hanche, <strong>le bas du dos ne se creuse pas</strong>. Si tu creuses, tu triches avec le dos au lieu d'ouvrir la hanche.</span></li>
+        </ol>
+      </div>
+
+      <button class="resume" id="resume" hidden>
+        <span>
+          <strong id="resume-name">Reprendre</strong>
+          <span id="resume-step">—</span>
+        </span>
+        <span class="go">Reprendre</span>
+      </button>
+
+      <div class="sessions" id="sessions"></div>
+
+      <div class="optrow">
+        <div>
+          <div class="lbl">Semaine de course</div>
+          <div class="sub">Retire l'excentrique : squats sautés, descente de box.</div>
+        </div>
+        <button class="sw" id="race" role="switch" aria-pressed="false" aria-label="Semaine de course"></button>
+      </div>
+
+      <div class="foot">
+        Pour l'épingler : ouvre cette page dans Safari, bouton Partager, « Sur l'écran d'accueil ».
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== SESSION ====================== -->
+  <section class="screen" id="session" hidden>
+    <div class="bar">
+      <div class="wrap">
+        <div class="bar-in">
+          <button class="back" id="quit">← Quitter</button>
+          <h2 id="s-name">Hanches</h2>
+          <span class="tour" id="s-tour"></span>
+        </div>
+      </div>
+      <div class="track"><i id="s-track" style="width:0%"></i></div>
+    </div>
+
+    <div class="wrap stage">
+      <p class="block-label" id="s-block">Échauffement</p>
+      <h3 class="ex-name" id="s-ex">—</h3>
+      <div id="s-side-wrap"></div>
+
+      <div class="dose" id="s-dose" hidden>
+        <span class="big" id="s-big">8</span>
+        <span class="unit" id="s-unit">répétitions</span>
+        <span class="load" id="s-load" hidden></span>
+      </div>
+
+      <div class="timer" id="s-timer" hidden>
+        <div class="ring">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="7"></circle>
+            <circle id="s-ring" cx="60" cy="60" r="52" fill="none" stroke="var(--accent)"
+                    stroke-width="7" stroke-linecap="round" transform="rotate(-90 60 60)"
+                    stroke-dasharray="326.73" stroke-dashoffset="0"></circle>
+          </svg>
+          <div class="num" id="s-count">20</div>
+        </div>
+      </div>
+
+      <div class="warn" id="s-warn" hidden></div>
+      <ul class="cues" id="s-cues"></ul>
+    </div>
+
+    <div class="wrap actions">
+      <button class="btn" id="s-go">Fait</button>
+      <button class="btn ghost" id="s-skip">Passer cet exercice</button>
+    </div>
+  </section>
+
+  <!-- ====================== REST ====================== -->
+  <div class="rest" id="rest" hidden>
+    <p class="lbl">Récupération</p>
+    <div class="ring">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="7"></circle>
+        <circle id="r-ring" cx="60" cy="60" r="52" fill="none" stroke="var(--accent)"
+                stroke-width="7" stroke-linecap="round" transform="rotate(-90 60 60)"
+                stroke-dasharray="326.73" stroke-dashoffset="0"></circle>
+      </svg>
+      <div class="num" id="r-count">60</div>
+    </div>
+    <p class="next">Ensuite<b id="r-next">—</b></p>
+    <button class="btn" id="r-skip" style="width:100%;max-width:420px">Enchaîner</button>
+  </div>
+
+  <!-- ====================== DONE ====================== -->
+  <section class="screen" id="done" hidden>
+    <div class="wrap done">
+      <h2 id="d-title">Séance pliée</h2>
+      <p id="d-sub">Note ce que le dos et la fesse gauche ont donné pendant que c'est frais.</p>
+      <div class="recap">
+        <h3>À rapporter</h3>
+        <ul>
+          <li>Dos en bas à droite <span>/10</span></li>
+          <li>Fesse gauche au SLRDL <span>sentie ?</span></li>
+          <li>Aine droite pendant la séance <span>/10</span></li>
+          <li>Séries écourtées <span id="d-cut">0</span></li>
+          <li>Durée <span id="d-time">—</span></li>
+        </ul>
+      </div>
+      <div class="actions" style="position:static;background:none;padding-bottom:0">
+        <button class="btn" id="d-home">Retour</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ---------------- Données des séances ---------------- */
+const SESSIONS = {
+  hanches: {
+    name: 'Hanches', day: 'Lundi', rounds: 2, mins: '25 min',
+    meta: '2 tours · SLRDL, abduction, serrage adducteurs, marche latérale',
+    blocks: [
+      { label: 'Échauffement', when: 'start', items: [
+        { name: 'Bascules de bassin', reps: 20, cues: [
+          'Debout, mains sur les hanches.',
+          'Tu rentres le bassin sous toi, tu relâches.',
+          'Amplitude moyenne, sans forcer.' ] },
+        { name: 'Chat-vache', reps: 10, cues: [
+          'À quatre pattes, lent.',
+          'Va chercher chaque bout du mouvement.' ] },
+        { name: 'Cercles lombaires', reps: 5, unit: 'dans chaque sens', cues: [
+          'Debout, grand cercle avec le bassin.',
+          'Très lent. C\'est la rotation qui manque au reste du programme.' ] }
+      ]},
+      { label: 'Activation', when: 'start', items: [
+        { name: 'Fessier gauche isolé', time: 5, sets: 10, single: 'G', rest: 0, cues: [
+          'Allongé sur le dos, genoux pliés.',
+          'Pousse le talon gauche dans le sol comme pour tirer le tapis vers toi — c\'est ce repère-là qui marche chez toi.',
+          'Le bassin ne bouge pas. Tu contractes, c\'est tout.' ] },
+        { name: 'Marche latérale', reps: 10, unit: 'pas de chaque côté', load: 'élastique gris', cues: [
+          'Boucle au-dessus des genoux, demi-squat.',
+          'Pieds parallèles, buste immobile.',
+          'Si le tronc se balance d\'un côté à l\'autre, l\'élastique est trop fort.' ] }
+      ]},
+      { label: 'Circuit', when: 'round', items: [
+        { name: 'SLRDL jambe tendue', sides: true, rest: 60,
+          left:  { reps: 8, load: 'à vide' },
+          right: { reps: 8, load: 'kettlebell 8 kg' },
+          warn: 'Dès que le dos lance en bas à droite, tu arrêtes la série. Le nombre ne compte pas, la sensation si.',
+          cues: [
+            'La jambe arrière part tendue dans le prolongement du corps, elle fait contrepoids.',
+            'Genou d\'appui légèrement fléchi et figé. S\'il plie en descendant, ça devient un squat.',
+            'Les hanches reculent, le buste suit.',
+            'Pousse le pied dans le sol comme pour repousser le tapis vers l\'arrière.',
+            'À gauche : une main en appui sur un mur, monte la jambe progressivement.' ] },
+        { name: 'Extension de hanche debout', sides: true, reps: 12, load: 'élastique', rest: 45,
+          warn: 'Le bas du dos ne se creuse pas. Creuser, c\'est simuler l\'ouverture avec le dos — exactement ce qui te fait mal en montée.',
+          cues: [
+            'Face à un mur, mains posées, élastique aux chevilles, buste penché de 20-30°.',
+            '1. Verrouille : rentre le bassin, pubis vers le nombril.',
+            '2. Serre la fesse — la jambe ne bouge pas encore.',
+            '3. Pousse un mur derrière toi avec le talon, pointe de pied tournée de 10-15° vers l\'extérieur.',
+            'Arrête-toi dès que le dos veut se creuser. Tiens 3 s fesse serrée, reviens lentement.',
+            'Main sur le bas du dos pour vérifier. 10-15 cm d\'amplitude, c\'est normal. Droite = le côté raide.' ] },
+        { name: 'Abduction allongée', sides: true, reps: 15, load: 'élastique bleu', rest: 45, cues: [
+          'Boucle au-dessus des genoux, appui complet au sol.',
+          'Jambe du dessus tendue, pas de rotation du bassin.',
+          'Monte moins haut qu\'à vide, l\'élastique fait le travail.' ] },
+        { name: 'Serrage adducteurs', time: 20, sets: 3, rest: 20,
+          warn: 'Remplace le Copenhagen tant que l\'aine droite tire. Ça doit rester à 2-3/10 maximum.',
+          cues: [
+            'Allongé sur le dos, genoux pliés, coussin ou poings entre les genoux.',
+            'Serre doucement, environ 50 % de ta force. Si c\'est dur, tu serres trop.',
+            'Respire normalement, pas d\'apnée.',
+            'C\'est ce qui calme le tendon. Le Copenhagen reviendra quand le test du matin sera sous 3/10.' ] },
+        { name: 'Descente de box', reps: 8, side2: true, eccentric: true, rest: 45, cues: [
+          'Descente lente, contrôlée, pas de réception sèche.',
+          'À sauter les jours de course ou après une grosse descente.' ] }
+      ]},
+      { label: 'Pour finir', when: 'end', items: [
+        { name: 'Jefferson curl', reps: 4, load: 'à plat, à vide', cues: [
+          'Tu déroules vertèbre par vertèbre en partant de la nuque.',
+          'Tu remontes pareil. Très lent.',
+          'Aucune charge, pas de step.' ],
+          warn: 'Si le point en bas à droite se réveille, tu arrêtes et tu le signales.' }
+      ]}
+    ]
+  },
+
+  postcourse: {
+    name: 'Post-course', day: 'Lundi après course', rounds: 1, mins: '15 min',
+    meta: '1 tour · sans excentrique · jambes courbaturées, on entretient sans charger',
+    blocks: [
+      { label: 'Activation', when: 'start', items: [
+        { name: 'Fessier gauche isolé', time: 5, sets: 10, single: 'G', rest: 0, cues: [
+          'Allongé sur le dos, genoux pliés.',
+          'Pousse le talon gauche dans le sol comme pour tirer le tapis vers toi.',
+          'Le bassin ne bouge pas. Tu contractes, c\'est tout.' ] },
+        { name: 'Marche latérale', reps: 10, unit: 'pas de chaque côté', load: 'élastique gris', cues: [
+          'Boucle au-dessus des genoux, demi-squat.',
+          'Pieds parallèles, buste immobile.' ] }
+      ]},
+      { label: 'Circuit', when: 'round', items: [
+        { name: 'SLRDL jambe tendue', sides: true, rest: 45,
+          left:  { reps: 8, load: 'à vide' },
+          right: { reps: 8, load: 'à vide' },
+          warn: 'À vide des deux côtés ce soir : les ischios ont pris leur part dans la descente.',
+          cues: [
+            'Jambe arrière tendue dans le prolongement du corps.',
+            'Genou d\'appui légèrement fléchi et figé.',
+            'Pousse le pied dans le sol. Main en appui à gauche.' ] },
+        { name: 'Extension de hanche debout', sides: true, reps: 12, load: 'élastique', rest: 45,
+          warn: 'La priorité de la séance. Le bas du dos ne se creuse pas — si c\'est 10 cm d\'amplitude, c\'est 10 cm.',
+          cues: [
+            'Face à un mur, mains posées, buste penché de 20-30°.',
+            '1. Verrouille : rentre le bassin, pubis vers le nombril.',
+            '2. Serre la fesse — la jambe ne bouge pas encore.',
+            '3. Pousse un mur derrière toi avec le talon, pointe de pied tournée de 10-15° vers l\'extérieur.',
+            'Arrête-toi dès que le dos veut se creuser. Tiens 3 s fesse serrée, reviens lentement.',
+            'Main sur le bas du dos pour vérifier. Si ça paraît minuscule, c\'est la vraie ouverture de ta hanche.' ] },
+        { name: 'Abduction allongée', sides: true, reps: 15, load: 'élastique bleu', rest: 45, cues: [
+          'Boucle au-dessus des genoux, appui complet au sol.',
+          'Pas de rotation du bassin, amplitude courte.' ] },
+        { name: 'Serrage adducteurs', time: 20, sets: 3, rest: 20, cues: [
+          'Allongé sur le dos, genoux pliés, coussin ou poings entre les genoux.',
+          'Serre doucement, environ 50 % de ta force. 2-3/10 maximum.',
+          'Remplace le Copenhagen tant que l\'aine droite tire.' ] }
+      ]},
+      { label: 'Facultatif', when: 'end', items: [
+        { name: 'Jefferson curl', reps: 4, load: 'à plat, à vide', cues: [
+          'Tu déroules vertèbre par vertèbre en partant de la nuque, tu remontes pareil.',
+          'Les jambes ne travaillent pas ici, tu peux le faire même courbaturé.' ],
+          warn: 'Si le point en bas à droite se réveille, tu arrêtes.' }
+      ]}
+    ]
+  },
+
+  mollets: {
+    name: 'Mollets & quadris', day: 'Jeudi', rounds: 2, mins: '22 min',
+    meta: '2 tours · montées sur pointe, fentes, flexion de hanche',
+    blocks: [
+      { label: 'Échauffement', when: 'start', items: [
+        { name: 'Bascules de bassin', reps: 20, cues: ['Debout, mains sur les hanches.','Amplitude moyenne.'] },
+        { name: 'Chat-vache', reps: 10, cues: ['À quatre pattes, lent.'] },
+        { name: 'Extension de hanche debout', sides: true, reps: 12, load: 'élastique', cues: [
+          'Boucle autour des chevilles, main en appui.',
+          'Jambe tendue vers l\'arrière, serre la fesse, reviens.',
+          'Le bas du dos ne se creuse pas. Amplitude courte.' ] }
+      ]},
+      { label: 'Circuit', when: 'round', items: [
+        { name: 'Montée sur pointe', sides: true, reps: 25, rest: 45, cues: [
+          'Une jambe, amplitude complète, descente contrôlée.',
+          'Objectif 25 par côté. Le gauche donne le chiffre.',
+          'Appui léger du doigt sur un mur pour l\'équilibre, pas pour pousser.' ] },
+        { name: 'Fente + montée sur pointes', sides: true, reps: 8, rest: 45, cues: [
+          'Fente avant, puis montée sur la pointe du pied avant.',
+          'Genou arrière qui descend vers le sol sans le toucher.' ] },
+        { name: 'Squat profond', reps: 8, eccentric: true, rest: 60,
+          warn: 'Sans le saut tant que l\'aine droite tire.',
+          cues: [
+            'Descente lente sur 3 s, aussi bas que possible sans que le dos s\'arrondisse.',
+            'Remonte normalement, sans élan.',
+            'Le saut reviendra quand le test du matin sera sous 3/10.' ] },
+        { name: 'Flexion de hanche lestée', sides: true, reps: 10, load: 'kettlebell 8 kg, assis', rest: 45, cues: [
+          'Version assise : kettlebell posée sur la cuisse au-dessus du genou, tu tiens la poignée et tu lèves le genou.',
+          'C\'est celle qui marche chez toi — tu sens bien l\'aine.',
+          'Monte le genou au-dessus de 90°, buste droit, bassin légèrement rentré.',
+          'Lent, pas d\'élan. Si c\'est un pincement net et pas une brûlure, réduis l\'amplitude.' ] },
+        { name: 'Serrage adducteurs', time: 20, sets: 3, rest: 20, cues: [
+          'Allongé sur le dos, genoux pliés, coussin ou poings entre les genoux.',
+          'Serre doucement, environ 50 % de ta force. 2-3/10 maximum.',
+          'Remplace le Copenhagen tant que l\'aine droite tire.' ] }
+      ]}
+    ]
+  },
+
+  mobilite: {
+    name: 'Mobilité', day: 'Tous les midis', rounds: 1, mins: '5 min',
+    meta: 'La coupure au milieu de la journée assise',
+    blocks: [
+      { label: 'Mobilité', when: 'round', items: [
+        { name: 'Extension de hanche debout', sides: true, reps: 8, cues: [
+          'Une main en appui sur un mur, sans élastique ici.',
+          'Tu pousses la jambe tendue vers l\'arrière, tu serres la fesse, tu reviens.',
+          'Le bas du dos ne se creuse pas. Amplitude courte, 20-30 cm.',
+          'C\'est le plus important de la routine : l\'opposé exact de la position assise.' ] },
+        { name: 'Bascules de bassin', reps: 20, cues: [
+          'Debout, mains sur les hanches.',
+          'Tu rentres le bassin sous toi, tu relâches.' ] },
+        { name: 'Chat-vache', reps: 10, cues: [
+          'À quatre pattes, lent, chaque bout du mouvement.' ] },
+        { name: 'Marche', time: 180, cues: [
+          'Dehors si tu peux.',
+          'C\'est elle qui coupe vraiment la station assise.' ] }
+      ]}
+    ]
+  },
+
+  bureau: {
+    name: 'Au bureau', day: 'Toutes les 30 min', rounds: 1, mins: '20 s',
+    meta: 'Le levier principal — 15 fois par jour bat n\'importe quelle séance',
+    blocks: [
+      { label: 'Pause', when: 'round', items: [
+        { name: 'Extension de hanche debout', sides: true, reps: 5, cues: [
+          'Tu te lèves, main en appui si besoin.',
+          'Jambe tendue vers l\'arrière, tu serres la fesse, tu reviens.',
+          'Le bas du dos ne se creuse pas.',
+          'Vingt secondes. C\'est là que ta hanche se raccourcit, pas ailleurs.' ] }
+      ]}
+    ]
+  }
+};
+
+/* ---------------- État ---------------- */
+const KEY = 'renfo.v1';
+let raceMode = false;
+let S = null;          // { id, steps, i, started, cut }
+let tick = null;
+
+const $ = id => document.getElementById(id);
+const CIRC = 326.73;
+
+function store(k, v){ try{ v===null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function load(k){ try{ const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; }catch(e){ return null; } }
+
+/* ---------------- Construction des étapes ---------------- */
+function buildSteps(id){
+  const s = SESSIONS[id], out = [];
+  const push = (item, label, side, setNo, totalSets) => {
+    out.push({ item, label, side, setNo, totalSets });
+  };
+  const expand = (item, label) => {
+    if (raceMode && item.eccentric) return;
+    const sets = item.sets || 1;
+    for (let n = 1; n <= sets; n++){
+      if (item.sides)      { push(item, label, 'G', n, sets); push(item, label, 'D', n, sets); }
+      else if (item.single){ push(item, label, item.single, n, sets); }
+      else                 { push(item, label, null, n, sets); }
+    }
+  };
+
+  s.blocks.filter(b => b.when === 'start').forEach(b => b.items.forEach(i => expand(i, b.label)));
+  const rounds = s.blocks.filter(b => b.when === 'round');
+  for (let r = 1; r <= s.rounds; r++){
+    rounds.forEach(b => b.items.forEach(i => expand(i, s.rounds > 1 ? b.label + ' · tour ' + r + '/' + s.rounds : b.label)));
+  }
+  s.blocks.filter(b => b.when === 'end').forEach(b => b.items.forEach(i => expand(i, b.label)));
+  return out;
+}
+
+/* ---------------- Écrans ---------------- */
+function show(which){
+  ['home','session','done'].forEach(id => $(id).hidden = (id !== which));
+  $('rest').hidden = true;
+  window.scrollTo(0, 0);
+}
+
+function renderHome(){
+  const box = $('sessions');
+  box.innerHTML = '';
+  Object.keys(SESSIONS).forEach(id => {
+    const s = SESSIONS[id];
+    const b = document.createElement('button');
+    b.className = 'card';
+    b.innerHTML =
+      '<div class="top"><h3>' + s.name + '</h3><span class="day">' + s.day + '</span></div>' +
+      '<div class="meta">' + s.mins + ' · ' + s.meta + '</div>';
+    b.addEventListener('click', () => start(id));
+    box.appendChild(b);
+  });
+
+  const saved = load(KEY);
+  if (saved && saved.id && SESSIONS[saved.id] && saved.i > 0){
+    $('resume').hidden = false;
+    $('resume-name').textContent = SESSIONS[saved.id].name;
+    $('resume-step').textContent = 'Étape ' + (saved.i + 1) + ' · interrompue';
+    $('resume').onclick = () => start(saved.id, saved.i);
+  } else {
+    $('resume').hidden = true;
+  }
+}
+
+function start(id, at){
+  raceMode = $('race').getAttribute('aria-pressed') === 'true';
+  S = { id, steps: buildSteps(id), i: at || 0, started: Date.now(), cut: 0 };
+  $('s-name').textContent = SESSIONS[id].name;
+  show('session');
+  wakeLock();
+  renderStep();
+}
+
+function renderStep(){
+  stopTick();
+  const st = S.steps[S.i];
+  if (!st) return finish();
+  const it = st.item;
+
+  $('s-track').style.width = (S.i / S.steps.length * 100) + '%';
+  $('s-tour').textContent = (S.i + 1) + '/' + S.steps.length;
+  $('s-block').textContent = st.label + (st.totalSets > 1 ? ' · série ' + st.setNo + '/' + st.totalSets : '');
+  $('s-ex').textContent = it.name;
+
+  // côté
+  const sw = $('s-side-wrap');
+  sw.innerHTML = '';
+  if (st.side){
+    const g = st.side === 'G';
+    const el = document.createElement('span');
+    el.className = 'side ' + (g ? 'g' : 'd');
+    el.innerHTML = '<span class="dot"></span>' + (g ? 'Gauche' : 'Droite');
+    sw.appendChild(el);
+  }
+
+  const spec = st.side === 'G' && it.left ? it.left : (st.side === 'D' && it.right ? it.right : it);
+  const secs = spec.time || it.time;
+
+  // dose ou timer
+  if (secs){
+    $('s-dose').hidden = true;
+    $('s-timer').hidden = false;
+    runTimer(secs, $('s-count'), $('s-ring'), () => advance());
+    $('s-go').textContent = 'Passer';
+  } else {
+    $('s-timer').hidden = true;
+    $('s-dose').hidden = false;
+    $('s-big').textContent = spec.reps || it.reps;
+    $('s-unit').textContent = it.unit || (it.side2 ? 'par jambe' : 'répétitions');
+    const load = spec.load || it.load;
+    $('s-load').hidden = !load;
+    if (load) $('s-load').textContent = load;
+    $('s-go').textContent = 'Fait';
+  }
+
+  const warn = it.warn;
+  $('s-warn').hidden = !warn;
+  if (warn) $('s-warn').textContent = warn;
+
+  $('s-cues').innerHTML = (it.cues || []).map(c => '<li>' + c + '</li>').join('');
+}
+
+function advance(){
+  stopTick();
+  const st = S.steps[S.i];
+  const next = S.steps[S.i + 1];
+  S.i++;
+  store(KEY, { id: S.id, i: S.i });
+
+  if (!next) return finish();
+
+  // récup : seulement après la droite (ou un exercice sans côté)
+  const rest = st.item.rest || 0;
+  const endsPair = !st.side || st.side === 'D' || st.item.single;
+  if (rest > 0 && endsPair){
+    showRest(rest, next);
+  } else {
+    renderStep();
+  }
+}
+
+function showRest(secs, next){
+  $('rest').hidden = false;
+  const label = next.item.name + (next.side ? ' · ' + (next.side === 'G' ? 'gauche' : 'droite') : '');
+  $('r-next').textContent = label;
+  runTimer(secs, $('r-count'), $('r-ring'), () => { $('rest').hidden = true; renderStep(); });
+}
+
+function finish(){
+  stopTick();
+  store(KEY, null);
+  const mins = Math.max(1, Math.round((Date.now() - S.started) / 60000));
+  $('d-time').textContent = mins + ' min';
+  $('d-cut').textContent = S.cut;
+  $('d-title').textContent = SESSIONS[S.id].name + ' pliée';
+  show('done');
+  releaseWake();
+  try { parent.postMessage({ type: 'renfo-done', id: S.id }, '*'); } catch(e) {}
+}
+
+/* ---------------- Chrono ---------------- */
+function runTimer(total, numEl, ringEl, done){
+  stopTick();
+  const end = Date.now() + total * 1000;
+  const paint = () => {
+    const left = Math.max(0, end - Date.now());
+    const s = Math.ceil(left / 1000);
+    numEl.textContent = s >= 60 ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : s;
+    ringEl.setAttribute('stroke-dashoffset', String(CIRC * (1 - left / (total * 1000))));
+    if (left <= 0){ stopTick(); beep(); done(); }
+  };
+  paint();
+  tick = setInterval(paint, 100);
+}
+function stopTick(){ if (tick){ clearInterval(tick); tick = null; } }
+
+let actx = null;
+function beep(){
+  try{
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.frequency.value = 660; o.type = 'sine';
+    g.gain.setValueAtTime(0.0001, actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.25, actx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.35);
+    o.connect(g); g.connect(actx.destination);
+    o.start(); o.stop(actx.currentTime + 0.36);
+  }catch(e){}
+  try{ navigator.vibrate && navigator.vibrate(120); }catch(e){}
+}
+
+/* ---------------- Veille écran ---------------- */
+let wl = null;
+async function wakeLock(){ try{ wl = await navigator.wakeLock.request('screen'); }catch(e){} }
+function releaseWake(){ try{ wl && wl.release(); wl = null; }catch(e){} }
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && !$('session').hidden) wakeLock();
+});
+
+/* ---------------- Contrôles ---------------- */
+$('s-go').addEventListener('click', advance);
+$('s-skip').addEventListener('click', () => {
+  const st = S.steps[S.i];
+  S.cut++;
+  // saute toutes les étapes restantes de cet exercice
+  stopTick();
+  let j = S.i;
+  while (S.steps[j] && S.steps[j].item === st.item && S.steps[j].label === st.label) j++;
+  S.i = j;
+  store(KEY, { id: S.id, i: S.i });
+  S.steps[S.i] ? renderStep() : finish();
+});
+$('quit').addEventListener('click', () => {
+  stopTick(); releaseWake();
+  store(KEY, { id: S.id, i: S.i });
+  renderHome(); show('home');
+});
+$('r-skip').addEventListener('click', () => { stopTick(); $('rest').hidden = true; renderStep(); });
+$('d-home').addEventListener('click', () => { renderHome(); show('home'); });
+
+$('race').addEventListener('click', e => {
+  const on = e.currentTarget.getAttribute('aria-pressed') === 'true';
+  e.currentTarget.setAttribute('aria-pressed', String(!on));
+  store('renfo.race', !on);
+});
+
+/* ---------------- Boot ---------------- */
+(function(){
+  const r = load('renfo.race');
+  if (r) $('race').setAttribute('aria-pressed', 'true');
+  renderHome();
+})();
+</script>
+</body></html>
