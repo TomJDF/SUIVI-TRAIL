@@ -599,23 +599,43 @@ const SESSIONS = {
   },
 
   mobilite: {
-    name: 'Mobilité', day: 'Tous les midis', rounds: 1, mins: '5 min',
-    meta: 'La coupure au milieu de la journée assise',
+    name: 'Mobilité', day: 'Midi ou avant footing', rounds: 1, mins: '10 min',
+    meta: 'Bassin, hanche droite, aine : on prépare sans rien forcer',
     blocks: [
-      { label: 'Mobilité', when: 'round', items: [
+      { label: 'Relâcher', when: 'start', items: [
+        { name: 'Psoas au repos', time: 60, cues: [
+          'Allongé sur le dos, mollets posés sur une chaise ou le canapé, hanches et genoux à 90°.',
+          'Respire lentement par le ventre : 4 s à l\'inspiration, 6 s à l\'expiration.',
+          'Rien à faire d\'autre : dans cette position le psoas est complètement détendu.' ] },
+        { name: 'Bascules de bassin allongé', reps: 10, cues: [
+          'Toujours sur le dos, pieds au sol cette fois.',
+          'Expire et colle doucement le bas du dos au sol, puis relâche.',
+          'Petite amplitude autour du neutre. Si ça pince, réduis encore.' ] }
+      ]},
+      { label: 'Activer', when: 'round', items: [
+        { name: 'Dead bug coussin', sides: true, reps: 5, cues: [
+          'Hanches et genoux à 90°, bras vers le plafond, coussin serré doucement entre les genoux.',
+          'Bas du dos collé au sol, tends lentement une jambe et le bras opposé, reviens, change.' ] },
+        { name: 'Fessier gauche isolé', time: 5, sets: 5, single: 'G', rest: 0, cues: [
+          'Sur le dos, genoux pliés. Pousse le talon gauche dans le sol, le bassin ne bouge pas.' ] },
+        { name: 'Serrage adducteurs', time: 20, sets: 2, rest: 15, cues: [
+          'Coussin ou poings entre les genoux, à 50 % de ta force. 2-3/10 maximum.' ] },
+        { name: 'Chat-vache', reps: 8, cues: [
+          'À quatre pattes, lent, amplitude moyenne.',
+          'Le passage vers le dos rond se fait en expirant, sans à-coup.' ] }
+      ]},
+      { label: 'Debout', when: 'end', items: [
+        { name: 'Bascules de bassin debout', reps: 10, cues: [
+          'Petites bascules lentes autour de la position neutre, pas depuis le dos creusé.',
+          'Expire et rentre légèrement le ventre avant de bouger.' ] },
         { name: 'Extension de hanche debout', sides: true, reps: 8, cues: [
-          'Une main en appui sur un mur, sans élastique ici.',
-          'Tu pousses la jambe tendue vers l\'arrière, tu serres la fesse, tu reviens.',
-          'Le bas du dos ne se creuse pas. Amplitude courte, 20-30 cm.',
-          'C\'est le plus important de la routine : l\'opposé exact de la position assise.' ] },
-        { name: 'Bascules de bassin', reps: 20, cues: [
-          'Debout, mains sur les hanches.',
-          'Tu rentres le bassin sous toi, tu relâches.' ] },
-        { name: 'Chat-vache', reps: 10, cues: [
-          'À quatre pattes, lent, chaque bout du mouvement.' ] },
-        { name: 'Marche', time: 180, cues: [
-          'Dehors si tu peux.',
-          'C\'est elle qui coupe vraiment la station assise.' ] }
+          'Face au mur, mains posées. Bassin verrouillé, fesse serrée, talon vers l\'arrière sur 10-15 cm.',
+          'Tiens 3 s, reviens lentement. Le dos ne se creuse pas.' ] },
+        { name: 'Montées de genoux en marchant', sides: true, reps: 8, cues: [
+          'Lent, genou à hauteur de hanche seulement, buste droit.',
+          'Si l\'aine tire, monte moins haut.' ] },
+        { name: 'Marche', time: 120, cues: [
+          'Marche active, puis tu pars en footing. Les 10 premières minutes, très tranquille.' ] }
       ]}
     ]
   },
