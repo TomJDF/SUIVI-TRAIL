@@ -136,6 +136,17 @@
       "rem": 17,
       "profond": 25
     },
+    "2026-10-24": {
+      "vfc": 72,
+      "fc_min": 53,
+      "fc_moy": 60,
+      "duree": "8h13",
+      "coucher": "00:13",
+      "lever": "08:28",
+      "rem": 20,
+      "profond": 24,
+      "note": "+ sieste 15h20-18h07 (2h47)"
+    },
     "2026-10-25": {
       "vfc": 78,
       "fc_min": 51,
@@ -161,17 +172,17 @@
       "aine": "4-5"
     },
     "2026-10-27": {
-      "vfc": 98,
+      "vfc": 97,
       "fc_min": 48,
       "fc_moy": 51,
-      "duree": "7h18",
+      "duree": "8h10",
       "coucher": "22:35",
-      "lever": "05:53",
-      "ressources": 90,
-      "rem": 29,
-      "profond": 19,
+      "lever": "06:58",
+      "ressources": 91,
+      "rem": 25,
+      "profond": 17,
       "aine": "3-4",
-      "note": "réveil tôt, changement d'heure"
+      "note": "réveil à 5h53 puis rendormi, changement d'heure"
     }
   }
 }
