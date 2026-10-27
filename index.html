@@ -91,6 +91,22 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .today-card{padding:14px 16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .today-card .k{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--p2)}
 .today-card .t{font-size:17px;font-weight:500;line-height:1.4}
+.sleep{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.sl-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.sl-top .k{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.sl-st{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:12px}
+.sl-st.ok{background:color-mix(in srgb,var(--p2) 18%,transparent);color:var(--p2)}
+.sl-st.mid{background:color-mix(in srgb,var(--p0) 18%,transparent);color:var(--p0)}
+.sl-st.low{background:color-mix(in srgb,var(--p3) 18%,transparent);color:var(--p3)}
+.sl-main{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sl-main .v{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.sl-main .v small{font-family:var(--body);font-size:11.5px;color:var(--muted);font-weight:500}
+.sl-main .l{font-size:10.5px;color:var(--muted);letter-spacing:.06em}
+.sl-meta{font-size:12px;color:var(--muted)}
+.spark{width:100%;height:auto;display:block}
+.spark text{font-family:var(--body);font-size:9px;fill:var(--muted)}
+.sl-leg{display:flex;gap:14px;font-size:11px;color:var(--muted)}
+.sl-leg i{display:inline-block;width:10px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
 .note{font-size:13px;color:var(--muted);padding:12px 14px;border-left:3px solid var(--p2);background:var(--card);border-radius:0 10px 10px 0}
 .note b{color:var(--ink);font-weight:600}
 
@@ -213,6 +229,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <div class="card"><ul class="todo" id="w-list"></ul></div>
     </div>
     <div>
+      <div class="card sleep" id="w-sleep" hidden></div>
       <div class="goals" id="w-goals"></div>
       <div class="note" id="w-daily" hidden></div>
       <p class="rules"><b>141</b> max en footing · VFC <b>&lt; 70</b> = journée facile · aine et dos <b>≤ 3/10</b></p>
@@ -256,7 +273,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const DAY = 86400000, $ = id => document.getElementById(id);
 const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 
-let WEEKS = {}, RESULTS = {}, PLANS = {};
+let WEEKS = {}, RESULTS = {}, PLANS = {}, SLEEP = {};
 let today = new Date(); today.setHours(0,0,0,0);
 let open = null;
 const S0 = D('2026-10-26'), RACE = D('2027-07-10');
@@ -345,6 +362,37 @@ function renderWeek(){
   document.querySelectorAll('#p-semaine .go').forEach(b => b.onclick = () => openRenfo(b.dataset.s));
 }
 
+
+/* ---------- Sommeil ---------- */
+function renderSleep(){
+  const keys = Object.keys(SLEEP).sort(), box = $('w-sleep');
+  if (!keys.length){ box.hidden = true; return; }
+  box.hidden = false;
+  const k = keys[keys.length-1], n = SLEEP[k], v = +n.vfc || 0;
+  const st = v >= 80 ? ['ok','Récupéré'] : v >= 70 ? ['mid','Correct'] : ['low','Journée facile'];
+  const isToday = k === iso(today);
+  // courbe VFC sur 14 jours
+  const end = today.getTime(), start = end - 13*DAY, W = 300, H = 84, top = 6, bot = 18;
+  const pts = keys.filter(x => D(x).getTime() >= start).map(x => ({ t:D(x).getTime(), v:+SLEEP[x].vfc, f:+SLEEP[x].fc_min }));
+  const lo = 50, hi = 110, y = val => top + (hi - Math.max(lo, Math.min(hi, val))) / (hi - lo) * (H - top - bot), x = t => 4 + (t - start) / (13*DAY) * (W - 8);
+  const path = (arr, key) => arr.filter(p => p[key]).map((p,i,a) => (i && p.t - a[i-1].t < 1.5*DAY ? 'L' : 'M') + x(p.t).toFixed(1) + ' ' + y(p[key]).toFixed(1)).join(' ');
+  const band = '<rect x="0" y="' + y(90).toFixed(1) + '" width="' + W + '" height="' + (y(80) - y(90)).toFixed(1) + '" fill="var(--p2)" opacity=".12"/>' +
+               '<line x1="0" x2="' + W + '" y1="' + y(70).toFixed(1) + '" y2="' + y(70).toFixed(1) + '" stroke="var(--p3)" stroke-dasharray="3 3" opacity=".6"/>';
+  const dots = pts.filter(p => p.v).map(p => '<circle cx="' + x(p.t).toFixed(1) + '" cy="' + y(p.v).toFixed(1) + '" r="' + (p.t === D(k).getTime() ? 3.6 : 2.2) + '" fill="var(--p2)"/>').join('');
+  const ticks = [[start,'start'], [start + 7*DAY,'middle'], [end,'end']].map(([t,a]) => '<text x="' + (a === 'start' ? 2 : a === 'end' ? W - 2 : x(t)).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="' + a + '">' + fmt(new Date(t)) + '</text>').join('');
+  box.innerHTML =
+    '<div class="sl-top"><span class="k">Nuit ' + (isToday ? 'dernière' : 'du ' + fmt(D(k))) + '</span><span class="sl-st ' + st[0] + '">' + st[1] + '</span></div>' +
+    '<div class="sl-main">' +
+      '<div><div class="v">' + (v || '—') + ' <small>ms</small></div><div class="l">VFC</div></div>' +
+      '<div><div class="v">' + (n.fc_min || '—') + ' <small>bpm</small></div><div class="l">FC min</div></div>' +
+      '<div><div class="v">' + esc(n.duree || '—') + '</div><div class="l">Sommeil</div></div>' +
+    '</div>' +
+    (n.coucher || n.ressources ? '<div class="sl-meta">' + [n.coucher && n.lever ? esc(n.coucher) + ' → ' + esc(n.lever) : '', n.ressources ? 'ressources ' + n.ressources + ' %' : '', n.aine != null ? 'aine ' + esc(n.aine) + '/10' : ''].filter(Boolean).join(' · ') + '</div>' : '') +
+    '<svg class="spark" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="VFC des 14 derniers jours">' + band +
+      '<path d="' + path(pts, 'v') + '" fill="none" stroke="var(--p2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' + dots + ticks + '</svg>' +
+    '<div class="sl-leg"><span><i style="background:var(--p2)"></i>VFC, 14 jours</span><span><i style="background:var(--p2);opacity:.3"></i>repère 80-90</span><span><i style="background:var(--p3)"></i>70 = facile</span></div>';
+}
+
 /* ---------- Saison ---------- */
 function bar(l, v, t){
   return '<span class="l">' + l + '</span><div class="trk"><i style="width:' + (t > 0 ? Math.min(100, v/t*100) : 0).toFixed(1) + '%"></i></div><span class="n">' + nf(v) + ' <span>/ ' + nf(t) + '</span></span>';
@@ -430,9 +478,9 @@ function render(){
   const d = Math.ceil((RACE - today)/DAY);
   $('cd').textContent = d > 0 ? 'J-' + d : 'Jour J';
   if (open === null){ const c = current(); open = c ? c.id : null; }
-  renderWeek(); renderSeason(); renderRaces();
+  renderWeek(); renderSleep(); renderSeason(); renderRaces();
 }
-function apply(d, label){ WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; $('sync').textContent = label + (d.maj || '—'); }
+function apply(d, label){ WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; SLEEP = d.sommeil || {}; $('sync').textContent = label + (d.maj || '—'); }
 async function loadData(){
   today = new Date(); today.setHours(0,0,0,0);
   try {

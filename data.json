@@ -71,5 +71,95 @@
       "quotidien": "test de l'aine au réveil (genoux serrés 5 s, note /10), 2-3 séries de serrage doux, extension de hanche toutes les 30 min au bureau",
       "prevu": "~34 km de course (~42 avec la rando) · ~1 150 m D+"
     }
+  },
+  "sommeil": {
+    "2026-10-15": {
+      "vfc": 69,
+      "fc_min": 58
+    },
+    "2026-10-16": {
+      "vfc": 90,
+      "fc_min": 47,
+      "coucher": "22:42"
+    },
+    "2026-10-17": {
+      "vfc": 74,
+      "fc_min": 53,
+      "coucher": "01:45",
+      "note": "veille de course, coucher tardif"
+    },
+    "2026-10-18": {
+      "vfc": 76,
+      "fc_min": 54,
+      "note": "jour d'U Periplu"
+    },
+    "2026-10-19": {
+      "vfc": 83,
+      "fc_min": 51
+    },
+    "2026-10-20": {
+      "vfc": 90,
+      "fc_min": 47,
+      "coucher": "22:47"
+    },
+    "2026-10-21": {
+      "vfc": 98,
+      "fc_min": 51,
+      "fc_moy": 53,
+      "duree": "7h23",
+      "coucher": "22:50",
+      "lever": "07:04",
+      "ressources": 88,
+      "rem": 13,
+      "profond": 36
+    },
+    "2026-10-22": {
+      "vfc": 63,
+      "fc_min": 53,
+      "fc_moy": 61,
+      "duree": "8h20",
+      "coucher": "22:57",
+      "lever": "07:21",
+      "ressources": 68,
+      "rem": 18,
+      "profond": 33,
+      "note": "lendemain des sprints CAB"
+    },
+    "2026-10-23": {
+      "vfc": 92,
+      "fc_min": 52,
+      "fc_moy": 54,
+      "duree": "8h19",
+      "coucher": "22:56",
+      "lever": "07:15",
+      "ressources": 86,
+      "rem": 17,
+      "profond": 25
+    },
+    "2026-10-26": {
+      "vfc": 92,
+      "fc_min": 48,
+      "fc_moy": 54,
+      "duree": "7h44",
+      "coucher": "23:11",
+      "lever": "06:55",
+      "ressources": 79,
+      "rem": 26,
+      "profond": 19,
+      "aine": "4-5"
+    },
+    "2026-10-27": {
+      "vfc": 98,
+      "fc_min": 48,
+      "fc_moy": 51,
+      "duree": "7h18",
+      "coucher": "22:35",
+      "lever": "05:53",
+      "ressources": 90,
+      "rem": 29,
+      "profond": 19,
+      "aine": "3-4",
+      "note": "réveil tôt, changement d'heure"
+    }
   }
 }
