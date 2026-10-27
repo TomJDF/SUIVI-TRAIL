@@ -1,26 +1,72 @@
 {
   "maj": "27/10/2026",
   "semaines": {
-    "2026-09-28": {"km": 29.7, "dplus": 1287, "note": "Vameval, rando Monte Astu, 5 km de Porto-Vecchio"},
-    "2026-10-05": {"km": 30.6, "dplus": 470, "note": "GUMP, côtes, Relais Rose · KV sauté (fatigue)"},
-    "2026-10-12": {"km": 41.4, "dplus": 1544, "note": "U Periplu · footing de Furiani trop dur, dos à 5/10"},
-    "2026-10-19": {"km": 39.6, "dplus": 1632, "note": "Sprints CAB, Zucca de nuit 945 m · + 48 min home trainer · aine droite"},
-    "2026-10-26": {"km": 0, "dplus": 0, "note": "Semaine en cours · aine droite à 4-5/10, pas d'intensité"}
+    "2026-09-28": {
+      "km": 29.7,
+      "dplus": 1287,
+      "note": "Vameval, rando Monte Astu, 5 km de Porto-Vecchio"
+    },
+    "2026-10-05": {
+      "km": 30.6,
+      "dplus": 470,
+      "note": "GUMP, côtes, Relais Rose · KV sauté (fatigue)"
+    },
+    "2026-10-12": {
+      "km": 41.4,
+      "dplus": 1544,
+      "note": "U Periplu · footing de Furiani trop dur, dos à 5/10"
+    },
+    "2026-10-19": {
+      "km": 39.6,
+      "dplus": 1632,
+      "note": "Sprints CAB, Zucca de nuit 945 m · + 48 min home trainer · aine droite"
+    },
+    "2026-10-26": {
+      "km": 0,
+      "dplus": 0,
+      "note": "Semaine en cours · aine droite à 4-5/10, pas d'intensité"
+    }
   },
   "resultats": {
-    "pv5k": {"temps": "20'11"},
-    "periplu": {"temps": "1h44'37", "place": "16e/114"}
+    "pv5k": {
+      "temps": "20'11"
+    },
+    "periplu": {
+      "temps": "1h44'37",
+      "place": "16e/114"
+    }
   },
   "plan": {
     "2026-10-26": {
       "jours": [
-        {"jour": "Lun", "seance": "Renfo Hanches, version aine : serrage adducteurs à la place du Copenhagen"},
-        {"jour": "Mar", "seance": "Mobilité (10 min) avant de partir, puis GUMP : footing sous 141, en ligne droite, sans gammes ni accélérations"},
-        {"jour": "Mer", "seance": "Pas de fractionné : vélo 45-60 min ou footing 40 min sous 141"},
-        {"jour": "Jeu", "seance": "Renfo Mollets (squat sans saut, sans Copenhagen) + 30 min faciles si aine ≤ 3/10"},
-        {"jour": "Ven", "seance": "Footing 40 min sous 141, alerte FC à 141 sur la montre"},
-        {"jour": "Sam", "seance": "Monte Astu, ~1 200 m D+ : montée 140-150, descente souple, 60 g glucides/h. Seulement si test aine ≤ 3/10, sinon rando tranquille"},
-        {"jour": "Dim", "seance": "Repos ou marche"}
+        {
+          "jour": "Lun",
+          "seance": "Renfo Hanches, version aine : serrage adducteurs à la place du Copenhagen"
+        },
+        {
+          "jour": "Mar",
+          "seance": "Mobilité (10 min) avant de partir, puis GUMP : footing sous 141, en ligne droite, sans gammes ni accélérations"
+        },
+        {
+          "jour": "Mer",
+          "seance": "Vélo 45-60 min tranquille + Renfo Mollets (squat sans saut, sans Copenhagen)"
+        },
+        {
+          "jour": "Jeu",
+          "seance": "GUMP, reco du City Trail de Bastia (9 km, 300 m D+) : à l'arrière du groupe, marche dans les escaliers raides, aine 3/10 max"
+        },
+        {
+          "jour": "Ven",
+          "seance": "Repos, ou vélo 30-45 min très facile. Samedi, c'est Monte Astu"
+        },
+        {
+          "jour": "Sam",
+          "seance": "Monte Astu, ~1 200 m D+ : montée 140-150, descente souple, 60 g glucides/h. Seulement si test aine ≤ 3/10, sinon rando tranquille"
+        },
+        {
+          "jour": "Dim",
+          "seance": "Repos ou marche"
+        }
       ],
       "quotidien": "test de l'aine au réveil (genoux serrés 5 s, note /10), 2-3 séries de serrage doux, extension de hanche toutes les 30 min au bureau"
     }
