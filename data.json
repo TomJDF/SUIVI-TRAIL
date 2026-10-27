@@ -136,6 +136,18 @@
       "rem": 17,
       "profond": 25
     },
+    "2026-10-25": {
+      "vfc": 78,
+      "fc_min": 51,
+      "fc_moy": 57,
+      "duree": "9h04",
+      "coucher": "00:52",
+      "lever": "09:04",
+      "ressources": 90,
+      "rem": 19,
+      "profond": 24,
+      "note": "nuit du changement d'heure, coucher tardif"
+    },
     "2026-10-26": {
       "vfc": 92,
       "fc_min": 48,
