@@ -45,30 +45,31 @@
         },
         {
           "jour": "Mar",
-          "seance": "Mobilité (10 min) avant de partir, puis GUMP : footing sous 141, en ligne droite, sans gammes ni accélérations"
+          "seance": "Mobilité (10 min) avant de partir, puis GUMP : footing sous 141, en ligne droite, sans gammes ni accélérations · ~9 km"
         },
         {
           "jour": "Mer",
-          "seance": "CAB : footing 30-35 min sous 141 pendant leur fractionné (couloir extérieur), puis Renfo Mollets en rentrant (sans saut, sans Copenhagen)"
+          "seance": "CAB : footing 30-35 min sous 141 pendant leur fractionné (couloir extérieur), puis Renfo Mollets en rentrant (sans saut, sans Copenhagen) · ~5,5 km"
         },
         {
           "jour": "Jeu",
-          "seance": "GUMP, reco du City Trail de Bastia (9 km, 300 m D+) : à l'arrière du groupe, marche dans les escaliers raides, aine 3/10 max"
+          "seance": "GUMP, reco du City Trail de Bastia (9 km, 300 m D+) : à l'arrière du groupe, marche dans les escaliers raides, aine 3/10 max · 9 km, 300 m D+"
         },
         {
           "jour": "Ven",
-          "seance": "CAB, sortie trail ~10 km : tranquille, marche dans les montées raides, descentes souples, aine 3/10 max"
+          "seance": "CAB, sortie trail ~10 km : tranquille, marche dans les montées raides, descentes souples, aine 3/10 max · ~10 km, ~300 m D+"
         },
         {
           "jour": "Sam",
-          "seance": "Rando GUMP avec un peu de D+ : marche active, sans courir"
+          "seance": "Rando GUMP avec un peu de D+ : marche active, sans courir · ~8 km, ~500 m D+"
         },
         {
           "jour": "Dim",
           "seance": "Repos ou marche"
         }
       ],
-      "quotidien": "test de l'aine au réveil (genoux serrés 5 s, note /10), 2-3 séries de serrage doux, extension de hanche toutes les 30 min au bureau"
+      "quotidien": "test de l'aine au réveil (genoux serrés 5 s, note /10), 2-3 séries de serrage doux, extension de hanche toutes les 30 min au bureau",
+      "prevu": "~34 km de course (~42 avec la rando) · ~1 150 m D+"
     }
   }
 }

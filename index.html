@@ -319,7 +319,7 @@ function toggleDay(i){
 function renderWeek(){
   const p = current(), mon = monday(), w = weekPlan(), ti = (today.getDay()+6)%7;
   $('w-eyebrow').textContent = 'Semaine ' + weekNo() + ' / 37' + (p ? ' · ' + p.name : '');
-  $('w-dates').textContent = 'Du ' + fmt(mon) + ' au ' + fmt(new Date(mon.getTime() + 6*DAY)) + ' · ' + w.jours.filter(j => j.fait).length + ' / ' + w.jours.length + ' fait';
+  $('w-dates').textContent = 'Du ' + fmt(mon) + ' au ' + fmt(new Date(mon.getTime() + 6*DAY)) + ' · ' + w.jours.filter(j => j.fait).length + ' / ' + w.jours.length + ' fait' + (w.prevu ? ' · prévu ' + w.prevu : '');
 
   const tj = w.jours[ti], rid = tj && renfoId(tj.seance);
   $('w-today').hidden = !tj;
