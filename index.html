@@ -381,7 +381,7 @@ function renderSleep(){
   const dots = pts.filter(p => p.v).map(p => '<circle cx="' + x(p.t).toFixed(1) + '" cy="' + y(p.v).toFixed(1) + '" r="' + (p.t === D(k).getTime() ? 3.6 : 2.2) + '" fill="var(--p2)"/>').join('');
   const ticks = [[start,'start'], [start + 7*DAY,'middle'], [end,'end']].map(([t,a]) => '<text x="' + (a === 'start' ? 2 : a === 'end' ? W - 2 : x(t)).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="' + a + '">' + fmt(new Date(t)) + '</text>').join('');
   box.innerHTML =
-    '<div class="sl-top"><span class="k">Nuit ' + (isToday ? 'dernière' : 'du ' + fmt(D(k))) + '</span><span class="sl-st ' + st[0] + '">' + st[1] + '</span></div>' +
+    '<div class="sl-top"><span class="k">Nuit ' + (isToday ? 'dernière' : 'du ' + fmt(new Date(D(k).getTime() - DAY)) + ' au ' + fmt(D(k))) + '</span><span class="sl-st ' + st[0] + '">' + st[1] + '</span></div>' +
     '<div class="sl-main">' +
       '<div><div class="v">' + (v || '—') + ' <small>ms</small></div><div class="l">VFC</div></div>' +
       '<div><div class="v">' + (n.fc_min || '—') + ' <small>bpm</small></div><div class="l">FC min</div></div>' +
