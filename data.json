@@ -49,7 +49,7 @@
         },
         {
           "jour": "Mer",
-          "seance": "Vélo 45-60 min tranquille + Renfo Mollets (squat sans saut, sans Copenhagen)"
+          "seance": "CAB : footing 30-35 min sous 141 pendant leur fractionné (couloir extérieur), puis Renfo Mollets en rentrant (sans saut, sans Copenhagen)"
         },
         {
           "jour": "Jeu",
@@ -57,11 +57,11 @@
         },
         {
           "jour": "Ven",
-          "seance": "Repos, ou vélo 30-45 min très facile. Samedi, c'est Monte Astu"
+          "seance": "CAB, sortie trail ~10 km : tranquille, marche dans les montées raides, descentes souples, aine 3/10 max"
         },
         {
           "jour": "Sam",
-          "seance": "Monte Astu, ~1 200 m D+ : montée 140-150, descente souple, 60 g glucides/h. Seulement si test aine ≤ 3/10, sinon rando tranquille"
+          "seance": "Rando GUMP avec un peu de D+ : marche active, sans courir"
         },
         {
           "jour": "Dim",
