@@ -136,6 +136,9 @@ h1,h2,h3{margin:0;text-wrap:balance}
   background:var(--surface);border:1px solid var(--line);border-radius:4px;
   padding:14px 18px;margin-bottom:34px
 }
+.seg{display:flex;gap:4px;flex:none}
+.seg button{width:40px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);font-family:var(--display);font-size:17px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .optrow .lbl{font-size:14.5px;font-weight:500}
 .optrow .sub{color:var(--muted);font-size:12.5px;margin-top:2px}
 .sw{
@@ -311,12 +314,13 @@ h1,h2,h3{margin:0;text-wrap:balance}
       </div>
 
       <div class="rules">
-        <h2>Les trois règles</h2>
+        <h2>Les règles de la kiné</h2>
         <ol>
-          <li><span class="n">1</span><span>Toujours commencer par la <strong>gauche</strong>.</span></li>
-          <li><span class="n">2</span><span>Le nombre de répétitions se cale sur la gauche. Si elle fait 6, la droite fait 6.</span></li>
-          <li><span class="n">3</span><span>Dès que le dos lance en bas à droite, la série s'arrête. Trois reps avec la fesse valent mieux que huit avec le dos.</span></li>
-          <li><span class="n">4</span><span>Sur tout ce qui ouvre la hanche, <strong>le bas du dos ne se creuse pas</strong>. Si tu creuses, tu triches avec le dos au lieu d'ouvrir la hanche.</span></li>
+          <li><span class="n">1</span><span><strong>2 à 4 tours.</strong> Mieux vaut des petites séances régulières qu'une grosse de temps en temps.</span></li>
+          <li><span class="n">2</span><span><strong>2 séances par semaine</strong>, en alternant les trois programmes.</span></li>
+          <li><span class="n">3</span><span>Si tu es fatigué, vas-y mollo et privilégie les muscles les plus en forme.</span></li>
+          <li><span class="n">4</span><span>Soigne la récup : sommeil, alimentation, hydratation.</span></li>
+          <li><span class="n">5</span><span>Si le dos lance ou si l'aine dépasse 3/10, la série s'arrête.</span></li>
         </ol>
       </div>
 
@@ -329,6 +333,14 @@ h1,h2,h3{margin:0;text-wrap:balance}
       </button>
 
       <div class="sessions" id="sessions"></div>
+
+      <div class="optrow">
+        <div>
+          <div class="lbl">Tours</div>
+          <div class="sub">De 2 à 4, selon la forme du jour.</div>
+        </div>
+        <div class="seg" id="tours"><button data-n="2">2</button><button data-n="3">3</button><button data-n="4">4</button></div>
+      </div>
 
       <div class="optrow">
         <div>
@@ -410,12 +422,12 @@ h1,h2,h3{margin:0;text-wrap:balance}
   <section class="screen" id="done" hidden>
     <div class="wrap done">
       <h2 id="d-title">Séance pliée</h2>
-      <p id="d-sub">Note ce que le dos et la fesse gauche ont donné pendant que c'est frais.</p>
+      <p id="d-sub">Note comment le dos et l'aine ont réagi, pendant que c'est frais.</p>
       <div class="recap">
         <h3>À rapporter</h3>
         <ul>
           <li>Dos en bas à droite <span>/10</span></li>
-          <li>Fesse gauche au SLRDL <span>sentie ?</span></li>
+          <li>Aine droite <span>/10</span></li>
           <li>Aine droite pendant la séance <span>/10</span></li>
           <li>Séries écourtées <span id="d-cut">0</span></li>
           <li>Durée <span id="d-time">—</span></li>
@@ -433,229 +445,147 @@ h1,h2,h3{margin:0;text-wrap:balance}
 /* ---------------- Données des séances ---------------- */
 const SESSIONS = {
   hanches: {
-    name: 'Hanches', day: 'Lundi', rounds: 2, mins: '25 min',
-    meta: '2 tours · SLRDL, abduction, serrage adducteurs, marche latérale',
+    name: 'Hanches', day: 'Programme 1', mins: '20-35 min',
+    meta: 'Planche latérale, fente bulgare, adducteurs, hip thrust, farmer walk',
     blocks: [
-      { label: 'Échauffement', when: 'start', items: [
-        { name: 'Bascules de bassin', reps: 12, cues: [
-          'Debout, mains sur les hanches.',
-          'Petites bascules lentes autour de la position neutre, pas depuis le dos creusé.',
-          'Expire et rentre légèrement le ventre avant de bouger. Si ça pince, réduis encore.' ] },
-        { name: 'Chat-vache', reps: 10, cues: [
-          'À quatre pattes, lent.',
-          'Va chercher chaque bout du mouvement.' ] },
-        { name: 'Psoas au repos', time: 60, cues: [
-          'Allongé sur le dos, mollets posés sur une chaise ou le canapé, hanches et genoux à 90°.',
-          'Respire lentement par le ventre. Rien à faire d\'autre.' ] }
-      ]},
-      { label: 'Activation', when: 'start', items: [
-        { name: 'Fessier gauche isolé', time: 5, sets: 10, single: 'G', rest: 0, cues: [
-          'Allongé sur le dos, genoux pliés.',
-          'Pousse le talon gauche dans le sol comme pour tirer le tapis vers toi — c\'est ce repère-là qui marche chez toi.',
-          'Le bassin ne bouge pas. Tu contractes, c\'est tout.' ] },
-        { name: 'Marche latérale', reps: 10, unit: 'pas de chaque côté', load: 'élastique gris', cues: [
-          'Boucle au-dessus des genoux, demi-squat.',
-          'Pieds parallèles, buste immobile.',
-          'Si le tronc se balance d\'un côté à l\'autre, l\'élastique est trop fort.' ] }
-      ]},
       { label: 'Circuit', when: 'round', items: [
-        { name: 'SLRDL jambe tendue', sides: true, rest: 60,
-          left:  { reps: 8, load: 'à vide' },
-          right: { reps: 8, load: 'kettlebell 8 kg' },
-          warn: 'Dès que le dos lance en bas à droite, tu arrêtes la série. Le nombre ne compte pas, la sensation si.',
+        { name: 'Planche latérale + jambe', sides: true, time: 35, rest: 30,
+          warn: 'Si le bas du dos lance, passe en appui sur le genou.',
           cues: [
-            'La jambe arrière part tendue dans le prolongement du corps, elle fait contrepoids.',
-            'Genou d\'appui légèrement fléchi et figé. S\'il plie en descendant, ça devient un squat.',
-            'Les hanches reculent, le buste suit.',
-            'Pousse le pied dans le sol comme pour repousser le tapis vers l\'arrière.',
-            'À gauche : une main en appui sur un mur, monte la jambe progressivement.' ] },
-        { name: 'Extension de hanche debout', sides: true, reps: 12, load: 'sans bande, 3 s tenu', rest: 45,
-          warn: 'Le bas du dos ne se creuse pas. Creuser, c\'est simuler l\'ouverture avec le dos — exactement ce qui te fait mal en montée.',
+            'Sur l\'avant-bras, et tu montes et descends la jambe du dessus pendant 30-40 s.',
+            'Laisse le bassin dans l\'axe épaule-hanche-genou : il ne s\'affaisse pas et ne recule pas.' ] },
+        { name: 'Fente bulgare', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 60, cues: [
+          'Pied arrière posé sur une chaise ou le canapé.',
+          'Penche bien le buste en avant.',
+          'C\'est la jambe arrière qui se dirige vers le sol et vers l\'arrière. Le genou avant avance le moins possible.',
+          'Tout le poids sur la jambe avant : tu dois pouvoir décoller le pied arrière.',
+          'Si 12 sont faciles, ajoute une charge.' ] },
+        { name: 'Planche adducteurs', sides: true, time: 30, rest: 30,
+          warn: 'Tant que le test de l\'aine dépasse 3/10 le matin : version genou, en statique, 20-30 s, et ça doit rester à 3/10 maximum.',
           cues: [
-            'Face à un mur, mains posées, buste penché de 20-30°. Pas besoin de bande : sur 10-15 cm, elle ne se tend pas.',
-            'Pour charger : kettlebell posée au sol derrière le talon, sur une serviette, et tu la fais glisser en reculant le pied. Même amplitude, même règle pour le dos.',
-            '1. Verrouille : rentre le bassin, pubis vers le nombril.',
-            '2. Serre la fesse — la jambe ne bouge pas encore.',
-            '3. Pousse un mur derrière toi avec le talon, pointe de pied tournée de 10-15° vers l\'extérieur.',
-            'Arrête-toi dès que le dos veut se creuser. Tiens 3 s fesse serrée, reviens lentement.',
-            'Main sur le bas du dos pour vérifier. 10-15 cm d\'amplitude, c\'est normal. Droite = le côté raide.' ] },
-        { name: 'Abduction allongée', sides: true, reps: 15, load: 'élastique bleu', rest: 45, cues: [
-          'Boucle au-dessus des genoux, appui complet au sol.',
-          'Jambe du dessus tendue, pas de rotation du bassin.',
-          'Monte moins haut qu\'à vide, l\'élastique fait le travail.' ] },
-        { name: 'Serrage adducteurs', time: 20, sets: 3, rest: 20,
-          warn: 'Remplace le Copenhagen tant que l\'aine droite tire. Ça doit rester à 2-3/10 maximum.',
-          cues: [
-            'Allongé sur le dos, genoux pliés, coussin ou poings entre les genoux.',
-            'Serre doucement, environ 50 % de ta force. Si c\'est dur, tu serres trop.',
-            'Respire normalement, pas d\'apnée.',
-            'C\'est ce qui calme le tendon. Le Copenhagen reviendra quand le test du matin sera sous 3/10.' ] },
-        { name: 'Dead bug', sides: true, reps: 6, rest: 45,
-          warn: 'Le bas du dos reste collé au sol du début à la fin. S\'il décolle, tu réduis l\'amplitude.',
-          cues: [
-            'Sur le dos, hanches et genoux à 90°, bras tendus vers le plafond. Pas de coussin ici, le serrage se fait juste avant.',
-            'Expire, colle le bas du dos au sol, puis tends lentement une jambe vers l\'avant, talon à 10 cm du sol, et le bras opposé derrière la tête.',
-            'Reviens lentement et change de côté. Si c\'est trop dur, garde le genou plié et pose juste le talon au sol.',
-            'Ça apprend aux abdos à tenir le bassin pendant que la hanche bouge : c\'est le relais qui manque entre l\'aine et le bas du dos.' ] },
-        { name: 'Descente de box', reps: 8, side2: true, eccentric: true, rest: 45, cues: [
-          'Descente lente, contrôlée, pas de réception sèche.',
-          'À sauter les jours de course ou après une grosse descente.' ] }
-      ]},
-      { label: 'Pour finir', when: 'end', items: [
-        { name: 'Jefferson curl', reps: 4, load: 'à plat, à vide', cues: [
-          'Tu déroules vertèbre par vertèbre en partant de la nuque.',
-          'Tu remontes pareil. Très lent.',
-          'Aucune charge, pas de step.' ],
-          warn: 'Si le point en bas à droite se réveille, tu arrêtes et tu le signales.' }
+            'Jambe du dessus posée sur le canapé, sur le genou ou sur le pied.',
+            '40 s en statique, ou 15-20 montées-descentes de la jambe du dessous.',
+            'Bassin aligné avec les genoux et les épaules.' ] },
+        { name: 'Hip thrust', reps: 10, unit: 'répétitions (8-12)', rest: 60, cues: [
+          'Omoplates sur le canapé ou une chaise, un coussin derrière.',
+          'Bassin stable, monte le plus haut possible.',
+          'Tout le travail est dans les fessiers, à la montée comme à la descente.',
+          'Si 12 sont faciles, ajoute une charge sur le bassin.' ] },
+        { name: 'Farmer walk', sides: true, time: 45, unit: 'secondes', load: 'sac de course chargé', rest: 45, cues: [
+          'Grosse charge dans une seule main, par exemple le sac de course rempli.',
+          'Tu marches GAINÉ, le buste ne penche pas du côté de la charge.',
+          'Le plus longtemps possible tant que le gainage tient.' ] }
       ]}
     ]
   },
 
-  postcourse: {
-    name: 'Post-course', day: 'Lundi après course', rounds: 1, mins: '15 min',
-    meta: '1 tour · sans excentrique · jambes courbaturées, on entretient sans charger',
+  quadri: {
+    name: 'Quadri & ischios', day: 'Programme 2', mins: '20-35 min',
+    meta: 'Montée de box, pont 1 jambe, descente de box, SLRDL',
     blocks: [
-      { label: 'Activation', when: 'start', items: [
-        { name: 'Fessier gauche isolé', time: 5, sets: 10, single: 'G', rest: 0, cues: [
-          'Allongé sur le dos, genoux pliés.',
-          'Pousse le talon gauche dans le sol comme pour tirer le tapis vers toi.',
-          'Le bassin ne bouge pas. Tu contractes, c\'est tout.' ] },
-        { name: 'Marche latérale', reps: 10, unit: 'pas de chaque côté', load: 'élastique gris', cues: [
-          'Boucle au-dessus des genoux, demi-squat.',
-          'Pieds parallèles, buste immobile.' ] }
-      ]},
       { label: 'Circuit', when: 'round', items: [
-        { name: 'SLRDL jambe tendue', sides: true, rest: 45,
-          left:  { reps: 8, load: 'à vide' },
-          right: { reps: 8, load: 'à vide' },
-          warn: 'À vide des deux côtés ce soir : les ischios ont pris leur part dans la descente.',
+        { name: 'Montée de box', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 45, cues: [
+          'Sur une chaise ou un banc.',
+          'Le moins d\'impulsion possible avec la jambe arrière.',
+          'Descente lente. Le genou reste stable, il ne rentre pas vers l\'intérieur.',
+          'Si 12 sont faciles, ajoute une charge.' ] },
+        { name: 'Pont fessier 1 jambe', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 45, cues: [
+          'Pied posé en hauteur, genou fléchi d\'environ 30°.',
+          'Surveille que les orteils ne partent pas vers l\'extérieur.',
+          'Si 12 sont faciles, ajoute une charge.' ] },
+        { name: 'Descente de box', sides: true, reps: 10, unit: 'répétitions (8-12)', eccentric: true, rest: 60,
+          warn: 'Charge beaucoup les tendons au-dessus et en dessous de la rotule. Après une grosse sortie en descente avec douleur, saute-le, puis reprends-le dès que ça diminue.',
           cues: [
-            'Jambe arrière tendue dans le prolongement du corps.',
-            'Genou d\'appui légèrement fléchi et figé.',
-            'Pousse le pied dans le sol. Main en appui à gauche.' ] },
-        { name: 'Extension de hanche debout', sides: true, reps: 12, load: 'sans bande, 3 s tenu', rest: 45,
-          warn: 'La priorité de la séance. Le bas du dos ne se creuse pas — si c\'est 10 cm d\'amplitude, c\'est 10 cm.',
+            'Pas de compensation dans la hanche : c\'est le GENOU qui plie pour faire descendre le pied, c\'est tout.',
+            'C\'est l\'exercice qui prépare au D-.',
+            'Si 12 sont faciles, ajoute une charge.' ] },
+        { name: 'SLRDL', sides: true, reps: 10, unit: 'répétitions (8-12)', load: 'kettlebell si 12 faciles', rest: 60,
+          warn: 'Dès que le dos lance en bas à droite, tu arrêtes la série.',
           cues: [
-            'Face à un mur, mains posées, buste penché de 20-30°.',
-            '1. Verrouille : rentre le bassin, pubis vers le nombril.',
-            '2. Serre la fesse — la jambe ne bouge pas encore.',
-            '3. Pousse un mur derrière toi avec le talon, pointe de pied tournée de 10-15° vers l\'extérieur.',
-            'Arrête-toi dès que le dos veut se creuser. Tiens 3 s fesse serrée, reviens lentement.',
-            'Main sur le bas du dos pour vérifier. Si ça paraît minuscule, c\'est la vraie ouverture de ta hanche.' ] },
-        { name: 'Abduction allongée', sides: true, reps: 15, load: 'élastique bleu', rest: 45, cues: [
-          'Boucle au-dessus des genoux, appui complet au sol.',
-          'Pas de rotation du bassin, amplitude courte.' ] },
-        { name: 'Serrage adducteurs', time: 20, sets: 3, rest: 20, cues: [
-          'Allongé sur le dos, genoux pliés, coussin ou poings entre les genoux.',
-          'Serre doucement, environ 50 % de ta force. 2-3/10 maximum.',
-          'Remplace le Copenhagen tant que l\'aine droite tire.' ] }
-      ]},
-      { label: 'Facultatif', when: 'end', items: [
-        { name: 'Jefferson curl', reps: 4, load: 'à plat, à vide', cues: [
-          'Tu déroules vertèbre par vertèbre en partant de la nuque, tu remontes pareil.',
-          'Les jambes ne travaillent pas ici, tu peux le faire même courbaturé.' ],
-          warn: 'Si le point en bas à droite se réveille, tu arrêtes.' }
+            'Tout est dans la bascule du bassin, comme un bras de levier.',
+            'Dos plat : on vise l\'arrière de la cuisse, ce n\'est pas au dos de faire le travail.',
+            'Pour travailler le pied : debout sur deux livres durs, un sous le talon, un sous les orteils.' ] }
       ]}
     ]
   },
 
   mollets: {
-    name: 'Mollets & quadris', day: 'Jeudi', rounds: 2, mins: '22 min',
-    meta: '2 tours · montées sur pointe, fentes, flexion de hanche',
+    name: 'Mollets & varié', day: 'Programme 3', mins: '20-35 min',
+    meta: 'Pointes de pied, fente + pointes, squat sauté, Jefferson, flexion de hanche',
     blocks: [
-      { label: 'Échauffement', when: 'start', items: [
-        { name: 'Bascules de bassin', reps: 20, cues: ['Debout, mains sur les hanches.','Amplitude moyenne.'] },
-        { name: 'Chat-vache', reps: 10, cues: ['À quatre pattes, lent.'] },
-        { name: 'Extension de hanche debout', sides: true, reps: 12, load: 'sans bande, 3 s tenu', cues: [
-          'Sans bande, main en appui. Tiens 3 s fesse serrée en fin de mouvement.',
-          'Jambe tendue vers l\'arrière, serre la fesse, reviens.',
-          'Le bas du dos ne se creuse pas. Amplitude courte.' ] }
-      ]},
       { label: 'Circuit', when: 'round', items: [
-        { name: 'Montée sur pointe', sides: true, reps: 25, rest: 45, cues: [
-          'Une jambe, amplitude complète, descente contrôlée.',
-          'Objectif 25 par côté. Le gauche donne le chiffre.',
-          'Appui léger du doigt sur un mur pour l\'équilibre, pas pour pousser.' ] },
-        { name: 'Fente + montée sur pointes', sides: true, reps: 8, rest: 45, cues: [
-          'Fente avant, puis montée sur la pointe du pied avant.',
-          'Genou arrière qui descend vers le sol sans le toucher.' ] },
-        { name: 'Squat profond', reps: 8, eccentric: true, rest: 60,
-          warn: 'Sans le saut tant que l\'aine droite tire.',
+        { name: 'Montée sur pointe 1 jambe', sides: true, reps: 15, unit: 'max (objectif 25)', rest: 45, cues: [
+          'Face à un mur, tout le corps penché vers le mur, les mains en appui.',
+          'Montée rapide, le plus haut possible. Descente lente et contrôlée.',
+          'Appuie bien sur les orteils.',
+          'Au début, 15 c\'est déjà très bien. Objectif 25 sur le long terme.' ] },
+        { name: 'Fente + pointes de pied', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 45, cues: [
+          'En position de fente, monte et descends sur la pointe du pied avant.',
+          'Mouvement contrôlé.' ] },
+        { name: 'Squat profond + saut', reps: 10, eccentric: true, rest: 60,
+          warn: 'À faire seulement sans fatigue. Tant que l\'aine dépasse 3/10 le matin : squat profond seul, sans le saut.',
           cues: [
-            'Descente lente sur 3 s, aussi bas que possible sans que le dos s\'arrondisse.',
-            'Remonte normalement, sans élan.',
-            'Le saut reviendra quand le test du matin sera sous 3/10.' ] },
-        { name: 'Flexion de hanche lestée', sides: true, reps: 10, load: 'kettlebell 8 kg, assis', rest: 45, cues: [
-          'Version assise : kettlebell posée sur la cuisse au-dessus du genou, tu tiens la poignée et tu lèves le genou.',
-          'C\'est celle qui marche chez toi — tu sens bien l\'aine.',
-          'Monte le genou au-dessus de 90°, buste droit, bassin légèrement rentré.',
-          'Lent, pas d\'élan. Si c\'est un pincement net et pas une brûlure, réduis l\'amplitude.' ] },
-        { name: 'Serrage adducteurs', time: 20, sets: 3, rest: 20, cues: [
-          'Allongé sur le dos, genoux pliés, coussin ou poings entre les genoux.',
-          'Serre doucement, environ 50 % de ta force. 2-3/10 maximum.',
-          'Remplace le Copenhagen tant que l\'aine droite tire.' ] }
+            'Travail d\'explosivité.',
+            'Utilise tout le corps pour te propulser, et pour amortir à la réception.' ] },
+        { name: 'Jefferson curl ou Superman', reps: 12, unit: 'répétitions (10 → 20)', rest: 45, cues: [
+          'Au choix.',
+          'Jefferson : chargé si possible, tu déroules vertèbre par vertèbre et tu remontes pareil.',
+          'Sinon, en endurance : de 10 à 20 répétitions.' ] },
+        { name: 'Flexion de hanche lestée', sides: true, reps: 10, unit: 'répétitions (8-12)', load: 'lest au pied (sac, seau)', rest: 45, cues: [
+          'De profil sur une marche, une jambe dans le vide avec le lest.',
+          'Tu montes le genou en gardant le bassin stable et bien gainé.',
+          'Redescente lente.' ] }
       ]}
     ]
   },
 
   mobilite: {
-    name: 'Mobilité', day: 'Midi ou avant footing', rounds: 1, mins: '10 min',
+    name: 'Mobilité', day: 'En plus · avant footing', mins: '10 min', fixed: true, rounds: 1,
     meta: 'Bassin, hanche droite, aine : on prépare sans rien forcer',
     blocks: [
       { label: 'Relâcher', when: 'start', items: [
         { name: 'Psoas au repos', time: 60, cues: [
           'Allongé sur le dos, mollets posés sur une chaise ou le canapé, hanches et genoux à 90°.',
-          'Respire lentement par le ventre : 4 s à l\'inspiration, 6 s à l\'expiration.',
-          'Rien à faire d\'autre : dans cette position le psoas est complètement détendu.' ] },
+          'Respire lentement par le ventre : 4 s à l\'inspiration, 6 s à l\'expiration.' ] },
         { name: 'Bascules de bassin allongé', reps: 10, cues: [
-          'Toujours sur le dos, pieds au sol cette fois.',
-          'Expire et colle doucement le bas du dos au sol, puis relâche.',
+          'Pieds au sol. Expire et colle doucement le bas du dos au sol, puis relâche.',
           'Petite amplitude autour du neutre. Si ça pince, réduis encore.' ] }
       ]},
       { label: 'Activer', when: 'round', items: [
         { name: 'Dead bug', sides: true, reps: 5, cues: [
           'Hanches et genoux à 90°, bras vers le plafond.',
           'Bas du dos collé au sol, tends lentement une jambe et le bras opposé, reviens, change.' ] },
-        { name: 'Fessier gauche isolé', time: 5, sets: 5, single: 'G', rest: 0, cues: [
-          'Sur le dos, genoux pliés. Pousse le talon gauche dans le sol, le bassin ne bouge pas.' ] },
         { name: 'Serrage adducteurs', time: 20, sets: 2, rest: 15, cues: [
           'Coussin ou poings entre les genoux, à 50 % de ta force. 2-3/10 maximum.' ] },
         { name: 'Chat-vache', reps: 8, cues: [
-          'À quatre pattes, lent, amplitude moyenne.',
-          'Le passage vers le dos rond se fait en expirant, sans à-coup.' ] }
+          'À quatre pattes, lent, amplitude moyenne.' ] }
       ]},
       { label: 'Debout', when: 'end', items: [
-        { name: 'Bascules de bassin debout', reps: 10, cues: [
-          'Petites bascules lentes autour de la position neutre, pas depuis le dos creusé.',
-          'Expire et rentre légèrement le ventre avant de bouger.' ] },
         { name: 'Extension de hanche debout', sides: true, reps: 8, cues: [
           'Face au mur, mains posées. Bassin verrouillé, fesse serrée, talon vers l\'arrière sur 10-15 cm.',
           'Tiens 3 s, reviens lentement. Le dos ne se creuse pas.' ] },
-        { name: 'Montées de genoux en marchant', sides: true, reps: 8, cues: [
-          'Lent, genou à hauteur de hanche seulement, buste droit.',
-          'Si l\'aine tire, monte moins haut.' ] },
         { name: 'Marche', time: 120, cues: [
-          'Marche active, puis tu pars en footing. Les 10 premières minutes, très tranquille.' ] }
+          'Marche active, puis tu pars en footing, très tranquille les 10 premières minutes.' ] }
       ]}
     ]
   },
 
   bureau: {
-    name: 'Au bureau', day: 'Toutes les 30 min', rounds: 1, mins: '20 s',
-    meta: 'Le levier principal — 15 fois par jour bat n\'importe quelle séance',
+    name: 'Au bureau', day: 'En plus · toutes les 30 min', mins: '20 s', fixed: true, rounds: 1,
+    meta: 'Couper la position assise',
     blocks: [
       { label: 'Pause', when: 'round', items: [
         { name: 'Extension de hanche debout', sides: true, reps: 5, cues: [
           'Tu te lèves, main en appui si besoin.',
-          'Jambe tendue vers l\'arrière, tu serres la fesse, tu reviens.',
-          'Le bas du dos ne se creuse pas.',
-          'Vingt secondes. C\'est là que ta hanche se raccourcit, pas ailleurs.' ] }
+          'Jambe vers l\'arrière sur 10-15 cm, fesse serrée 3 s, le dos ne se creuse pas.' ] }
       ]}
     ]
   }
 };
 
 /* ---------------- État ---------------- */
+let TOURS = 2;
+try { const t = JSON.parse(localStorage.getItem('renfo.tours')); if ([2,3,4].includes(t)) TOURS = t; } catch(e) {}
 const KEY = 'renfo.v1';
 let raceMode = false;
 let S = null;          // { id, steps, i, started, cut }
@@ -685,8 +615,9 @@ function buildSteps(id){
 
   s.blocks.filter(b => b.when === 'start').forEach(b => b.items.forEach(i => expand(i, b.label)));
   const rounds = s.blocks.filter(b => b.when === 'round');
-  for (let r = 1; r <= s.rounds; r++){
-    rounds.forEach(b => b.items.forEach(i => expand(i, s.rounds > 1 ? b.label + ' · tour ' + r + '/' + s.rounds : b.label)));
+  const R = s.fixed ? (s.rounds || 1) : TOURS;
+  for (let r = 1; r <= R; r++){
+    rounds.forEach(b => b.items.forEach(i => expand(i, R > 1 ? b.label + ' · tour ' + r + '/' + R : b.label)));
   }
   s.blocks.filter(b => b.when === 'end').forEach(b => b.items.forEach(i => expand(i, b.label)));
   return out;
@@ -890,6 +821,9 @@ $('race').addEventListener('click', e => {
 (function(){
   const r = load('renfo.race');
   if (r) $('race').setAttribute('aria-pressed', 'true');
+  const paintTours = () => document.querySelectorAll('#tours button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.n === TOURS)));
+  document.querySelectorAll('#tours button').forEach(b => b.addEventListener('click', () => { TOURS = +b.dataset.n; store('renfo.tours', TOURS); paintTours(); }));
+  paintTours();
   renderHome();
 })();
 </script>

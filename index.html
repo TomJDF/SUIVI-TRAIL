@@ -297,6 +297,7 @@ function tally(p){
 function renfoId(s){
   s = String(s).toLowerCase();
   if (s.includes('post-course')) return 'postcourse';
+  if (s.includes('quadri') || s.includes('ischio')) return 'quadri';
   if (s.includes('hanches')) return 'hanches';
   if (s.includes('mollets')) return 'mollets';
   if (s.includes('mobilit')) return 'mobilite';
