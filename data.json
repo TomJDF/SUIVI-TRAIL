@@ -1,5 +1,5 @@
 {
-  "maj": "27/10/2026",
+  "maj": "28/10/2026",
   "semaines": {
     "2026-09-28": {
       "km": 29.7,
@@ -22,9 +22,9 @@
       "note": "Sprints CAB, Zucca de nuit 945 m · + 48 min home trainer · aine droite"
     },
     "2026-10-26": {
-      "km": 0,
-      "dplus": 0,
-      "note": "Semaine en cours · aine droite à 4-5/10, pas d'intensité"
+      "km": 8.1,
+      "dplus": 45,
+      "note": "GUMP mardi à 138 de FC moyenne, enfin sous 141 · aine 0 pendant le footing"
     }
   },
   "resultats": {
@@ -183,6 +183,18 @@
       "profond": 17,
       "aine": "3-4",
       "note": "réveil à 5h53 puis rendormi, changement d'heure"
+    },
+    "2026-10-28": {
+      "vfc": 60,
+      "fc_min": 59,
+      "fc_moy": 62,
+      "duree": "6h35",
+      "coucher": "00:32",
+      "lever": "07:14",
+      "ressources": 59,
+      "rem": 24,
+      "profond": 20,
+      "note": "apéro GUMP, 2 verres de vin"
     }
   }
 }
