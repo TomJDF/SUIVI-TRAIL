@@ -1,5 +1,5 @@
 {
-  "maj": "28/10/2026",
+  "maj": "29/10/2026",
   "semaines": {
     "2026-09-28": {
       "km": 29.7,
@@ -195,6 +195,18 @@
       "rem": 24,
       "profond": 20,
       "note": "apéro GUMP, 2 verres de vin"
+    },
+    "2026-10-29": {
+      "vfc": 82,
+      "fc_min": 53,
+      "fc_moy": 56,
+      "duree": "6h56",
+      "coucher": "00:24",
+      "lever": "07:20",
+      "ressources": 78,
+      "rem": 25,
+      "profond": 24,
+      "note": "ami à la maison, coucher tardif"
     }
   }
 }
