@@ -40,7 +40,7 @@ const PHASES = [
 const RACES = {
   pv5k:     { d:'2026-10-04', label:'04/10',   name:'5 km Porto-Vecchio', f:'5 km route' },
   periplu:  { d:'2026-10-18', label:'18/10',   name:'U Periplu', f:'11 km · 1 060 D+' },
-  calvi:    { d:'2026-11-07', label:'07/11',   name:'Trail in Calvi', note:'objectif 59 min-1h02', f:'Giru di a Serra · 11 km · 324 D+ · une montée de 240 m' },
+  calvi:    { d:'2026-11-07', label:'07/11',   name:'Trail in Calvi', note:'objectif sub 1h', f:'Giru di a Serra · 11 km · 324 D+ · une montée de 240 m' },
   parteu:   { d:'2026-11-29', label:'29/11',   name:'San Parteu', f:'23 km · 1 958 D+', key:true },
   cross:    { d:'2027-01-24', label:'24/01',   name:'Cross de Corte', f:'cross' },
   blanc:    { d:'2027-02-06', label:'déb. fév', name:'Trail blanc', f:'18 km · 650 D+' },
