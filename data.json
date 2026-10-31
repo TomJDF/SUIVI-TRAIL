@@ -1,5 +1,5 @@
 {
- "maj": "30/10/2026",
+ "maj": "31/10/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -22,9 +22,9 @@
    "note": "Sprints CAB, Zucca de nuit 945 m · + 48 min home trainer · aine droite"
   },
   "2026-10-26": {
-   "km": 18.4,
-   "dplus": 344,
-   "note": "GUMP mardi à 138 de FC moyenne · City Trail jeudi 10,3 km / 299 m D+ à 151 de moyenne, 170+ dans les montées · adducteur passé vendredi, dos encore présent au réveil"
+   "km": 25.4,
+   "dplus": 805,
+   "note": "GUMP mardi à 138 de FC moyenne · City Trail jeudi 10,3 km / 299 m D+ à 151 de moyenne, 170+ dans les montées · rando GUMP samedi 7 km / 461 m D+ · adducteur passé, dos encore présent au réveil"
   }
  },
  "resultats": {
@@ -61,7 +61,7 @@
     },
     {
      "jour": "Sam",
-     "seance": "Rando GUMP avec un peu de D+ : marche active, sans courir · ~8 km, ~500 m D+"
+     "seance": "Rando GUMP à Sermano : marche active, sans courir · 7 km, 461 m D+ (fait)"
     },
     {
      "jour": "Dim",
@@ -219,6 +219,17 @@
    "rem": 27,
    "profond": 19,
    "note": "lendemain du City Trail (151 de moyenne, 170+ dans les montées) · dos bas droite au réveil, moins que la veille · adducteur passé"
+  },
+  "2026-10-31": {
+   "vfc": 76,
+   "fc_min": 52,
+   "fc_moy": 59,
+   "duree": "7h53",
+   "coucher": "00:01",
+   "lever": "07:54",
+   "ressources": 83,
+   "rem": 25,
+   "profond": 23
   }
  }
 }
