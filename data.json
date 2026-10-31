@@ -65,7 +65,7 @@
     },
     {
      "jour": "Dim",
-     "seance": "Reco du parcours de Calvi en Pulsar, en footing : FC sous 141 sur le plat, montée tranquille. Repérer où ça raidit, le haut, les passages techniques de la descente · ~11 km, ~320 m D+"
+     "seance": "Reco du parcours de Calvi en Pulsar, en footing : FC sous 141 sur le plat, montée tranquille. Repérer où ça raidit, le haut, les passages techniques de la descente. Mollet au-dessus de 3/10 en descente = descentes en marchant · ~11 km, ~320 m D+"
     }
    ],
    "quotidien": "test de l'aine au réveil (genoux serrés 5 s, note /10), 2-3 séries de serrage doux, extension de hanche toutes les 30 min au bureau",
@@ -229,7 +229,8 @@
    "lever": "07:54",
    "ressources": 83,
    "rem": 25,
-   "profond": 23
+   "profond": 23,
+   "note": "dos et aine à 0 · petite boule en haut du mollet en descente depuis jeudi"
   }
  }
 }
