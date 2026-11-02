@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}[hidden]{display:none!important}.foot,.mark,.masthead .eyebrow,.masthead h1{display:none}.masthead{padding-block:18px 8px}</style></head><body><title>Carnet de renfo</title>
+<!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}[hidden]{display:none!important}.foot,#home .masthead{display:none}#home > .wrap{padding-top:18px}</style></head><body><title>Carnet de renfo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap">
@@ -6,7 +6,7 @@
 <style>
 /* Layout: single column, one exercise filling the screen at a time, sticky header for progress, rest timer as a full overlay. */
 :root{
-  --bg:#EFF2F1;
+  --bg:#F3F5F4;
   --surface:#FFFFFF;
   --surface-2:#E6EBE9;
   --ink:#14191A;
@@ -24,7 +24,7 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0E1314;
+    --bg:#0B1011;
     --surface:#171E1F;
     --surface-2:#1F292A;
     --ink:#E8EDEC;
@@ -40,7 +40,7 @@
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0E1314;
+  --bg:#0B1011;
   --surface:#171E1F;
   --surface-2:#1F292A;
   --ink:#E8EDEC;
@@ -56,7 +56,7 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{height:100%;overscroll-behavior:none}
 body{
   margin:0;
   background:var(--bg);
@@ -118,7 +118,7 @@ h1,h2,h3{margin:0;text-wrap:balance}
 }
 .card .day{
   font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent);white-space:nowrap
+  color:var(--accent);text-align:right;max-width:52%;line-height:1.35
 }
 .card .meta{margin-top:7px;color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums}
 
@@ -219,9 +219,19 @@ h1,h2,h3{margin:0;text-wrap:balance}
   content:"";position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--muted)
 }
 
+/* Séance plein écran : barre en haut, contenu qui défile au milieu, boutons fixes en bas (jamais par-dessus le contenu). */
+#session{position:fixed;inset:0;z-index:1}
+#session .bar{position:static;flex:none}
+#session .stage{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;justify-content:flex-start;padding-block:18px}
+.stage-in{margin-block:auto}
+#session .actions{position:static;flex:none;background:var(--bg);border-top:1px solid var(--line);padding-block:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+
 /* Timer */
-.timer{display:flex;flex-direction:column;align-items:center;margin-top:20px}
-.ring{width:min(220px,62vw);max-width:100%;aspect-ratio:1;position:relative}
+.timer{display:flex;flex-direction:column;align-items:center;margin-top:20px;border:0;background:none;padding:0;width:100%;-webkit-tap-highlight-color:transparent}
+.ring{display:block;width:min(220px,62vw,34vh);max-width:100%;aspect-ratio:1;position:relative}
+.rest .ring{width:min(240px,64vw,40vh)}
+.timer.armed .ring svg{opacity:.55}
+.hint{display:block;margin:10px 0 0;font-size:13.5px;color:var(--muted);text-align:center}
 .ring svg{width:100%;height:100%;display:block}
 .ring .num{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -313,17 +323,6 @@ h1,h2,h3{margin:0;text-wrap:balance}
         <p>Les séances telles qu'on les a réglées. Les séries, les côtés et les récups sont déjà dedans.</p>
       </div>
 
-      <div class="rules">
-        <h2>Les règles de la kiné</h2>
-        <ol>
-          <li><span class="n">1</span><span><strong>2 à 4 tours.</strong> Mieux vaut des petites séances régulières qu'une grosse de temps en temps.</span></li>
-          <li><span class="n">2</span><span><strong>2 séances par semaine</strong>, en alternant les trois programmes.</span></li>
-          <li><span class="n">3</span><span>Si tu es fatigué, vas-y mollo et privilégie les muscles les plus en forme.</span></li>
-          <li><span class="n">4</span><span>Soigne la récup : sommeil, alimentation, hydratation.</span></li>
-          <li><span class="n">5</span><span>Si le dos lance ou si l'aine dépasse 3/10, la série s'arrête.</span></li>
-        </ol>
-      </div>
-
       <button class="resume" id="resume" hidden>
         <span>
           <strong id="resume-name">Reprendre</strong>
@@ -350,6 +349,17 @@ h1,h2,h3{margin:0;text-wrap:balance}
         <button class="sw" id="race" role="switch" aria-pressed="false" aria-label="Semaine de course"></button>
       </div>
 
+      <div class="rules">
+        <h2>Les règles de la kiné</h2>
+        <ol>
+          <li><span class="n">1</span><span><strong>2 à 4 tours.</strong> Mieux vaut des petites séances régulières qu'une grosse de temps en temps.</span></li>
+          <li><span class="n">2</span><span><strong>2 séances par semaine</strong>, en alternant les trois programmes.</span></li>
+          <li><span class="n">3</span><span>Si tu es fatigué, vas-y mollo et privilégie les muscles les plus en forme.</span></li>
+          <li><span class="n">4</span><span>Soigne la récup : sommeil, alimentation, hydratation.</span></li>
+          <li><span class="n">5</span><span>Si le dos lance ou si l'aine dépasse 3/10, la série s'arrête.</span></li>
+        </ol>
+      </div>
+
       <div class="foot">
         Pour l'épingler : ouvre cette page dans Safari, bouton Partager, « Sur l'écran d'accueil ».
       </div>
@@ -369,7 +379,8 @@ h1,h2,h3{margin:0;text-wrap:balance}
       <div class="track"><i id="s-track" style="width:0%"></i></div>
     </div>
 
-    <div class="wrap stage">
+    <div class="wrap stage" id="s-stage">
+      <div class="stage-in">
       <p class="block-label" id="s-block">Échauffement</p>
       <h3 class="ex-name" id="s-ex">—</h3>
       <div id="s-side-wrap"></div>
@@ -380,20 +391,22 @@ h1,h2,h3{margin:0;text-wrap:balance}
         <span class="load" id="s-load" hidden></span>
       </div>
 
-      <div class="timer" id="s-timer" hidden>
-        <div class="ring">
+      <button class="timer" id="s-timer" type="button" aria-label="Démarrer le chrono" hidden>
+        <span class="ring">
           <svg viewBox="0 0 120 120" aria-hidden="true">
             <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="7"></circle>
             <circle id="s-ring" cx="60" cy="60" r="52" fill="none" stroke="var(--accent)"
                     stroke-width="7" stroke-linecap="round" transform="rotate(-90 60 60)"
                     stroke-dasharray="326.73" stroke-dashoffset="0"></circle>
           </svg>
-          <div class="num" id="s-count">20</div>
-        </div>
-      </div>
+          <span class="num" id="s-count">20</span>
+        </span>
+        <span class="hint" id="s-hint">Mets-toi en place, puis lance le chrono.</span>
+      </button>
 
       <div class="warn" id="s-warn" hidden></div>
       <ul class="cues" id="s-cues"></ul>
+      </div>
     </div>
 
     <div class="wrap actions">
@@ -628,6 +641,8 @@ function show(which){
   ['home','session','done'].forEach(id => $(id).hidden = (id !== which));
   $('rest').hidden = true;
   window.scrollTo(0, 0);
+  // l'app masque son en-tête et ses onglets pendant la séance
+  try { if (parent !== window) parent.postMessage({ type: 'renfo-screen', screen: which }, '*'); } catch(e) {}
 }
 
 function renderHome(){
@@ -691,11 +706,17 @@ function renderStep(){
 
   // dose ou timer
   if (secs){
+    // le chrono attend que Tom le lance
     $('s-dose').hidden = true;
     $('s-timer').hidden = false;
-    runTimer(secs, $('s-count'), $('s-ring'), () => advance());
-    $('s-go').textContent = 'Passer';
+    S.armed = secs;
+    $('s-timer').classList.add('armed');
+    $('s-hint').hidden = false;
+    $('s-count').textContent = clock(secs);
+    $('s-ring').setAttribute('stroke-dashoffset', '0');
+    $('s-go').textContent = 'Démarrer';
   } else {
+    S.armed = 0;
     $('s-timer').hidden = true;
     $('s-dose').hidden = false;
     $('s-big').textContent = spec.reps || it.reps;
@@ -711,6 +732,18 @@ function renderStep(){
   if (warn) $('s-warn').textContent = warn;
 
   $('s-cues').innerHTML = (it.cues || []).map(c => '<li>' + c + '</li>').join('');
+  $('s-stage').scrollTop = 0;
+}
+
+function startArmed(){
+  if (!S || !S.armed) return false;
+  const t = S.armed; S.armed = 0;
+  unlockAudio();
+  $('s-timer').classList.remove('armed');
+  $('s-hint').hidden = true;
+  $('s-go').textContent = 'Terminer';
+  runTimer(t, $('s-count'), $('s-ring'), () => advance());
+  return true;
 }
 
 function advance(){
@@ -757,8 +790,7 @@ function runTimer(total, numEl, ringEl, done){
   const end = Date.now() + total * 1000;
   const paint = () => {
     const left = Math.max(0, end - Date.now());
-    const s = Math.ceil(left / 1000);
-    numEl.textContent = s >= 60 ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : s;
+    numEl.textContent = clock(Math.ceil(left / 1000));
     ringEl.setAttribute('stroke-dashoffset', String(CIRC * (1 - left / (total * 1000))));
     if (left <= 0){ stopTick(); beep(); done(); }
   };
@@ -766,8 +798,16 @@ function runTimer(total, numEl, ringEl, done){
   tick = setInterval(paint, 100);
 }
 function stopTick(){ if (tick){ clearInterval(tick); tick = null; } }
+function clock(s){ return s >= 60 ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : String(s); }
 
 let actx = null;
+// iOS ne joue le bip que si le son a été débloqué par un appui
+function unlockAudio(){
+  try{
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+  }catch(e){}
+}
 function beep(){
   try{
     actx = actx || new (window.AudioContext || window.webkitAudioContext)();
@@ -791,7 +831,8 @@ document.addEventListener('visibilitychange', () => {
 });
 
 /* ---------------- Contrôles ---------------- */
-$('s-go').addEventListener('click', advance);
+$('s-go').addEventListener('click', () => { unlockAudio(); if (!startArmed()) advance(); });
+$('s-timer').addEventListener('click', () => { startArmed(); });
 $('s-skip').addEventListener('click', () => {
   const st = S.steps[S.i];
   S.cut++;

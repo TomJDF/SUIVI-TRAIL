@@ -157,8 +157,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .wkn{font-size:12px;color:var(--muted);margin:-3px 0 0 52px}
 
 .races{display:flex;flex-direction:column}
-.race{display:grid;grid-template-columns:54px 1fr auto;gap:2px 12px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
-.race .d{font-family:var(--display);font-size:16px;font-variant-numeric:tabular-nums}
+.race{display:grid;grid-template-columns:60px 1fr auto;gap:2px 12px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
+.race .d{font-family:var(--display);font-size:16px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .race .rn{font-weight:600;font-size:15px}
 .race .rn em{font-style:normal;font-weight:400;color:var(--muted);font-size:12.5px}
 .race .f{grid-column:2;font-size:12.5px;color:var(--muted)}
@@ -175,8 +175,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .rules b{color:var(--ink)}
 .sync{margin:0;font-size:11.5px;color:var(--faint);text-align:center}
 
-.page.rf{max-width:none;padding:0;gap:0;height:calc(100dvh - 57px - env(safe-area-inset-top,0px) - 62px - env(safe-area-inset-bottom,0px))}
-.page.rf iframe{flex:1;width:100%;border:0;background:var(--bg)}
+/* Renfo : cadre fixe entre l'en-tête et les onglets (hauteurs mesurées en JS), la page derrière ne défile plus.
+   Pendant une séance, l'en-tête et les onglets disparaissent : la séance prend tout l'écran. */
+.page.rf{position:fixed;left:0;right:0;top:var(--top-h,57px);bottom:var(--tabs-h,59px);max-width:none;margin:0;padding:0;gap:0;background:var(--bg)}
+.page.rf iframe{flex:1;display:block;width:100%;height:100%;border:0;background:var(--bg)}
+html.rf-on,html.rf-on body{overflow:hidden;overscroll-behavior:none}
+html.focus .top,html.focus .tabs{display:none}
+html.focus .page.rf{top:0;bottom:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 
 .wk-grid{display:flex;flex-direction:column;gap:16px}
 .wk-grid > div{display:flex;flex-direction:column;gap:16px}
@@ -193,7 +198,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .page{max-width:1000px;padding:36px 32px 64px}
   .wk-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
   #p-saison,#p-courses{max-width:760px}
-  .page.rf{height:calc(100dvh - 57px);max-width:520px;margin:0 auto;border-inline:1px solid var(--line)}
+  .page.rf{width:min(520px,100%);margin:0 auto;border-inline:1px solid var(--line)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -450,12 +455,27 @@ function go(p){
   if (!PAGES.includes(p)) p = 'semaine';
   PAGES.forEach(x => { $('p-' + x).hidden = x !== p; });
   document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-current', t.dataset.p === p ? 'page' : 'false'));
+  const html = document.documentElement;
+  html.classList.toggle('rf-on', p === 'renfo');
+  if (p !== 'renfo') html.classList.remove('focus');
   if (p === 'renfo') loadRenfo();
   if (location.hash !== '#' + p) history.replaceState(null, '', '#' + p);
   window.scrollTo(0, 0);
 }
 document.querySelectorAll('.tab').forEach(t => t.onclick = () => go(t.dataset.p));
 window.addEventListener('hashchange', () => go(location.hash.slice(1)));
+
+/* ---------- Hauteurs réelles de l'en-tête et des onglets (encoches, polices) ---------- */
+function measureChrome(){
+  const top = document.querySelector('.top'), tabs = document.querySelector('.tabs'), s = document.documentElement.style;
+  const th = top.getBoundingClientRect().height, bh = getComputedStyle(tabs).position === 'fixed' ? tabs.getBoundingClientRect().height : 0;
+  if (th) s.setProperty('--top-h', th + 'px');
+  if (bh || getComputedStyle(tabs).position !== 'fixed') s.setProperty('--tabs-h', bh + 'px');
+}
+measureChrome();
+window.addEventListener('resize', measureChrome);
+if ('ResizeObserver' in window){ const ro = new ResizeObserver(measureChrome); ro.observe(document.querySelector('.top')); ro.observe(document.querySelector('.tabs')); }
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureChrome);
 
 /* ---------- Renfo ---------- */
 let rfLoaded = null;
@@ -469,7 +489,9 @@ async function openRenfo(id){
   try { $('rf-frame').contentWindow.start(id); } catch(e) {}
 }
 window.addEventListener('message', e => {
-  const m = e.data; if (!m || m.type !== 'renfo-done' || e.source !== $('rf-frame').contentWindow) return;
+  const m = e.data; if (!m || e.source !== $('rf-frame').contentWindow) return;
+  if (m.type === 'renfo-screen'){ document.documentElement.classList.toggle('focus', m.screen === 'session'); return; }
+  if (m.type !== 'renfo-done') return;
   const ti = (today.getDay()+6)%7, j = weekPlan().jours[ti];
   if (j && !j.fait && renfoId(j.seance) === m.id) toggleDay(ti);
 });
