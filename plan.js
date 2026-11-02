@@ -8,7 +8,7 @@ const PHASES = [
   { id:'nov', name:'Bloc novembre', c:'--p0', start:'2026-10-26', end:'2026-11-29', km:[30,40], dp:[1000,1800],
     sub:'30-40 km/sem · calmer l\'aine',
     week:[['Lun','Renfo kiné (programme du cycle)'],['Mar','GUMP, footing sous 141'],['Mer','CAB : côtes, pas de sprint'],['Jeu','Renfo kiné (programme suivant)'],['Ven','Footing 40 min sous 141'],['Sam','Sortie montagne'],['Dim','Repos ou marche']],
-    focus:['Serrage adducteurs tous les jours, test du matin','Calvi à fond, départ contrôlé, puis 165-170','14-15/11 : reco du San Parteu ou deux tours de Zucca','San Parteu : montée 145-155, descentes gardées'],
+    focus:['Serrage adducteurs tous les jours, test du matin','Calvi : sub 1h, montée de départ à 170-173, pas de sprint final','14-15/11 : reco du San Parteu ou deux tours de Zucca','San Parteu : montée 145-155, descentes gardées'],
     races:['calvi','parteu'] },
   { id:'recup', name:'Récup', c:'--pr', start:'2026-11-30', end:'2026-12-13', km:[25,25], dp:[500,500],
     sub:'Footings courts, randos, point aine et dos',

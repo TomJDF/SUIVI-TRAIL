@@ -1,5 +1,5 @@
 {
- "maj": "31/10/2026",
+ "maj": "02/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -24,7 +24,7 @@
   "2026-10-26": {
    "km": 25.4,
    "dplus": 805,
-   "note": "GUMP mardi à 138 de FC moyenne · City Trail jeudi 10,3 km / 299 m D+ à 151 de moyenne, 170+ dans les montées · rando GUMP samedi 7 km / 461 m D+ · adducteur passé, dos encore présent au réveil"
+   "note": "GUMP mardi à 138 de FC moyenne · City Trail jeudi 10,3 km / 299 m D+ à 151 de moyenne, 170+ dans les montées · rando GUMP samedi 7 km / 461 m D+ · dimanche sauté (reco de Calvi annulée, vent) · adducteur passé, dos à 0 samedi"
   }
  },
  "resultats": {
@@ -65,11 +65,45 @@
     },
     {
      "jour": "Dim",
-     "seance": "Reco annulée (vent à Calvi). Trail près de chez toi, ~1h : montée en footing avec 3 × 3 min à l'effort de Calvi (170-173), récup en marchant ; descente tranquille, en marchant si le mollet dépasse 3/10. Repos si la météo est pourrie · ~8 km, 300-400 m D+"
+     "seance": "Reco de Calvi annulée (vent), pas de sortie"
     }
    ],
    "quotidien": "test de l'aine au réveil (genoux serrés 5 s, note /10), 2-3 séries de serrage doux, extension de hanche toutes les 30 min au bureau",
    "prevu": "~26 km de course (~33 avec la rando) · ~1 150 m D+"
+  },
+  "2026-11-02": {
+   "jours": [
+    {
+     "jour": "Lun",
+     "seance": "Renfo kiné Programme 1 Hanches, 2 tours, sans aller à l'échec. Planche adducteurs en version genou, semaine de course"
+    },
+    {
+     "jour": "Mar",
+     "seance": "GUMP : footing sous 141, sans gammes ni accélérations · ~8 km"
+    },
+    {
+     "jour": "Mer",
+     "seance": "CAB, version courte : 20 min de footing, puis 3 × 3 min en côte à l'effort de Calvi (170-173), retour en trottinant ; 10 min au calme. Pas de sprint · ~8 km, ~150 m D+"
+    },
+    {
+     "jour": "Jeu",
+     "seance": "Repos. Mobilité 10 min le soir"
+    },
+    {
+     "jour": "Ven",
+     "seance": "Footing 20-25 min très tranquille + 3 accélérations progressives de 20 s (pas de sprint). Préparer le sac · ~4 km"
+    },
+    {
+     "jour": "Sam",
+     "seance": "Trail in Calvi, Giru di a Serra. Échauffement 15 min + 3 × 30 s en montée. Montée de départ à 170-173, haut vers 19 min, descente fluide, pas de sprint final. Objectif sub 1h · 11 km, 324 m D+"
+    },
+    {
+     "jour": "Dim",
+     "seance": "Récup : marche ou vélo facile 45 min, mobilité"
+    }
+   ],
+   "quotidien": "Chaque matin : dos /10 au réveil, durée du dérouillage, réveil la nuit ou non. Mollet : test montées sur pointe avant de courir",
+   "prevu": "~33 km dont la course · ~550 m D+"
   }
  },
  "sommeil": {
@@ -231,6 +265,23 @@
    "rem": 25,
    "profond": 23,
    "note": "dos et aine à 0 · petite boule en haut du mollet en descente depuis jeudi"
+  },
+  "2026-11-01": {
+   "coucher": "02:30",
+   "lever": "08:00",
+   "duree": "5h30",
+   "note": "soirée d'Halloween, pas de capture"
+  },
+  "2026-11-02": {
+   "vfc": 83,
+   "fc_min": 52,
+   "fc_moy": 56,
+   "duree": "7h43",
+   "coucher": "23:26",
+   "lever": "07:13",
+   "ressources": 79,
+   "rem": 12,
+   "profond": 27
   }
  }
 }
