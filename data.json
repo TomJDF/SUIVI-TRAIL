@@ -88,7 +88,7 @@
     },
     {
      "jour": "Mer",
-     "seance": "CAB, version courte : 20 min de footing, puis 3 × 3 min en côte à l'effort de Calvi (170-173), retour en trottinant ; 10 min au calme. Pas de sprint · ~8 km, ~150 m D+"
+     "seance": "CAB, version courte : 20 min de footing, puis 3 × 3 min en côte à l'effort de Calvi (170-173), retour en trottinant ; 10 min au calme. Pas de sprint. Courbatures fortes = 2 × 3 min · ~8 km, ~150 m D+"
     },
     {
      "jour": "Jeu",
@@ -297,7 +297,7 @@
    "coucher": "23:00",
    "lever": "07:15",
    "ressources": 94,
-   "note": "montre mise vers 23h mais l'appli compte le sommeil dès 19h46 : durée, phases et ressources faussées"
+   "note": "nuit sans réveil, dos ok · montre mise vers 23h mais l'appli compte le sommeil dès 19h46 : durée, phases et ressources faussées"
   }
  }
 }
