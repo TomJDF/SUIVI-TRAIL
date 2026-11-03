@@ -1,5 +1,5 @@
 {
- "maj": "02/11/2026",
+ "maj": "03/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -25,6 +25,11 @@
    "km": 25.4,
    "dplus": 805,
    "note": "GUMP mardi à 138 de FC moyenne · City Trail jeudi 10,3 km / 299 m D+ à 151 de moyenne, 170+ dans les montées · rando GUMP samedi 7 km / 461 m D+ · dimanche sauté (reco de Calvi annulée, vent) · adducteur passé, dos à 0 samedi"
+  },
+  "2026-11-02": {
+   "km": 0,
+   "dplus": 0,
+   "note": "renfo Programme 1 lundi, sans douleur au dos"
   }
  },
  "resultats": {
@@ -283,6 +288,16 @@
    "rem": 12,
    "profond": 27,
    "note": "dos : rien en journée samedi et dimanche, mais réveils la nuit, besoin de bouger"
+  },
+  "2026-11-03": {
+   "vfc": 75,
+   "fc_min": 53,
+   "fc_moy": 58,
+   "duree": "~8h15",
+   "coucher": "23:00",
+   "lever": "07:15",
+   "ressources": 94,
+   "note": "montre mise vers 23h mais l'appli compte le sommeil dès 19h46 : durée, phases et ressources faussées"
   }
  }
 }
