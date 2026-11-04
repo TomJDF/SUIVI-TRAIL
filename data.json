@@ -1,5 +1,5 @@
 {
- "maj": "03/11/2026",
+ "maj": "04/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -298,6 +298,11 @@
    "lever": "07:15",
    "ressources": 94,
    "note": "nuit sans réveil, dos ok · montre mise vers 23h mais l'appli compte le sommeil dès 19h46 : durée, phases et ressources faussées"
+  },
+  "2026-11-04": {
+   "vfc": 75,
+   "duree": "6h30",
+   "note": "couché tard après le GUMP"
   }
  }
 }
