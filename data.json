@@ -1,5 +1,5 @@
 {
- "maj": "04/11/2026",
+ "maj": "05/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -303,6 +303,17 @@
    "vfc": 75,
    "duree": "6h30",
    "note": "couché tard après le GUMP"
+  },
+  "2026-11-05": {
+   "vfc": 73,
+   "fc_min": 53,
+   "fc_moy": 59,
+   "duree": "8h00",
+   "coucher": "23:19",
+   "lever": "07:20",
+   "ressources": 71,
+   "rem": 19,
+   "profond": 28
   }
  }
 }
