@@ -96,7 +96,7 @@
     },
     {
      "jour": "Ven",
-     "seance": "Footing 20-25 min très tranquille + 3 accélérations progressives de 20 s (pas de sprint). Préparer le sac · ~4 km"
+     "seance": "Footing 20 min très tranquille + 3 accélérations progressives de 20 s (pas de sprint), ou repos complet si toujours fatigué. Préparer le sac · ~4 km"
     },
     {
      "jour": "Sam",
@@ -313,7 +313,8 @@
    "lever": "07:20",
    "ressources": 71,
    "rem": 19,
-   "profond": 28
+   "profond": 28,
+   "note": "nuit sans douleur au dos, mais pas super reposé"
   }
  }
 }
