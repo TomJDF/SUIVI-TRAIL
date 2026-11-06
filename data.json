@@ -1,5 +1,5 @@
 {
- "maj": "05/11/2026",
+ "maj": "06/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -315,6 +315,18 @@
    "rem": 19,
    "profond": 28,
    "note": "nuit sans douleur au dos, mais pas super reposé"
+  },
+  "2026-11-06": {
+   "vfc": 86,
+   "fc_min": 53,
+   "fc_moy": 56,
+   "duree": "7h39",
+   "coucher": "23:37",
+   "lever": "07:16",
+   "ressources": 87,
+   "rem": 21,
+   "profond": 20,
+   "note": "VFC revenue dans la norme la veille de Calvi"
   }
  }
 }
