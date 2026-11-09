@@ -175,13 +175,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .rules b{color:var(--ink)}
 .sync{margin:0;font-size:11.5px;color:var(--faint);text-align:center}
 
-/* Renfo : cadre fixe entre l'en-tête et les onglets (hauteurs mesurées en JS), la page derrière ne défile plus.
+/* Renfo : le carnet est dans la page comme les autres onglets (le cadre prend la hauteur de son contenu)
+   et c'est la page qui défile. Sur iPhone, en appli écran d'accueil, une page bloquée (qui ne défile pas)
+   fait remonter les onglets du bas de la hauteur de la barre d'état : on ne bloque donc plus la page.
    Pendant une séance, l'en-tête et les onglets disparaissent : la séance prend tout l'écran. */
-.page.rf{position:fixed;left:0;right:0;top:var(--top-h,57px);bottom:var(--tabs-h,59px);max-width:none;margin:0;padding:0;gap:0;background:var(--bg)}
-.page.rf iframe{flex:1;display:block;width:100%;height:100%;border:0;background:var(--bg)}
-html.rf-on,html.rf-on body{overflow:hidden;overscroll-behavior:none}
+.page.rf{display:block;max-width:none;margin:0;padding:0 0 calc(env(safe-area-inset-bottom,0px) + 72px);min-height:calc(100vh + 1px);background:var(--bg)}
+.page.rf iframe{display:block;width:100%;height:100vh;border:0;background:var(--bg)}
+html.focus,html.focus body{overflow:hidden;overscroll-behavior:none}
 html.focus .top,html.focus .tabs{display:none}
-html.focus .page.rf{top:0;bottom:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html.focus .page.rf{position:fixed;inset:0;z-index:30;min-height:0;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+html.focus .page.rf iframe{flex:1;height:100%;min-height:0}
 
 .wk-grid{display:flex;flex-direction:column;gap:16px}
 .wk-grid > div{display:flex;flex-direction:column;gap:16px}
@@ -250,7 +253,8 @@ html.focus .page.rf{top:0;bottom:0;padding-top:env(safe-area-inset-top,0px);padd
   .sq{font-size:15px}
   .sq.t{font-size:12px}
   #p-saison,#p-courses{max-width:760px}
-  .page.rf{width:min(520px,100%);margin:0 auto;border-inline:1px solid var(--line)}
+  .page.rf{width:min(520px,100%);margin:0 auto;padding-bottom:0;border-inline:1px solid var(--line)}
+  html.focus .page.rf{margin:0 auto}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -679,10 +683,8 @@ function go(p){
   if (!PAGES.includes(p)) p = 'semaine';
   PAGES.forEach(x => { $('p-' + x).hidden = x !== p; });
   document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-current', t.dataset.p === p ? 'page' : 'false'));
-  const html = document.documentElement;
-  html.classList.toggle('rf-on', p === 'renfo');
-  if (p !== 'renfo') html.classList.remove('focus');
-  if (p === 'renfo') loadRenfo();
+  if (p !== 'renfo') document.documentElement.classList.remove('focus');
+  if (p === 'renfo') loadRenfo().then(sizeRenfo);
   if (location.hash !== '#' + p) history.replaceState(null, '', '#' + p);
   window.scrollTo(0, 0);
 }
@@ -705,8 +707,27 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureChr
 let rfLoaded = null;
 function loadRenfo(){
   const fr = $('rf-frame');
-  if (!rfLoaded) rfLoaded = new Promise(r => { fr.onload = () => { applyTheme(document.documentElement.getAttribute('data-theme')); r(); }; fr.src = 'renfo.html'; });
+  if (!rfLoaded) rfLoaded = new Promise(r => { fr.onload = () => {
+    applyTheme(document.documentElement.getAttribute('data-theme'));
+    try { // le cadre suit la hauteur du carnet (cartes, reprise de séance, fin de séance)
+      const w = fr.contentWindow, app = w.document.querySelector('.app');
+      if (app && w.ResizeObserver) new w.ResizeObserver(sizeRenfo).observe(app);
+    } catch(e) {}
+    sizeRenfo(); r();
+  }; fr.src = 'renfo.html'; });
   return rfLoaded;
+}
+/* Hors séance, le cadre fait la hauteur du carnet (la page défile) ; en séance, il prend tout l'écran. */
+function sizeRenfo(){
+  const fr = $('rf-frame'); let doc;
+  try { doc = fr.contentDocument; } catch(e) { return; }
+  if (!doc || !doc.documentElement) return;
+  const focus = document.documentElement.classList.contains('focus');
+  doc.documentElement.classList.toggle('flow', !focus);
+  if (focus){ fr.style.height = ''; return; }
+  const app = doc.querySelector('.app');
+  const h = Math.ceil(app ? app.getBoundingClientRect().height : doc.body.scrollHeight);
+  if (h > 0) fr.style.height = h + 'px';
 }
 async function openRenfo(id){
   go('renfo'); await loadRenfo();
@@ -714,7 +735,12 @@ async function openRenfo(id){
 }
 window.addEventListener('message', e => {
   const m = e.data; if (!m || e.source !== $('rf-frame').contentWindow) return;
-  if (m.type === 'renfo-screen'){ document.documentElement.classList.toggle('focus', m.screen === 'session'); return; }
+  if (m.type === 'renfo-screen'){
+    const was = document.documentElement.classList.contains('focus'), now = m.screen === 'session';
+    document.documentElement.classList.toggle('focus', now); sizeRenfo();
+    if (was && !now) window.scrollTo(0, 0);
+    return;
+  }
   if (m.type !== 'renfo-done') return;
   const ti = (today.getDay()+6)%7, j = weekPlan().jours[ti];
   if (j && !j.fait && renfoId(j.seance) === m.id) toggleDay(ti);

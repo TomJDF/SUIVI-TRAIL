@@ -72,6 +72,9 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .app{min-height:100%;display:flex;flex-direction:column}
 .screen{display:flex;flex-direction:column;flex:1;min-height:0}
 .screen[hidden]{display:none!important}
+/* Dans l'app, hors séance : le cadre prend la hauteur du contenu et c'est la page de l'app qui défile */
+html.flow,html.flow body{height:auto;overscroll-behavior:auto}
+html.flow .app{min-height:0}
 
 .wrap{width:100%;max-width:560px;margin:0 auto;padding-inline:18px}
 
