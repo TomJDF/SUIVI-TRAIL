@@ -1,5 +1,5 @@
 {
- "maj": "06/11/2026",
+ "maj": "09/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -27,9 +27,9 @@
    "note": "GUMP mardi à 138 de FC moyenne · City Trail jeudi 10,3 km / 299 m D+ à 151 de moyenne, 170+ dans les montées · rando GUMP samedi 7 km / 461 m D+ · dimanche sauté (reco de Calvi annulée, vent) · adducteur passé, dos à 0 samedi"
   },
   "2026-11-02": {
-   "km": 19.5,
-   "dplus": 324,
-   "note": "renfo Programme 1 lundi, sans douleur au dos · GUMP mardi 9,3 km à 138 de FC moyenne · mercredi 10,2 km / 304 m D+ en ville à 145 de moyenne, montées de San Rocuccio vers 148-150 (170 la semaine d'avant) · aucune douleur mercredi"
+   "km": 34.2,
+   "dplus": 811,
+   "note": "renfo Programme 1 lundi · GUMP mardi à 138 · mercredi en ville, montées marchées à 148-150 · vendredi 3,5 km de déblocage · Calvi samedi : 11,2 km / 393 m D+ en 1h02'04 (montre), 170 de FC moyenne, haut de la montée à 21'34"
   }
  },
  "resultats": {
@@ -39,6 +39,10 @@
   "periplu": {
    "temps": "1h44'37",
    "place": "16e/114"
+  },
+  "calvi": {
+   "temps": "1h02'04",
+   "note": "temps montre"
   }
  },
  "plan": {
@@ -109,6 +113,40 @@
    ],
    "quotidien": "Chaque matin : dos /10 au réveil, durée du dérouillage, réveil la nuit ou non. Mollet : test montées sur pointe avant de courir",
    "prevu": "~33 km dont la course · ~550 m D+"
+  },
+  "2026-11-09": {
+   "jours": [
+    {
+     "jour": "Lun",
+     "seance": "Renfo kiné Programme 2 Quadri & ischios, 2 tours. Descente de box seulement si les cuisses ne sont plus courbaturées par Calvi"
+    },
+    {
+     "jour": "Mar",
+     "seance": "GUMP : footing sous 141 · ~8 km"
+    },
+    {
+     "jour": "Mer",
+     "seance": "11 novembre, férié : footing vallonné 50 min sous 141, montées en marchant si ça dépasse 150 · ~8 km, ~200 m D+"
+    },
+    {
+     "jour": "Jeu",
+     "seance": "Renfo kiné Programme 3 Mollets & varié, 2 tours. Pluie probable : à la maison"
+    },
+    {
+     "jour": "Ven",
+     "seance": "Repos ou 30 min très faciles. Préparer la sortie du week-end"
+    },
+    {
+     "jour": "Sam",
+     "seance": "Grosse sortie : reco du San Parteu ou deux tours de Zucca. Montées 145-155 en marchant dès que ça raidit, descentes gardées. Ravito 40-60 g/h, couches chaudes (froid en altitude) · ~20-23 km, ~1 600-1 900 m D+"
+    },
+    {
+     "jour": "Dim",
+     "seance": "Repos ou marche, mobilité 10 min"
+    }
+   ],
+   "quotidien": "Chaque matin : dos /10 au réveil, durée du dérouillage, réveil la nuit ou non. Serrage adducteurs et test du mollet avant de courir",
+   "prevu": "~40 km dont la grosse sortie · ~2 000 m D+"
   }
  },
  "sommeil": {
@@ -327,6 +365,29 @@
    "rem": 21,
    "profond": 20,
    "note": "VFC revenue dans la norme la veille de Calvi"
+  },
+  "2026-11-08": {
+   "vfc": 71,
+   "fc_min": 52,
+   "fc_moy": 60,
+   "duree": "10h42",
+   "coucher": "21:30",
+   "lever": "08:39",
+   "ressources": 82,
+   "rem": 24,
+   "profond": 19,
+   "note": "nuit après Calvi, 27 min d'éveil"
+  },
+  "2026-11-09": {
+   "vfc": 84,
+   "fc_min": 52,
+   "fc_moy": 55,
+   "duree": "6h10",
+   "coucher": "00:44",
+   "lever": "07:15",
+   "ressources": 75,
+   "rem": 14,
+   "profond": 26
   }
  }
 }
