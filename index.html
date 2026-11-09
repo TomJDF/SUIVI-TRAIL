@@ -571,7 +571,8 @@ function renderForme(){
   const k = s.days[fSel], n = SLEEP[k], acts = SEANCES[k] || [], ds = DOS[k], pas = PAS[k];
   const plan = PLANS[iso(fMon)] && Array.isArray(PLANS[iso(fMon)].jours) ? PLANS[iso(fMon)].jours[fSel] : null, fut = D(k) > today;
   const dl = [];
-  dl.push(['Nuit', n ? [n.coucher && n.lever ? esc(n.coucher) + ' → ' + esc(n.lever) : '', n.duree ? esc(n.duree) : '', n.vfc ? 'VFC <b>' + n.vfc + '</b> ms' : '', n.fc_min ? 'FC min ' + n.fc_min : '', n.fc_moy ? 'moy. ' + n.fc_moy : '', n.score ? 'score ' + n.score : ''].filter(Boolean).join(' · ') : '<span>' + (fut ? 'à venir' : 'pas de nuit enregistrée') + '</span>']);
+  dl.push(['Nuit', n ? [n.coucher && n.lever ? esc(n.coucher) + ' → ' + esc(n.lever) : '', n.duree ? esc(n.duree) : '', n.vfc ? 'VFC <b>' + n.vfc + '</b> ms' : '', n.fc_min ? 'FC min ' + n.fc_min : '', n.fc_moy ? 'moy. ' + n.fc_moy : '', n.score ? 'score ' + n.score : '', n.eveil_min ? 'éveil ' + n.eveil_min + ' min' : ''].filter(Boolean).join(' · ') : '<span>' + (fut ? 'à venir' : 'pas de nuit enregistrée') + '</span>']);
+  if (n && n.a_verifier) dl.push(['À voir', esc(n.a_verifier)]);
   if (n && n.note) dl.push(['Note', esc(n.note)]);
   dl.push(['Séance', acts.length ? acts.map(a => esc(a.nom) + ' <span>· ' + [a.km ? dec(a.km, 1) + ' km' : '', a.dp ? nf(a.dp) + ' m D+' : '', a.duree ? esc(a.duree) : '', a.fc ? 'FC ' + a.fc : ''].filter(Boolean).join(' · ') + '</span>').join('<br>') : '<span>' + (fut ? 'à venir' : 'repos ou pas sur Strava') + '</span>']);
   if (plan) dl.push(['Prévu', esc(plan.seance)]);

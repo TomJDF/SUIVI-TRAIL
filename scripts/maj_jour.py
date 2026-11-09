@@ -6,7 +6,7 @@ Usage : python3 scripts/maj_jour.py payload.json
 payload.json peut contenir, toutes facultatives :
   "sommeil": { "AAAA-MM-JJ" (date du réveil): {vfc, fc_min, fc_moy, duree, coucher, lever, score, profond, rem, note} }
   "pas":     { "AAAA-MM-JJ": nombre_de_pas }
-  "seances": { "AAAA-MM-JJ": [ {nom, type, km, dp, fc, duree} ] }   (remplace la liste du jour)
+  "seances": { "AAAA-MM-JJ": [ {nom, type, km, dp, fc, duree} ] }   (remplace les séances Strava du jour ; les renfos et séances "manuel" restent)
   "dos":     { "AAAA-MM-JJ": {etat: "ok"|"gene"|"douleur", score, derouillage, nuit, note} }
 Les champs existants d'une nuit sont conservés sauf s'ils sont fournis (la note n'est jamais effacée).
 Les km et le D+ de chaque semaine qui a des séances sont recalculés (course, trail, rando, marche) ; la note de la semaine est gardée.
@@ -37,7 +37,10 @@ def main(path):
         d.setdefault('dos', {}).setdefault(k, {}).update(v)
     touched = set()
     for k, v in p.get('seances', {}).items():
-        d.setdefault('seances', {})[k] = v
+        # la liste Strava remplace celle du jour, mais les séances notées à la main (renfo, etc.) restent
+        noms = {a.get('nom') for a in v}
+        gardees = [a for a in d.setdefault('seances', {}).get(k, []) if (a.get('type') == 'Renfo' or a.get('manuel')) and a.get('nom') not in noms]
+        d['seances'][k] = v + gardees
         touched.add(monday(k))
     # recalcul des semaines touchées
     for mon in touched:
