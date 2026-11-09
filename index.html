@@ -21,7 +21,8 @@
   document.documentElement.setAttribute('data-theme', t); })();
 </script>
 <style>
-/* Cinq pages : Semaine (accueil), Forme, Saison, Courses, Renfo. Onglets en bas sur mobile, en haut sur PC. Une colonne lisible. */
+/* Trois onglets : Semaine, Saison, Renfo. Chaque onglet commence par un résumé ;
+   le détail s'ouvre en sous-page (Jour, Forme, Phase). Pensé pour le téléphone. */
 :root{
   --bg:#0B1011; --card:#131A1B; --card-2:#1B2425; --line:#222C2D;
   --ink:#E9EEED; --muted:#8A9B98; --faint:#56645F; --nav:rgba(11,16,17,.92);
@@ -42,111 +43,143 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{background:var(--bg)}
-body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%;transition:background .2s,color .2s}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
 :focus-visible{outline:2px solid var(--p2);outline-offset:2px;border-radius:6px}
 
+/* En-tête et onglets */
 .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
-.top-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px max(18px,env(safe-area-inset-right,0px)) 10px max(18px,env(safe-area-inset-left,0px))}
+.top-in{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px max(18px,env(safe-area-inset-right,0px)) 10px max(18px,env(safe-area-inset-left,0px))}
 .logo{width:32px;height:32px;border-radius:8px;flex:none;margin-right:-4px}
 .brand{font-family:var(--brand);font-weight:800;text-transform:uppercase;color:var(--title);line-height:.9;font-size:15px;letter-spacing:.01em}
 .brand span{display:block;text-align:right;font-size:11px}
 .cd{margin-left:auto;font-family:var(--display);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
 .theme{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);flex:none}
 .theme svg{width:17px;height:17px}
-
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--nav);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-.tabs-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tabs-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
 .tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 8px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--faint)}
 .tab svg{width:22px;height:22px}
 .tab[aria-current="page"]{color:var(--p2)}
 
-.page{max-width:760px;margin:0 auto;padding:22px max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 96px) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:22px}
+/* Pages */
+.page{max-width:560px;margin:0 auto;padding:20px max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 92px) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:18px}
 .page-h{display:flex;flex-direction:column;gap:4px}
-.eyebrow{margin:0;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.page-h h1{margin:0;font-family:var(--display);font-size:34px;font-weight:600;text-transform:uppercase;line-height:1;letter-spacing:.01em}
-.sub{margin:0;font-size:13.5px;color:var(--muted)}
+.eyebrow{margin:0;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.page-h h1{margin:0;font-family:var(--display);font-size:32px;font-weight:600;text-transform:uppercase;line-height:1.02;letter-spacing:.01em}
+.sub{margin:0;font-size:14px;color:var(--muted)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px}
+.back{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin:-6px 0 -6px -6px;padding:6px;font-size:14px;font-weight:600;color:var(--p2)}
+.back svg{width:16px;height:16px}
+.sec{display:flex;flex-direction:column;gap:8px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:0 2px}
+.sec-h h2{margin:0;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.sec-h span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chev{flex:none;width:8px;height:8px;border-right:1.6px solid var(--faint);border-bottom:1.6px solid var(--faint);transform:rotate(-45deg);margin-right:3px}
+.st{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:12px;white-space:nowrap}
+.st.ok{background:color-mix(in srgb,var(--p2) 18%,transparent);color:var(--p2)}
+.st.mid{background:color-mix(in srgb,var(--p0) 18%,transparent);color:var(--p0)}
+.st.low{background:color-mix(in srgb,var(--p3) 18%,transparent);color:var(--p3)}
+.st.no{background:var(--card-2);color:var(--muted)}
+.go{flex:none;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--on-accent);background:var(--p2);border-radius:20px;padding:9px 16px}
+.go.ghost{background:none;color:var(--p2);border:1px solid var(--p2)}
+.muted{color:var(--muted)}
+.foot{margin:0;font-size:12px;color:var(--faint);text-align:center}
 
-.goals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.goal{padding:12px 14px}
-.goal .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.goal .v{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums;margin:2px 0 8px}
-.goal .v small{font-family:var(--body);font-size:12px;color:var(--muted);font-weight:500}
+/* Semaine */
+.today{padding:16px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.today .k{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--p2)}
+.today .t{font-size:17px;font-weight:500;line-height:1.4}
+.morning{width:100%;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.morning .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.morning .k{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.morning .l{font-size:14.5px}
+.days{list-style:none;margin:0;padding:0 14px}
+.days li{display:flex;align-items:center;border-bottom:1px solid var(--line)}
+.days li:last-child{border-bottom:0}
+.box{flex:none;width:44px;height:48px;display:grid;place-items:center;margin-left:-10px}
+.box i{width:21px;height:21px;border-radius:6px;border:1.5px solid var(--faint);display:grid;place-items:center}
+.box svg{width:13px;height:13px;opacity:0;stroke:var(--on-accent)}
+.box.on i{background:var(--p2);border-color:var(--p2)}
+.box.on svg{opacity:1}
+.drow{flex:1;min-width:0;display:grid;grid-template-columns:38px 1fr auto auto;gap:10px;align-items:center;padding:12px 0}
+.dj{font-family:var(--display);font-size:14.5px;text-transform:uppercase;letter-spacing:.04em;line-height:1.15}
+.dj small{display:block;font-family:var(--body);font-size:11px;color:var(--muted);letter-spacing:0}
+.dt{min-width:0;font-size:14.5px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dm{font-size:12.5px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+li.is-today .dj{color:var(--p2)}
+li.is-done .dt{color:var(--muted)}
+.wkbar{padding:12px 16px 14px;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line)}
+.wkbar .l{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.wkbar .l b{color:var(--ink);font-weight:600}
 .trk{height:5px;background:var(--card-2);border-radius:3px;overflow:hidden}
 .trk i{display:block;height:100%;background:var(--c,var(--p2));border-radius:3px}
-.todo{list-style:none;margin:0;padding:2px 14px}
-.todo li{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
-.todo li:last-child{border-bottom:0}
-.chk{flex:1;min-width:0;display:grid;grid-template-columns:22px 42px 1fr;gap:10px;align-items:start;padding:13px 0;font-size:14.5px}
-.box{width:21px;height:21px;border-radius:6px;border:1.5px solid var(--faint);display:grid;place-items:center;transition:background .15s,border-color .15s}
-.box svg{width:13px;height:13px;opacity:0;stroke:var(--on-accent)}
-.chk.done .box{background:var(--p2);border-color:var(--p2)}
-.chk.done .box svg{opacity:1}
-.dj{font-family:var(--display);font-size:14.5px;text-transform:uppercase;letter-spacing:.04em;line-height:1.3}
-.dj small{display:block;font-family:var(--body);font-size:11px;color:var(--muted);text-transform:none;letter-spacing:0}
-.chk.today .dj{color:var(--p2)}
-.chk.done .ds{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint)}
-.go{flex:none;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--p2);border:1px solid var(--p2);border-radius:14px;padding:5px 10px}
-.today-card{padding:14px 16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.today-card .k{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--p2)}
-.today-card .t{font-size:17px;font-weight:500;line-height:1.4}
-.sleep{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
-.sl-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.sl-top .k{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.sl-st{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:12px}
-.sl-st.ok{background:color-mix(in srgb,var(--p2) 18%,transparent);color:var(--p2)}
-.sl-st.mid{background:color-mix(in srgb,var(--p0) 18%,transparent);color:var(--p0)}
-.sl-st.low{background:color-mix(in srgb,var(--p3) 18%,transparent);color:var(--p3)}
-.sl-main{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.sl-main .v{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
-.sl-main .v small{font-family:var(--body);font-size:11.5px;color:var(--muted);font-weight:500}
-.sl-main .l{font-size:10.5px;color:var(--muted);letter-spacing:.06em}
-.sl-meta{font-size:12px;color:var(--muted)}
-.spark{width:100%;height:auto;display:block}
-.spark text{font-family:var(--body);font-size:9px;fill:var(--muted)}
-.sl-leg{display:flex;gap:14px;font-size:11px;color:var(--muted)}
-.sl-leg i{display:inline-block;width:10px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
-.note{font-size:13px;color:var(--muted);padding:12px 14px;border-left:3px solid var(--p2);background:var(--card);border-radius:0 10px 10px 0}
-.note b{color:var(--ink);font-weight:600}
 
-.hero h1{margin:0;font-family:var(--brand);font-weight:800;text-transform:uppercase;color:var(--title);line-height:.95;display:inline-block}
-.hero .t1{display:block;font-size:clamp(34px,10vw,52px)}
-.hero .t2{display:block;text-align:right;font-size:clamp(22px,6.4vw,34px)}
-.hero .t3{display:block;text-align:right;font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.24em;color:var(--muted);margin-top:4px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stat{padding:10px 0}
-.stat + .stat{padding-left:14px;border-left:1px solid var(--line)}
-.stat .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.stat .v{font-family:var(--display);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
-.stat .v small{font-family:var(--body);font-size:11.5px;color:var(--muted);font-weight:500}
-.tl{display:flex;gap:3px;height:8px;border-radius:4px;overflow:hidden}
-.tl i{display:block;height:100%;opacity:.3}
-.tl i.on{opacity:1}
-.phase{border-bottom:1px solid var(--line)}
-.ph-btn{display:grid;grid-template-columns:10px 1fr auto 10px;gap:4px 12px;align-items:center;width:100%;padding:15px 0}
-.dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
-.ph-name{font-family:var(--display);font-weight:600;font-size:20px;text-transform:uppercase;letter-spacing:.02em;line-height:1}
-.phase.current .ph-name{color:var(--c)}
-.phase.past .ph-name{color:var(--muted)}
-.ph-date{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.chev{width:7px;height:7px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
-.phase.open .chev{transform:rotate(-135deg)}
-.ph-sub{grid-column:2 / 4;font-size:12.5px;color:var(--muted)}
-.ph-body{padding:0 0 18px 22px;display:flex;flex-direction:column;gap:16px}
-.ph-body h3{margin:0 0 6px;font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.bar2{display:grid;grid-template-columns:28px 1fr auto;gap:6px 10px;align-items:center;font-size:12.5px}
-.bar2 .l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.bar2 .n{font-variant-numeric:tabular-nums}
-.bar2 .n span{color:var(--muted)}
-.wk-type{display:grid;grid-template-columns:36px 1fr;gap:4px 10px;font-size:13.5px;margin:0}
+/* Sous-pages : blocs simples */
+.blk{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.blk .k{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.blk p{margin:0}
+.blk .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.act{display:flex;flex-direction:column;gap:1px}
+.act + .act{padding-top:8px;border-top:1px solid var(--line)}
+.act b{font-weight:600}
+.act span{font-size:13.5px;color:var(--muted)}
+.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.big3 .v{font-family:var(--display);font-size:28px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.big3 .v small{font-family:var(--body);font-size:12px;color:var(--muted);font-weight:500}
+.big3 .l{font-size:11px;color:var(--muted);letter-spacing:.04em}
+.lines{display:flex;flex-direction:column}
+.ln{display:grid;grid-template-columns:10px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ln:last-child{border-bottom:0}
+.ln .d{width:10px;height:10px;border-radius:50%;background:var(--faint)}
+.ln .d.ok{background:var(--p2)} .ln .d.mid{background:var(--p0)} .ln .d.low{background:var(--p3)}
+.ln .r{color:var(--muted);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ln .r b{color:var(--ink);font-weight:600;font-size:14px}
+.dos7{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.dos7 div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:var(--muted)}
+.dos7 i{width:100%;aspect-ratio:1;max-width:40px;border-radius:8px;display:grid;place-items:center;font-style:normal;font-family:var(--display);font-size:13px;color:var(--ink);background:transparent;border:1px dashed var(--line)}
+.dos7 i.ok{border:0;background:color-mix(in srgb,var(--p2) 30%,var(--card-2))}
+.dos7 i.mid{border:0;background:color-mix(in srgb,var(--p0) 32%,var(--card-2))}
+.dos7 i.low{border:0;background:color-mix(in srgb,var(--p3) 30%,var(--card-2));box-shadow:inset 0 0 0 2px var(--p3)}
+.trend svg{width:100%;height:auto;display:block;touch-action:pan-y}
+.trend svg text{font-family:var(--body);font-size:9px;fill:var(--muted)}
+.trend .ro{font-size:13px;color:var(--muted);min-height:1.4em;font-variant-numeric:tabular-nums}
+.trend .ro b{color:var(--ink);font-weight:600}
+.ref{margin:0;font-size:12.5px;color:var(--muted);line-height:1.5}
+.ref b{color:var(--ink);font-weight:600}
+
+/* Saison */
+.prow{width:100%;display:grid;grid-template-columns:10px 1fr auto 10px;gap:12px;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line)}
+.prows > :last-child{border-bottom:0}
+.prow .dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.prow .n{font-family:var(--display);font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+.prow .n small{display:block;font-family:var(--body);font-size:12.5px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);margin-top:3px}
+.prow .dd{font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.prow.past .n{color:var(--muted)}
+.prow.cur{background:color-mix(in srgb,var(--c) 10%,var(--card))}
+.prow.cur .n{color:var(--c)}
+.prow .wk{grid-column:2 / 5;display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--muted)}
+.race{display:grid;grid-template-columns:54px 1fr auto;gap:2px 12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.races > :last-child{border-bottom:0}
+.race .d{font-family:var(--display);font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.race .rn{font-weight:600;font-size:15px;line-height:1.25}
+.race .f{grid-column:2;font-size:12.5px;color:var(--muted)}
+.race .r{grid-row:1 / 3;grid-column:3;text-align:right;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.race .r b{display:block;font-family:var(--display);font-size:17px;color:var(--ink);font-weight:600}
+.race.key .rn::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-left:7px;transform:translateY(-2px)}
+.race.past .d,.race.past .rn{color:var(--muted)}
+.race.next{background:color-mix(in srgb,var(--p2) 9%,var(--card))}
+.race.next .r b{color:var(--p2);font-size:20px}
+.race.final{background:linear-gradient(140deg,color-mix(in srgb,var(--title) 18%,var(--card)) 0%,var(--card) 75%)}
+.race.final .rn{font-family:var(--brand);font-weight:800;text-transform:uppercase;color:var(--title);font-size:15px}
+.ok-tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--on-accent);background:var(--p2);border-radius:10px;padding:2px 8px}
+.focus{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:14px}
+.focus li{position:relative;padding-left:14px}
+.focus li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:2px;background:var(--c,var(--p2))}
+.wk-type{display:grid;grid-template-columns:36px 1fr;gap:6px 10px;font-size:14px;margin:0}
 .wk-type dt{font-family:var(--display);color:var(--c);text-transform:uppercase}
 .wk-type dd{margin:0}
-.focus{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;font-size:13.5px}
-.focus li{position:relative;padding-left:14px}
-.focus li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:2px;background:var(--c)}
-.wks{display:flex;flex-direction:column;gap:7px}
-.wkr{display:grid;grid-template-columns:42px 1fr 112px;gap:10px;align-items:center;font-size:12.5px}
+.wkr{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;font-size:13px}
 .wkr .wd{color:var(--muted);font-variant-numeric:tabular-nums}
 .wkr .wb{position:relative;height:6px;background:var(--card-2);border-radius:3px}
 .wkr .wb i{position:absolute;left:0;top:0;bottom:0;background:var(--c);border-radius:3px}
@@ -154,108 +187,18 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .wkr .wv{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .wkr .wv span{color:var(--muted)}
 .wkr.fut{opacity:.45}
-.wkn{font-size:12px;color:var(--muted);margin:-3px 0 0 52px}
+.wkn{font-size:12.5px;color:var(--muted);margin:-4px 0 4px 50px}
 
-.races{display:flex;flex-direction:column}
-.race{display:grid;grid-template-columns:60px 1fr auto;gap:2px 12px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
-.race .d{font-family:var(--display);font-size:16px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.race .rn{font-weight:600;font-size:15px}
-.race .rn em{font-style:normal;font-weight:400;color:var(--muted);font-size:12.5px}
-.race .f{grid-column:2;font-size:12.5px;color:var(--muted)}
-.race .r{grid-row:1 / 3;grid-column:3;text-align:right;font-size:12.5px;color:var(--muted);white-space:nowrap;align-self:center}
-.race .r b{display:block;font-family:var(--display);font-size:17px;color:var(--ink);font-weight:600}
-.race.key .rn::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-left:7px;transform:translateY(-2px)}
-.race.past .d,.race.past .rn{color:var(--muted)}
-.final{border-radius:16px;padding:18px;background:linear-gradient(140deg,color-mix(in srgb,var(--title) 20%,var(--card)) 0%,var(--card) 70%);border:1px solid color-mix(in srgb,var(--title) 35%,var(--line))}
-.final .fn{font-family:var(--brand);font-weight:800;font-size:22px;text-transform:uppercase;color:var(--title);line-height:1}
-.final .ok{display:inline-block;vertical-align:middle;margin-left:8px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--on-accent);background:var(--p2);border-radius:12px;padding:3px 9px}
-.final .fd{font-family:var(--display);font-size:17px;margin-top:8px}
-.final .ff{font-size:13px;color:var(--muted);margin-top:4px}
-.rules{margin:0;font-size:12px;color:var(--muted);text-align:center}
-.rules b{color:var(--ink)}
-.sync{margin:0;font-size:11.5px;color:var(--faint);text-align:center}
-
-/* Renfo : le carnet est dans la page comme les autres onglets (le cadre prend la hauteur de son contenu)
-   et c'est la page qui défile. Sur iPhone, en appli écran d'accueil, une page bloquée (qui ne défile pas)
-   fait remonter les onglets du bas de la hauteur de la barre d'état : on ne bloque donc plus la page.
-   Pendant une séance, l'en-tête et les onglets disparaissent : la séance prend tout l'écran. */
+/* Renfo : le carnet est dans la page (le cadre prend la hauteur de son contenu) et c'est la page qui défile.
+   Sur iPhone, en appli écran d'accueil, une page bloquée fait remonter les onglets : on ne la bloque pas.
+   Pendant une séance, l'en-tête et les onglets disparaissent et la séance prend tout l'écran. */
 .page.rf{display:block;max-width:none;margin:0;padding:0 0 calc(env(safe-area-inset-bottom,0px) + 72px);min-height:calc(100vh + 1px);background:var(--bg)}
 .page.rf iframe{display:block;width:100%;height:100vh;border:0;background:var(--bg)}
 html.focus,html.focus body{overflow:hidden;overscroll-behavior:none}
 html.focus .top,html.focus .tabs{display:none}
 html.focus .page.rf{position:fixed;inset:0;z-index:30;min-height:0;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
 html.focus .page.rf iframe{flex:1;height:100%;min-height:0}
-
-.wk-grid{display:flex;flex-direction:column;gap:16px}
-.wk-grid > div{display:flex;flex-direction:column;gap:16px}
-
-/* Forme : la semaine en carrés (sommeil Suunto, séances Strava, dos) */
-.fm-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-.fm-nav{display:flex;gap:6px;flex:none}
-.fm-nav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink)}
-.fm-nav button:disabled{opacity:.3;cursor:default}
-.fm-nav svg{width:16px;height:16px}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.kpi{padding:12px 14px;display:flex;flex-direction:column;gap:3px;min-width:0}
-.kpi .k{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.kpi .k .sl-st{font-size:9.5px;padding:2px 7px;letter-spacing:.06em}
-.kpi .v{font-family:var(--display);font-size:30px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
-.kpi .v small{font-family:var(--body);font-size:12px;color:var(--muted);font-weight:500}
-.kpi .s{font-size:11.5px;color:var(--muted);line-height:1.35}
-.kpi .s b{color:var(--ink);font-weight:600}
-.mx{padding:14px 12px 12px;display:flex;flex-direction:column;gap:10px}
-.mx-grid{display:grid;grid-template-columns:50px repeat(7,minmax(0,1fr));gap:4px;align-items:center}
-.mx-l{font-size:10.5px;color:var(--muted);letter-spacing:.03em;line-height:1.15}
-.mx-l small{display:block;font-size:9px;color:var(--faint)}
-.mx-d{display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 0;border-radius:8px;font-family:var(--display);font-size:13px;text-transform:uppercase;line-height:1}
-.mx-d small{font-family:var(--body);font-size:9.5px;color:var(--muted);font-variant-numeric:tabular-nums}
-.mx-d.today{color:var(--p2)}
-.mx-d.sel{background:var(--ink);color:var(--bg)}
-.mx-d.sel small{color:var(--bg);opacity:.75}
-.sq{aspect-ratio:1;min-width:0;border-radius:7px;background:var(--card-2);display:grid;place-items:center;font-family:var(--display);font-size:12.5px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap;overflow:hidden;color:var(--ink)}
-.sq.t{font-family:var(--body);font-weight:600;font-size:min(10.5px,2.7vw);letter-spacing:-.01em}
-.sq.e{background:transparent;border:1px dashed var(--line);color:var(--faint)}
-.sq.ok{background:color-mix(in srgb,var(--p2) 30%,var(--card-2))}
-.sq.mid{background:color-mix(in srgb,var(--p0) 32%,var(--card-2))}
-.sq.low{background:color-mix(in srgb,var(--p3) 30%,var(--card-2));box-shadow:inset 0 0 0 2px var(--p3)}
-.sq.sel:not(.e){outline:1.5px solid color-mix(in srgb,var(--ink) 55%,transparent);outline-offset:1px}
-.sq.e.sel{border-style:solid;border-color:var(--faint)}
-.mx-leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11px;color:var(--muted)}
-.mx-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:5px}
-.fm-day{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
-.fm-dl{display:grid;grid-template-columns:62px 1fr;gap:8px 12px;margin:0;font-size:13.5px}
-.fm-dl dt{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:2px}
-.fm-dl dd{margin:0}
-.fm-dl dd span{color:var(--muted)}
-.trend{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-.trend svg{width:100%;height:auto;display:block;touch-action:pan-y}
-.trend svg text{font-family:var(--body);font-size:9px;fill:var(--muted)}
-.trend .ro{font-size:12.5px;color:var(--muted);min-height:1.4em;font-variant-numeric:tabular-nums}
-.trend .ro b{color:var(--ink);font-weight:600}
-.fm-cols{display:flex;flex-direction:column;gap:16px}
-.fm-cols > div{display:flex;flex-direction:column;gap:16px;min-width:0}
-@media (max-width:359px){.mx{padding-inline:8px}.mx-grid{grid-template-columns:42px repeat(7,minmax(0,1fr));gap:3px}.sq{font-size:10.5px;border-radius:6px}.mx-l{font-size:9.5px}.kpi{padding:10px 11px}.kpi .v{font-size:26px}}
-
-@media (min-width:900px){
-  .top-in{max-width:1000px;padding-inline:32px}
-  .brand{font-size:18px}
-  .logo{width:36px;height:36px}
-  .tabs{position:static;background:none;border:0;padding:0;backdrop-filter:none;-webkit-backdrop-filter:none}
-  .tabs-in{max-width:none;margin:0 0 0 28px;display:flex;gap:4px}
-  .tab{flex-direction:row;gap:8px;padding:8px 14px;border-radius:20px;font-size:13px;color:var(--muted)}
-  .tab svg{width:17px;height:17px}
-  .tab[aria-current="page"]{background:var(--card-2);color:var(--ink)}
-  .page{max-width:1000px;padding:36px 32px 64px}
-  .wk-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
-  .kpis{grid-template-columns:repeat(4,1fr)}
-  .fm-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
-  .mx-grid{grid-template-columns:64px repeat(7,minmax(0,1fr));gap:6px}
-  .sq{font-size:15px}
-  .sq.t{font-size:12px}
-  #p-saison,#p-courses{max-width:760px}
-  .page.rf{width:min(520px,100%);margin:0 auto;padding-bottom:0;border-inline:1px solid var(--line)}
-  html.focus .page.rf{margin:0 auto}
-}
+@media (min-width:600px){ .page.rf{width:560px;margin:0 auto;border-inline:1px solid var(--line)} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -265,133 +208,98 @@ html.focus .page.rf iframe{flex:1;height:100%;min-height:0}
   <div class="top-in">
     <img class="logo" src="logo.svg" alt="" width="32" height="32">
     <div class="brand">Restonica<span>Trail</span></div>
-    <nav class="tabs" aria-label="Pages">
-      <div class="tabs-in">
-        <button class="tab" data-p="semaine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M8.5 15l2 2 4-4"/></svg>Semaine</button>
-        <button class="tab" data-p="forme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12.5h4l2.5-6 4.5 12 2.5-6h5.5"/></svg>Forme</button>
-        <button class="tab" data-p="saison"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-10 4 6 3-4 5 8z"/></svg>Saison</button>
-        <button class="tab" data-p="courses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>Courses</button>
-        <button class="tab" data-p="renfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="6"/></svg>Renfo</button>
-      </div>
-    </nav>
     <div class="cd" id="cd">—</div>
     <button class="theme" id="theme" aria-label="Changer de thème"></button>
   </div>
 </header>
 
-<main class="page" id="p-semaine" hidden>
-  <div class="page-h">
-    <p class="eyebrow" id="w-eyebrow"></p>
-    <h1>Cette semaine</h1>
-    <p class="sub" id="w-dates"></p>
-  </div>
-  <div class="wk-grid">
-    <div>
-      <div class="today-card card" id="w-today"></div>
-      <div class="card"><ul class="todo" id="w-list"></ul></div>
-    </div>
-    <div>
-      <div class="card sleep" id="w-sleep" hidden></div>
-      <div class="goals" id="w-goals"></div>
-      <div class="note" id="w-daily" hidden></div>
-      <p class="rules"><b>141</b> max en footing · VFC <b>&lt; 70</b> = journée facile · aine et dos <b>≤ 3/10</b></p>
-    </div>
-  </div>
-</main>
+<main class="page" id="view"></main>
+<main class="page rf" id="p-renfo" hidden><iframe id="rf-frame" title="Carnet de renfo"></iframe></main>
 
-<main class="page" id="p-forme" hidden>
-  <div class="fm-head">
-    <div class="page-h">
-      <p class="eyebrow" id="f-eyebrow">Forme</p>
-      <h1>Forme</h1>
-      <p class="sub" id="f-dates"></p>
-    </div>
-    <div class="fm-nav">
-      <button id="f-prev" aria-label="Semaine précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <button id="f-next" aria-label="Semaine suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
-    </div>
+<nav class="tabs" aria-label="Pages">
+  <div class="tabs-in">
+    <button class="tab" data-p="semaine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M8.5 15l2 2 4-4"/></svg>Semaine</button>
+    <button class="tab" data-p="saison"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-10 4 6 3-4 5 8z"/></svg>Saison</button>
+    <button class="tab" data-p="renfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="6"/></svg>Renfo</button>
   </div>
-  <div class="kpis" id="f-kpis"></div>
-  <div class="fm-cols">
-    <div>
-      <div class="card mx"><div class="mx-grid" id="f-grid"></div>
-        <div class="mx-leg"><span><i style="background:color-mix(in srgb,var(--p2) 30%,var(--card-2))"></i>bon</span><span><i style="background:color-mix(in srgb,var(--p0) 32%,var(--card-2))"></i>moyen</span><span><i style="background:color-mix(in srgb,var(--p3) 30%,var(--card-2));box-shadow:inset 0 0 0 2px var(--p3)"></i>à surveiller</span><span><i style="background:color-mix(in srgb,var(--p1) 40%,var(--card-2))"></i>volume</span></div>
-      </div>
-      <div class="card fm-day" id="f-day"></div>
-    </div>
-    <div>
-      <div class="card trend" id="f-trend"></div>
-      <p class="rules">VFC <b>80-90</b> = récupéré · <b>&lt; 70</b> = journée facile · sommeil <b>≥ 7 h</b></p>
-      <p class="sync" id="f-sync"></p>
-    </div>
-  </div>
-</main>
-
-<main class="page" id="p-saison" hidden>
-  <div class="hero"><h1><span class="t1">Restonica</span><span class="t2">Trail</span><span class="t3">Corsica · 69 km</span></h1></div>
-  <div class="stats" id="s-stats"></div>
-  <div class="tl" id="s-tl" aria-hidden="true"></div>
-  <div id="s-phases"></div>
-  <p class="sync" id="sync">Chargement…</p>
-</main>
-
-<main class="page" id="p-courses" hidden>
-  <div class="page-h">
-    <p class="eyebrow">Saison 2026 – 2027</p>
-    <h1>Courses</h1>
-    <p class="sub">Le point marque les courses qui comptent le plus.</p>
-  </div>
-  <div class="races" id="c-list"></div>
-  <div class="final">
-    <div class="fn">Restonica Trail <span class="ok">Inscrit</span></div>
-    <div class="fd">Samedi 10 juillet 2027 · 2h00 · Corte</div>
-    <div class="ff">69 km · 3 950 m D+ · frontale 500 lm · 60-70 g de glucides/h</div>
-  </div>
-</main>
-
-<main class="page rf" id="p-renfo" hidden>
-  <iframe id="rf-frame" title="Carnet de renfo"></iframe>
-</main>
+</nav>
 
 <script src="plan.js"></script>
 <script>
+/* ---------- Outils ---------- */
 const D = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const add = (d, n) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() + n); return x; };
 const fmt = d => String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
 const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 const nf = n => Math.round(n).toLocaleString('fr-FR');
+const dec = (n, d) => (+n).toFixed(d).replace('.', ',');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const DAY = 86400000, $ = id => document.getElementById(id);
 const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
-
-let WEEKS = {}, RESULTS = {}, PLANS = {}, SLEEP = {}, PAS = {}, SEANCES = {}, DOS = {};
-let today = new Date(); today.setHours(0,0,0,0);
-let open = null;
-const S0 = D('2026-10-26'), RACE = D('2027-07-10');
+const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const longDate = d => JOURS[(d.getDay()+6)%7] + ' ' + d.getDate() + ' ' + MOIS[d.getMonth()];
+const hrs = s => { const m = String(s || '').match(/(\d+)\s*h\s*(\d+)?/); return m ? +m[1] + (+(m[2] || 0))/60 : null; };
+const hm = h => { const t = Math.round(h*60); return Math.floor(t/60) + 'h' + String(t%60).padStart(2,'0'); };
 const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch(e) { return d; } };
 const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} };
+const CHEV = '<span class="chev" aria-hidden="true"></span>';
+const BACK = t => '<button class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>' + t + '</button>';
 
+let WEEKS = {}, RESULTS = {}, PLANS = {}, SLEEP = {}, PAS = {}, SEANCES = {}, DOS = {}, MAJ = '';
+let today = new Date(); today.setHours(0,0,0,0);
+const S0 = D('2026-10-26'), RACE = D('2027-07-10');
+const PIED = ['Run','TrailRun','Hike','Walk','VirtualRun'];
+
+/* ---------- Plan ---------- */
 const status = p => today < D(p.start) ? 'future' : (today > D(p.end) ? 'past' : 'current');
-const current = () => PHASES.find(p => !p.pre && status(p) === 'current');
-const monday = () => new Date(today.getTime() - ((today.getDay()+6)%7)*DAY);
-const weekNo = () => Math.max(1, Math.min(37, Math.floor((today - S0)/(7*DAY)) + 1));
+const current = () => PHASES.find(p => !p.pre && status(p) === 'current') || PHASES.find(p => status(p) === 'current');
+const mondayOf = d => add(d, -((d.getDay()+6)%7));
+const weekNo = d => Math.max(1, Math.min(37, Math.floor((mondayOf(d) - S0) / (7*DAY)) + 1));
 function weeksOf(p){
-  const out = []; for (let t = D(p.start).getTime(); t <= D(p.end).getTime(); t += 7*DAY) out.push(new Date(t));
+  const out = []; for (let w = D(p.start); w <= D(p.end); w = add(w, 7)) out.push(w);
   return out.map((w,i,a) => { const r = a.length > 1 ? i/(a.length-1) : 0;
     return { start:w, key:iso(w), tKm:p.km[0]+(p.km[1]-p.km[0])*r, tDp:p.dp[0]+(p.dp[1]-p.dp[0])*r }; });
 }
-function tally(p){
-  let km=0, dp=0, tKm=0, tDp=0;
-  weeksOf(p).filter(w => w.start <= today).forEach(w => { tKm+=w.tKm; tDp+=w.tDp; const a = WEEKS[w.key]; if (a){ km+=+a.km||0; dp+=+a.dplus||0; } });
-  return { km, dp, tKm, tDp };
-}
+const targetOf = mon => { for (const p of PHASES){ if (p.pre) continue; const w = weeksOf(p).find(x => x.key === iso(mon)); if (w) return w; } return null; };
 function renfoId(s){
   s = String(s).toLowerCase();
   if (s.includes('post-course')) return 'postcourse';
-  if (s.includes('quadri') || s.includes('ischio')) return 'quadri';
-  if (s.includes('hanches')) return 'hanches';
-  if (s.includes('mollets')) return 'mollets';
+  if (s.includes('programme 1') || s.includes('hanches')) return 'hanches';
+  if (s.includes('programme 2') || s.includes('quadri') || s.includes('ischio')) return 'quadri';
+  if (s.includes('programme 3') || s.includes('mollets')) return 'mollets';
   if (s.includes('mobilit')) return 'mobilite';
   return null;
+}
+/* Titre court d'une séance : celui du plan s'il existe, sinon le début du texte */
+function titre(j){
+  if (j.titre) return j.titre;
+  const s = String(j.seance || '').split(/ : |\. | · |\(/)[0].trim();
+  return s.length > 44 ? s.slice(0, 42) + '…' : s;
+}
+function weekPlan(mon){
+  const k = iso(mon); let jours;
+  if (PLANS[k] && Array.isArray(PLANS[k].jours)) jours = PLANS[k].jours.map(j => Object.assign({}, j));
+  else { const p = PHASES.find(x => D(x.start) <= mon && mon <= D(x.end)) || current(); jours = (p ? p.week : []).map(([j,s]) => ({ jour:j, seance:s })); }
+  const c = lsGet('saison.coches.' + k, {});
+  jours.forEach((j,i) => { const day = iso(add(mon, i)); j.date = day; j.acts = SEANCES[day] || []; j.coche = !!c[i]; j.fait = j.coche || j.acts.length > 0; });
+  return { jours, prevu: PLANS[k] && PLANS[k].prevu };
+}
+function toggleDay(mon, i){
+  const k = 'saison.coches.' + iso(mon), c = lsGet(k, {});
+  c[i] = !c[i]; lsSet(k, c); route();
+}
+const vfcSt = v => !v ? 'no' : v >= 80 ? 'ok' : v >= 70 ? 'mid' : 'low';
+const VFC_TXT = { ok:'Récupéré', mid:'Correct', low:'Journée facile', no:'Pas de VFC' };
+const slpSt = h => h == null ? 'no' : h >= 7 ? 'ok' : h >= 6 ? 'mid' : 'low';
+const DOS_ST = { ok:'ok', gene:'mid', douleur:'low' };
+const dosTxt = x => x ? (x.score != null ? x.score + '/10' : ({ ok:'rien', gene:'gêne', douleur:'douleur' }[x.etat] || '')) : '';
+const footKm = acts => acts.filter(a => PIED.includes(a.type)).reduce((t,a) => t + (+a.km || 0), 0);
+function actLine(a){
+  return '<div class="act"><b>' + esc(a.nom) + '</b><span>' + [a.km ? dec(a.km, 1) + ' km' : '', a.dp ? nf(a.dp) + ' m D+' : '', a.duree ? esc(a.duree) : '', a.fc ? 'FC ' + a.fc : ''].filter(Boolean).join(' · ') + '</span></div>';
+}
+function lastNight(){
+  if (SLEEP[iso(today)]) return iso(today);
+  const k = Object.keys(SLEEP).sort(); return k.length ? k[k.length-1] : null;
 }
 
 /* ---------- Thème ---------- */
@@ -411,308 +319,201 @@ $('theme').onclick = () => {
 };
 applyTheme(document.documentElement.getAttribute('data-theme'));
 
-/* ---------- Semaine ---------- */
-function weekPlan(){
-  const mon = iso(monday()); let w;
-  if (PLANS[mon] && Array.isArray(PLANS[mon].jours)) w = JSON.parse(JSON.stringify(PLANS[mon]));
-  else { const p = current(); w = { jours:(p ? p.week : []).map(([j,s]) => ({ jour:j, seance:s })) }; }
-  const c = lsGet('saison.coches.' + mon, {});
-  w.jours.forEach((j,i) => { j.fait = !!c[i]; });
-  return w;
-}
-function toggleDay(i){
-  const k = 'saison.coches.' + iso(monday()), c = lsGet(k, {});
-  c[i] = !c[i]; lsSet(k, c); renderWeek();
-}
-function renderWeek(){
-  const p = current(), mon = monday(), w = weekPlan(), ti = (today.getDay()+6)%7;
-  $('w-eyebrow').textContent = 'Semaine ' + weekNo() + ' / 37' + (p ? ' · ' + p.name : '');
-  $('w-dates').textContent = 'Du ' + fmt(mon) + ' au ' + fmt(new Date(mon.getTime() + 6*DAY)) + ' · ' + w.jours.filter(j => j.fait).length + ' / ' + w.jours.length + ' fait' + (w.prevu ? ' · prévu ' + w.prevu : '');
-
+/* ================= SEMAINE ================= */
+function vSemaine(){
+  const mon = mondayOf(today), w = weekPlan(mon), ti = (today.getDay()+6)%7, p = current();
   const tj = w.jours[ti], rid = tj && renfoId(tj.seance);
-  $('w-today').hidden = !tj;
-  $('w-today').innerHTML = tj ? '<div class="k">Aujourd\'hui · ' + JOURS[ti] + '</div><div class="t">' + esc(tj.seance) + '</div>' +
-    (rid && !tj.fait ? '<button class="go" data-s="' + rid + '">Lancer la séance</button>' : '') : '';
-
-  $('w-list').innerHTML = w.jours.map((j,i) => {
-    const d = new Date(mon.getTime() + i*DAY), r = renfoId(j.seance);
-    return '<li><button class="chk' + (j.fait ? ' done' : '') + (i === ti ? ' today' : '') + '" data-i="' + i + '" aria-pressed="' + j.fait + '">' +
-      '<span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
-      '<span class="dj">' + esc(j.jour) + '<small>' + fmt(d) + '</small></span><span class="ds">' + esc(j.seance) + '</span></button>' +
-      (r && !j.fait && i !== ti ? '<button class="go" data-s="' + r + '">Lancer</button>' : '') + '</li>';
-  }).join('');
-
-  const wk = p ? weeksOf(p).find(x => x.key === iso(mon)) : null, a = WEEKS[iso(mon)] || {};
-  const goal = (k, v, t, u) => '<div class="goal card"><div class="k">' + k + ' de la semaine</div><div class="v">' + nf(v) + (t ? ' <small>/ ' + nf(t) + ' ' + u + '</small>' : '') + '</div>' +
-    '<div class="trk"><i style="width:' + (t ? Math.min(100, v/t*100) : 0).toFixed(1) + '%"></i></div></div>';
-  $('w-goals').innerHTML = goal('Km', +a.km||0, wk && wk.tKm, 'km') + goal('D+', +a.dplus||0, wk && wk.tDp, 'm');
-  $('w-daily').hidden = !w.quotidien;
-  if (w.quotidien) $('w-daily').innerHTML = '<b>Chaque jour</b> · ' + esc(w.quotidien);
-
-  document.querySelectorAll('#p-semaine .chk').forEach(b => b.onclick = () => toggleDay(+b.dataset.i));
-  document.querySelectorAll('#p-semaine .go').forEach(b => b.onclick = () => openRenfo(b.dataset.s));
+  // Aujourd'hui
+  let h = '<div class="page-h"><p class="eyebrow">Semaine ' + weekNo(today) + (p ? ' · ' + esc(p.name) : '') + '</p><h1>' + longDate(today) + '</h1></div>';
+  if (tj) h += '<div class="card today"><div class="k">Aujourd\'hui</div><div class="t">' + esc(tj.seance) + '</div>' +
+    (rid && !tj.fait ? '<button class="go" data-renfo="' + rid + '">Lancer la séance</button>' : '') + '</div>';
+  // Ce matin
+  const nk = lastNight(), n = nk ? SLEEP[nk] : null, ds = DOS[iso(today)], fresh = nk === iso(today);
+  const st = fresh ? vfcSt(+n.vfc) : 'no';
+  const bits = fresh ? [n.duree ? esc(n.duree) + ' de sommeil' : '', n.vfc ? 'VFC ' + n.vfc : ''] : ['Pas encore de nuit · ouvre l\'app Suunto'];
+  bits.push(ds ? 'dos ' + dosTxt(ds) : 'dos : à me dire');
+  h += '<button class="card morning" data-go="#semaine/forme"><div class="m"><div class="k">Ce matin</div>' +
+    '<div><span class="st ' + st + '">' + (fresh ? VFC_TXT[st] : 'En attente') + '</span></div><div class="l">' + bits.filter(Boolean).join(' · ') + '</div></div>' + CHEV + '</button>';
+  // La semaine
+  const a = WEEKS[iso(mon)] || {}, tg = targetOf(mon), km = +a.km || 0, dp = +a.dplus || 0;
+  h += '<div class="sec"><div class="sec-h"><h2>La semaine</h2><span>' + w.jours.filter(j => j.fait).length + ' / ' + w.jours.length + ' fait</span></div><div class="card"><ul class="days">' +
+    w.jours.map((j,i) => {
+      const d = add(mon, i), k = footKm(j.acts), meta = k > 0 ? dec(k, k < 10 ? 1 : 0) + ' km' : (j.acts.length ? 'fait' : '');
+      return '<li class="' + (i === ti ? 'is-today ' : '') + (j.fait ? 'is-done' : '') + '"><button class="box' + (j.fait ? ' on' : '') + '" data-tog="' + i + '" aria-label="Marquer ' + JOURS[i] + ' comme fait" aria-pressed="' + j.fait + '"><i><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></button>' +
+        '<button class="drow" data-go="#semaine/jour/' + iso(d) + '"><span class="dj">' + esc(j.jour) + '<small>' + fmt(d) + '</small></span><span class="dt">' + esc(titre(j)) + '</span><span class="dm">' + meta + '</span>' + CHEV + '</button></li>';
+    }).join('') + '</ul>' +
+    '<div class="wkbar"><div class="l"><span><b>' + nf(km) + ' km</b> · ' + nf(dp) + ' m D+</span><span>' + (w.prevu ? esc(String(w.prevu).split(' dont')[0].split(' · ')[0]) : (tg ? '~' + nf(tg.tKm) + ' km' : '')) + '</span></div>' +
+    (tg ? '<div class="trk"><i style="width:' + Math.min(100, km / tg.tKm * 100).toFixed(1) + '%"></i></div>' : '') + '</div></div></div>';
+  $('view').innerHTML = h;
+  $('view').querySelectorAll('[data-tog]').forEach(b => b.onclick = () => toggleDay(mon, +b.dataset.tog));
 }
 
+/* Sous-page : un jour */
+function vJour(day){
+  const d = D(day), mon = mondayOf(d), i = (d.getDay()+6)%7, w = weekPlan(mon), j = w.jours[i] || { seance:'', acts:[] };
+  const n = SLEEP[day], ds = DOS[day], fut = d > today, rid = renfoId(j.seance), pas = PAS[day];
+  let h = BACK('Semaine') + '<div class="page-h"><p class="eyebrow">' + (day === iso(today) ? 'Aujourd\'hui · ' : '') + longDate(d) + '</p><h1>' + esc(titre(j) || 'Libre') + '</h1></div>';
+  if (j.seance) h += '<div class="card blk"><div class="k">Prévu</div><p>' + esc(j.seance) + '</p><div class="acts">' +
+    (rid && !j.fait && !fut ? '<button class="go" data-renfo="' + rid + '">Lancer la séance</button>' : '') +
+    (!j.acts.length && !fut ? '<button class="go ghost" data-tog="' + i + '">' + (j.coche ? 'Pas fait finalement' : 'Marquer comme fait') + '</button>' : '') + '</div></div>';
+  if (j.acts.length) h += '<div class="card blk"><div class="k">Fait</div>' + j.acts.map(actLine).join('') + '</div>';
+  if (n) h += '<div class="card blk"><div class="k">Nuit</div><p>' + [n.coucher && n.lever ? esc(n.coucher) + ' → ' + esc(n.lever) : '', n.duree ? esc(n.duree) : '', n.vfc ? 'VFC ' + n.vfc : '', n.fc_min ? 'FC min ' + n.fc_min : ''].filter(Boolean).join(' · ') +
+    '</p>' + (n.note ? '<p class="muted">' + esc(n.note) + '</p>' : '') + '</div>';
+  if (ds) h += '<div class="card blk"><div class="k">Dos</div><p>' + esc(dosTxt(ds)) + (ds.nuit ? ' · réveils la nuit' : '') + (ds.note && ds.note !== dosTxt(ds) + ' au réveil' ? ' <span class="muted">· ' + esc(ds.note) + '</span>' : '') + '</p></div>';
+  if (pas >= 1500) h += '<p class="foot">' + nf(pas) + ' pas ce jour-là</p>';
+  if (!j.seance && !j.acts.length && !n && !ds) h += '<p class="sub">Rien d\'enregistré ce jour-là.</p>';
+  $('view').innerHTML = h;
+  $('view').querySelectorAll('[data-tog]').forEach(b => b.onclick = () => toggleDay(mon, +b.dataset.tog));
+}
 
-/* ---------- Sommeil ---------- */
-function renderSleep(){
-  const keys = Object.keys(SLEEP).sort(), box = $('w-sleep');
-  if (!keys.length){ box.hidden = true; return; }
-  box.hidden = false;
-  const k = keys[keys.length-1], n = SLEEP[k], v = +n.vfc || 0;
-  const st = v >= 80 ? ['ok','Récupéré'] : v >= 70 ? ['mid','Correct'] : ['low','Journée facile'];
-  const isToday = k === iso(today);
-  // courbe VFC sur 14 jours
-  const end = today.getTime(), start = end - 13*DAY, W = 300, H = 84, top = 6, bot = 18;
-  const pts = keys.filter(x => D(x).getTime() >= start).map(x => ({ t:D(x).getTime(), v:+SLEEP[x].vfc, f:+SLEEP[x].fc_min }));
-  const lo = 50, hi = 110, y = val => top + (hi - Math.max(lo, Math.min(hi, val))) / (hi - lo) * (H - top - bot), x = t => 4 + (t - start) / (13*DAY) * (W - 8);
-  const path = (arr, key) => arr.filter(p => p[key]).map((p,i,a) => (i && p.t - a[i-1].t < 1.5*DAY ? 'L' : 'M') + x(p.t).toFixed(1) + ' ' + y(p[key]).toFixed(1)).join(' ');
-  const band = '<rect x="0" y="' + y(90).toFixed(1) + '" width="' + W + '" height="' + (y(80) - y(90)).toFixed(1) + '" fill="var(--p2)" opacity=".12"/>' +
-               '<line x1="0" x2="' + W + '" y1="' + y(70).toFixed(1) + '" y2="' + y(70).toFixed(1) + '" stroke="var(--p3)" stroke-dasharray="3 3" opacity=".6"/>';
-  const dots = pts.filter(p => p.v).map(p => '<circle cx="' + x(p.t).toFixed(1) + '" cy="' + y(p.v).toFixed(1) + '" r="' + (p.t === D(k).getTime() ? 3.6 : 2.2) + '" fill="var(--p2)"/>').join('');
-  const ticks = [[start,'start'], [start + 7*DAY,'middle'], [end,'end']].map(([t,a]) => '<text x="' + (a === 'start' ? 2 : a === 'end' ? W - 2 : x(t)).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="' + a + '">' + fmt(new Date(t)) + '</text>').join('');
-  box.innerHTML =
-    '<div class="sl-top"><span class="k">Nuit ' + (isToday ? 'dernière' : 'du ' + fmt(new Date(D(k).getTime() - DAY)) + ' au ' + fmt(D(k))) + '</span><span class="sl-st ' + st[0] + '">' + st[1] + '</span></div>' +
-    '<div class="sl-main">' +
-      '<div><div class="v">' + (v || '—') + ' <small>ms</small></div><div class="l">VFC</div></div>' +
+/* Sous-page : forme (sommeil, VFC, dos) */
+function vForme(){
+  const nk = lastNight(), n = nk ? SLEEP[nk] : {}, st = vfcSt(+n.vfc), fresh = nk === iso(today);
+  let h = BACK('Semaine') + '<div class="page-h"><p class="eyebrow">' + (nk ? (fresh ? 'Nuit dernière' : 'Nuit du ' + fmt(add(D(nk), -1)) + ' au ' + fmt(D(nk))) : 'Forme') + '</p><h1>' + (nk ? VFC_TXT[st] : 'Pas de nuit') + '</h1>' +
+    (nk ? '<p class="sub">' + (st === 'low' ? 'On allège la séance du jour.' : st === 'mid' ? 'Séance prévue, sans forcer.' : st === 'ok' ? 'Feu vert pour la séance prévue.' : '') + '</p>' : '') + '</div>';
+  if (nk) h += '<div class="card blk"><div class="big3">' +
+      '<div><div class="v">' + (n.vfc || '—') + ' <small>ms</small></div><div class="l">VFC</div></div>' +
       '<div><div class="v">' + (n.fc_min || '—') + ' <small>bpm</small></div><div class="l">FC min</div></div>' +
-      '<div><div class="v">' + esc(n.duree || '—') + '</div><div class="l">Sommeil</div></div>' +
-    '</div>' +
-    (n.coucher || n.ressources ? '<div class="sl-meta">' + [n.coucher && n.lever ? esc(n.coucher) + ' → ' + esc(n.lever) : '', n.ressources ? 'ressources ' + n.ressources + ' %' : '', n.aine != null ? 'aine ' + esc(n.aine) + '/10' : ''].filter(Boolean).join(' · ') + '</div>' : '') +
-    '<svg class="spark" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="VFC des 14 derniers jours">' + band +
-      '<path d="' + path(pts, 'v') + '" fill="none" stroke="var(--p2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' + dots + ticks + '</svg>' +
-    '<div class="sl-leg"><span><i style="background:var(--p2)"></i>VFC, 14 jours</span><span><i style="background:var(--p2);opacity:.3"></i>repère 80-90</span><span><i style="background:var(--p3)"></i>70 = facile</span></div>';
-}
-
-/* ---------- Forme : la semaine en carrés ---------- */
-let fMon = null, fSel = null;
-const add = (d, n) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() + n); return x; };
-const mondayOf = d => add(d, -((d.getDay()+6)%7));
-const hrs = s => { const m = String(s || '').match(/(\d+)\s*h\s*(\d+)?/); return m ? +m[1] + (+(m[2] || 0))/60 : null; };
-const hm = h => { const t = Math.round(h*60); return Math.floor(t/60) + 'h' + String(t%60).padStart(2,'0'); };
-const dec = (n, d) => (+n).toFixed(d).replace('.', ',');
-const vfcSt = v => v >= 80 ? 'ok' : v >= 70 ? 'mid' : 'low';
-const slpSt = h => h >= 7 ? 'ok' : h >= 6 ? 'mid' : 'low';
-const PIED = ['Run','TrailRun','Hike','Walk','VirtualRun'];
-const DOS_TXT = { ok:['ok','OK','Rien'], gene:['mid','Gêne','Gêne'], douleur:['low','Mal','Douleur'] };
-const J1 = ['L','M','M','J','V','S','D'];
-function tag(a){
-  const n = String(a.nom || '').toLowerCase(), t = a.type;
-  if (n.includes('(course)')) return 'Course';
-  if (t === 'Renfo' || n.includes('renfo')) return 'Renfo';
-  if (t === 'Hike' || t === 'Walk') return 'Rando';
-  if (t === 'Ride' || t === 'VirtualRide') return 'Vélo';
-  if (n.includes('fraction')) return 'Fract';
-  if (n.includes('côte') || n.includes('cote')) return 'Côtes';
-  return t === 'TrailRun' ? 'Trail' : 'EF';
-}
-function weekStats(mon){
-  const days = [...Array(7)].map((_,i) => iso(add(mon, i)));
-  const nights = days.map(k => SLEEP[k]).filter(Boolean);
-  const v = nights.map(x => +x.vfc).filter(Boolean), f = nights.map(x => +x.fc_min).filter(Boolean), h = nights.map(x => hrs(x.duree)).filter(x => x != null);
+      '<div><div class="v">' + (hrs(n.duree) != null ? hm(hrs(n.duree)) : '—') + '</div><div class="l">Sommeil</div></div></div>' +
+      (n.coucher && n.lever ? '<p class="muted">' + esc(n.coucher) + ' → ' + esc(n.lever) + (n.eveil_min ? ' · éveillé ' + n.eveil_min + ' min' : '') + '</p>' : '') +
+      (n.note ? '<p class="muted">' + esc(n.note) + '</p>' : '') + '</div>';
+  // Courbes sur 3 semaines
+  h += '<div class="card blk trend" id="f-trend"></div>';
+  // Cette semaine
+  const mon = mondayOf(today), days = [...Array(7)].map((_,i) => iso(add(mon, i))), nights = days.map(k => SLEEP[k]).filter(Boolean);
   const avg = a => a.length ? a.reduce((s,x) => s + x, 0) / a.length : null;
-  const acts = days.flatMap(k => SEANCES[k] || []), run = acts.filter(a => PIED.includes(a.type)), w = WEEKS[iso(mon)] || {};
-  return { days, vfc:avg(v), nV:v.length, vMin:v.length ? Math.min(...v) : null, fc:avg(f), fMin:f.length ? Math.min(...f) : null, h:avg(h), nH:h.length, short:h.filter(x => x < 7).length,
-    km:w.km != null ? +w.km : run.reduce((s,a) => s + (+a.km || 0), 0), dp:w.dplus != null ? +w.dplus : run.reduce((s,a) => s + (+a.dp || 0), 0), nAct:acts.length };
+  const v = avg(nights.map(x => +x.vfc).filter(Boolean)), f = avg(nights.map(x => +x.fc_min).filter(Boolean)), s = avg(nights.map(x => hrs(x.duree)).filter(x => x != null));
+  if (nights.length > 1) h += '<div class="sec"><div class="sec-h"><h2>Cette semaine</h2><span>' + nights.length + ' nuits</span></div><div class="card blk lines">' +
+    '<div class="ln"><i class="d ' + vfcSt(v) + '"></i><span>VFC moyenne</span><span class="r"><b>' + Math.round(v) + '</b> ms · repère 80-90</span></div>' +
+    '<div class="ln"><i class="d"></i><span>FC min moyenne</span><span class="r"><b>' + Math.round(f) + '</b> · repère 47-51</span></div>' +
+    '<div class="ln"><i class="d ' + slpSt(s) + '"></i><span>Sommeil moyen</span><span class="r"><b>' + hm(s) + '</b> · repère 7 h</span></div></div></div>';
+  // Dos sur 7 jours
+  const last7 = [...Array(7)].map((_,i) => add(today, i - 6));
+  h += '<div class="sec"><div class="sec-h"><h2>Dos, 7 derniers jours</h2></div><div class="card blk"><div class="dos7">' +
+    last7.map(d => { const x = DOS[iso(d)]; return '<div><i class="' + (x ? DOS_ST[x.etat] || '' : '') + '">' + (x ? (x.score != null ? x.score : x.etat === 'ok' ? '0' : '') : '') + '</i>' + JOURS[(d.getDay()+6)%7].slice(0,3) + '</div>'; }).join('') +
+    '</div></div></div>';
+  h += '<p class="ref"><b>VFC 80-90</b> : récupéré · <b>70-79</b> : correct · <b>sous 70</b> : journée facile. Dos : vert = rien, orange = gêne, rouge = douleur ; stop si plus de <b>3/10</b>.</p>';
+  h += '<p class="foot">Nuit relevée sur la montre chaque matin à 8 h' + (MAJ ? ' · mise à jour le ' + esc(MAJ) : '') + '</p>';
+  $('view').innerHTML = h;
+  trend($('f-trend'));
 }
-function targetOf(mon){
-  for (const p of PHASES){ if (p.pre) continue; const w = weeksOf(p).find(x => x.key === iso(mon)); if (w) return w; }
-  return null;
-}
-function renderForme(){
-  const cur = monday(), keys = Object.keys(SLEEP).concat(Object.keys(SEANCES)).sort();
-  const first = keys.length ? mondayOf(D(keys[0])) : cur;
-  if (!fMon) fMon = cur;
-  if (fMon < first) fMon = first;
-  if (fMon > cur) fMon = cur;
-  const isCur = iso(fMon) === iso(cur), ti = (today.getDay()+6)%7;
-  if (fSel === null) fSel = isCur ? ti : 6;
-  const s = weekStats(fMon), pv = weekStats(add(fMon, -7)), tg = targetOf(fMon), wn = Math.floor((fMon - S0) / (7*DAY)) + 1;
-  $('f-prev').disabled = fMon <= first; $('f-next').disabled = isCur;
-  $('f-eyebrow').textContent = (wn >= 1 ? 'Semaine ' + Math.min(37, wn) + ' / 37' : 'Avant la saison') + (isCur ? ' · en cours' : '');
-  $('f-dates').textContent = 'Du ' + fmt(fMon) + ' au ' + fmt(add(fMon, 6)) + ' · ' + s.nV + ' nuit' + (s.nV > 1 ? 's' : '') + ' · ' + s.nAct + ' séance' + (s.nAct > 1 ? 's' : '');
-
-  /* Tuiles de la semaine */
-  const vs = (a, b, txt) => a == null || b == null ? '' : '<br>' + txt(a - b) + ' vs sem. préc.';
-  const sign = (x, d, u) => (x >= 0 ? '+' : '−') + dec(Math.abs(x), d) + (u || '');
-  const chip = (st, t) => '<span class="sl-st ' + st + '">' + t + '</span>';
-  const tile = (k, ch, v, sub) => '<div class="kpi card"><div class="k"><span>' + k + '</span>' + ch + '</div><div class="v">' + v + '</div><div class="s">' + sub + '</div></div>';
-  const kmPct = tg && tg.tKm ? Math.min(100, s.km / tg.tKm * 100) : 0;
-  $('f-kpis').innerHTML =
-    tile('VFC moy.', s.vfc ? chip(vfcSt(s.vfc), {ok:'Récupéré', mid:'Correct', low:'Facile'}[vfcSt(s.vfc)]) : '',
-      s.vfc ? Math.round(s.vfc) + ' <small>ms</small>' : '—', 'repère 80-90' + (s.nV > 1 ? ' · plus basse <b>' + s.vMin + '</b>' : '') + vs(s.vfc, pv.vfc, x => '<b>' + sign(x, 0) + '</b>')) +
-    tile('FC min moy.', '', s.fc ? Math.round(s.fc) + ' <small>bpm</small>' : '—', (s.fMin ? 'repère 47-51' + (s.nV > 1 ? ' · plus basse <b>' + s.fMin + '</b>' : '') : 'pas de nuit') + vs(s.fc, pv.fc, x => '<b>' + sign(x, 0) + '</b>')) +
-    tile('Sommeil', s.h ? chip(slpSt(s.h), {ok:'Bon', mid:'Juste', low:'Court'}[slpSt(s.h)]) : '',
-      s.h ? hm(s.h) : '—', (s.nH ? '<b>' + s.short + '</b> nuit' + (s.short > 1 ? 's' : '') + ' sous 7 h' : 'pas de nuit') + (s.h && pv.h ? '<br><b>' + sign((s.h - pv.h) * 60, 0, ' min') + '</b> vs sem. préc.' : '')) +
-    tile('Volume', '', nf(s.km) + ' <small>km · ' + nf(s.dp) + ' m</small>',
-      (tg ? 'objectif ~' + nf(tg.tKm) + ' km · ' + nf(tg.tDp) + ' m' : 'hors plan') + '<div class="trk" style="margin-top:6px"><i style="width:' + kmPct.toFixed(1) + '%;--c:var(--p1)"></i></div>');
-
-  /* Grille : une colonne par jour */
-  /* chaque ligne renvoie [classe, texte, infobulle, fond] ou rien */
-  const vol = (x, max) => 'color-mix(in srgb,var(--p1) ' + Math.round(14 + Math.min(1, x / max) * 46) + '%,var(--card-2))';
-  const foot = k => (SEANCES[k] || []).filter(a => PIED.includes(a.type));
-  const rows = [
-    ['Nuit<small>VFC, ms</small>', (k, n) => n && n.vfc ? [vfcSt(+n.vfc), n.vfc] : null],
-    ['FC min<small>bpm</small>', (k, n) => n && n.fc_min ? ['', n.fc_min] : null],
-    ['Sommeil', (k, n) => n && hrs(n.duree) != null ? [slpSt(hrs(n.duree)), hm(hrs(n.duree))] : null],
-    ['Pas<small>milliers</small>', k => PAS[k] == null ? null : PAS[k] >= 1500 ? ['', dec(PAS[k] / 1000, 1)] : ['e', '–', 'montre pas portée']],
-    ['Séance', k => { const a = SEANCES[k] || []; if (!a.length) return null; const m = a.find(x => PIED.includes(x.type)) || a[0]; return ['t', tag(m) + (a.length > 1 ? '+' : ''), a.map(x => x.nom).join(' + ')]; }],
-    ['Km', k => { const km = foot(k).reduce((t,a) => t + (+a.km || 0), 0); return km > 0 ? ['', dec(km, km < 10 ? 1 : 0), '', vol(km, 20)] : null; }],
-    ['D+<small>m</small>', k => { const dp = foot(k).reduce((t,a) => t + (+a.dp || 0), 0); return dp > 0 ? ['', Math.round(dp), '', vol(dp, 1200)] : null; }],
-    ['Dos', k => { const x = DOS[k], t = x && DOS_TXT[x.etat]; return t ? [t[0] + ' t', x.score != null ? x.score : t[1], x.note || ''] : null; }]
-  ];
-  let g = '<span></span>' + s.days.map((k,i) => '<button class="mx-d' + (isCur && i === ti ? ' today' : '') + (i === fSel ? ' sel' : '') + '" data-i="' + i + '" aria-label="' + JOURS[i] + ' ' + fmt(D(k)) + '">' + J1[i] + '<small>' + k.slice(8) + '</small></button>').join('');
-  rows.forEach(([lab, fn]) => {
-    g += '<span class="mx-l">' + lab + '</span>' + s.days.map((k,i) => {
-      const c = fn(k, SLEEP[k]) || ['e', D(k) > today ? '' : '·'];
-      return '<span class="sq ' + c[0] + (i === fSel ? ' sel' : '') + '" data-i="' + i + '"' + (c[2] ? ' title="' + esc(c[2]) + '"' : '') + (c[3] ? ' style="background:' + c[3] + '"' : '') + '>' + esc(c[1]) + '</span>';
-    }).join('');
-  });
-  $('f-grid').innerHTML = g;
-  $('f-grid').querySelectorAll('[data-i]').forEach(b => b.onclick = () => { fSel = +b.dataset.i; renderForme(); });
-
-  /* Détail du jour choisi */
-  const k = s.days[fSel], n = SLEEP[k], acts = SEANCES[k] || [], ds = DOS[k], pas = PAS[k];
-  const plan = PLANS[iso(fMon)] && Array.isArray(PLANS[iso(fMon)].jours) ? PLANS[iso(fMon)].jours[fSel] : null, fut = D(k) > today;
-  const dl = [];
-  dl.push(['Nuit', n ? [n.coucher && n.lever ? esc(n.coucher) + ' → ' + esc(n.lever) : '', n.duree ? esc(n.duree) : '', n.vfc ? 'VFC <b>' + n.vfc + '</b> ms' : '', n.fc_min ? 'FC min ' + n.fc_min : '', n.fc_moy ? 'moy. ' + n.fc_moy : '', n.score ? 'score ' + n.score : '', n.eveil_min ? 'éveil ' + n.eveil_min + ' min' : ''].filter(Boolean).join(' · ') : '<span>' + (fut ? 'à venir' : 'pas de nuit enregistrée') + '</span>']);
-  if (n && n.a_verifier) dl.push(['À voir', esc(n.a_verifier)]);
-  if (n && n.note) dl.push(['Note', esc(n.note)]);
-  dl.push(['Séance', acts.length ? acts.map(a => esc(a.nom) + ' <span>· ' + [a.km ? dec(a.km, 1) + ' km' : '', a.dp ? nf(a.dp) + ' m D+' : '', a.duree ? esc(a.duree) : '', a.fc ? 'FC ' + a.fc : ''].filter(Boolean).join(' · ') + '</span>').join('<br>') : '<span>' + (fut ? 'à venir' : 'repos ou pas sur Strava') + '</span>']);
-  if (plan) dl.push(['Prévu', esc(plan.seance)]);
-  if (pas != null) dl.push(['Pas', pas >= 1500 ? nf(pas) : '<span>montre pas portée</span>']);
-  if (ds) dl.push(['Dos', (DOS_TXT[ds.etat] ? DOS_TXT[ds.etat][2] : '') + (ds.score != null ? ' ' + ds.score + '/10' : '') + (ds.nuit ? ' · réveils la nuit' : ds.nuit === false ? ' · nuit sans réveil' : '') + (ds.note ? ' <span>· ' + esc(ds.note) + '</span>' : '')]);
-  $('f-day').innerHTML = '<div class="sl-top"><span class="k">' + JOURS[fSel] + ' ' + fmt(D(k)) + (isCur && fSel === ti ? ' · aujourd\'hui' : '') + '</span>' +
-    (n && n.vfc ? chip(vfcSt(+n.vfc), {ok:'Récupéré', mid:'Correct', low:'Journée facile'}[vfcSt(+n.vfc)]) : '') + '</div>' +
-    '<dl class="fm-dl">' + dl.map(([t,d]) => '<dt>' + t + '</dt><dd>' + d + '</dd>').join('') + '</dl>';
-
-  renderTrend();
-  $('f-sync').textContent = 'Sommeil et pas : montre Suunto, relevés chaque matin à 8 h · séances : Strava · dos : ce que tu me dis';
-}
-
-/* Courbes : VFC et durée de sommeil sur 3 semaines (deux petits graphiques, un seul axe chacun) */
-function renderTrend(){
-  const end = add(fMon, 6) < today ? add(fMon, 6) : today, N = 21, days = [...Array(N)].map((_,i) => add(end, i - N + 1));
-  const W = 320, H1 = 92, G = 16, H2 = 46, H = H1 + G + H2 + 16, L = 4, R = 4, step = (W - L - R) / N;
-  const cx = i => L + step * (i + .5);
-  const lo = 50, hi = 110, yv = v => 14 + (hi - Math.max(lo, Math.min(hi, v))) / (hi - lo) * (H1 - 20);
-  const y2 = h => H1 + G + H2 - Math.min(11, h) / 11 * H2;
+/* VFC et durée de sommeil sur 21 jours : deux petits graphiques l'un sous l'autre, un seul axe chacun */
+function trend(box){
+  const N = 21, days = [...Array(N)].map((_,i) => add(today, i - N + 1));
+  const W = 320, H1 = 92, G = 18, H2 = 46, H = H1 + G + H2 + 16, L = 4, R = 4, step = (W - L - R) / N, cx = i => L + step * (i + .5);
+  const lo = 50, hi = 110, yv = v => 14 + (hi - Math.max(lo, Math.min(hi, v))) / (hi - lo) * (H1 - 20), y2 = h => H1 + G + H2 - Math.min(11, h) / 11 * H2;
   const data = days.map(d => { const n = SLEEP[iso(d)] || {}; return { d, v:+n.vfc || null, h:hrs(n.duree), f:+n.fc_min || null }; });
-  const i0 = days.findIndex(d => iso(d) === iso(fMon));
-  let svg = '';
-  if (i0 >= 0) svg += '<rect x="' + (cx(i0) - step/2).toFixed(1) + '" y="0" width="' + (step * Math.min(7, N - i0)).toFixed(1) + '" height="' + (H - 14) + '" fill="var(--card-2)" rx="6"/>';
-  svg += '<text x="' + L + '" y="9">VFC (ms)</text><text x="' + L + '" y="' + (H1 + G - 2) + '">Sommeil (h)</text>';
-  svg += '<rect x="0" y="' + yv(90).toFixed(1) + '" width="' + W + '" height="' + (yv(80) - yv(90)).toFixed(1) + '" fill="var(--p2)" opacity=".13"/>';
-  svg += '<line x1="0" x2="' + W + '" y1="' + yv(70).toFixed(1) + '" y2="' + yv(70).toFixed(1) + '" stroke="var(--p3)" stroke-dasharray="3 3" opacity=".7"/>';
-  svg += '<text x="' + (W - R) + '" y="' + (yv(90) - 3).toFixed(1) + '" text-anchor="end">80-90</text><text x="' + (W - R) + '" y="' + (yv(70) + 10).toFixed(1) + '" text-anchor="end">70</text>';
-  const path = data.map((p,i) => p.v ? ((i && data[i-1].v ? 'L' : 'M') + cx(i).toFixed(1) + ' ' + yv(p.v).toFixed(1)) : '').join(' ');
-  svg += '<path d="' + path + '" fill="none" stroke="var(--p2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
-  svg += data.map((p,i) => p.v ? '<circle cx="' + cx(i).toFixed(1) + '" cy="' + yv(p.v).toFixed(1) + '" r="3.4" fill="var(--p2)" stroke="var(--card)" stroke-width="2"/>' : '').join('');
-  svg += '<line x1="0" x2="' + W + '" y1="' + y2(7).toFixed(1) + '" y2="' + y2(7).toFixed(1) + '" stroke="var(--muted)" stroke-dasharray="3 3" opacity=".6"/>';
-  svg += '<text x="' + (W - R) + '" y="' + (y2(7) - 3).toFixed(1) + '" text-anchor="end">7 h</text>';
-  svg += data.map((p,i) => p.h != null ? '<rect x="' + (cx(i) - step/2 + 1.5).toFixed(1) + '" y="' + y2(p.h).toFixed(1) + '" width="' + (step - 3).toFixed(1) + '" height="' + (H1 + G + H2 - y2(p.h)).toFixed(1) + '" rx="2.5" fill="var(--p4)" opacity=".85"/>' : '').join('');
-  svg += '<line id="f-x" x1="-10" x2="-10" y1="0" y2="' + (H1 + G + H2) + '" stroke="var(--ink)" stroke-width="1" opacity=".5"/>';
-  svg += [0, 7, 14, 20].map(i => '<text x="' + cx(i).toFixed(1) + '" y="' + (H - 3) + '" text-anchor="middle">' + fmt(days[i]) + '</text>').join('');
-  $('f-trend').innerHTML = '<div class="sl-top"><span class="k">3 dernières semaines</span></div>' +
-    '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="VFC et durée de sommeil sur 21 jours">' + svg + '</svg>' +
-    '<div class="ro" id="f-ro">Touche le graphique pour lire une nuit.</div>';
-  const el = $('f-trend').querySelector('svg');
+  let s = '<text x="' + L + '" y="9">VFC (ms)</text><text x="' + L + '" y="' + (H1 + G - 3) + '">Sommeil (h)</text>';
+  s += '<rect x="0" y="' + yv(90).toFixed(1) + '" width="' + W + '" height="' + (yv(80) - yv(90)).toFixed(1) + '" fill="var(--p2)" opacity=".13"/>';
+  s += '<line x1="0" x2="' + W + '" y1="' + yv(70).toFixed(1) + '" y2="' + yv(70).toFixed(1) + '" stroke="var(--p3)" stroke-dasharray="3 3" opacity=".7"/>';
+  s += '<text x="' + (W - R) + '" y="' + (yv(90) - 3).toFixed(1) + '" text-anchor="end">80-90</text><text x="' + (W - R) + '" y="' + (yv(70) + 10).toFixed(1) + '" text-anchor="end">70</text>';
+  s += '<path d="' + data.map((p,i) => p.v ? ((i && data[i-1].v ? 'L' : 'M') + cx(i).toFixed(1) + ' ' + yv(p.v).toFixed(1)) : '').join(' ') + '" fill="none" stroke="var(--p2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+  s += data.map((p,i) => p.v ? '<circle cx="' + cx(i).toFixed(1) + '" cy="' + yv(p.v).toFixed(1) + '" r="3.4" fill="var(--p2)" stroke="var(--card)" stroke-width="2"/>' : '').join('');
+  s += '<line x1="0" x2="' + W + '" y1="' + y2(7).toFixed(1) + '" y2="' + y2(7).toFixed(1) + '" stroke="var(--muted)" stroke-dasharray="3 3" opacity=".6"/><text x="' + (W - R) + '" y="' + (y2(7) - 3).toFixed(1) + '" text-anchor="end">7 h</text>';
+  s += data.map((p,i) => p.h != null ? '<rect x="' + (cx(i) - step/2 + 1.5).toFixed(1) + '" y="' + y2(p.h).toFixed(1) + '" width="' + (step - 3).toFixed(1) + '" height="' + (H1 + G + H2 - y2(p.h)).toFixed(1) + '" rx="2.5" fill="var(--p4)" opacity=".85"/>' : '').join('');
+  s += '<line id="f-x" x1="-10" x2="-10" y1="0" y2="' + (H1 + G + H2) + '" stroke="var(--ink)" stroke-width="1" opacity=".5"/>';
+  s += [0, 7, 14, 20].map(i => '<text x="' + cx(i).toFixed(1) + '" y="' + (H - 3) + '" text-anchor="middle">' + fmt(days[i]) + '</text>').join('');
+  box.innerHTML = '<div class="k">3 dernières semaines</div><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="VFC et durée de sommeil sur 21 jours">' + s + '</svg><div class="ro" id="f-ro">Touche le graphique pour lire une nuit.</div>';
+  const el = box.querySelector('svg');
   const read = e => {
     const r = el.getBoundingClientRect(), i = Math.max(0, Math.min(N - 1, Math.floor(((e.clientX - r.left) / r.width * W - L) / step))), p = data[i];
     $('f-x').setAttribute('x1', cx(i)); $('f-x').setAttribute('x2', cx(i));
-    $('f-ro').innerHTML = JOURS[(p.d.getDay()+6)%7].slice(0,3) + '. ' + fmt(p.d) + ' · ' + (p.v || p.h != null ? (p.v ? 'VFC <b>' + p.v + '</b> ms' : 'VFC —') + ' · sommeil <b>' + (p.h != null ? hm(p.h) : '—') + '</b>' + (p.f ? ' · FC min ' + p.f : '') : 'pas de nuit enregistrée');
+    $('f-ro').innerHTML = JOURS[(p.d.getDay()+6)%7].slice(0,3) + '. ' + fmt(p.d) + ' · ' + (p.v || p.h != null ? 'VFC <b>' + (p.v || '—') + '</b> · sommeil <b>' + (p.h != null ? hm(p.h) : '—') + '</b>' + (p.f ? ' · FC min ' + p.f : '') : 'pas de nuit enregistrée');
   };
   el.addEventListener('pointermove', read); el.addEventListener('pointerdown', read);
 }
-$('f-prev').onclick = () => { fMon = add(fMon, -7); fSel = 6; renderForme(); };
-$('f-next').onclick = () => { fMon = add(fMon, 7); const c = iso(fMon) === iso(monday()); fSel = c ? (today.getDay()+6)%7 : 6; renderForme(); };
 
-/* ---------- Saison ---------- */
-function bar(l, v, t){
-  return '<span class="l">' + l + '</span><div class="trk"><i style="width:' + (t > 0 ? Math.min(100, v/t*100) : 0).toFixed(1) + '%"></i></div><span class="n">' + nf(v) + ' <span>/ ' + nf(t) + '</span></span>';
-}
-function renderSeason(){
-  let km=0, dp=0, tKm=0, tDp=0;
-  PHASES.filter(p => !p.pre).forEach(p => { const t = tally(p); km+=t.km; dp+=t.dp; tKm+=t.tKm; tDp+=t.tDp; });
-  $('s-stats').innerHTML =
-    '<div class="stat"><div class="k">Semaine</div><div class="v">' + weekNo() + ' <small>/ 37</small></div></div>' +
-    '<div class="stat"><div class="k">Km</div><div class="v">' + nf(km) + ' <small>/ ' + nf(tKm) + '</small></div></div>' +
-    '<div class="stat"><div class="k">D+ (m)</div><div class="v">' + nf(dp) + ' <small>/ ' + nf(tDp) + '</small></div></div>';
-  $('s-tl').innerHTML = PHASES.filter(p => !p.pre).map(p => '<i class="' + (status(p) !== 'future' ? 'on' : '') + '" style="flex:' + ((D(p.end)-D(p.start))/DAY + 1) + ';background:var(' + p.c + ')"></i>').join('');
-
-  $('s-phases').innerHTML = PHASES.map(p => {
-    const st = status(p), t = tally(p), isOpen = open === p.id;
-    let body = '';
-    if (isOpen){
-      const weeks = weeksOf(p), max = Math.max(1, ...weeks.map(w => Math.max(w.tKm, +(WEEKS[w.key]||{}).km||0))) * 1.1;
-      const rows = weeks.map(w => {
-        const a = WEEKS[w.key], k = a ? +a.km||0 : 0, d = a ? +a.dplus||0 : 0;
-        return '<div class="wkr' + (w.start > today ? ' fut' : '') + '"><span class="wd">' + fmt(w.start) + '</span>' +
-          '<div class="wb"><i style="width:' + (k/max*100).toFixed(1) + '%"></i>' + (p.pre ? '' : '<b style="left:calc(' + (w.tKm/max*100).toFixed(1) + '% - 1px)"></b>') + '</div>' +
-          '<span class="wv">' + (a ? nf(k) + ' km · ' + nf(d) + ' m' : '<span>' + nf(w.tKm) + ' km · ' + nf(w.tDp) + ' m</span>') + '</span></div>' +
-          (a && a.note ? '<div class="wkn">' + esc(a.note) + '</div>' : '');
-      }).join('');
-      body = '<div class="ph-body">' +
-        (!p.pre && st !== 'future' ? '<div class="bar2">' + bar('Km', t.km, t.tKm) + bar('D+', t.dp, t.tDp) + '</div>' : '') +
-        (p.week.length ? '<div><h3>Semaine type</h3><dl class="wk-type">' + p.week.map(([j,s]) => '<dt>' + j + '</dt><dd>' + esc(s) + '</dd>').join('') + '</dl></div>' : '') +
-        '<div><h3>Points clés</h3><ul class="focus">' + p.focus.map(f => '<li>' + esc(f) + '</li>').join('') + '</ul></div>' +
-        '<div><h3>Semaine par semaine</h3><div class="wks">' + rows + '</div></div></div>';
+/* ================= SAISON ================= */
+const ALL_RACES = () => Object.assign({}, RACES, { resto:{ d:'2027-07-10', label:'10/07', name:'Restonica Trail', f:'69 km · 3 950 D+ · départ 2h, Corte', key:true, final:true } });
+function vSaison(){
+  const cur = current();
+  let h = '<div class="page-h"><p class="eyebrow">Saison 2026 – 2027</p><h1>Vers la Restonica</h1><p class="sub">Semaine ' + weekNo(today) + ' sur 37</p></div>';
+  // Le plan : la phase en cours est ouverte, les autres en une ligne
+  h += '<div class="sec"><div class="sec-h"><h2>Le plan</h2></div><div class="card prows">' + PHASES.filter(p => !p.pre).map(p => {
+    const st = status(p), isCur = cur && cur.id === p.id;
+    let extra = '';
+    if (isCur){
+      const ws = weeksOf(p), wi = ws.findIndex(w => w.key === iso(mondayOf(today))) + 1;
+      extra = '<div class="wk"><span>Semaine ' + wi + ' sur ' + ws.length + ' du bloc</span><div class="trk"><i style="width:' + (wi / ws.length * 100).toFixed(0) + '%;--c:var(' + p.c + ')"></i></div></div>';
     }
-    return '<div class="phase ' + st + (isOpen ? ' open' : '') + '" style="--c:var(' + p.c + ')">' +
-      '<button class="ph-btn" data-id="' + p.id + '" aria-expanded="' + isOpen + '"><span class="dot"></span><span class="ph-name">' + esc(p.name) + '</span>' +
-      '<span class="ph-date">' + fmt(D(p.start)) + ' → ' + fmt(D(p.end)) + '</span><span class="chev"></span><span class="ph-sub">' + esc(p.sub) + '</span></button>' + body + '</div>';
-  }).join('');
-  document.querySelectorAll('#s-phases .ph-btn').forEach(b => b.onclick = () => { open = open === b.dataset.id ? null : b.dataset.id; renderSeason(); });
+    return '<button class="prow ' + st + (isCur ? ' cur' : '') + '" style="--c:var(' + p.c + ')" data-go="#saison/phase/' + p.id + '"><span class="dot"></span><span class="n">' + esc(p.name) + (isCur ? '<small>' + esc(p.sub) + '</small>' : '') + '</span>' +
+      '<span class="dd">' + fmt(D(p.start)) + ' → ' + fmt(D(p.end)) + '</span>' + CHEV + extra + '</button>';
+  }).join('') + '</div></div>';
+  // Les courses : à venir d'abord, résultats ensuite
+  const races = Object.entries(ALL_RACES()).sort((a,b) => a[1].d.localeCompare(b[1].d));
+  const todo = races.filter(([k,r]) => D(r.d) >= today), done = races.filter(([k,r]) => D(r.d) < today).reverse();
+  const colorOf = k => { const p = PHASES.find(x => x.races.includes(k)); return p ? p.c : '--title'; };
+  const row = ([k,r], i, past) => {
+    const res = RESULTS[k], days = Math.ceil((D(r.d) - today) / DAY), isNext = !past && i === 0;
+    const right = past ? (res ? '<b>' + esc(res.temps || '') + '</b>' + esc(res.place || '') : '') : r.final ? '<span class="ok-tag">Inscrit</span>' : (isNext ? '<b>J-' + days + '</b>' : '');
+    return '<div class="race' + (r.key ? ' key' : '') + (past ? ' past' : '') + (isNext && !r.final ? ' next' : '') + (r.final ? ' final' : '') + '" style="--c:var(' + colorOf(k) + ')"><span class="d">' + esc(r.label) + '</span>' +
+      '<span class="rn">' + esc(r.name) + '</span><span class="r">' + right + '</span><span class="f">' + esc(r.f) + (r.note && !past ? ' · ' + esc(r.note) : '') + '</span></div>';
+  };
+  h += '<div class="sec"><div class="sec-h"><h2>Courses à venir</h2><span>le point = course clé</span></div><div class="card races">' + todo.map((x,i) => row(x, i, false)).join('') + '</div></div>';
+  if (done.length) h += '<div class="sec"><div class="sec-h"><h2>Résultats</h2></div><div class="card races">' + done.map((x,i) => row(x, i, true)).join('') + '</div></div>';
+  $('view').innerHTML = h;
 }
 
-/* ---------- Courses ---------- */
-function renderRaces(){
-  const colorOf = k => { const p = PHASES.find(x => x.races.includes(k)); return p ? p.c : '--p2'; };
-  $('c-list').innerHTML = Object.entries(RACES).sort((a,b) => a[1].d.localeCompare(b[1].d)).map(([k,r]) => {
-    const res = RESULTS[k], past = D(r.d) < today, days = Math.ceil((D(r.d) - today)/DAY);
-    const right = res && (res.temps || res.place) ? '<b>' + esc(res.temps || '') + '</b>' + esc(res.place || '') : (past ? '' : '<b>J-' + days + '</b>');
-    return '<div class="race' + (r.key ? ' key' : '') + (past ? ' past' : '') + '" style="--c:var(' + colorOf(k) + ')"><span class="d">' + esc(r.label) + '</span>' +
-      '<span class="rn">' + esc(r.name) + (r.note ? ' <em>' + esc(r.note) + '</em>' : '') + '</span><span class="r">' + right + '</span>' +
-      '<span class="f">' + esc(r.f) + '</span></div>';
-  }).join('');
+/* Sous-page : une phase */
+function vPhase(id){
+  const p = PHASES.find(x => x.id === id); if (!p) return go('saison');
+  const st = status(p);
+  let h = BACK('Saison') + '<div class="page-h" style="--c:var(' + p.c + ')"><p class="eyebrow">' + fmt(D(p.start)) + ' → ' + fmt(D(p.end)) + (st === 'current' ? ' · en cours' : st === 'past' ? ' · terminé' : '') + '</p><h1>' + esc(p.name) + '</h1><p class="sub">' + esc(p.sub) + '</p></div>';
+  h += '<div class="card blk" style="--c:var(' + p.c + ')"><div class="k">Points clés</div><ul class="focus">' + p.focus.map(f => '<li>' + esc(f) + '</li>').join('') + '</ul></div>';
+  if (p.week.length) h += '<div class="card blk" style="--c:var(' + p.c + ')"><div class="k">Semaine type</div><dl class="wk-type">' + p.week.map(([j,s]) => '<dt>' + j + '</dt><dd>' + esc(s) + '</dd>').join('') + '</dl></div>';
+  const weeks = weeksOf(p), max = Math.max(1, ...weeks.map(w => Math.max(w.tKm, +(WEEKS[w.key] || {}).km || 0))) * 1.1;
+  h += '<div class="card blk" style="--c:var(' + p.c + ')"><div class="k">Semaine par semaine' + (p.pre ? '' : ' · le trait = objectif') + '</div><div class="lines">' + weeks.map(w => {
+    const a = WEEKS[w.key], k = a ? +a.km || 0 : 0, d = a ? +a.dplus || 0 : 0;
+    return '<div class="wkr' + (w.start > today ? ' fut' : '') + '" style="padding:7px 0"><span class="wd">' + fmt(w.start) + '</span>' +
+      '<div class="wb"><i style="width:' + (k / max * 100).toFixed(1) + '%"></i>' + (p.pre ? '' : '<b style="left:calc(' + (w.tKm / max * 100).toFixed(1) + '% - 1px)"></b>') + '</div>' +
+      '<span class="wv">' + (a ? nf(k) + ' km · ' + nf(d) + ' m' : '<span>' + nf(w.tKm) + ' km · ' + nf(w.tDp) + ' m</span>') + '</span></div>' +
+      (a && a.note ? '<div class="wkn">' + esc(a.note) + '</div>' : '');
+  }).join('') + '</div></div>';
+  $('view').innerHTML = h;
 }
 
-/* ---------- Navigation ---------- */
-const PAGES = ['semaine','forme','saison','courses','renfo'];
-function go(p){
-  if (!PAGES.includes(p)) p = 'semaine';
-  PAGES.forEach(x => { $('p-' + x).hidden = x !== p; });
-  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-current', t.dataset.p === p ? 'page' : 'false'));
-  if (p !== 'renfo') document.documentElement.classList.remove('focus');
-  if (p === 'renfo') loadRenfo().then(sizeRenfo);
-  if (location.hash !== '#' + p) history.replaceState(null, '', '#' + p);
-  window.scrollTo(0, 0);
+/* ================= NAVIGATION ================= */
+/* #semaine, #semaine/jour/AAAA-MM-JJ, #semaine/forme, #saison, #saison/phase/<id>, #renfo */
+const TABS = ['semaine','saison','renfo'], mem = {};
+let curKey = null, fromApp = false;
+function route(){
+  const parts = location.hash.slice(1).split('/'), tab = TABS.includes(parts[0]) ? parts[0] : 'semaine', key = parts.join('/') || 'semaine';
+  if (curKey && curKey !== key) mem[curKey] = window.scrollY;
+  const isRf = tab === 'renfo';
+  $('view').hidden = isRf; $('p-renfo').hidden = !isRf;
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-current', t.dataset.p === tab ? 'page' : 'false'));
+  if (!isRf) document.documentElement.classList.remove('focus');
+  if (isRf) loadRenfo().then(sizeRenfo);
+  else if (parts[1] === 'jour' && /^\d{4}-\d{2}-\d{2}$/.test(parts[2] || '')) vJour(parts[2]);
+  else if (parts[1] === 'forme') vForme();
+  else if (tab === 'saison' && parts[1] === 'phase') vPhase(parts[2]);
+  else if (tab === 'saison') vSaison();
+  else vSemaine();
+  const isSub = parts.length > 1;
+  if (curKey !== key) window.scrollTo(0, isSub ? 0 : (mem[key] || 0));
+  curKey = key;
 }
-document.querySelectorAll('.tab').forEach(t => t.onclick = () => go(t.dataset.p));
-window.addEventListener('hashchange', () => go(location.hash.slice(1)));
-
-/* ---------- Hauteurs réelles de l'en-tête et des onglets (encoches, polices) ---------- */
-function measureChrome(){
-  const top = document.querySelector('.top'), tabs = document.querySelector('.tabs'), s = document.documentElement.style;
-  const th = top.getBoundingClientRect().height, bh = getComputedStyle(tabs).position === 'fixed' ? tabs.getBoundingClientRect().height : 0;
-  if (th) s.setProperty('--top-h', th + 'px');
-  if (bh || getComputedStyle(tabs).position !== 'fixed') s.setProperty('--tabs-h', bh + 'px');
+function go(h, push){
+  h = '#' + h.replace(/^#/, '');
+  if (location.hash === h) return route();
+  if (push) { fromApp = true; location.hash = h; }
+  else { history.replaceState(null, '', h); route(); }
 }
-measureChrome();
-window.addEventListener('resize', measureChrome);
-if ('ResizeObserver' in window){ const ro = new ResizeObserver(measureChrome); ro.observe(document.querySelector('.top')); ro.observe(document.querySelector('.tabs')); }
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureChrome);
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => { const p = t.dataset.p; mem[p] = 0; fromApp = false; go(p); });
+document.addEventListener('click', e => {
+  const g = e.target.closest('[data-go]'); if (g) { go(g.dataset.go, true); return; }
+  const b = e.target.closest('[data-back]'); if (b) { if (fromApp) history.back(); else go(location.hash.slice(1).split('/')[0]); return; }
+  const r = e.target.closest('[data-renfo]'); if (r) openRenfo(r.dataset.renfo);
+});
+window.addEventListener('hashchange', route);
 
-/* ---------- Renfo ---------- */
+/* ================= RENFO ================= */
 let rfLoaded = null;
 function loadRenfo(){
   const fr = $('rf-frame');
   if (!rfLoaded) rfLoaded = new Promise(r => { fr.onload = () => {
     applyTheme(document.documentElement.getAttribute('data-theme'));
-    try { // le cadre suit la hauteur du carnet (cartes, reprise de séance, fin de séance)
-      const w = fr.contentWindow, app = w.document.querySelector('.app');
-      if (app && w.ResizeObserver) new w.ResizeObserver(sizeRenfo).observe(app);
-    } catch(e) {}
+    try { const w = fr.contentWindow, app = w.document.querySelector('.app'); if (app && w.ResizeObserver) new w.ResizeObserver(sizeRenfo).observe(app); } catch(e) {}
     sizeRenfo(); r();
   }; fr.src = 'renfo.html'; });
   return rfLoaded;
@@ -725,8 +526,7 @@ function sizeRenfo(){
   const focus = document.documentElement.classList.contains('focus');
   doc.documentElement.classList.toggle('flow', !focus);
   if (focus){ fr.style.height = ''; return; }
-  const app = doc.querySelector('.app');
-  const h = Math.ceil(app ? app.getBoundingClientRect().height : doc.body.scrollHeight);
+  const app = doc.querySelector('.app'), h = Math.ceil(app ? app.getBoundingClientRect().height : doc.body.scrollHeight);
   if (h > 0) fr.style.height = h + 'px';
 }
 async function openRenfo(id){
@@ -742,36 +542,28 @@ window.addEventListener('message', e => {
     return;
   }
   if (m.type !== 'renfo-done') return;
-  const ti = (today.getDay()+6)%7, j = weekPlan().jours[ti];
-  if (j && !j.fait && renfoId(j.seance) === m.id) toggleDay(ti);
+  const mon = mondayOf(today), ti = (today.getDay()+6)%7, j = weekPlan(mon).jours[ti];
+  if (j && !j.fait && renfoId(j.seance) === m.id){ const k = 'saison.coches.' + iso(mon), c = lsGet(k, {}); c[ti] = true; lsSet(k, c); }
 });
 
-/* ---------- Données ---------- */
-function render(){
-  const d = Math.ceil((RACE - today)/DAY);
-  $('cd').textContent = d > 0 ? 'J-' + d : 'Jour J';
-  if (open === null){ const c = current(); open = c ? c.id : null; }
-  renderWeek(); renderSleep(); renderForme(); renderSeason(); renderRaces();
-}
-function apply(d, label){
+/* ================= DONNÉES ================= */
+function apply(d){
   WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; SLEEP = d.sommeil || {};
-  PAS = d.pas || {}; SEANCES = d.seances || {}; DOS = d.dos || {};
-  $('sync').textContent = label + (d.maj || '—');
+  PAS = d.pas || {}; SEANCES = d.seances || {}; DOS = d.dos || {}; MAJ = d.maj || '';
 }
+function header(){ const d = Math.ceil((RACE - today) / DAY); $('cd').textContent = d > 0 ? 'J-' + d : 'Jour J'; }
 async function loadData(){
   today = new Date(); today.setHours(0,0,0,0);
   try {
     const r = await fetch('data.json?t=' + Date.now(), { cache:'no-store' });
     if (!r.ok) throw new Error(r.status);
-    const d = await r.json(); apply(d, 'Données mises à jour le '); lsSet('saison.data', d);
-  } catch(e) {
-    const d = lsGet('saison.data', null);
-    if (d) apply(d, 'Hors ligne · données du '); else $('sync').textContent = 'Pas de données';
-  }
-  render();
+    const d = await r.json(); apply(d); lsSet('saison.data', d);
+  } catch(e) { const d = lsGet('saison.data', null); if (d) apply(d); }
+  header();
+  if (!document.documentElement.classList.contains('focus')) { const y = window.scrollY; route(); window.scrollTo(0, y); }
 }
-go(location.hash.slice(1));
-render(); loadData();
+const cached = lsGet('saison.data', null); if (cached) apply(cached);
+header(); route(); loadData();
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') loadData(); });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>

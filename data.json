@@ -50,31 +50,38 @@
    "jours": [
     {
      "jour": "Lun",
-     "seance": "Renfo Hanches, version aine : serrage adducteurs à la place du Copenhagen"
+     "seance": "Renfo Hanches, version aine : serrage adducteurs à la place du Copenhagen",
+     "titre": "Renfo hanches (version aine)"
     },
     {
      "jour": "Mar",
-     "seance": "Mobilité (10 min) avant de partir, puis GUMP : footing sous 141, en ligne droite, sans gammes ni accélérations · ~9 km"
+     "seance": "Mobilité (10 min) avant de partir, puis GUMP : footing sous 141, en ligne droite, sans gammes ni accélérations · ~9 km",
+     "titre": "GUMP · footing facile"
     },
     {
      "jour": "Mer",
-     "seance": "Pas de footing (VFC 60, dos) : renfo kiné programme Mollets & varié, 2 tours, squat sans le saut. Stop si le dos lance"
+     "seance": "Pas de footing (VFC 60, dos) : renfo kiné programme Mollets & varié, 2 tours, squat sans le saut. Stop si le dos lance",
+     "titre": "Renfo mollets à la maison"
     },
     {
      "jour": "Jeu",
-     "seance": "GUMP, reco du City Trail de Bastia (9 km, 300 m D+) : à l'arrière du groupe, marche dans les escaliers raides, aine 3/10 max · 9 km, 300 m D+"
+     "seance": "GUMP, reco du City Trail de Bastia (9 km, 300 m D+) : à l'arrière du groupe, marche dans les escaliers raides, aine 3/10 max · 9 km, 300 m D+",
+     "titre": "GUMP · reco City Trail"
     },
     {
      "jour": "Ven",
-     "seance": "Repos (VFC 71, prise de sang à midi). Le soir, Mobilité 10 min si envie"
+     "seance": "Repos (VFC 71, prise de sang à midi). Le soir, Mobilité 10 min si envie",
+     "titre": "Repos"
     },
     {
      "jour": "Sam",
-     "seance": "Rando GUMP à Sermano : marche active, sans courir · 7 km, 461 m D+ (fait)"
+     "seance": "Rando GUMP à Sermano : marche active, sans courir · 7 km, 461 m D+ (fait)",
+     "titre": "Rando GUMP à Sermano"
     },
     {
      "jour": "Dim",
-     "seance": "Reco de Calvi annulée (vent), pas de sortie"
+     "seance": "Reco de Calvi annulée (vent), pas de sortie",
+     "titre": "Reco Calvi annulée"
     }
    ],
    "quotidien": "test de l'aine au réveil (genoux serrés 5 s, note /10), 2-3 séries de serrage doux, extension de hanche toutes les 30 min au bureau",
@@ -84,31 +91,38 @@
    "jours": [
     {
      "jour": "Lun",
-     "seance": "Renfo kiné Programme 1 Hanches, 2 tours, sans aller à l'échec. Planche adducteurs en version genou, semaine de course"
+     "seance": "Renfo kiné Programme 1 Hanches, 2 tours, sans aller à l'échec. Planche adducteurs en version genou, semaine de course",
+     "titre": "Renfo P1 · hanches"
     },
     {
      "jour": "Mar",
-     "seance": "GUMP : footing sous 141, sans gammes ni accélérations · ~8 km"
+     "seance": "GUMP : footing sous 141, sans gammes ni accélérations · ~8 km",
+     "titre": "GUMP · footing facile"
     },
     {
      "jour": "Mer",
-     "seance": "CAB, version courte : 20 min de footing, puis 3 × 3 min en côte à l'effort de Calvi (170-173), retour en trottinant ; 10 min au calme. Pas de sprint. Courbatures fortes = 2 × 3 min · ~8 km, ~150 m D+"
+     "seance": "CAB, version courte : 20 min de footing, puis 3 × 3 min en côte à l'effort de Calvi (170-173), retour en trottinant ; 10 min au calme. Pas de sprint. Courbatures fortes = 2 × 3 min · ~8 km, ~150 m D+",
+     "titre": "CAB · 3 × 3 min en côte"
     },
     {
      "jour": "Jeu",
-     "seance": "Repos. Mobilité 10 min le soir"
+     "seance": "Repos. Mobilité 10 min le soir",
+     "titre": "Repos + mobilité"
     },
     {
      "jour": "Ven",
-     "seance": "Footing 20 min très tranquille + 3 accélérations progressives de 20 s (pas de sprint), ou repos complet si toujours fatigué. Préparer le sac · ~4 km"
+     "seance": "Footing 20 min très tranquille + 3 accélérations progressives de 20 s (pas de sprint), ou repos complet si toujours fatigué. Préparer le sac · ~4 km",
+     "titre": "Footing 20 min + accélérations"
     },
     {
      "jour": "Sam",
-     "seance": "Trail in Calvi, Giru di a Serra, départ 13h. Repas 9h30, départ de Biguglia 10h30, échauffement 12h20-12h45 (15 min + 3 × 30 s en montée), compote 12h45. Montée de départ à 170-173, haut vers 19 min, descente fluide, pas de sprint final. Objectif sub 1h · 11 km, 324 m D+"
+     "seance": "Trail in Calvi, Giru di a Serra, départ 13h. Repas 9h30, départ de Biguglia 10h30, échauffement 12h20-12h45 (15 min + 3 × 30 s en montée), compote 12h45. Montée de départ à 170-173, haut vers 19 min, descente fluide, pas de sprint final. Objectif sub 1h · 11 km, 324 m D+",
+     "titre": "Trail in Calvi"
     },
     {
      "jour": "Dim",
-     "seance": "Récup : marche ou vélo facile 45 min, mobilité"
+     "seance": "Récup : marche ou vélo facile 45 min, mobilité",
+     "titre": "Récup · marche ou vélo"
     }
    ],
    "quotidien": "Chaque matin : dos /10 au réveil, durée du dérouillage, réveil la nuit ou non. Mollet : test montées sur pointe avant de courir",
@@ -118,31 +132,38 @@
    "jours": [
     {
      "jour": "Lun",
-     "seance": "Renfo kiné Programme 2 Quadri & ischios, 2 tours. Descente de box seulement si les cuisses ne sont plus courbaturées par Calvi"
+     "seance": "Renfo kiné Programme 2 Quadri & ischios, 2 tours. Descente de box seulement si les cuisses ne sont plus courbaturées par Calvi",
+     "titre": "Renfo P2 · quadri & ischios"
     },
     {
      "jour": "Mar",
-     "seance": "GUMP : footing sous 141 (145 max) · ~8 km"
+     "seance": "GUMP : footing sous 141 (145 max) · ~8 km",
+     "titre": "GUMP · footing facile"
     },
     {
      "jour": "Mer",
-     "seance": "11 novembre, pas de fractionné CAB : renfo kiné Programme 3 Mollets & varié à la maison, 2 tours, squat sans le saut. Si tu vas voir le groupe : 40 min de footing autour de la piste sous 141"
+     "seance": "11 novembre, pas de fractionné CAB : renfo kiné Programme 3 Mollets & varié à la maison, 2 tours, squat sans le saut. Si tu vas voir le groupe : 40 min de footing autour de la piste sous 141",
+     "titre": "Renfo P3 à la maison"
     },
     {
      "jour": "Jeu",
-     "seance": "GUMP côtes, la séance de qualité de la semaine : montées à 165-172, récup en trottinant en descente, pas de sprint. Finir en ayant pu en faire une de plus · ~8 km"
+     "seance": "GUMP côtes, la séance de qualité de la semaine : montées à 165-172, récup en trottinant en descente, pas de sprint. Finir en ayant pu en faire une de plus · ~8 km",
+     "titre": "GUMP · côtes"
     },
     {
      "jour": "Ven",
-     "seance": "Repos actif, ou 30 min très faciles au CAB si tu veux voir le groupe. Préparer la sortie et le ravito"
+     "seance": "Repos actif, ou 30 min très faciles au CAB si tu veux voir le groupe. Préparer la sortie et le ravito",
+     "titre": "Repos actif"
     },
     {
      "jour": "Sam",
-     "seance": "Zucca : 1 tour complet, puis 2e montée à la carte (jusqu'à mi-pente ou au sommet selon les sensations) ; objectif ~3h d'effort, pas le D+. Stop après le 1er tour si mollet, dos ou aine > 3/10. Montées 145-155, descentes gardées. Ravito 60 g/h : 1 flasque à 40 g par heure + 3 dattes ou 2 pâtes de fruits · ~16-20 km, ~1 400-1 900 m D+"
+     "seance": "Zucca : 1 tour complet, puis 2e montée à la carte (jusqu'à mi-pente ou au sommet selon les sensations) ; objectif ~3h d'effort, pas le D+. Stop après le 1er tour si mollet, dos ou aine > 3/10. Montées 145-155, descentes gardées. Ravito 60 g/h : 1 flasque à 40 g par heure + 3 dattes ou 2 pâtes de fruits · ~16-20 km, ~1 400-1 900 m D+",
+     "titre": "Zucca · sortie longue ~3h"
     },
     {
      "jour": "Dim",
-     "seance": "Repos actif : marche 30-45 min + mobilité 10 min (le dos n'aime pas les journées immobiles)"
+     "seance": "Repos actif : marche 30-45 min + mobilité 10 min (le dos n'aime pas les journées immobiles)",
+     "titre": "Repos actif + mobilité"
     }
    ],
    "quotidien": "Chaque matin : dos /10 au réveil, durée du dérouillage, réveil la nuit ou non. Serrage adducteurs et test du mollet avant de courir",
