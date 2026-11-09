@@ -57,7 +57,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .theme{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);flex:none}
 .theme svg{width:17px;height:17px}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--nav);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-.tabs-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.tabs-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
 .tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 8px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--faint)}
 .tab svg{width:22px;height:22px}
 .tab[aria-current="page"]{color:var(--p2)}
@@ -135,12 +135,34 @@ li.is-done .dt{color:var(--muted)}
 .ln .d.ok{background:var(--p2)} .ln .d.mid{background:var(--p0)} .ln .d.low{background:var(--p3)}
 .ln .r{color:var(--muted);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ln .r b{color:var(--ink);font-weight:600;font-size:14px}
-.dos7{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-.dos7 div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:var(--muted)}
-.dos7 i{width:100%;aspect-ratio:1;max-width:40px;border-radius:8px;display:grid;place-items:center;font-style:normal;font-family:var(--display);font-size:13px;color:var(--ink);background:transparent;border:1px dashed var(--line)}
-.dos7 i.ok{border:0;background:color-mix(in srgb,var(--p2) 30%,var(--card-2))}
-.dos7 i.mid{border:0;background:color-mix(in srgb,var(--p0) 32%,var(--card-2))}
-.dos7 i.low{border:0;background:color-mix(in srgb,var(--p3) 30%,var(--card-2));box-shadow:inset 0 0 0 2px var(--p3)}
+/* Forme : une carte par sujet, 7 cases pour la semaine */
+.fnav{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.fnav .nav{display:flex;gap:6px;flex:none}
+.fnav .nav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink)}
+.fnav .nav button:disabled{opacity:.3;cursor:default}
+.fnav .nav svg{width:16px;height:16px}
+.fcard{width:100%;padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.fh{display:flex;align-items:center;gap:10px;width:100%}
+.fh .t{font-family:var(--display);font-size:19px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;line-height:1;white-space:nowrap}
+.fh .s{margin-left:auto;font-size:13px;color:var(--muted);text-align:right;line-height:1.3}
+.fh .s b{color:var(--ink);font-weight:600}
+.rl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:-6px}
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;width:100%}
+.strip div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:var(--muted);min-width:0}
+.strip div span.td{color:var(--p2);font-weight:600}
+.strip i{width:100%;max-width:44px;aspect-ratio:1;border-radius:8px;display:grid;place-items:center;font-style:normal;font-family:var(--display);font-size:13px;color:var(--ink);border:1px dashed var(--line);white-space:nowrap;overflow:hidden}
+.strip i.n{border:0;background:var(--card-2)}
+.strip i.ok{border:0;background:color-mix(in srgb,var(--p2) 30%,var(--card-2))}
+.strip i.mid{border:0;background:color-mix(in srgb,var(--p0) 32%,var(--card-2))}
+.strip i.low{border:0;background:color-mix(in srgb,var(--p3) 30%,var(--card-2));box-shadow:inset 0 0 0 2px var(--p3)}
+.strip i.fut{border-style:dotted;opacity:.45}
+.hist{display:flex;flex-direction:column}
+.hrow{display:grid;grid-template-columns:62px 1fr;gap:4px 12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.hrow:last-child{border-bottom:0}
+.hrow .hd{font-family:var(--display);font-size:14px;text-transform:uppercase;letter-spacing:.03em;line-height:1.2}
+.hrow .hd small{display:block;font-family:var(--body);font-size:11px;color:var(--muted);letter-spacing:0;text-transform:none}
+.hrow .hv{display:flex;flex-direction:column;gap:3px}
+.hrow .hv .muted{font-size:13px}
 .trend svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .trend svg text{font-family:var(--body);font-size:9px;fill:var(--muted)}
 .trend .ro{font-size:13px;color:var(--muted);min-height:1.4em;font-variant-numeric:tabular-nums}
@@ -219,6 +241,7 @@ html.focus .page.rf iframe{flex:1;height:100%;min-height:0}
 <nav class="tabs" aria-label="Pages">
   <div class="tabs-in">
     <button class="tab" data-p="semaine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M8.5 15l2 2 4-4"/></svg>Semaine</button>
+    <button class="tab" data-p="forme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12.5h4l2.5-6 4.5 12 2.5-6h5.5"/></svg>Forme</button>
     <button class="tab" data-p="saison"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-10 4 6 3-4 5 8z"/></svg>Saison</button>
     <button class="tab" data-p="renfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="6"/></svg>Renfo</button>
   </div>
@@ -245,7 +268,7 @@ const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } ca
 const CHEV = '<span class="chev" aria-hidden="true"></span>';
 const BACK = t => '<button class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>' + t + '</button>';
 
-let WEEKS = {}, RESULTS = {}, PLANS = {}, SLEEP = {}, PAS = {}, SEANCES = {}, DOS = {}, MAJ = '';
+let WEEKS = {}, RESULTS = {}, PLANS = {}, SLEEP = {}, PAS = {}, SEANCES = {}, DOS = {}, DOUL = {}, MAJ = '';
 let today = new Date(); today.setHours(0,0,0,0);
 const S0 = D('2026-10-26'), RACE = D('2027-07-10');
 const PIED = ['Run','TrailRun','Hike','Walk','VirtualRun'];
@@ -332,7 +355,7 @@ function vSemaine(){
   const st = fresh ? vfcSt(+n.vfc) : 'no';
   const bits = fresh ? [n.duree ? esc(n.duree) + ' de sommeil' : '', n.vfc ? 'VFC ' + n.vfc : ''] : ['Pas encore de nuit · ouvre l\'app Suunto'];
   bits.push(ds ? 'dos ' + dosTxt(ds) : 'dos : à me dire');
-  h += '<button class="card morning" data-go="#semaine/forme"><div class="m"><div class="k">Ce matin</div>' +
+  h += '<button class="card morning" data-go="#forme"><div class="m"><div class="k">Ce matin</div>' +
     '<div><span class="st ' + st + '">' + (fresh ? VFC_TXT[st] : 'En attente') + '</span></div><div class="l">' + bits.filter(Boolean).join(' · ') + '</div></div>' + CHEV + '</button>';
   // La semaine
   const a = WEEKS[iso(mon)] || {}, tg = targetOf(mon), km = +a.km || 0, dp = +a.dplus || 0;
@@ -366,10 +389,73 @@ function vJour(day){
   $('view').querySelectorAll('[data-tog]').forEach(b => b.onclick = () => toggleDay(mon, +b.dataset.tog));
 }
 
-/* Sous-page : forme (sommeil, VFC, dos) */
+/* ================= FORME : dos, douleurs, sommeil, pas ================= */
+let fMon = null;
+const J3 = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const sev = x => x.score != null ? +x.score : ({ ok:0, gene:2, douleur:5 }[x.etat] || 0);
+const sevSt = n => n <= 0 ? 'ok' : n <= 3 ? 'mid' : 'low';
+const avgOf = a => a.length ? a.reduce((t,x) => t + x, 0) / a.length : null;
+/* 7 cases pour la semaine ; cell(k) renvoie [classe, texte] ou rien */
+function strip(mon, cell){
+  return '<div class="strip">' + [...Array(7)].map((_,i) => {
+    const d = add(mon, i), k = iso(d), c = d > today ? ['fut',''] : (cell(k) || ['','']);
+    return '<div><i class="' + c[0] + '">' + esc(c[1]) + '</i><span' + (k === iso(today) ? ' class="td"' : '') + '>' + J3[i] + '</span></div>';
+  }).join('') + '</div>';
+}
 function vForme(){
+  const cur = mondayOf(today), keys = Object.keys(SLEEP).concat(Object.keys(DOS), Object.keys(DOUL), Object.keys(PAS)).sort();
+  const first = keys.length ? mondayOf(D(keys[0])) : cur;
+  if (!fMon || fMon > cur) fMon = cur;
+  if (fMon < first) fMon = first;
+  const isCur = iso(fMon) === iso(cur), days = [...Array(7)].map((_,i) => iso(add(fMon, i))).filter(k => D(k) <= today);
+  let h = '<div class="fnav"><div class="page-h"><p class="eyebrow">' + (isCur ? 'Cette semaine' : 'Semaine ' + weekNo(fMon)) + ' · ' + fmt(fMon) + ' → ' + fmt(add(fMon, 6)) + '</p><h1>Forme</h1></div>' +
+    '<div class="nav"><button id="f-prev" aria-label="Semaine précédente"' + (fMon <= first ? ' disabled' : '') + '><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+    '<button id="f-next" aria-label="Semaine suivante"' + (isCur ? ' disabled' : '') + '><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div></div>';
+  const card = (go, t, sum, body) => { const tag = go ? 'button' : 'div';
+    return '<' + tag + ' class="card fcard"' + (go ? ' data-go="' + go + '"' : '') + '><div class="fh"><span class="t">' + t + '</span><span class="s">' + sum + '</span>' + (go ? CHEV : '') + '</div>' + body + '</' + tag + '>'; };
+  // Dos
+  const dd = days.map(k => DOS[k]).filter(Boolean), gene = dd.filter(x => sev(x) > 0).length, mx = dd.length ? Math.max(...dd.map(sev)) : 0;
+  h += card('#forme/dos', 'Dos', dd.length ? (gene ? '<b>' + gene + ' jour' + (gene > 1 ? 's' : '') + '</b> de gêne' + (dd.some(x => x.score != null) ? ' · max ' + Math.max(...dd.filter(x => x.score != null).map(x => +x.score)) + '/10' : '') : 'rien à signaler') : 'pas encore noté',
+    strip(fMon, k => { const x = DOS[k]; return x ? [DOS_ST[x.etat] || 'n', x.score != null ? x.score : x.etat === 'ok' ? '0' : ''] : null; }));
+  // Autres douleurs
+  const pd = days.flatMap(k => DOUL[k] || []).filter(x => sev(x) > 0), zones = [...new Set(pd.map(x => x.zone))];
+  h += card('#forme/douleurs', 'Douleurs', zones.length ? '<b>' + esc(zones.join(', ')) + '</b>' : 'rien de signalé',
+    strip(fMon, k => { const a = DOUL[k]; if (!a || !a.length) return null; const m = Math.max(...a.map(sev)), sc = a.filter(x => x.score != null).map(x => +x.score); return [sevSt(m), sc.length ? Math.max(...sc) : m > 0 ? '' : '0']; }));
+  // Sommeil
+  const nights = days.map(k => SLEEP[k]).filter(Boolean), aH = avgOf(nights.map(x => hrs(x.duree)).filter(x => x != null)), aV = avgOf(nights.map(x => +x.vfc).filter(Boolean));
+  h += card('#forme/sommeil', 'Sommeil', nights.length ? 'moy. <b>' + hm(aH) + '</b>' + (aV ? ' · VFC <b>' + Math.round(aV) + '</b>' : '') : 'pas de nuit',
+    '<div class="rl">Durée</div>' + strip(fMon, k => { const n = SLEEP[k], x = n && hrs(n.duree); return x != null ? [slpSt(x), hm(x)] : null; }) +
+    '<div class="rl">VFC</div>' + strip(fMon, k => { const n = SLEEP[k]; return n && n.vfc ? [vfcSt(+n.vfc), n.vfc] : null; }));
+  // Pas
+  const worn = days.map(k => PAS[k]).filter(v => v != null && v >= 1500);
+  h += card('', 'Pas', worn.length ? 'moy. <b>' + nf(avgOf(worn)) + '</b> · ' + worn.length + ' jour' + (worn.length > 1 ? 's' : '') : 'montre pas portée la journée',
+    strip(fMon, k => PAS[k] == null ? null : PAS[k] >= 1500 ? ['n', dec(PAS[k] / 1000, PAS[k] >= 10000 ? 0 : 1) + 'k'] : ['', '–']));
+  h += '<p class="foot">Nuit et pas : la montre, relevés chaque matin à 8 h · dos et douleurs : ce que tu me dis</p>';
+  $('view').innerHTML = h;
+  $('f-prev').onclick = () => { fMon = add(fMon, -7); route(); };
+  $('f-next').onclick = () => { fMon = add(fMon, 7); route(); };
+}
+/* Liste jour par jour (le plus récent en haut) */
+const hrow = (k, main, sub) => '<div class="hrow"><span class="hd">' + J3[(D(k).getDay()+6)%7] + '<small>' + fmt(D(k)) + '</small></span><span class="hv"><span>' + main + '</span>' + (sub ? '<span class="muted">' + sub + '</span>' : '') + '</span></div>';
+function vDos(){
+  const ks = Object.keys(DOS).sort().reverse().slice(0, 28);
+  let h = BACK('Forme') + '<div class="page-h"><p class="eyebrow">Au réveil, sur 10</p><h1>Dos</h1><p class="sub">Stop la série ou la sortie si ça dépasse 3/10.</p></div>';
+  h += '<div class="card blk hist">' + (ks.length ? ks.map(k => { const x = DOS[k];
+    return hrow(k, '<span class="st ' + (DOS_ST[x.etat] || 'no') + '">' + esc(x.score != null ? x.score + '/10' : ({ ok:'Rien', gene:'Gêne', douleur:'Douleur' }[x.etat] || '—')) + '</span>' + (x.nuit ? ' <span class="muted">réveils la nuit</span>' : x.nuit === false ? ' <span class="muted">nuit sans réveil</span>' : ''),
+      x.note && !/^\d+\/10 au réveil$/.test(x.note) ? esc(x.note) : ''); }).join('') : '<p class="muted">Rien de noté pour l\'instant.</p>') + '</div>';
+  $('view').innerHTML = h;
+}
+function vDouleurs(){
+  const ks = Object.keys(DOUL).sort().reverse().filter(k => (DOUL[k] || []).length).slice(0, 40);
+  let h = BACK('Forme') + '<div class="page-h"><p class="eyebrow">Hors dos</p><h1>Autres douleurs</h1><p class="sub">Aine, mollet, cuisse… dis-moi dès que quelque chose tire, je le note ici.</p></div>';
+  h += '<div class="card blk hist">' + (ks.length ? ks.map(k => (DOUL[k]).map(x => hrow(k,
+      '<b>' + esc(x.zone) + '</b> <span class="st ' + sevSt(sev(x)) + '">' + esc(x.score != null ? x.score + '/10' : ({ ok:'passé', gene:'gêne', douleur:'douleur' }[x.etat] || '')) + '</span>',
+      x.note ? esc(x.note) : '')).join('')).join('') : '<p class="muted">Rien de signalé.</p>') + '</div>';
+  $('view').innerHTML = h;
+}
+function vSommeil(){
   const nk = lastNight(), n = nk ? SLEEP[nk] : {}, st = vfcSt(+n.vfc), fresh = nk === iso(today);
-  let h = BACK('Semaine') + '<div class="page-h"><p class="eyebrow">' + (nk ? (fresh ? 'Nuit dernière' : 'Nuit du ' + fmt(add(D(nk), -1)) + ' au ' + fmt(D(nk))) : 'Forme') + '</p><h1>' + (nk ? VFC_TXT[st] : 'Pas de nuit') + '</h1>' +
+  let h = BACK('Forme') + '<div class="page-h"><p class="eyebrow">' + (nk ? (fresh ? 'Nuit dernière' : 'Nuit du ' + fmt(add(D(nk), -1)) + ' au ' + fmt(D(nk))) : 'Sommeil') + '</p><h1>' + (nk ? VFC_TXT[st] : 'Pas de nuit') + '</h1>' +
     (nk ? '<p class="sub">' + (st === 'low' ? 'On allège la séance du jour.' : st === 'mid' ? 'Séance prévue, sans forcer.' : st === 'ok' ? 'Feu vert pour la séance prévue.' : '') + '</p>' : '') + '</div>';
   if (nk) h += '<div class="card blk"><div class="big3">' +
       '<div><div class="v">' + (n.vfc || '—') + ' <small>ms</small></div><div class="l">VFC</div></div>' +
@@ -377,23 +463,12 @@ function vForme(){
       '<div><div class="v">' + (hrs(n.duree) != null ? hm(hrs(n.duree)) : '—') + '</div><div class="l">Sommeil</div></div></div>' +
       (n.coucher && n.lever ? '<p class="muted">' + esc(n.coucher) + ' → ' + esc(n.lever) + (n.eveil_min ? ' · éveillé ' + n.eveil_min + ' min' : '') + '</p>' : '') +
       (n.note ? '<p class="muted">' + esc(n.note) + '</p>' : '') + '</div>';
-  // Courbes sur 3 semaines
   h += '<div class="card blk trend" id="f-trend"></div>';
-  // Cette semaine
-  const mon = mondayOf(today), days = [...Array(7)].map((_,i) => iso(add(mon, i))), nights = days.map(k => SLEEP[k]).filter(Boolean);
-  const avg = a => a.length ? a.reduce((s,x) => s + x, 0) / a.length : null;
-  const v = avg(nights.map(x => +x.vfc).filter(Boolean)), f = avg(nights.map(x => +x.fc_min).filter(Boolean)), s = avg(nights.map(x => hrs(x.duree)).filter(x => x != null));
-  if (nights.length > 1) h += '<div class="sec"><div class="sec-h"><h2>Cette semaine</h2><span>' + nights.length + ' nuits</span></div><div class="card blk lines">' +
-    '<div class="ln"><i class="d ' + vfcSt(v) + '"></i><span>VFC moyenne</span><span class="r"><b>' + Math.round(v) + '</b> ms · repère 80-90</span></div>' +
-    '<div class="ln"><i class="d"></i><span>FC min moyenne</span><span class="r"><b>' + Math.round(f) + '</b> · repère 47-51</span></div>' +
-    '<div class="ln"><i class="d ' + slpSt(s) + '"></i><span>Sommeil moyen</span><span class="r"><b>' + hm(s) + '</b> · repère 7 h</span></div></div></div>';
-  // Dos sur 7 jours
-  const last7 = [...Array(7)].map((_,i) => add(today, i - 6));
-  h += '<div class="sec"><div class="sec-h"><h2>Dos, 7 derniers jours</h2></div><div class="card blk"><div class="dos7">' +
-    last7.map(d => { const x = DOS[iso(d)]; return '<div><i class="' + (x ? DOS_ST[x.etat] || '' : '') + '">' + (x ? (x.score != null ? x.score : x.etat === 'ok' ? '0' : '') : '') + '</i>' + JOURS[(d.getDay()+6)%7].slice(0,3) + '</div>'; }).join('') +
-    '</div></div></div>';
-  h += '<p class="ref"><b>VFC 80-90</b> : récupéré · <b>70-79</b> : correct · <b>sous 70</b> : journée facile. Dos : vert = rien, orange = gêne, rouge = douleur ; stop si plus de <b>3/10</b>.</p>';
-  h += '<p class="foot">Nuit relevée sur la montre chaque matin à 8 h' + (MAJ ? ' · mise à jour le ' + esc(MAJ) : '') + '</p>';
+  const ks = Object.keys(SLEEP).sort().reverse().slice(0, 14);
+  h += '<div class="sec"><div class="sec-h"><h2>Les dernières nuits</h2></div><div class="card blk hist">' + ks.map(k => { const x = SLEEP[k];
+    return hrow(k, (x.duree ? '<b>' + esc(hrs(x.duree) != null ? hm(hrs(x.duree)) : x.duree) + '</b>' : '') + (x.vfc ? ' · VFC <b>' + x.vfc + '</b>' : '') + (x.fc_min ? ' · FC min ' + x.fc_min : ''),
+      [x.coucher && x.lever ? esc(x.coucher) + ' → ' + esc(x.lever) : '', x.note ? esc(x.note) : ''].filter(Boolean).join(' · ')); }).join('') + '</div></div>';
+  h += '<p class="ref"><b>VFC 80-90</b> : récupéré · <b>70-79</b> : correct · <b>sous 70</b> : journée facile · FC min repère <b>47-51</b> · sommeil <b>7 h</b> et plus.</p>';
   $('view').innerHTML = h;
   trend($('f-trend'));
 }
@@ -474,7 +549,7 @@ function vPhase(id){
 
 /* ================= NAVIGATION ================= */
 /* #semaine, #semaine/jour/AAAA-MM-JJ, #semaine/forme, #saison, #saison/phase/<id>, #renfo */
-const TABS = ['semaine','saison','renfo'], mem = {};
+const TABS = ['semaine','forme','saison','renfo'], mem = {};
 let curKey = null, fromApp = false;
 function route(){
   const parts = location.hash.slice(1).split('/'), tab = TABS.includes(parts[0]) ? parts[0] : 'semaine', key = parts.join('/') || 'semaine';
@@ -485,7 +560,10 @@ function route(){
   if (!isRf) document.documentElement.classList.remove('focus');
   if (isRf) loadRenfo().then(sizeRenfo);
   else if (parts[1] === 'jour' && /^\d{4}-\d{2}-\d{2}$/.test(parts[2] || '')) vJour(parts[2]);
-  else if (parts[1] === 'forme') vForme();
+  else if (tab === 'forme' && parts[1] === 'dos') vDos();
+  else if (tab === 'forme' && parts[1] === 'douleurs') vDouleurs();
+  else if (tab === 'forme' && parts[1] === 'sommeil') vSommeil();
+  else if (tab === 'forme' || parts[1] === 'forme') vForme();
   else if (tab === 'saison' && parts[1] === 'phase') vPhase(parts[2]);
   else if (tab === 'saison') vSaison();
   else vSemaine();
@@ -549,7 +627,7 @@ window.addEventListener('message', e => {
 /* ================= DONNÉES ================= */
 function apply(d){
   WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; SLEEP = d.sommeil || {};
-  PAS = d.pas || {}; SEANCES = d.seances || {}; DOS = d.dos || {}; MAJ = d.maj || '';
+  PAS = d.pas || {}; SEANCES = d.seances || {}; DOS = d.dos || {}; DOUL = d.douleurs || {}; MAJ = d.maj || '';
 }
 function header(){ const d = Math.ceil((RACE - today) / DAY); $('cd').textContent = d > 0 ? 'J-' + d : 'Jour J'; }
 async function loadData(){

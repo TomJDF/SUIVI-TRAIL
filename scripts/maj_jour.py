@@ -8,6 +8,7 @@ payload.json peut contenir, toutes facultatives :
   "pas":     { "AAAA-MM-JJ": nombre_de_pas }
   "seances": { "AAAA-MM-JJ": [ {nom, type, km, dp, fc, duree} ] }   (remplace les séances Strava du jour ; les renfos et séances "manuel" restent)
   "dos":     { "AAAA-MM-JJ": {etat: "ok"|"gene"|"douleur", score, derouillage, nuit, note} }
+  "douleurs":{ "AAAA-MM-JJ": [ {zone: "mollet droit", etat: "ok"|"gene"|"douleur", score, note} ] }   (hors dos)
 Les champs existants d'une nuit sont conservés sauf s'ils sont fournis (la note n'est jamais effacée).
 Les km et le D+ de chaque semaine qui a des séances sont recalculés (course, trail, rando, marche) ; la note de la semaine est gardée.
 """
@@ -35,6 +36,11 @@ def main(path):
         d.setdefault('pas', {})[k] = int(v)
     for k, v in p.get('dos', {}).items():
         d.setdefault('dos', {}).setdefault(k, {}).update(v)
+    for k, v in p.get('douleurs', {}).items():
+        # une liste par jour : {zone, etat: ok|gene|douleur, score, note} ; même zone = remplacée
+        cur = {x.get('zone'): x for x in d.setdefault('douleurs', {}).get(k, [])}
+        for x in v: cur[x.get('zone')] = x
+        d['douleurs'][k] = list(cur.values())
     touched = set()
     for k, v in p.get('seances', {}).items():
         # la liste Strava remplace celle du jour, mais les séances notées à la main (renfo, etc.) restent

@@ -648,5 +648,42 @@
     "type": "Renfo"
    }
   ]
+ },
+ "douleurs": {
+  "2026-10-29": [
+   {
+    "zone": "mollet",
+    "etat": "gene",
+    "note": "petite boule en haut du mollet en descente, depuis le soir"
+   }
+  ],
+  "2026-10-30": [
+   {
+    "zone": "aine droite",
+    "etat": "gene",
+    "note": "au réveil, moins que la veille ; adducteur passé"
+   }
+  ],
+  "2026-10-31": [
+   {
+    "zone": "mollet",
+    "etat": "gene",
+    "note": "un peu, rien de fou"
+   }
+  ],
+  "2026-11-02": [
+   {
+    "zone": "cuisse droite",
+    "etat": "gene",
+    "note": "petite contracture, à voir au renfo"
+   }
+  ],
+  "2026-11-03": [
+   {
+    "zone": "cuisse droite",
+    "etat": "ok",
+    "note": "rien pendant le renfo"
+   }
+  ]
  }
 }
