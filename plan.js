@@ -43,11 +43,11 @@ const RACES = {
   calvi:    { d:'2026-11-07', label:'07/11',   name:'Trail in Calvi', note:'objectif sub 1h', f:'Giru di a Serra · 11 km · 324 D+ · une montée de 240 m' },
   parteu:   { d:'2026-11-29', label:'29/11',   name:'San Parteu', f:'23 km · 1 958 D+', key:true },
   cross:    { d:'2027-01-24', label:'24/01',   name:'Cross de Corte', f:'cross' },
-  blanc:    { d:'2027-02-06', label:'déb. fév', name:'Trail blanc', f:'18 km · 650 D+' },
+  blanc:    { d:'2027-01-31', label:'fin jan.', name:'Restonica Trail Blanc', note:'date à confirmer', f:'18 km · 650 D+ · Corte' },
   mandria:  { d:'2027-02-14', label:'~15/02',  name:'Mandrialinca', f:'9 km · 900 D+' },
   monte:    { d:'2027-03-29', label:'29/03',   name:'Trail di Monte', f:'13 km · 800 D+' },
-  gravona:  { d:'2027-04-18', label:'18/04',   name:'Gravona', f:'42 km · 2 550 D+', key:true },
+  gravona:  { d:'2027-04-18', label:'avril',   name:'Gravona', note:'date à confirmer', f:'Marathon 40 km · 2 600 D+ · Ucciani', key:true },
   venaco:   { d:'2027-05-02', label:'déb. mai', name:'Venaco', f:'19 km · 2 000 D+' },
-  pietralba:{ d:'2027-06-06', label:'06/06',   name:'Pietralba', note:'en contrôle', f:'44 km · 3 000 D+', key:true }
+  pietralba:{ d:'2027-06-05', label:'05/06',   name:'Pietralba', note:'en contrôle', f:'L\'Alturaghja 45 km · 2 900 D+', key:true }
 };
 
