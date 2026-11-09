@@ -537,7 +537,7 @@ function renderForme(){
   $('f-kpis').innerHTML =
     tile('VFC moy.', s.vfc ? chip(vfcSt(s.vfc), {ok:'Récupéré', mid:'Correct', low:'Facile'}[vfcSt(s.vfc)]) : '',
       s.vfc ? Math.round(s.vfc) + ' <small>ms</small>' : '—', 'repère 80-90' + (s.nV > 1 ? ' · plus basse <b>' + s.vMin + '</b>' : '') + vs(s.vfc, pv.vfc, x => '<b>' + sign(x, 0) + '</b>')) +
-    tile('FC min moy.', '', s.fc ? Math.round(s.fc) + ' <small>bpm</small>' : '—', (s.fMin ? (s.nV > 1 ? 'plus basse <b>' + s.fMin + '</b>' : '1 nuit pour l\'instant') : 'pas de nuit') + vs(s.fc, pv.fc, x => '<b>' + sign(x, 0) + '</b>')) +
+    tile('FC min moy.', '', s.fc ? Math.round(s.fc) + ' <small>bpm</small>' : '—', (s.fMin ? 'repère 47-51' + (s.nV > 1 ? ' · plus basse <b>' + s.fMin + '</b>' : '') : 'pas de nuit') + vs(s.fc, pv.fc, x => '<b>' + sign(x, 0) + '</b>')) +
     tile('Sommeil', s.h ? chip(slpSt(s.h), {ok:'Bon', mid:'Juste', low:'Court'}[slpSt(s.h)]) : '',
       s.h ? hm(s.h) : '—', (s.nH ? '<b>' + s.short + '</b> nuit' + (s.short > 1 ? 's' : '') + ' sous 7 h' : 'pas de nuit') + (s.h && pv.h ? '<br><b>' + sign((s.h - pv.h) * 60, 0, ' min') + '</b> vs sem. préc.' : '')) +
     tile('Volume', '', nf(s.km) + ' <small>km · ' + nf(s.dp) + ' m</small>',
