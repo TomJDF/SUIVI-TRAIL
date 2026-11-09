@@ -21,7 +21,7 @@
   document.documentElement.setAttribute('data-theme', t); })();
 </script>
 <style>
-/* Quatre pages : Semaine (accueil), Saison, Courses, Renfo. Onglets en bas sur mobile, en haut sur PC. Une colonne lisible. */
+/* Cinq pages : Semaine (accueil), Forme, Saison, Courses, Renfo. Onglets en bas sur mobile, en haut sur PC. Une colonne lisible. */
 :root{
   --bg:#0B1011; --card:#131A1B; --card-2:#1B2425; --line:#222C2D;
   --ink:#E9EEED; --muted:#8A9B98; --faint:#56645F; --nav:rgba(11,16,17,.92);
@@ -56,7 +56,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .theme svg{width:17px;height:17px}
 
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--nav);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-.tabs-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
 .tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 8px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--faint)}
 .tab svg{width:22px;height:22px}
 .tab[aria-current="page"]{color:var(--p2)}
@@ -186,6 +186,53 @@ html.focus .page.rf{top:0;bottom:0;padding-top:env(safe-area-inset-top,0px);padd
 .wk-grid{display:flex;flex-direction:column;gap:16px}
 .wk-grid > div{display:flex;flex-direction:column;gap:16px}
 
+/* Forme : la semaine en carrés (sommeil Suunto, séances Strava, dos) */
+.fm-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.fm-nav{display:flex;gap:6px;flex:none}
+.fm-nav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink)}
+.fm-nav button:disabled{opacity:.3;cursor:default}
+.fm-nav svg{width:16px;height:16px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{padding:12px 14px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.kpi .k{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.kpi .k .sl-st{font-size:9.5px;padding:2px 7px;letter-spacing:.06em}
+.kpi .v{font-family:var(--display);font-size:30px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .v small{font-family:var(--body);font-size:12px;color:var(--muted);font-weight:500}
+.kpi .s{font-size:11.5px;color:var(--muted);line-height:1.35}
+.kpi .s b{color:var(--ink);font-weight:600}
+.mx{padding:14px 12px 12px;display:flex;flex-direction:column;gap:10px}
+.mx-grid{display:grid;grid-template-columns:50px repeat(7,minmax(0,1fr));gap:4px;align-items:center}
+.mx-l{font-size:10.5px;color:var(--muted);letter-spacing:.03em;line-height:1.15}
+.mx-l small{display:block;font-size:9px;color:var(--faint)}
+.mx-d{display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 0;border-radius:8px;font-family:var(--display);font-size:13px;text-transform:uppercase;line-height:1}
+.mx-d small{font-family:var(--body);font-size:9.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.mx-d.today{color:var(--p2)}
+.mx-d.sel{background:var(--ink);color:var(--bg)}
+.mx-d.sel small{color:var(--bg);opacity:.75}
+.sq{aspect-ratio:1;min-width:0;border-radius:7px;background:var(--card-2);display:grid;place-items:center;font-family:var(--display);font-size:12.5px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap;overflow:hidden;color:var(--ink)}
+.sq.t{font-family:var(--body);font-weight:600;font-size:min(10.5px,2.7vw);letter-spacing:-.01em}
+.sq.e{background:transparent;border:1px dashed var(--line);color:var(--faint)}
+.sq.ok{background:color-mix(in srgb,var(--p2) 30%,var(--card-2))}
+.sq.mid{background:color-mix(in srgb,var(--p0) 32%,var(--card-2))}
+.sq.low{background:color-mix(in srgb,var(--p3) 30%,var(--card-2));box-shadow:inset 0 0 0 2px var(--p3)}
+.sq.sel:not(.e){outline:1.5px solid color-mix(in srgb,var(--ink) 55%,transparent);outline-offset:1px}
+.sq.e.sel{border-style:solid;border-color:var(--faint)}
+.mx-leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11px;color:var(--muted)}
+.mx-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+.fm-day{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.fm-dl{display:grid;grid-template-columns:62px 1fr;gap:8px 12px;margin:0;font-size:13.5px}
+.fm-dl dt{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.fm-dl dd{margin:0}
+.fm-dl dd span{color:var(--muted)}
+.trend{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.trend svg{width:100%;height:auto;display:block;touch-action:pan-y}
+.trend svg text{font-family:var(--body);font-size:9px;fill:var(--muted)}
+.trend .ro{font-size:12.5px;color:var(--muted);min-height:1.4em;font-variant-numeric:tabular-nums}
+.trend .ro b{color:var(--ink);font-weight:600}
+.fm-cols{display:flex;flex-direction:column;gap:16px}
+.fm-cols > div{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media (max-width:359px){.mx{padding-inline:8px}.mx-grid{grid-template-columns:42px repeat(7,minmax(0,1fr));gap:3px}.sq{font-size:10.5px;border-radius:6px}.mx-l{font-size:9.5px}.kpi{padding:10px 11px}.kpi .v{font-size:26px}}
+
 @media (min-width:900px){
   .top-in{max-width:1000px;padding-inline:32px}
   .brand{font-size:18px}
@@ -197,6 +244,11 @@ html.focus .page.rf{top:0;bottom:0;padding-top:env(safe-area-inset-top,0px);padd
   .tab[aria-current="page"]{background:var(--card-2);color:var(--ink)}
   .page{max-width:1000px;padding:36px 32px 64px}
   .wk-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .fm-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
+  .mx-grid{grid-template-columns:64px repeat(7,minmax(0,1fr));gap:6px}
+  .sq{font-size:15px}
+  .sq.t{font-size:12px}
   #p-saison,#p-courses{max-width:760px}
   .page.rf{width:min(520px,100%);margin:0 auto;border-inline:1px solid var(--line)}
 }
@@ -212,6 +264,7 @@ html.focus .page.rf{top:0;bottom:0;padding-top:env(safe-area-inset-top,0px);padd
     <nav class="tabs" aria-label="Pages">
       <div class="tabs-in">
         <button class="tab" data-p="semaine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M8.5 15l2 2 4-4"/></svg>Semaine</button>
+        <button class="tab" data-p="forme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12.5h4l2.5-6 4.5 12 2.5-6h5.5"/></svg>Forme</button>
         <button class="tab" data-p="saison"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-10 4 6 3-4 5 8z"/></svg>Saison</button>
         <button class="tab" data-p="courses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>Courses</button>
         <button class="tab" data-p="renfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="6"/></svg>Renfo</button>
@@ -238,6 +291,34 @@ html.focus .page.rf{top:0;bottom:0;padding-top:env(safe-area-inset-top,0px);padd
       <div class="goals" id="w-goals"></div>
       <div class="note" id="w-daily" hidden></div>
       <p class="rules"><b>141</b> max en footing · VFC <b>&lt; 70</b> = journée facile · aine et dos <b>≤ 3/10</b></p>
+    </div>
+  </div>
+</main>
+
+<main class="page" id="p-forme" hidden>
+  <div class="fm-head">
+    <div class="page-h">
+      <p class="eyebrow" id="f-eyebrow">Forme</p>
+      <h1>Forme</h1>
+      <p class="sub" id="f-dates"></p>
+    </div>
+    <div class="fm-nav">
+      <button id="f-prev" aria-label="Semaine précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button id="f-next" aria-label="Semaine suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+  <div class="kpis" id="f-kpis"></div>
+  <div class="fm-cols">
+    <div>
+      <div class="card mx"><div class="mx-grid" id="f-grid"></div>
+        <div class="mx-leg"><span><i style="background:color-mix(in srgb,var(--p2) 30%,var(--card-2))"></i>bon</span><span><i style="background:color-mix(in srgb,var(--p0) 32%,var(--card-2))"></i>moyen</span><span><i style="background:color-mix(in srgb,var(--p3) 30%,var(--card-2));box-shadow:inset 0 0 0 2px var(--p3)"></i>à surveiller</span><span><i style="background:color-mix(in srgb,var(--p1) 40%,var(--card-2))"></i>volume</span></div>
+      </div>
+      <div class="card fm-day" id="f-day"></div>
+    </div>
+    <div>
+      <div class="card trend" id="f-trend"></div>
+      <p class="rules">VFC <b>80-90</b> = récupéré · <b>&lt; 70</b> = journée facile · sommeil <b>≥ 7 h</b></p>
+      <p class="sync" id="f-sync"></p>
     </div>
   </div>
 </main>
@@ -278,7 +359,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const DAY = 86400000, $ = id => document.getElementById(id);
 const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 
-let WEEKS = {}, RESULTS = {}, PLANS = {}, SLEEP = {};
+let WEEKS = {}, RESULTS = {}, PLANS = {}, SLEEP = {}, PAS = {}, SEANCES = {}, DOS = {};
 let today = new Date(); today.setHours(0,0,0,0);
 let open = null;
 const S0 = D('2026-10-26'), RACE = D('2027-07-10');
@@ -399,6 +480,148 @@ function renderSleep(){
     '<div class="sl-leg"><span><i style="background:var(--p2)"></i>VFC, 14 jours</span><span><i style="background:var(--p2);opacity:.3"></i>repère 80-90</span><span><i style="background:var(--p3)"></i>70 = facile</span></div>';
 }
 
+/* ---------- Forme : la semaine en carrés ---------- */
+let fMon = null, fSel = null;
+const add = (d, n) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() + n); return x; };
+const mondayOf = d => add(d, -((d.getDay()+6)%7));
+const hrs = s => { const m = String(s || '').match(/(\d+)\s*h\s*(\d+)?/); return m ? +m[1] + (+(m[2] || 0))/60 : null; };
+const hm = h => { const t = Math.round(h*60); return Math.floor(t/60) + 'h' + String(t%60).padStart(2,'0'); };
+const dec = (n, d) => (+n).toFixed(d).replace('.', ',');
+const vfcSt = v => v >= 80 ? 'ok' : v >= 70 ? 'mid' : 'low';
+const slpSt = h => h >= 7 ? 'ok' : h >= 6 ? 'mid' : 'low';
+const PIED = ['Run','TrailRun','Hike','Walk','VirtualRun'];
+const DOS_TXT = { ok:['ok','OK','Rien'], gene:['mid','Gêne','Gêne'], douleur:['low','Mal','Douleur'] };
+const J1 = ['L','M','M','J','V','S','D'];
+function tag(a){
+  const n = String(a.nom || '').toLowerCase(), t = a.type;
+  if (n.includes('(course)')) return 'Course';
+  if (t === 'Renfo' || n.includes('renfo')) return 'Renfo';
+  if (t === 'Hike' || t === 'Walk') return 'Rando';
+  if (t === 'Ride' || t === 'VirtualRide') return 'Vélo';
+  if (n.includes('fraction')) return 'Fract';
+  if (n.includes('côte') || n.includes('cote')) return 'Côtes';
+  return t === 'TrailRun' ? 'Trail' : 'EF';
+}
+function weekStats(mon){
+  const days = [...Array(7)].map((_,i) => iso(add(mon, i)));
+  const nights = days.map(k => SLEEP[k]).filter(Boolean);
+  const v = nights.map(x => +x.vfc).filter(Boolean), f = nights.map(x => +x.fc_min).filter(Boolean), h = nights.map(x => hrs(x.duree)).filter(x => x != null);
+  const avg = a => a.length ? a.reduce((s,x) => s + x, 0) / a.length : null;
+  const acts = days.flatMap(k => SEANCES[k] || []), run = acts.filter(a => PIED.includes(a.type)), w = WEEKS[iso(mon)] || {};
+  return { days, vfc:avg(v), nV:v.length, vMin:v.length ? Math.min(...v) : null, fc:avg(f), fMin:f.length ? Math.min(...f) : null, h:avg(h), nH:h.length, short:h.filter(x => x < 7).length,
+    km:w.km != null ? +w.km : run.reduce((s,a) => s + (+a.km || 0), 0), dp:w.dplus != null ? +w.dplus : run.reduce((s,a) => s + (+a.dp || 0), 0), nAct:acts.length };
+}
+function targetOf(mon){
+  for (const p of PHASES){ if (p.pre) continue; const w = weeksOf(p).find(x => x.key === iso(mon)); if (w) return w; }
+  return null;
+}
+function renderForme(){
+  const cur = monday(), keys = Object.keys(SLEEP).concat(Object.keys(SEANCES)).sort();
+  const first = keys.length ? mondayOf(D(keys[0])) : cur;
+  if (!fMon) fMon = cur;
+  if (fMon < first) fMon = first;
+  if (fMon > cur) fMon = cur;
+  const isCur = iso(fMon) === iso(cur), ti = (today.getDay()+6)%7;
+  if (fSel === null) fSel = isCur ? ti : 6;
+  const s = weekStats(fMon), pv = weekStats(add(fMon, -7)), tg = targetOf(fMon), wn = Math.floor((fMon - S0) / (7*DAY)) + 1;
+  $('f-prev').disabled = fMon <= first; $('f-next').disabled = isCur;
+  $('f-eyebrow').textContent = (wn >= 1 ? 'Semaine ' + Math.min(37, wn) + ' / 37' : 'Avant la saison') + (isCur ? ' · en cours' : '');
+  $('f-dates').textContent = 'Du ' + fmt(fMon) + ' au ' + fmt(add(fMon, 6)) + ' · ' + s.nV + ' nuit' + (s.nV > 1 ? 's' : '') + ' · ' + s.nAct + ' séance' + (s.nAct > 1 ? 's' : '');
+
+  /* Tuiles de la semaine */
+  const vs = (a, b, txt) => a == null || b == null ? '' : '<br>' + txt(a - b) + ' vs sem. préc.';
+  const sign = (x, d, u) => (x >= 0 ? '+' : '−') + dec(Math.abs(x), d) + (u || '');
+  const chip = (st, t) => '<span class="sl-st ' + st + '">' + t + '</span>';
+  const tile = (k, ch, v, sub) => '<div class="kpi card"><div class="k"><span>' + k + '</span>' + ch + '</div><div class="v">' + v + '</div><div class="s">' + sub + '</div></div>';
+  const kmPct = tg && tg.tKm ? Math.min(100, s.km / tg.tKm * 100) : 0;
+  $('f-kpis').innerHTML =
+    tile('VFC moy.', s.vfc ? chip(vfcSt(s.vfc), {ok:'Récupéré', mid:'Correct', low:'Facile'}[vfcSt(s.vfc)]) : '',
+      s.vfc ? Math.round(s.vfc) + ' <small>ms</small>' : '—', 'repère 80-90' + (s.nV > 1 ? ' · plus basse <b>' + s.vMin + '</b>' : '') + vs(s.vfc, pv.vfc, x => '<b>' + sign(x, 0) + '</b>')) +
+    tile('FC min moy.', '', s.fc ? Math.round(s.fc) + ' <small>bpm</small>' : '—', (s.fMin ? (s.nV > 1 ? 'plus basse <b>' + s.fMin + '</b>' : '1 nuit pour l\'instant') : 'pas de nuit') + vs(s.fc, pv.fc, x => '<b>' + sign(x, 0) + '</b>')) +
+    tile('Sommeil', s.h ? chip(slpSt(s.h), {ok:'Bon', mid:'Juste', low:'Court'}[slpSt(s.h)]) : '',
+      s.h ? hm(s.h) : '—', (s.nH ? '<b>' + s.short + '</b> nuit' + (s.short > 1 ? 's' : '') + ' sous 7 h' : 'pas de nuit') + (s.h && pv.h ? '<br><b>' + sign((s.h - pv.h) * 60, 0, ' min') + '</b> vs sem. préc.' : '')) +
+    tile('Volume', '', nf(s.km) + ' <small>km · ' + nf(s.dp) + ' m</small>',
+      (tg ? 'objectif ~' + nf(tg.tKm) + ' km · ' + nf(tg.tDp) + ' m' : 'hors plan') + '<div class="trk" style="margin-top:6px"><i style="width:' + kmPct.toFixed(1) + '%;--c:var(--p1)"></i></div>');
+
+  /* Grille : une colonne par jour */
+  /* chaque ligne renvoie [classe, texte, infobulle, fond] ou rien */
+  const vol = (x, max) => 'color-mix(in srgb,var(--p1) ' + Math.round(14 + Math.min(1, x / max) * 46) + '%,var(--card-2))';
+  const foot = k => (SEANCES[k] || []).filter(a => PIED.includes(a.type));
+  const rows = [
+    ['Nuit<small>VFC, ms</small>', (k, n) => n && n.vfc ? [vfcSt(+n.vfc), n.vfc] : null],
+    ['FC min<small>bpm</small>', (k, n) => n && n.fc_min ? ['', n.fc_min] : null],
+    ['Sommeil', (k, n) => n && hrs(n.duree) != null ? [slpSt(hrs(n.duree)), hm(hrs(n.duree))] : null],
+    ['Pas<small>milliers</small>', k => PAS[k] == null ? null : PAS[k] >= 1500 ? ['', dec(PAS[k] / 1000, 1)] : ['e', '–', 'montre pas portée']],
+    ['Séance', k => { const a = SEANCES[k] || []; if (!a.length) return null; const m = a.find(x => PIED.includes(x.type)) || a[0]; return ['t', tag(m) + (a.length > 1 ? '+' : ''), a.map(x => x.nom).join(' + ')]; }],
+    ['Km', k => { const km = foot(k).reduce((t,a) => t + (+a.km || 0), 0); return km > 0 ? ['', dec(km, km < 10 ? 1 : 0), '', vol(km, 20)] : null; }],
+    ['D+<small>m</small>', k => { const dp = foot(k).reduce((t,a) => t + (+a.dp || 0), 0); return dp > 0 ? ['', Math.round(dp), '', vol(dp, 1200)] : null; }],
+    ['Dos', k => { const x = DOS[k], t = x && DOS_TXT[x.etat]; return t ? [t[0] + ' t', x.score != null ? x.score : t[1], x.note || ''] : null; }]
+  ];
+  let g = '<span></span>' + s.days.map((k,i) => '<button class="mx-d' + (isCur && i === ti ? ' today' : '') + (i === fSel ? ' sel' : '') + '" data-i="' + i + '" aria-label="' + JOURS[i] + ' ' + fmt(D(k)) + '">' + J1[i] + '<small>' + k.slice(8) + '</small></button>').join('');
+  rows.forEach(([lab, fn]) => {
+    g += '<span class="mx-l">' + lab + '</span>' + s.days.map((k,i) => {
+      const c = fn(k, SLEEP[k]) || ['e', D(k) > today ? '' : '·'];
+      return '<span class="sq ' + c[0] + (i === fSel ? ' sel' : '') + '" data-i="' + i + '"' + (c[2] ? ' title="' + esc(c[2]) + '"' : '') + (c[3] ? ' style="background:' + c[3] + '"' : '') + '>' + esc(c[1]) + '</span>';
+    }).join('');
+  });
+  $('f-grid').innerHTML = g;
+  $('f-grid').querySelectorAll('[data-i]').forEach(b => b.onclick = () => { fSel = +b.dataset.i; renderForme(); });
+
+  /* Détail du jour choisi */
+  const k = s.days[fSel], n = SLEEP[k], acts = SEANCES[k] || [], ds = DOS[k], pas = PAS[k];
+  const plan = PLANS[iso(fMon)] && Array.isArray(PLANS[iso(fMon)].jours) ? PLANS[iso(fMon)].jours[fSel] : null, fut = D(k) > today;
+  const dl = [];
+  dl.push(['Nuit', n ? [n.coucher && n.lever ? esc(n.coucher) + ' → ' + esc(n.lever) : '', n.duree ? esc(n.duree) : '', n.vfc ? 'VFC <b>' + n.vfc + '</b> ms' : '', n.fc_min ? 'FC min ' + n.fc_min : '', n.fc_moy ? 'moy. ' + n.fc_moy : '', n.score ? 'score ' + n.score : ''].filter(Boolean).join(' · ') : '<span>' + (fut ? 'à venir' : 'pas de nuit enregistrée') + '</span>']);
+  if (n && n.note) dl.push(['Note', esc(n.note)]);
+  dl.push(['Séance', acts.length ? acts.map(a => esc(a.nom) + ' <span>· ' + [a.km ? dec(a.km, 1) + ' km' : '', a.dp ? nf(a.dp) + ' m D+' : '', a.duree ? esc(a.duree) : '', a.fc ? 'FC ' + a.fc : ''].filter(Boolean).join(' · ') + '</span>').join('<br>') : '<span>' + (fut ? 'à venir' : 'repos ou pas sur Strava') + '</span>']);
+  if (plan) dl.push(['Prévu', esc(plan.seance)]);
+  if (pas != null) dl.push(['Pas', pas >= 1500 ? nf(pas) : '<span>montre pas portée</span>']);
+  if (ds) dl.push(['Dos', (DOS_TXT[ds.etat] ? DOS_TXT[ds.etat][2] : '') + (ds.score != null ? ' ' + ds.score + '/10' : '') + (ds.nuit ? ' · réveils la nuit' : ds.nuit === false ? ' · nuit sans réveil' : '') + (ds.note ? ' <span>· ' + esc(ds.note) + '</span>' : '')]);
+  $('f-day').innerHTML = '<div class="sl-top"><span class="k">' + JOURS[fSel] + ' ' + fmt(D(k)) + (isCur && fSel === ti ? ' · aujourd\'hui' : '') + '</span>' +
+    (n && n.vfc ? chip(vfcSt(+n.vfc), {ok:'Récupéré', mid:'Correct', low:'Journée facile'}[vfcSt(+n.vfc)]) : '') + '</div>' +
+    '<dl class="fm-dl">' + dl.map(([t,d]) => '<dt>' + t + '</dt><dd>' + d + '</dd>').join('') + '</dl>';
+
+  renderTrend();
+  $('f-sync').textContent = 'Sommeil et pas : montre Suunto, relevés chaque matin à 8 h · séances : Strava · dos : ce que tu me dis';
+}
+
+/* Courbes : VFC et durée de sommeil sur 3 semaines (deux petits graphiques, un seul axe chacun) */
+function renderTrend(){
+  const end = add(fMon, 6) < today ? add(fMon, 6) : today, N = 21, days = [...Array(N)].map((_,i) => add(end, i - N + 1));
+  const W = 320, H1 = 92, G = 16, H2 = 46, H = H1 + G + H2 + 16, L = 4, R = 4, step = (W - L - R) / N;
+  const cx = i => L + step * (i + .5);
+  const lo = 50, hi = 110, yv = v => 14 + (hi - Math.max(lo, Math.min(hi, v))) / (hi - lo) * (H1 - 20);
+  const y2 = h => H1 + G + H2 - Math.min(11, h) / 11 * H2;
+  const data = days.map(d => { const n = SLEEP[iso(d)] || {}; return { d, v:+n.vfc || null, h:hrs(n.duree), f:+n.fc_min || null }; });
+  const i0 = days.findIndex(d => iso(d) === iso(fMon));
+  let svg = '';
+  if (i0 >= 0) svg += '<rect x="' + (cx(i0) - step/2).toFixed(1) + '" y="0" width="' + (step * Math.min(7, N - i0)).toFixed(1) + '" height="' + (H - 14) + '" fill="var(--card-2)" rx="6"/>';
+  svg += '<text x="' + L + '" y="9">VFC (ms)</text><text x="' + L + '" y="' + (H1 + G - 2) + '">Sommeil (h)</text>';
+  svg += '<rect x="0" y="' + yv(90).toFixed(1) + '" width="' + W + '" height="' + (yv(80) - yv(90)).toFixed(1) + '" fill="var(--p2)" opacity=".13"/>';
+  svg += '<line x1="0" x2="' + W + '" y1="' + yv(70).toFixed(1) + '" y2="' + yv(70).toFixed(1) + '" stroke="var(--p3)" stroke-dasharray="3 3" opacity=".7"/>';
+  svg += '<text x="' + (W - R) + '" y="' + (yv(90) - 3).toFixed(1) + '" text-anchor="end">80-90</text><text x="' + (W - R) + '" y="' + (yv(70) + 10).toFixed(1) + '" text-anchor="end">70</text>';
+  const path = data.map((p,i) => p.v ? ((i && data[i-1].v ? 'L' : 'M') + cx(i).toFixed(1) + ' ' + yv(p.v).toFixed(1)) : '').join(' ');
+  svg += '<path d="' + path + '" fill="none" stroke="var(--p2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+  svg += data.map((p,i) => p.v ? '<circle cx="' + cx(i).toFixed(1) + '" cy="' + yv(p.v).toFixed(1) + '" r="3.4" fill="var(--p2)" stroke="var(--card)" stroke-width="2"/>' : '').join('');
+  svg += '<line x1="0" x2="' + W + '" y1="' + y2(7).toFixed(1) + '" y2="' + y2(7).toFixed(1) + '" stroke="var(--muted)" stroke-dasharray="3 3" opacity=".6"/>';
+  svg += '<text x="' + (W - R) + '" y="' + (y2(7) - 3).toFixed(1) + '" text-anchor="end">7 h</text>';
+  svg += data.map((p,i) => p.h != null ? '<rect x="' + (cx(i) - step/2 + 1.5).toFixed(1) + '" y="' + y2(p.h).toFixed(1) + '" width="' + (step - 3).toFixed(1) + '" height="' + (H1 + G + H2 - y2(p.h)).toFixed(1) + '" rx="2.5" fill="var(--p4)" opacity=".85"/>' : '').join('');
+  svg += '<line id="f-x" x1="-10" x2="-10" y1="0" y2="' + (H1 + G + H2) + '" stroke="var(--ink)" stroke-width="1" opacity=".5"/>';
+  svg += [0, 7, 14, 20].map(i => '<text x="' + cx(i).toFixed(1) + '" y="' + (H - 3) + '" text-anchor="middle">' + fmt(days[i]) + '</text>').join('');
+  $('f-trend').innerHTML = '<div class="sl-top"><span class="k">3 dernières semaines</span></div>' +
+    '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="VFC et durée de sommeil sur 21 jours">' + svg + '</svg>' +
+    '<div class="ro" id="f-ro">Touche le graphique pour lire une nuit.</div>';
+  const el = $('f-trend').querySelector('svg');
+  const read = e => {
+    const r = el.getBoundingClientRect(), i = Math.max(0, Math.min(N - 1, Math.floor(((e.clientX - r.left) / r.width * W - L) / step))), p = data[i];
+    $('f-x').setAttribute('x1', cx(i)); $('f-x').setAttribute('x2', cx(i));
+    $('f-ro').innerHTML = JOURS[(p.d.getDay()+6)%7].slice(0,3) + '. ' + fmt(p.d) + ' · ' + (p.v || p.h != null ? (p.v ? 'VFC <b>' + p.v + '</b> ms' : 'VFC —') + ' · sommeil <b>' + (p.h != null ? hm(p.h) : '—') + '</b>' + (p.f ? ' · FC min ' + p.f : '') : 'pas de nuit enregistrée');
+  };
+  el.addEventListener('pointermove', read); el.addEventListener('pointerdown', read);
+}
+$('f-prev').onclick = () => { fMon = add(fMon, -7); fSel = 6; renderForme(); };
+$('f-next').onclick = () => { fMon = add(fMon, 7); const c = iso(fMon) === iso(monday()); fSel = c ? (today.getDay()+6)%7 : 6; renderForme(); };
+
 /* ---------- Saison ---------- */
 function bar(l, v, t){
   return '<span class="l">' + l + '</span><div class="trk"><i style="width:' + (t > 0 ? Math.min(100, v/t*100) : 0).toFixed(1) + '%"></i></div><span class="n">' + nf(v) + ' <span>/ ' + nf(t) + '</span></span>';
@@ -450,7 +673,7 @@ function renderRaces(){
 }
 
 /* ---------- Navigation ---------- */
-const PAGES = ['semaine','saison','courses','renfo'];
+const PAGES = ['semaine','forme','saison','courses','renfo'];
 function go(p){
   if (!PAGES.includes(p)) p = 'semaine';
   PAGES.forEach(x => { $('p-' + x).hidden = x !== p; });
@@ -501,9 +724,13 @@ function render(){
   const d = Math.ceil((RACE - today)/DAY);
   $('cd').textContent = d > 0 ? 'J-' + d : 'Jour J';
   if (open === null){ const c = current(); open = c ? c.id : null; }
-  renderWeek(); renderSleep(); renderSeason(); renderRaces();
+  renderWeek(); renderSleep(); renderForme(); renderSeason(); renderRaces();
 }
-function apply(d, label){ WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; SLEEP = d.sommeil || {}; $('sync').textContent = label + (d.maj || '—'); }
+function apply(d, label){
+  WEEKS = d.semaines || {}; RESULTS = d.resultats || {}; PLANS = d.plan || {}; SLEEP = d.sommeil || {};
+  PAS = d.pas || {}; SEANCES = d.seances || {}; DOS = d.dos || {};
+  $('sync').textContent = label + (d.maj || '—');
+}
 async function loadData(){
   today = new Date(); today.setHours(0,0,0,0);
   try {

@@ -12,7 +12,7 @@
    "note": "GUMP, côtes, Relais Rose · KV sauté (fatigue)"
   },
   "2026-10-12": {
-   "km": 41.4,
+   "km": 41.5,
    "dplus": 1544,
    "note": "U Periplu · footing de Furiani trop dur, dos à 5/10"
   },
@@ -335,12 +335,18 @@
    "coucher": "23:00",
    "lever": "07:15",
    "ressources": 94,
-   "note": "nuit sans réveil, dos ok · montre mise vers 23h mais l'appli compte le sommeil dès 19h46 : durée, phases et ressources faussées"
+   "note": "nuit sans réveil, dos ok · montre mise vers 23h mais l'appli compte le sommeil dès 19h46 : durée, phases et ressources faussées",
+   "score": 75
   },
   "2026-11-04": {
-   "vfc": 75,
-   "duree": "6h30",
-   "note": "couché tard après le GUMP"
+   "vfc": 62,
+   "duree": "6h33",
+   "note": "couché tard après le GUMP",
+   "fc_min": 56,
+   "fc_moy": 63,
+   "coucher": "00:42",
+   "lever": "07:15",
+   "score": 81
   },
   "2026-11-05": {
    "vfc": 73,
@@ -352,7 +358,8 @@
    "ressources": 71,
    "rem": 19,
    "profond": 28,
-   "note": "nuit sans douleur au dos, mais pas super reposé"
+   "note": "nuit sans douleur au dos, mais pas super reposé",
+   "score": 80
   },
   "2026-11-06": {
    "vfc": 86,
@@ -364,7 +371,8 @@
    "ressources": 87,
    "rem": 21,
    "profond": 20,
-   "note": "VFC revenue dans la norme la veille de Calvi"
+   "note": "VFC revenue dans la norme la veille de Calvi",
+   "score": 85
   },
   "2026-11-08": {
    "vfc": 71,
@@ -372,11 +380,12 @@
    "fc_moy": 60,
    "duree": "10h42",
    "coucher": "21:30",
-   "lever": "08:39",
+   "lever": "08:38",
    "ressources": 82,
    "rem": 24,
    "profond": 19,
-   "note": "nuit après Calvi, 27 min d'éveil"
+   "note": "nuit après Calvi, 27 min d'éveil",
+   "score": 71
   },
   "2026-11-09": {
    "vfc": 84,
@@ -388,7 +397,229 @@
    "ressources": 75,
    "rem": 14,
    "profond": 26,
-   "note": "dos : rien samedi (course), un peu dimanche après-midi après beaucoup de canapé"
+   "note": "dos : rien samedi (course), un peu dimanche après-midi après beaucoup de canapé",
+   "score": 74
   }
+ },
+ "pas": {
+  "2026-11-02": 16,
+  "2026-11-03": 12486,
+  "2026-11-04": 10774,
+  "2026-11-05": 30,
+  "2026-11-06": 3675,
+  "2026-11-07": 20304,
+  "2026-11-08": 115
+ },
+ "dos": {
+  "2026-10-27": {
+   "etat": "douleur",
+   "note": "revenu au réveil après le renfo"
+  },
+  "2026-10-28": {
+   "etat": "douleur",
+   "note": "toute la journée"
+  },
+  "2026-10-29": {
+   "etat": "gene",
+   "note": "à la bascule au réveil"
+  },
+  "2026-10-30": {
+   "etat": "gene",
+   "note": "moins que la veille"
+  },
+  "2026-10-31": {
+   "etat": "ok"
+  },
+  "2026-11-02": {
+   "etat": "gene",
+   "nuit": true,
+   "note": "réveils la nuit, raideur globale au réveil"
+  },
+  "2026-11-03": {
+   "etat": "ok",
+   "nuit": false
+  },
+  "2026-11-04": {
+   "etat": "ok"
+  },
+  "2026-11-05": {
+   "etat": "ok",
+   "nuit": false
+  },
+  "2026-11-07": {
+   "etat": "ok"
+  },
+  "2026-11-08": {
+   "etat": "gene",
+   "note": "l'après-midi après beaucoup de canapé"
+  }
+ },
+ "seances": {
+  "2026-10-13": [
+   {
+    "nom": "GUMP",
+    "type": "Run",
+    "km": 12.2,
+    "dp": 57,
+    "fc": 147,
+    "duree": "1h18"
+   }
+  ],
+  "2026-10-14": [
+   {
+    "nom": "Footing",
+    "type": "Run",
+    "km": 9.5,
+    "dp": 49,
+    "duree": "1h00"
+   }
+  ],
+  "2026-10-16": [
+   {
+    "nom": "Trail Furiani",
+    "type": "TrailRun",
+    "km": 8.6,
+    "dp": 377,
+    "duree": "56 min"
+   }
+  ],
+  "2026-10-18": [
+   {
+    "nom": "U Periplu (course)",
+    "type": "TrailRun",
+    "km": 11.2,
+    "dp": 1061,
+    "fc": 165,
+    "duree": "1h45"
+   }
+  ],
+  "2026-10-20": [
+   {
+    "nom": "Home trainer",
+    "type": "Ride",
+    "km": 0,
+    "dp": 0,
+    "duree": "49 min"
+   }
+  ],
+  "2026-10-21": [
+   {
+    "nom": "Fractionné CAB",
+    "type": "Run",
+    "km": 8.5,
+    "dp": 92,
+    "duree": "52 min"
+   }
+  ],
+  "2026-10-22": [
+   {
+    "nom": "Footing",
+    "type": "Run",
+    "km": 2.2,
+    "dp": 0,
+    "duree": "15 min"
+   }
+  ],
+  "2026-10-23": [
+   {
+    "nom": "Footing",
+    "type": "Run",
+    "km": 9.7,
+    "dp": 61,
+    "duree": "58 min"
+   }
+  ],
+  "2026-10-24": [
+   {
+    "nom": "Rando Campile",
+    "type": "Hike",
+    "km": 7.8,
+    "dp": 534,
+    "duree": "2h03"
+   }
+  ],
+  "2026-10-25": [
+   {
+    "nom": "Zucca by night",
+    "type": "TrailRun",
+    "km": 11.4,
+    "dp": 945,
+    "duree": "2h04"
+   }
+  ],
+  "2026-10-27": [
+   {
+    "nom": "GUMP",
+    "type": "Run",
+    "km": 8.1,
+    "dp": 45,
+    "fc": 138,
+    "duree": "58 min"
+   }
+  ],
+  "2026-10-29": [
+   {
+    "nom": "City Trail (reco)",
+    "type": "TrailRun",
+    "km": 10.3,
+    "dp": 299,
+    "fc": 151,
+    "duree": "1h01"
+   }
+  ],
+  "2026-10-31": [
+   {
+    "nom": "Rando GUMP",
+    "type": "TrailRun",
+    "km": 7.0,
+    "dp": 461,
+    "duree": "1h07"
+   }
+  ],
+  "2026-11-03": [
+   {
+    "nom": "GUMP",
+    "type": "Run",
+    "km": 9.3,
+    "dp": 20,
+    "fc": 138,
+    "duree": "1h07"
+   }
+  ],
+  "2026-11-04": [
+   {
+    "nom": "Sortie en ville",
+    "type": "Run",
+    "km": 10.2,
+    "dp": 304,
+    "fc": 145,
+    "duree": "1h08"
+   }
+  ],
+  "2026-11-06": [
+   {
+    "nom": "Déblocage",
+    "type": "Run",
+    "km": 3.5,
+    "dp": 94,
+    "duree": "24 min"
+   }
+  ],
+  "2026-11-07": [
+   {
+    "nom": "Trail in Calvi (course)",
+    "type": "TrailRun",
+    "km": 11.2,
+    "dp": 393,
+    "fc": 170,
+    "duree": "1h01"
+   }
+  ],
+  "2026-11-02": [
+   {
+    "nom": "Renfo Programme 1",
+    "type": "Renfo"
+   }
+  ]
  }
 }
