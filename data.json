@@ -30,6 +30,10 @@
    "km": 34.2,
    "dplus": 811,
    "note": "renfo Programme 1 lundi · GUMP mardi à 138 · mercredi en ville, montées marchées à 148-150 · vendredi 3,5 km de déblocage · Calvi samedi : 11,2 km / 393 m D+ en 1h01 officiel, 29e/323, 170 de FC moyenne, haut de la montée à 21'34"
+  },
+  "2026-11-09": {
+   "km": 0,
+   "dplus": 0
   }
  },
  "resultats": {
@@ -478,7 +482,7 @@
   "2026-11-09": {
    "etat": "gene",
    "score": 3,
-   "note": "3/10 au réveil"
+   "note": "3/10 au réveil · au renfo, pont fessier sur la jambe droite : le bas du dos à droite lâche s'il ne serre pas fort"
   }
  },
  "seances": {
@@ -646,6 +650,13 @@
    {
     "nom": "Renfo Programme 1",
     "type": "Renfo"
+   }
+  ],
+  "2026-11-09": [
+   {
+    "nom": "Renfo Programme 2",
+    "type": "Renfo",
+    "duree": "2 tours"
    }
   ]
  },

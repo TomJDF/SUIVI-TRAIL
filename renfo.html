@@ -502,16 +502,18 @@ const SESSIONS = {
       { label: 'Circuit', when: 'round', items: [
         { name: 'Montée de box', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 45, cues: [
           'Sur une chaise ou un banc.',
+          'Commence par la droite (le côté faible), puis le même nombre à gauche.',
           'Le moins d\'impulsion possible avec la jambe arrière.',
           'Descente lente. Le genou reste stable, il ne rentre pas vers l\'intérieur.',
           'Si 12 sont faciles, ajoute une charge.' ] },
-        { name: 'Pont fessier 1 jambe', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 45, cues: [
-          'Allongé sur le dos, un talon posé sur une chaise ou le canapé, jambe presque tendue (genou juste un peu plié).',
-          'L\'autre jambe en l\'air, genou ramené vers toi : elle ne pousse pas.',
-          'Pousse dans le talon et monte les fesses jusqu\'à faire une ligne épaule, hanche, genou. 1 seconde en haut, redescends lentement, les fesses frôlent le sol.',
-          'Ça doit travailler l\'arrière de la cuisse et la fesse. Crampe derrière la cuisse : plie un peu plus le genou. Ça tire dans le bas du dos : monte moins haut, serre les fesses, ne cambre pas.',
-          'Orteils vers le plafond, pas tournés vers l\'extérieur.',
-          'Si 12 sont faciles, un poids sur le bassin (sac à dos, kettlebell).' ] },
+        { name: 'Pont fessier 1 jambe', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 45,
+          warn: 'Dès que le bas du dos à droite prend le relais, la série s\'arrête.',
+          cues: [
+          'Pour l\'instant, pied au sol : allongé sur le dos, genou plié, l\'autre jambe en l\'air, genou ramené vers toi.',
+          'Avant de monter : plaque le bas du dos au sol (bascule le bassin) et serre la fesse.',
+          'Monte jusqu\'à aligner épaule, hanche et genou, pas plus haut : si le bas du dos travaille, c\'est que tu cambres. 1 seconde en haut, descente lente.',
+          'Commence par la droite, puis fais le même nombre à gauche.',
+          'Quand 12 propres des deux côtés : talon sur une chaise, jambe presque tendue.' ] },
         { name: 'Descente de box', sides: true, reps: 10, unit: 'répétitions (8-12)', eccentric: true, rest: 60,
           warn: 'Charge beaucoup les tendons au-dessus et en dessous de la rotule. Après une grosse sortie en descente avec douleur, saute-le, puis reprends-le dès que ça diminue.',
           cues: [
