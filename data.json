@@ -134,7 +134,7 @@
     },
     {
      "jour": "Ven",
-     "seance": "Repos ou 30 min très faciles. Préparer la sortie du week-end"
+     "seance": "Repos actif : 30 min de marche + mobilité 10 min, pas de canapé toute la soirée. Préparer la sortie du week-end"
     },
     {
      "jour": "Sam",
@@ -142,7 +142,7 @@
     },
     {
      "jour": "Dim",
-     "seance": "Repos ou marche, mobilité 10 min"
+     "seance": "Repos actif : marche 30-45 min + mobilité 10 min (le dos n'aime pas les journées immobiles)"
     }
    ],
    "quotidien": "Chaque matin : dos /10 au réveil, durée du dérouillage, réveil la nuit ou non. Serrage adducteurs et test du mollet avant de courir",
@@ -387,7 +387,8 @@
    "lever": "07:15",
    "ressources": 75,
    "rem": 14,
-   "profond": 26
+   "profond": 26,
+   "note": "dos : rien samedi (course), un peu dimanche après-midi après beaucoup de canapé"
   }
  }
 }
