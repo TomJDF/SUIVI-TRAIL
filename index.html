@@ -190,6 +190,10 @@ li.is-done .dt{color:var(--muted)}
 .ref b{color:var(--ink);font-weight:600}
 
 /* Saison */
+.goal-big{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:16px 18px 17px;border-radius:20px;border:1px solid color-mix(in srgb,var(--p0) 45%,var(--line));background:radial-gradient(120% 120% at 100% 0%,color-mix(in srgb,var(--p0) 26%,transparent),transparent 62%),linear-gradient(180deg,var(--card-hi),var(--card));box-shadow:var(--shadow)}
+.goal-big .gk{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--p0)}
+.goal-big .gv{font-family:var(--display);font-size:54px;font-weight:900;font-stretch:120%;line-height:1;letter-spacing:-.01em;margin:4px 0 2px;background:linear-gradient(180deg,var(--ink) 35%,color-mix(in srgb,var(--p0) 70%,var(--ink)));-webkit-background-clip:text;background-clip:text;color:transparent}
+.goal-big .gs{font-size:13px;color:var(--muted)}
 .prows,.races{overflow:hidden}
 .prow{width:100%;display:grid;grid-template-columns:10px 1fr auto 10px;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
 .prows > :last-child{border-bottom:0}
@@ -575,10 +579,11 @@ function trend(box){
 }
 
 /* ================= SAISON ================= */
-const ALL_RACES = () => Object.assign({}, RACES, { resto:{ d:'2027-07-10', label:'10/07', name:'Restonica Trail', f:'69 km · 3 950 D+ · départ 2h, Corte', key:true, final:true } });
+const ALL_RACES = () => Object.assign({}, RACES, { resto:{ d:'2027-07-10', label:'10/07', name:'Restonica Trail', f:'69 km · 3 950 D+ · départ 2h, Corte', note:'objectif sub 13h', key:true, final:true } });
 function vSaison(){
   const cur = current();
-  let h = hero('trail', (weekNo(today) - 1) / 36) + '<div class="page-h"><p class="eyebrow">Saison 2026 – 2027</p><h1>Vers la Restonica</h1><p class="sub">Semaine ' + weekNo(today) + ' sur 37</p></div>';
+  let h = hero('trail', (weekNo(today) - 1) / 36) + '<div class="page-h"><p class="eyebrow">Saison 2026 – 2027</p><h1>Vers la Restonica</h1><p class="sub">Semaine ' + weekNo(today) + ' sur 37</p></div>' +
+    '<div class="goal-big"><span class="gk">Objectif Restonica</span><span class="gv">SUB 13H</span><span class="gs">et on kiffe la prépa · filet : sub 14h</span></div>';
   // Le plan : la phase en cours est ouverte, les autres en une ligne
   h += '<div class="sec"><div class="sec-h"><h2>Le plan</h2></div><div class="card prows">' + PHASES.filter(p => !p.pre).map(p => {
     const st = status(p), isCur = cur && cur.id === p.id;
