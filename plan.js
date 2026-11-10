@@ -51,3 +51,37 @@ const RACES = {
   pietralba:{ d:'2027-06-05', label:'05/06',   name:'Pietralba', note:'en contrôle', f:'L\'Alturaghja 45 km · 2 900 D+', key:true }
 };
 
+
+/* Plan de course Restonica (objectif sub 13h, départ 2h). Heures et rythmes estimés à partir du GPX de la course :
+   à recaler avec les sorties longues de l'hiver et Pietralba. Chaque partie a sa séance type pour imprimer le rythme. */
+const RESTO = {
+  pass: [
+    { t:'2h00', n:'Départ Corte', km:0, alt:430 },
+    { t:'4h35', n:'Aleri', km:13, alt:1580, dp:1510, bar:'7h05', rav:'boisson + petite nourriture' },
+    { t:'7h00', n:'Inzecche', km:26.6, alt:1710, dp:2150, bar:'10h45', rav:'repas chaud' },
+    { t:'7h25', n:'Ninu', km:29.8, alt:1750, dp:2210, rav:'pointage' },
+    { t:'9h40', n:'Bocca a Soglia', km:41.6, alt:2010, dp:2910, rav:'eau seulement' },
+    { t:'10h25', n:'Grotelle chez Téo', km:45.7, alt:1370, dp:2910, rav:'repas chaud' },
+    { t:'11h15', n:'Tragone-César', km:51, alt:1020, dp:2940, bar:'17h05', rav:'boisson' },
+    { t:'12h20', n:'Alzu', km:56, alt:1580, dp:3570, rav:'repas chaud' },
+    { t:'14h40', n:'Arrivée Corte', km:68.5, alt:430, dp:3690 }
+  ],
+  parts: [
+    { n:'Montée 1', up:true, km:'0 → 8', alt:'430 → 1 810 m', d:'+1 450 m', dur:'1h50', rythme:'~790 m/h', fc:'145-150, pas plus', note:'De nuit, à la frontale. Tout le monde part trop vite : laisse partir, tu reprendras le temps dans les descentes.',
+      seance:'Montée continue de 45 min à 1h à 145-150, en visant 750-800 m/h (Zucca, Cima). Une fois par mois à la frontale.' },
+    { n:'Descente 1', up:false, km:'8 → 16', alt:'1 810 → 1 160 m', d:'−720 m', dur:'1h20', rythme:'~6 km/h', fc:'relâché', note:'Encore de nuit. On descend propre, sans se cramer les cuisses : il reste 50 km.',
+      seance:'Descente technique à la frontale, allure facile, regard loin devant.' },
+    { n:'Montée 2', up:true, km:'16 → 27', alt:'1 160 → 1 770 m', d:'+680 m', dur:'1h55', rythme:'~5,5 km/h', fc:'140-150', note:'Longue montée roulante, le jour se lève. Alterner course et marche. Repas chaud à Inzecche.',
+      seance:'Sortie de 2h en montée douce, en alternant 4 min courues et 1 min marchée, sans dépasser 150.' },
+    { n:'Faux-plat', up:false, km:'27 → 34', alt:'1 770 → 1 540 m', d:'−250 m', dur:'1h10', rythme:'~6,3 km/h', fc:'135-145', note:'Courir en relâché et manger : c\'est là qu\'on remplit le réservoir avant le point haut.',
+      seance:'Footing vallonné de 1h en mangeant 60 g de glucides : habituer l\'estomac à manger en courant.' },
+    { n:'Montée 3', up:true, km:'34 → 39', alt:'1 540 → 2 210 m', d:'+680 m', dur:'1h05', rythme:'~630 m/h', fc:'145-155', note:'Le point haut, après 7h de course. C\'est le moment de ton coup de mou de Pietralba : arriver avec des glucides avalés depuis le départ. À Bocca a Soglia, il n\'y a que de l\'eau.',
+      seance:'Une montée de 600-700 m en fin de sortie longue, après 3h ou plus d\'effort.' },
+    { n:'Grande descente', up:false, km:'39 → 49', alt:'2 210 → 1 010 m', d:'−1 230 m', dur:'1h50', rythme:'~5,8 km/h', fc:'libre', note:'Ton point fort. Doubler, mais garder des cuisses pour la suite. Repas chaud à Grotelle.',
+      seance:'Longue descente technique de 1 000 m en fin de sortie longue. Au renfo, la descente de box.' },
+    { n:'Montée 4', up:true, km:'49 → 53', alt:'1 010 → 1 640 m', d:'+640 m', dur:'1h00', rythme:'~640 m/h', fc:'145-155', note:'Raide, vers midi, en pleine chaleur. S\'arroser, sel dans les flasques. Alzu en haut : ne pas s\'asseoir.',
+      seance:'Montée raide de 600 m en milieu de journée quand il fait chaud (printemps, été).' },
+    { n:'Descente finale', up:false, km:'53 → 68,5', alt:'1 640 → 430 m', d:'−1 320 m', dur:'2h25', rythme:'~5,5 km/h', fc:'libre', note:'13 km jusqu\'à Corte, dans la chaleur de l\'après-midi. Si les jambes et le carburant sont là, c\'est là que tu doubles du monde.',
+      seance:'Enchaîner une longue descente à la fin d\'une sortie de 5h ou plus.' }
+  ]
+};

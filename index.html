@@ -194,7 +194,27 @@ li.is-done .dt{color:var(--muted)}
 .goal-big{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:16px 18px 17px;border-radius:20px;border:1px solid color-mix(in srgb,var(--p0) 45%,var(--line));background:radial-gradient(120% 120% at 100% 0%,color-mix(in srgb,var(--p0) 26%,transparent),transparent 62%),linear-gradient(180deg,var(--card-hi),var(--card));box-shadow:var(--shadow)}
 .goal-big .gk{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--p0)}
 .goal-big .gv{font-family:var(--display);font-size:54px;font-weight:900;font-stretch:120%;line-height:1;letter-spacing:-.01em;margin:4px 0 2px;background:linear-gradient(180deg,var(--ink) 35%,color-mix(in srgb,var(--p0) 70%,var(--ink)));-webkit-background-clip:text;background-clip:text;color:transparent}
-.goal-big .gs{font-size:13px;color:var(--muted)}
+.goal-big{width:100%}
+.goal-big .gl{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink)}
+.goal-big .gl .chev{border-color:var(--p0)}
+.pass{display:grid;grid-template-columns:54px 1fr auto;gap:2px 12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.pass:last-child{border-bottom:0}
+.pass .pt{font-family:var(--display);font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
+.pass .pn{font-weight:600;font-size:14.5px;line-height:1.25}
+.pass .pm{grid-column:2;font-size:12.5px;color:var(--muted)}
+.pass .pb{grid-row:1 / 3;grid-column:3;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.part{padding:15px 16px;display:flex;flex-direction:column;gap:9px}
+.part .ph{display:flex;align-items:center;gap:10px}
+.part .pi{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none;font-size:15px;font-weight:800}
+.part .pi.up{background:color-mix(in srgb,var(--p0) 22%,transparent);color:var(--p0)}
+.part .pi.dn{background:color-mix(in srgb,var(--p1) 22%,transparent);color:var(--p1)}
+.part .pt2{font-family:var(--display);font-size:15px;font-weight:800;font-stretch:110%;text-transform:uppercase;letter-spacing:.02em}
+.part .pk{font-size:12px;color:var(--muted)}
+.part .chips{display:flex;flex-wrap:wrap;gap:6px}
+.part .chips span{font-size:12px;font-weight:600;padding:4px 9px;border-radius:10px;background:var(--card-2);font-variant-numeric:tabular-nums}
+.part p{margin:0;font-size:14px}
+.part .se{padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--p2) 10%,transparent);border:1px solid color-mix(in srgb,var(--p2) 25%,transparent);font-size:13.5px}
+.part .se b{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--p2);margin-bottom:3px}
 .prows,.races{overflow:hidden}
 .prow{width:100%;display:grid;grid-template-columns:10px 1fr auto 10px;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
 .prows > :last-child{border-bottom:0}
@@ -584,7 +604,7 @@ const ALL_RACES = () => Object.assign({}, RACES, { resto:{ d:'2027-07-10', label
 function vSaison(){
   const cur = current();
   let h = hero('trail', (weekNo(today) - 1) / 36) + '<div class="page-h"><p class="eyebrow">Saison 2026 – 2027</p><h1>Vers la Restonica</h1><p class="sub">Semaine ' + weekNo(today) + ' sur 37</p></div>' +
-    '<div class="goal-big"><span class="gk">Objectif Restonica</span><span class="gv">SUB 13H</span></div>';
+    '<button class="goal-big" data-go="#saison/restonica"><span class="gk">Objectif Restonica</span><span class="gv">SUB 13H</span><span class="gl">Plan de course' + CHEV + '</span></button>';
   // Le plan : la phase en cours est ouverte, les autres en une ligne
   h += '<div class="sec"><div class="sec-h"><h2>Le plan</h2></div><div class="card prows">' + PHASES.filter(p => !p.pre).map(p => {
     const st = status(p), isCur = cur && cur.id === p.id;
@@ -608,6 +628,20 @@ function vSaison(){
   };
   h += '<div class="sec"><div class="sec-h"><h2>Courses à venir</h2><span>le point = course clé</span></div><div class="card races">' + todo.map((x,i) => row(x, i, false)).join('') + '</div></div>';
   if (done.length) h += '<div class="sec"><div class="sec-h"><h2>Résultats</h2></div><div class="card races">' + done.map((x,i) => row(x, i, true)).join('') + '</div></div>';
+  $('view').innerHTML = h;
+}
+
+/* Sous-page : le plan de course de la Restonica */
+function vResto(){
+  let h = BACK('Saison') + '<div class="page-h"><p class="eyebrow">Restonica · 10/07/2027 · départ 2h</p><h1>Plan de course</h1><p class="sub">Objectif sub 13h · arrivée vers 14h40</p></div>';
+  h += '<div class="sec"><div class="sec-h"><h2>Points de passage</h2><span>barrière · ravito</span></div><div class="card blk">' + RESTO.pass.map(p =>
+    '<div class="pass"><span class="pt">' + p.t + '</span><span class="pn">' + esc(p.n) + '</span><span class="pb">' + (p.bar ? 'barrière ' + p.bar + '<br>' : '') + esc(p.rav || '') + '</span>' +
+    '<span class="pm">km ' + String(p.km).replace('.', ',') + ' · ' + nf(p.alt) + ' m' + (p.dp ? ' · ' + nf(p.dp) + ' m D+' : '') + '</span></div>').join('') + '</div></div>';
+  h += '<div class="sec"><div class="sec-h"><h2>Partie par partie</h2><span>et la séance type</span></div>' + RESTO.parts.map(p =>
+    '<div class="card part"><div class="ph"><span class="pi ' + (p.up ? 'up' : 'dn') + '">' + (p.up ? '↗' : '↘') + '</span><div><div class="pt2">' + esc(p.n) + '</div><div class="pk">km ' + esc(p.km) + ' · ' + esc(p.alt) + '</div></div></div>' +
+    '<div class="chips"><span>' + esc(p.d) + '</span><span>' + esc(p.dur) + '</span><span>' + esc(p.rythme) + '</span><span>FC ' + esc(p.fc) + '</span></div>' +
+    '<p>' + esc(p.note) + '</p><div class="se"><b>À l\'entraînement</b>' + esc(p.seance) + '</div></div>').join('') + '</div>';
+  h += '<p class="foot">Heures estimées à partir du GPX : on les recalera avec les sorties longues et Pietralba.</p>';
   $('view').innerHTML = h;
 }
 
@@ -647,6 +681,7 @@ function route(){
   else if (tab === 'forme' && parts[1] === 'sommeil') vSommeil();
   else if (tab === 'forme' || parts[1] === 'forme') vForme();
   else if (tab === 'saison' && parts[1] === 'phase') vPhase(parts[2]);
+  else if (tab === 'saison' && parts[1] === 'restonica') vResto();
   else if (tab === 'saison') vSaison();
   else vSemaine();
   const isSub = parts.length > 1;
