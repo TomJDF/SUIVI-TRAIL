@@ -53,9 +53,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 :focus-visible{outline:2px solid var(--p2);outline-offset:2px;border-radius:8px}
 
 /* En-tête : transparent sur le décor, givré dès qu'on défile */
-/* En-tête toujours plein, de la couleur du haut du ciel : sur iPhone, le système floute le haut de l'écran, et un flou sur une couleur unie ne se voit pas */
-.top{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:var(--sky-a);border-bottom:1px solid transparent}
-.top.solid{border-bottom-color:var(--line)}
+/* En-tête transparent sur le décor, descendu de 16 px sous la barre d'état : sur iPhone, le système floute le haut de l'écran */
+.top{position:sticky;top:0;z-index:20;padding-top:calc(env(safe-area-inset-top,0px) + 16px);border-bottom:1px solid transparent}
+.top.solid{background:var(--bg);border-bottom-color:var(--line)}
 .top-in{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px;height:57px;padding:0 max(18px,env(safe-area-inset-right,0px)) 0 max(18px,env(safe-area-inset-left,0px))}
 .logo{width:32px;height:32px;border-radius:9px;flex:none;box-shadow:0 4px 12px -4px rgba(0,0,0,.5)}
 .brand{font-family:var(--display);font-weight:800;text-transform:uppercase;color:var(--ink);line-height:.95;font-size:14px;letter-spacing:.05em}
@@ -75,7 +75,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .page{position:relative;max-width:560px;margin:0 auto;padding:16px max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 104px) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:18px}
 .page > :not(.hero){position:relative;z-index:1}
 .page.has-hero{padding-top:118px}
-.hero{position:absolute;left:0;right:0;top:calc(-58px - env(safe-area-inset-top,0px));height:calc(318px + env(safe-area-inset-top,0px));z-index:0;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+.hero{position:absolute;left:0;right:0;top:calc(-74px - env(safe-area-inset-top,0px));height:calc(334px + env(safe-area-inset-top,0px));z-index:0;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
 .hero svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .page-h{display:flex;flex-direction:column;gap:5px}
 .eyebrow{margin:0;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
@@ -408,7 +408,7 @@ function hero(kind, prog){
   if (kind === 'moon') sky = '<circle cx="212" cy="74" r="34" fill="url(#hg2)"/><circle cx="212" cy="74" r="10.5" fill="#F4F1E6"/><circle cx="216.5" cy="71" r="9" fill="var(--sky-b)" opacity=".92"/>';
   else sky = '<circle cx="' + (kind === 'trail' ? 96 : 292) + '" cy="168" r="150" fill="url(#hg)"/>' + (kind === 'sun' ? '<circle cx="292" cy="150" r="17" fill="var(--glow)" opacity=".95"/>' : '');
   return '<div class="hero" aria-hidden="true"><svg viewBox="0 0 390 318" preserveAspectRatio="xMidYMax slice"><defs>' +
-    '<linearGradient id="hs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sky-a)"/><stop offset=".44" stop-color="var(--sky-a)"/><stop offset=".86" stop-color="var(--sky-b)"/></linearGradient>' +
+    '<linearGradient id="hs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sky-a)"/><stop offset=".72" stop-color="var(--sky-b)"/></linearGradient>' +
     '<radialGradient id="hg"><stop offset="0" stop-color="var(--glow)" stop-opacity=".6"/><stop offset=".45" stop-color="var(--glow)" stop-opacity=".16"/><stop offset="1" stop-color="var(--glow)" stop-opacity="0"/></radialGradient>' +
     '<radialGradient id="hg2"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>' +
     '<rect x="-30" y="-80" width="450" height="420" fill="url(#hs)"/><g style="opacity:var(--star)">' + stars + '</g><g class="ly" data-k=".42">' + sky + '</g>' +
