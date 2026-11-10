@@ -33,7 +33,7 @@ const PHASES = [
   { id:'aff', name:'Affûtage', c:'--p4', start:'2027-06-14', end:'2027-07-10', km:[45,25], dp:[1500,800],
     sub:'Volume −30 puis −50 % · sommeil · rien de nouveau',
     week:[['Lun','Renfo mobilité et activation'],['Mar','Footing court'],['Mer','Rappel d\'intensité court'],['Jeu','Footing court'],['Ven','Repos'],['Sam','Sortie 2h-3h max'],['Dim','Repos']],
-    focus:['Matériel et nutrition figés','Dernière semaine : grosses nuits du lundi au jeudi','Sieste le vendredi après-midi avant le départ de 2h'],
+    focus:['Pause GUMP pendant l\'affûtage : coucher tôt, zéro alcool, footings seul ou au CAB','Matériel et nutrition figés','Dernière semaine : grosses nuits du lundi au jeudi','Sieste le vendredi après-midi avant le départ de 2h'],
     races:[] }
 ];
 
