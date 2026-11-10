@@ -584,7 +584,7 @@ const ALL_RACES = () => Object.assign({}, RACES, { resto:{ d:'2027-07-10', label
 function vSaison(){
   const cur = current();
   let h = hero('trail', (weekNo(today) - 1) / 36) + '<div class="page-h"><p class="eyebrow">Saison 2026 – 2027</p><h1>Vers la Restonica</h1><p class="sub">Semaine ' + weekNo(today) + ' sur 37</p></div>' +
-    '<div class="goal-big"><span class="gk">Objectif Restonica</span><span class="gv">SUB 13H</span><span class="gs">et on kiffe la prépa</span></div>';
+    '<div class="goal-big"><span class="gk">Objectif Restonica</span><span class="gv">SUB 13H</span></div>';
   // Le plan : la phase en cours est ouverte, les autres en une ligne
   h += '<div class="sec"><div class="sec-h"><h2>Le plan</h2></div><div class="card prows">' + PHASES.filter(p => !p.pre).map(p => {
     const st = status(p), isCur = cur && cur.id === p.id;
