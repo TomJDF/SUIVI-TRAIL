@@ -1,55 +1,52 @@
 <!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}[hidden]{display:none!important}.foot,#home .masthead{display:none}#home > .wrap{padding-top:18px}</style></head><body><title>Carnet de renfo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-
 <style>
+@font-face{font-family:'Archivo';src:url('fonts/archivo.woff2') format('woff2');font-weight:100 900;font-stretch:62% 125%;font-display:swap}
 /* Layout: single column, one exercise filling the screen at a time, sticky header for progress, rest timer as a full overlay. */
 :root{
-  --bg:#F3F5F4;
+  --bg:#F2F5F9;
   --surface:#FFFFFF;
-  --surface-2:#E6EBE9;
-  --ink:#14191A;
-  --muted:#64716F;
-  --line:#D6DEDC;
-  --accent:#0B6E5B;
-  --accent-soft:#D7EBE5;
+  --surface-2:#E7EDF4;
+  --ink:#0F1A28;
+  --muted:#55657A;
+  --line:#DAE2EC;
+  --accent:#0B8C6E;
+  --accent-soft:#D5EFE8;
   --accent-ink:#FFFFFF;
   --flag:#9A5214;
   --flag-soft:#F7E8D7;
   --shadow:0 1px 2px rgba(20,25,26,.06),0 8px 24px rgba(20,25,26,.06);
 
-  --display:'Antonio','Haettenschweiler','Arial Narrow',sans-serif;
-  --body:'Barlow','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --display:'Archivo','Arial Narrow',sans-serif;
+  --body:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0B1011;
-    --surface:#171E1F;
-    --surface-2:#1F292A;
-    --ink:#E8EDEC;
-    --muted:#8DA09C;
-    --line:#2A3536;
-    --accent:#35C9A6;
-    --accent-soft:#113A32;
-    --accent-ink:#06211C;
-    --flag:#E2A469;
+    --bg:#0A0F16;
+    --surface:#131C28;
+    --surface-2:#1B2635;
+    --ink:#EEF3F8;
+    --muted:#8E9DB2;
+    --line:#233145;
+    --accent:#3DDBB4;
+    --accent-soft:#103A33;
+    --accent-ink:#04201A;
+    --flag:#F2A65A;
     --flag-soft:#38291A;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0B1011;
-  --surface:#171E1F;
-  --surface-2:#1F292A;
-  --ink:#E8EDEC;
-  --muted:#8DA09C;
-  --line:#2A3536;
-  --accent:#35C9A6;
-  --accent-soft:#113A32;
-  --accent-ink:#06211C;
-  --flag:#E2A469;
+  --bg:#0A0F16;
+  --surface:#131C28;
+  --surface-2:#1B2635;
+  --ink:#EEF3F8;
+  --muted:#8E9DB2;
+  --line:#233145;
+  --accent:#3DDBB4;
+  --accent-soft:#103A33;
+  --accent-ink:#04201A;
+  --flag:#F2A65A;
   --flag-soft:#38291A;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
   color-scheme:dark;
@@ -75,6 +72,15 @@ h1,h2,h3{margin:0;text-wrap:balance}
 /* Dans l'app, hors séance : le cadre prend la hauteur du contenu et c'est la page de l'app qui défile */
 html.flow,html.flow body{height:auto;overscroll-behavior:auto}
 html.flow .app{min-height:0}
+/* Même habillage que l'app : cartes arrondies en relief, titres larges sur l'accueil, boutons en pilule */
+body{-webkit-font-smoothing:antialiased}
+html .card,html .rules,html .resume{border-radius:20px;box-shadow:var(--shadow)}
+html .card h3{font-stretch:112%;font-weight:800;font-size:16px;letter-spacing:.02em;line-height:1.15}
+html .card .day{font-size:10px;letter-spacing:.16em}
+html .resume .go{font-stretch:108%;font-weight:800;font-size:12px;letter-spacing:.1em}
+html .btn{border-radius:18px}
+html .btn.ghost{font-stretch:100%}
+html .seg button{border-radius:12px}
 
 .wrap{width:100%;max-width:560px;margin:0 auto;padding-inline:18px}
 
@@ -86,7 +92,7 @@ html.flow .app{min-height:0}
   text-transform:uppercase;color:var(--muted);margin:0 0 6px
 }
 .masthead h1{
-  font-family:var(--display);font-weight:700;font-size:clamp(38px,12vw,54px);
+  font-family:var(--display);font-stretch:70%;font-weight:700;font-size:clamp(38px,12vw,54px);
   line-height:.92;letter-spacing:-.01em;text-transform:uppercase
 }
 .masthead p{margin:10px 0 0;color:var(--muted);font-size:15px;max-width:34em}
@@ -102,7 +108,7 @@ html.flow .app{min-height:0}
 .rules ol{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:9px}
 .rules li{display:flex;gap:11px;align-items:baseline;font-size:14.5px}
 .rules .n{
-  font-family:var(--display);font-size:17px;color:var(--accent);
+  font-family:var(--display);font-stretch:70%;font-size:17px;color:var(--accent);
   min-width:16px;font-variant-numeric:tabular-nums
 }
 
@@ -116,7 +122,7 @@ html.flow .app{min-height:0}
 .card:active{transform:translateY(1px)}
 .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .card h3{
-  font-family:var(--display);text-transform:uppercase;font-weight:600;
+  font-family:var(--display);font-stretch:70%;text-transform:uppercase;font-weight:600;
   font-size:26px;line-height:1;letter-spacing:.005em
 }
 .card .day{
@@ -132,7 +138,7 @@ html.flow .app{min-height:0}
 }
 .resume strong{font-weight:600}
 .resume span{color:var(--muted);font-size:13.5px;display:block}
-.resume .go{font-family:var(--display);text-transform:uppercase;color:var(--accent);font-size:17px}
+.resume .go{font-family:var(--display);font-stretch:70%;text-transform:uppercase;color:var(--accent);font-size:17px}
 
 .optrow{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
@@ -140,7 +146,7 @@ html.flow .app{min-height:0}
   padding:14px 18px;margin-bottom:34px
 }
 .seg{display:flex;gap:4px;flex:none}
-.seg button{width:40px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);font-family:var(--display);font-size:17px;color:var(--muted)}
+.seg button{width:40px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);font-family:var(--display);font-stretch:70%;font-size:17px;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .optrow .lbl{font-size:14.5px;font-weight:500}
 .optrow .sub{color:var(--muted);font-size:12.5px;margin-top:2px}
@@ -166,7 +172,7 @@ html.flow .app{min-height:0}
   font-size:14px;font-weight:500;flex:none
 }
 .bar h2{
-  font-family:var(--display);text-transform:uppercase;font-size:20px;font-weight:600;
+  font-family:var(--display);font-stretch:70%;text-transform:uppercase;font-size:20px;font-weight:600;
   line-height:1;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
 }
 .tour{
@@ -182,7 +188,7 @@ html.flow .app{min-height:0}
   color:var(--muted);margin-bottom:8px
 }
 .ex-name{
-  font-family:var(--display);text-transform:uppercase;font-weight:700;
+  font-family:var(--display);font-stretch:70%;text-transform:uppercase;font-weight:700;
   font-size:clamp(30px,8.5vw,42px);line-height:.98;letter-spacing:.004em
 }
 
@@ -200,7 +206,7 @@ html.flow .app{min-height:0}
   margin-top:18px;padding-top:18px;border-top:1px solid var(--line)
 }
 .dose .big{
-  font-family:var(--display);font-size:54px;line-height:.85;font-weight:700;
+  font-family:var(--display);font-stretch:70%;font-size:54px;line-height:.85;font-weight:700;
   font-variant-numeric:tabular-nums;color:var(--accent)
 }
 .dose .unit{font-size:15px;color:var(--muted);font-weight:500}
@@ -238,7 +244,7 @@ html.flow .app{min-height:0}
 .ring svg{width:100%;height:100%;display:block}
 .ring .num{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:700;font-size:clamp(50px,17vw,68px);
+  font-family:var(--display);font-stretch:70%;font-weight:700;font-size:clamp(50px,17vw,68px);
   font-variant-numeric:tabular-nums;letter-spacing:-.01em
 }
 
@@ -249,7 +255,7 @@ html.flow .app{min-height:0}
 }
 .btn{
   width:100%;border:none;border-radius:4px;background:var(--accent);color:var(--accent-ink);
-  font-family:var(--display);text-transform:uppercase;font-size:21px;font-weight:600;
+  font-family:var(--display);font-stretch:70%;text-transform:uppercase;font-size:21px;font-weight:600;
   letter-spacing:.03em;padding:15px 18px 13px;transition:transform .12s ease,filter .15s ease
 }
 .btn:active{transform:translateY(1px)}
@@ -274,7 +280,7 @@ html.flow .app{min-height:0}
   margin-top:26px;text-align:center;color:var(--muted);font-size:14px;max-width:24em
 }
 .rest .next b{
-  display:block;color:var(--ink);font-family:var(--display);text-transform:uppercase;
+  display:block;color:var(--ink);font-family:var(--display);font-stretch:70%;text-transform:uppercase;
   font-size:21px;font-weight:600;margin-top:3px;line-height:1.1
 }
 .rest .btn{max-width:420px;margin-top:28px}
@@ -282,7 +288,7 @@ html.flow .app{min-height:0}
 /* Done */
 .done{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:40px}
 .done h2{
-  font-family:var(--display);text-transform:uppercase;font-weight:700;
+  font-family:var(--display);font-stretch:70%;text-transform:uppercase;font-weight:700;
   font-size:clamp(34px,10vw,48px);line-height:.95
 }
 .done p{color:var(--muted);margin:14px 0 0;font-size:15px}
