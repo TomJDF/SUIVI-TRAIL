@@ -434,6 +434,16 @@
    "coucher": "23:18",
    "lever": "07:20",
    "score": 81
+  },
+  "2026-11-11": {
+   "vfc": 42,
+   "fc_min": 64,
+   "fc_moy": 68,
+   "duree": "7h59",
+   "coucher": "02:39",
+   "lever": "10:39",
+   "score": 85,
+   "note": "petit excès la veille (après le GUMP)"
   }
  },
  "pas": {
