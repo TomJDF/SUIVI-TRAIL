@@ -519,6 +519,11 @@
    "etat": "ok",
    "score": 0,
    "note": "zéro douleur au réveil, lendemain du renfo"
+  },
+  "2026-11-11": {
+   "etat": "gene",
+   "score": 2,
+   "note": "2/10 sur la journée, journée canapé"
   }
  },
  "seances": {

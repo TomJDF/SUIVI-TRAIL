@@ -540,10 +540,10 @@ function vForme(){
 const hrow = (k, main, sub) => '<div class="hrow"><span class="hd">' + J3[(D(k).getDay()+6)%7] + '<small>' + fmt(D(k)) + '</small></span><span class="hv"><span>' + main + '</span>' + (sub ? '<span class="muted">' + sub + '</span>' : '') + '</span></div>';
 function vDos(){
   const ks = Object.keys(DOS).sort().reverse().slice(0, 28);
-  let h = BACK('Forme') + '<div class="page-h"><p class="eyebrow">Au réveil, sur 10</p><h1>Dos</h1><p class="sub">Stop la série ou la sortie si ça dépasse 3/10.</p></div>';
+  let h = BACK('Forme') + '<div class="page-h"><p class="eyebrow">Sur la journée, sur 10</p><h1>Dos</h1><p class="sub">Stop la série ou la sortie si ça dépasse 3/10.</p></div>';
   h += '<div class="card blk hist">' + (ks.length ? ks.map(k => { const x = DOS[k];
     return hrow(k, '<span class="st ' + (DOS_ST[x.etat] || 'no') + '">' + esc(x.score != null ? x.score + '/10' : ({ ok:'Rien', gene:'Gêne', douleur:'Douleur' }[x.etat] || '—')) + '</span>' + (x.nuit ? ' <span class="muted">réveils la nuit</span>' : x.nuit === false ? ' <span class="muted">nuit sans réveil</span>' : ''),
-      x.note && !/^\d+\/10 au réveil$/.test(x.note) ? esc(x.note) : ''); }).join('') : '<p class="muted">Rien de noté pour l\'instant.</p>') + '</div>';
+      x.note && !/^\d+\/10 (au réveil|sur la journée)$/.test(x.note) ? esc(x.note) : ''); }).join('') : '<p class="muted">Rien de noté pour l\'instant.</p>') + '</div>';
   $('view').innerHTML = h;
 }
 function vDouleurs(){
