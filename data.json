@@ -704,6 +704,13 @@
     "duree": "1h05",
     "fc": 148
    }
+  ],
+  "2026-11-11": [
+   {
+    "nom": "Renfo Programme 3 (version douce)",
+    "type": "Renfo",
+    "duree": "2 tours"
+   }
   ]
  },
  "douleurs": {
