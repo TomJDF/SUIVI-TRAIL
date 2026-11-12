@@ -170,7 +170,7 @@
      "titre": "Repos actif + mobilité"
     }
    ],
-   "quotidien": "Chaque matin : dos /10 au réveil, durée du dérouillage, réveil la nuit ou non. Serrage adducteurs et test du mollet avant de courir",
+   "quotidien": "Le soir : dos sur la journée (sur 10) et autre douleur. Test du mollet avant de courir",
    "prevu": "~35-40 km dont la sortie du samedi · ~1 700-2 200 m D+"
   }
  },
@@ -752,6 +752,13 @@
     "zone": "cuisse droite",
     "etat": "ok",
     "note": "rien pendant le renfo"
+   }
+  ],
+  "2026-11-12": [
+   {
+    "zone": "aine droite",
+    "etat": "ok",
+    "note": "plus rien depuis une semaine : dossier classé"
    }
   ]
  }
