@@ -1,5 +1,5 @@
 {
- "maj": "12/11/2026",
+ "maj": "13/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -32,8 +32,8 @@
    "note": "renfo Programme 1 lundi · GUMP mardi à 138 · mercredi en ville, montées marchées à 148-150 · vendredi 3,5 km de déblocage · Calvi samedi : 11,2 km / 393 m D+ en 1h01 officiel, 29e/323, 170 de FC moyenne, haut de la montée à 21'34"
   },
   "2026-11-09": {
-   "km": 9.8,
-   "dplus": 23
+   "km": 18.2,
+   "dplus": 374
   }
  },
  "resultats": {
@@ -453,6 +453,15 @@
    "coucher": "00:13",
    "lever": "07:20",
    "score": 85
+  },
+  "2026-11-13": {
+   "vfc": 51,
+   "fc_min": 62,
+   "fc_moy": 64,
+   "duree": "6h34",
+   "coucher": "00:34",
+   "lever": "07:08",
+   "score": 80
   }
  },
  "pas": {
@@ -465,7 +474,8 @@
   "2026-11-08": 115,
   "2026-11-09": 278,
   "2026-11-10": 16732,
-  "2026-11-11": 1932
+  "2026-11-11": 1932,
+  "2026-11-12": 13872
  },
  "dos": {
   "2026-10-27": {
@@ -715,6 +725,15 @@
     "nom": "Renfo Programme 3 (version douce)",
     "type": "Renfo",
     "duree": "2 tours"
+   }
+  ],
+  "2026-11-12": [
+   {
+    "nom": "Course à pied en soirée",
+    "type": "Run",
+    "km": 8.4,
+    "dp": 351,
+    "duree": "1h05"
    }
   ]
  },
