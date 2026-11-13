@@ -152,12 +152,12 @@
     {
      "jour": "Jeu",
      "seance": "GUMP côtes, selon la VFC du matin : 70 ou plus, séance de qualité (montées à 165-172, récup en trottinant, pas de sprint). Sous 70 : monter avec le groupe en endurance, sans forcer · ~8 km",
-     "titre": "GUMP · côtes (selon VFC)"
+     "titre": "GUMP · côtes"
     },
     {
      "jour": "Ven",
-     "seance": "Repos actif, ou 30 min très faciles au CAB si tu veux voir le groupe. Préparer la sortie et le ravito",
-     "titre": "Repos actif"
+     "seance": "Repos complet ou 20-30 min de marche (VFC 51 après les côtes et le resto). Préparer la sortie et le ravito (Maurten 320 + eau + dattes, bâtons, ceinture). Couché tôt.",
+     "titre": "Repos + préparer la Zucca"
     },
     {
      "jour": "Sam",
@@ -461,7 +461,8 @@
    "duree": "6h34",
    "coucher": "00:34",
    "lever": "07:08",
-   "score": 80
+   "score": 80,
+   "note": "côtes GUMP puis resto, couché tard, sans alcool"
   }
  },
  "pas": {
@@ -534,6 +535,11 @@
    "etat": "gene",
    "score": 2,
    "note": "2/10 sur la journée, journée canapé"
+  },
+  "2026-11-12": {
+   "etat": "gene",
+   "score": 1,
+   "note": "1/10 sur la journée"
   }
  },
  "seances": {
