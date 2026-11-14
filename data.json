@@ -32,8 +32,9 @@
    "note": "renfo Programme 1 lundi · GUMP mardi à 138 · mercredi en ville, montées marchées à 148-150 · vendredi 3,5 km de déblocage · Calvi samedi : 11,2 km / 393 m D+ en 1h01 officiel, 29e/323, 170 de FC moyenne, haut de la montée à 21'34"
   },
   "2026-11-09": {
-   "km": 18.2,
-   "dplus": 374
+   "km": 36.7,
+   "dplus": 2117,
+   "note": "GUMP mardi à 148 · soirée mardi (VFC 42 mercredi, 101 jeudi) · renfo P2 lundi et P3 mercredi · côtes GUMP jeudi · samedi double Zucca : 18,5 km / 1 743 m D+ en 4h, 1re montée à ~700 m/h (FC 148), 2e à ~810 m/h (FC 158) · test Maurten 320 : 2 flasques (160 g), dont 80 g en 50 min dans la 2e montée, aucun souci de ventre · dos 2/10 max"
   }
  },
  "resultats": {
@@ -172,6 +173,47 @@
    ],
    "quotidien": "Le soir : dos sur la journée (sur 10) et autre douleur. Test du mollet avant de courir",
    "prevu": "~35-40 km dont la sortie du samedi · ~1 700-2 200 m D+"
+  },
+  "2026-11-16": {
+   "jours": [
+    {
+     "jour": "Lun",
+     "titre": "Renfo P1 · hanches",
+     "seance": "Renfo kiné Programme 1 Hanches, 2 tours, sans aller à l'échec. Si les cuisses sont encore lourdes de la Zucca : 1 tour + 10 min de mobilité"
+    },
+    {
+     "jour": "Mar",
+     "titre": "GUMP · footing facile",
+     "seance": "GUMP : footing sous 141 (145 max), ~8 km. Mardi dernier tu étais à 148 de moyenne : reste au fond du groupe"
+    },
+    {
+     "jour": "Mer",
+     "titre": "CAB · version légère",
+     "seance": "CAB avec le groupe en version légère : échauffement et récups avec eux, les fractions en endurance (sous 150), ou 40 min de footing autour de la piste. La séance dure de la semaine, c'est samedi"
+    },
+    {
+     "jour": "Jeu",
+     "titre": "GUMP · côtes en endurance",
+     "seance": "GUMP côtes en version légère : tu montes avec le groupe sans dépasser 150, tu redescends en trottinant. Pas de séance dure avant samedi · ~8 km"
+    },
+    {
+     "jour": "Ven",
+     "titre": "Renfo P3 léger",
+     "seance": "Renfo kiné Programme 3 Mollets & varié, 2 tours, squat sans le saut, 2-3 répétitions en réserve. Préparer la tenue du 29 (ceinture, 2 flasques, bâtons, veste). Couché tôt"
+    },
+    {
+     "jour": "Sam",
+     "titre": "Zucca · spécifique San Parteu",
+     "seance": "Sortie spécifique San Parteu, ~2h : 1 montée de la Zucca avec les bâtons, dont 3 × 8 min à l'allure de course (160-165), le reste à 145-155. Descente technique relâchée, bâtons rangés. Ravito de course : 1 flasque de Maurten 320 sur la montée + 1 flasque d'eau + 3 dattes, soit ~60 g par heure. Tenue complète du 29. Stop si dos ou mollet > 3/10 · ~9 km, ~860 m D+"
+    },
+    {
+     "jour": "Dim",
+     "titre": "Repos actif + mobilité",
+     "seance": "Repos actif : marche 30-45 min + mobilité 10 min"
+    }
+   ],
+   "quotidien": "Le soir : dos sur la journée (sur 10) et autre douleur. Test du mollet avant de courir",
+   "prevu": "~33-36 km · ~1 300 m D+"
   }
  },
  "sommeil": {
@@ -551,6 +593,11 @@
    "etat": "gene",
    "score": 1,
    "note": "1/10 sur la journée"
+  },
+  "2026-11-14": {
+   "etat": "gene",
+   "score": 2,
+   "note": "senti en toute fin de 2e montée de la Zucca, resté à 2/10 max, pas monté dans la descente"
   }
  },
  "seances": {
@@ -751,6 +798,16 @@
     "km": 8.4,
     "dp": 351,
     "duree": "1h05"
+   }
+  ],
+  "2026-11-14": [
+   {
+    "nom": "Double Zucca supplément cheese 🍔",
+    "type": "TrailRun",
+    "km": 18.5,
+    "dp": 1743,
+    "duree": "3h25",
+    "fc": 145
    }
   ]
  },
