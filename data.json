@@ -34,7 +34,7 @@
   "2026-11-09": {
    "km": 36.7,
    "dplus": 2117,
-   "note": "GUMP mardi à 148 · soirée mardi (VFC 42 mercredi, 101 jeudi) · renfo P2 lundi et P3 mercredi · côtes GUMP jeudi · samedi double Zucca : 18,5 km / 1 743 m D+ en 4h, 1re montée à ~700 m/h (FC 148), 2e à ~810 m/h (FC 158) · test Maurten 320 : 2 flasques (160 g), dont 80 g en 50 min dans la 2e montée, aucun souci de ventre · dos 2/10 max"
+   "note": "GUMP mardi à 148 · soirée mardi (VFC 42 mercredi, 101 jeudi) · renfo P2 lundi et P3 mercredi · côtes GUMP jeudi · samedi double Zucca : 18,5 km / 1 743 m D+ en 4h, 1re montée à ~700 m/h (FC 148), 2e à ~810 m/h (FC 158) · test Maurten 320 : 2 flasques (160 g), dont 80 g en 50 min dans la 2e montée, aucun souci de ventre · eau claire en descente (1 flasque par tour) · tenue de course complète testée, avec les bâtons · dos 2/10 max"
   }
  },
  "resultats": {
@@ -598,6 +598,11 @@
    "etat": "gene",
    "score": 2,
    "note": "senti en toute fin de 2e montée de la Zucca, resté à 2/10 max, pas monté dans la descente"
+  },
+  "2026-11-13": {
+   "etat": "gene",
+   "score": 1,
+   "note": "1/10 sur la journée"
   }
  },
  "seances": {
