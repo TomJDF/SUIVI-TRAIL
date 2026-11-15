@@ -32,9 +32,9 @@
    "note": "renfo Programme 1 lundi · GUMP mardi à 138 · mercredi en ville, montées marchées à 148-150 · vendredi 3,5 km de déblocage · Calvi samedi : 11,2 km / 393 m D+ en 1h01 officiel, 29e/323, 170 de FC moyenne, haut de la montée à 21'34"
   },
   "2026-11-09": {
-   "km": 36.7,
-   "dplus": 2117,
-   "note": "GUMP mardi à 148 · soirée mardi (VFC 42 mercredi, 101 jeudi) · renfo P2 lundi et P3 mercredi · côtes GUMP jeudi · samedi double Zucca : 18,5 km / 1 743 m D+ en 4h, 1re montée à ~700 m/h (FC 148), 2e à ~810 m/h (FC 158) · test Maurten 320 : 2 flasques (160 g), dont 80 g en 50 min dans la 2e montée, aucun souci de ventre · eau claire en descente (1 flasque par tour) · tenue de course complète testée, avec les bâtons · dos 2/10 max"
+   "km": 46.6,
+   "dplus": 2634,
+   "note": "GUMP mardi à 148 · soirée mardi (VFC 42 mercredi, 101 jeudi) · renfo P2 lundi et P3 mercredi · côtes GUMP jeudi · samedi double Zucca : 18,5 km / 1 743 m D+ en 4h, 1re montée à ~700 m/h (FC 148), 2e à ~810 m/h (FC 158) · test Maurten 320 : 2 flasques (160 g), dont 80 g en 50 min dans la 2e montée, aucun souci de ventre · eau claire en descente (1 flasque par tour) · tenue de course complète testée, avec les bâtons · dos 2/10 max · dimanche rando GUMP sous la pluie : 9,9 km / 517 m D+"
   }
  },
  "resultats": {
@@ -178,8 +178,8 @@
    "jours": [
     {
      "jour": "Lun",
-     "titre": "Renfo P1 · hanches",
-     "seance": "Renfo kiné Programme 1 Hanches, 2 tours, sans aller à l'échec. Si les cuisses sont encore lourdes de la Zucca : 1 tour + 10 min de mobilité"
+     "titre": "Repos + mobilité",
+     "seance": "Repos complet après le gros week-end (2 260 m de D+ en deux jours). Mobilité 10 min le soir, couché tôt"
     },
     {
      "jour": "Mar",
@@ -188,8 +188,8 @@
     },
     {
      "jour": "Mer",
-     "titre": "CAB · version légère",
-     "seance": "CAB avec le groupe en version légère : échauffement et récups avec eux, les fractions en endurance (sous 150), ou 40 min de footing autour de la piste. La séance dure de la semaine, c'est samedi"
+     "titre": "Renfo P1 ou CAB léger",
+     "seance": "Au choix : renfo kiné Programme 1 Hanches, 2 tours, sans aller à l'échec ; ou CAB avec le groupe en version légère (fractions en endurance, sous 150). Pas les deux"
     },
     {
      "jour": "Jeu",
@@ -213,7 +213,7 @@
     }
    ],
    "quotidien": "Le soir : dos sur la journée (sur 10) et autre douleur. Test du mollet avant de courir",
-   "prevu": "~33-36 km · ~1 300 m D+"
+   "prevu": "~28-32 km · ~1 300 m D+ (semaine allégée après les 2 630 m de la semaine du 9)"
   }
  },
  "sommeil": {
@@ -823,6 +823,15 @@
     "dp": 1743,
     "duree": "3h25",
     "fc": 145
+   }
+  ],
+  "2026-11-15": [
+   {
+    "nom": "Randonnée GUMP (pique-nique)",
+    "type": "Hike",
+    "km": 9.9,
+    "dp": 517,
+    "duree": "2h40"
    }
   ]
  },
