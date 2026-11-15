@@ -1,5 +1,5 @@
 {
- "maj": "14/11/2026",
+ "maj": "15/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -167,8 +167,8 @@
     },
     {
      "jour": "Dim",
-     "seance": "Repos actif : marche 30-45 min + mobilité 10 min (le dos n'aime pas les journées immobiles)",
-     "titre": "Repos actif + mobilité"
+     "seance": "Pique-nique avec le GUMP : en marchant, sans courir, FC sous 130. Si la balade dépasse 2h ou 500 m de D+, tu coupes ou tu fais demi-tour. Mobilité 10 min ce soir",
+     "titre": "Pique-nique GUMP en marchant"
     }
    ],
    "quotidien": "Le soir : dos sur la journée (sur 10) et autre douleur. Test du mollet avant de courir",
@@ -515,6 +515,16 @@
    "lever": "07:10",
    "score": 79,
    "note": "rendormi de 7h37 à 9h57"
+  },
+  "2026-11-15": {
+   "vfc": 67,
+   "fc_min": 52,
+   "fc_moy": 59,
+   "duree": "8h22",
+   "coucher": "23:27",
+   "lever": "07:51",
+   "score": 81,
+   "note": "lendemain de la double Zucca, du mal à s'endormir"
   }
  },
  "pas": {
