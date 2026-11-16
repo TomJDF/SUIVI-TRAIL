@@ -566,6 +566,43 @@ const SESSIONS = {
     ]
   },
 
+  recup: {
+    name: 'Récup', day: 'Lendemain de course ou de grosse sortie', mins: '15 min', fixed: true, rounds: 2,
+    meta: 'Gainage, bassin, fessiers : on bouge sans charger les jambes',
+    blocks: [
+      { label: 'Relâcher', when: 'start', items: [
+        { name: 'Psoas au repos', time: 60, cues: [
+          'Allongé sur le dos, mollets posés sur une chaise ou le canapé, hanches et genoux à 90°.',
+          'Respire lentement par le ventre : 4 s à l\'inspiration, 6 s à l\'expiration.' ] },
+        { name: 'Chat-vache', reps: 8, cues: [
+          'À quatre pattes, lent, amplitude moyenne. Ça dérouille toute la colonne.' ] }
+      ]},
+      { label: 'Circuit', when: 'round', items: [
+        { name: 'Dead bug', sides: true, reps: 6, cues: [
+          'Hanches et genoux à 90°, bras vers le plafond.',
+          'Bas du dos collé au sol, tends lentement une jambe et le bras opposé, reviens, change.' ] },
+        { name: 'Bird-dog', sides: true, reps: 6, cues: [
+          'À quatre pattes. Tends un bras et la jambe opposée, tiens 3 s, reviens.',
+          'Le bassin ne bouge pas : imagine un verre d\'eau posé sur le bas du dos.' ] },
+        { name: 'Planche latérale sur le genou', sides: true, time: 20, rest: 15,
+          warn: 'Si le bas du dos tire, raccourcis à 10 s.',
+          cues: [
+            'Sur l\'avant-bras, genou du bas au sol. Épaule, hanche et genou alignés.' ] },
+        { name: 'Pont fessier à deux pieds', reps: 10, rest: 20, cues: [
+          'Plaque le bas du dos au sol, serre les fesses, monte jusqu\'à aligner épaule, hanche et genou.',
+          '2 s en haut, descente lente. Pas plus haut : si le dos travaille, tu cambres.' ] },
+        { name: 'Équilibre sur une jambe', sides: true, time: 30, cues: [
+          'Debout, mains sur les hanches. Le bassin reste horizontal : la hanche de la jambe en l\'air ne tombe pas.' ] }
+      ]},
+      { label: 'Étirer', when: 'end', items: [
+        { name: 'Fléchisseurs de hanche', sides: true, time: 30, cues: [
+          'En fente basse, genou arrière au sol. Fesse serrée, bassin poussé vers l\'avant, sans cambrer.' ] },
+        { name: 'Posture de l\'enfant', time: 45, cues: [
+          'Fesses vers les talons, bras devant, front au sol. Respire dans le dos.' ] }
+      ]}
+    ]
+  },
+
   mobilite: {
     name: 'Mobilité', day: 'En plus · avant footing', mins: '10 min', fixed: true, rounds: 1,
     meta: 'Bassin, hanche droite, aine : on prépare sans rien forcer',

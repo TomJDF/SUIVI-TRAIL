@@ -332,7 +332,7 @@ function weeksOf(p){
 const targetOf = mon => { for (const p of PHASES){ if (p.pre) continue; const w = weeksOf(p).find(x => x.key === iso(mon)); if (w) return w; } return null; };
 function renfoId(s){
   s = String(s).toLowerCase();
-  if (s.includes('post-course')) return 'postcourse';
+  if (s.includes('récup')) return 'recup';
   if (s.includes('programme 1') || s.includes('hanches')) return 'hanches';
   if (s.includes('programme 2') || s.includes('quadri') || s.includes('ischio')) return 'quadri';
   if (s.includes('programme 3') || s.includes('mollets')) return 'mollets';
