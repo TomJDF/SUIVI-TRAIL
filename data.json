@@ -1,5 +1,5 @@
 {
- "maj": "15/11/2026",
+ "maj": "16/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -613,6 +613,16 @@
    "etat": "gene",
    "score": 1,
    "note": "1/10 sur la journée"
+  },
+  "2026-11-15": {
+   "etat": "douleur",
+   "score": 3.5,
+   "note": "3-4/10 après la rando : diffus au milieu de la colonne, pas en bas à droite comme d'habitude ; un peu gêné pour s'endormir"
+  },
+  "2026-11-16": {
+   "etat": "gene",
+   "score": 2,
+   "note": "au réveil : quasi rien, 2/10 max, pas douloureux à la bascule, pareil dans toutes les positions"
   }
  },
  "seances": {
@@ -876,6 +886,13 @@
     "zone": "aine droite",
     "etat": "ok",
     "note": "plus rien depuis une semaine : dossier classé"
+   }
+  ],
+  "2026-11-16": [
+   {
+    "zone": "cuisses",
+    "etat": "gene",
+    "note": "courbatures au squat après le week-end, rien aux genoux"
    }
   ]
  }
