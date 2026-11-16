@@ -65,16 +65,18 @@ const RACEPLAN = {
       { km:14.6, n:'Col', t:'11h45', top:true, small:true },
       { km:15.8, n:'Ravito 2', s:'Croce d\'Olu', t:'11h50', bar:'barrière 14h45', rav:true }
     ],
+    // où je mange sur le profil
+    food:[ { km:6.0, l:'½ Naak' }, { km:11.0, l:'½ Naak' }, { km:19.5, l:'gel ?', opt:true } ],
     // tronçons : up = montée (Maurten), sinon descente (eau claire)
     segs:[
       { a:0, b:6.0, up:true, n:'Montée au San Parteu', dv:'+1 290 m', t:'1h30', what:'Flasque A : toute la Maurten 320 (80 g)', how:'Une gorgée toutes les 8-10 min, même dans le mur du km 4 → 6 (+760 m sur 2 km). Rien à mâcher.', g:80 },
-      { a:6.0, b:10.3, up:false, n:'Grande descente', dv:'−900 m', t:'40 min', what:'Au sommet : 2-3 bouchées de Naak en marchant', how:'Puis eau claire seulement, tête sur les pieds.', g:10 },
-      { a:10.3, b:14.6, up:true, n:'Ravito 1 et remontée', dv:'+350 m', t:'35 min', what:'Sachet 320 dans la flasque A · eau dans la B · fin de la Naak', how:'Debout, 1 min max. La moitié de la flasque A dans la remontée (40 g).', g:60 },
+      { a:6.0, b:10.3, up:false, n:'Grande descente', dv:'−900 m', t:'40 min', what:'Au sommet : ½ barre Naak en marchant', how:'Avant de basculer. Puis eau claire seulement, tête sur les pieds.', g:15 },
+      { a:10.3, b:14.6, up:true, n:'Ravito 1 et remontée', dv:'+350 m', t:'35 min', what:'Sachet 320 dans la flasque A · eau dans la B · l\'autre ½ Naak', how:'Debout, 1 min max. La ½ Naak en repartant, au pied de la remontée (km 11), puis la moitié de la flasque A dans la montée (40 g).', g:55 },
       { a:14.6, b:22.2, up:false, n:'Ravito 2 et descente finale', dv:'−815 m', t:'45 min', what:'Eau complétée, tu repars vite', how:'Le reste de la Maurten par gorgées dans les passages roulants. Gel au km 19-20 si besoin.', g:40 }
     ],
-    avant:[ ['6h00','Petit-déj ~120 g : pain blanc + miel ou confiture, compote, café. Peu de fibres.'], ['8h40','Un gel ou 3 bouchées de Naak (~25 g).'] ],
-    sac:['Flasque A en main : Maurten 320','Flasque B en ceinture : eau (1 L au total)','1 sachet de 320 pour le ravito 1','1 gel de secours','2 barres Naak (1 course + 1 réserve)','Veste à capuche, couverture, sifflet, gobelet, tél. chargé'],
-    test:'Samedi à la Zucca : même petit-déj, même timing, et la Naak au même moment (haut de la 1re montée, début de la 2e). Si elle passe mal, retour aux dattes.'
+    avant:[ ['6h00','Petit-déj ~120 g : pain blanc + miel ou confiture, compote, café. Peu de fibres.'], ['8h40','Un gel (~25 g).'] ],
+    sac:['Flasque A en main : Maurten 320','Flasque B en ceinture : eau (1 L au total)','1 sachet de 320 pour le ravito 1','1 gel de secours','2 barres Naak (1 coupée en deux pour la course + 1 en réserve)','Veste à capuche, couverture, sifflet, gobelet, tél. chargé'],
+    test:'Samedi à la Zucca : même petit-déj, même timing, et la Naak coupée en deux au même moment (½ en haut de la 1re montée, ½ au pied de la 2e). Si elle passe mal, retour aux dattes.'
   }
 };
 

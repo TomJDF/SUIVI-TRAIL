@@ -249,6 +249,13 @@ button.race{width:100%;text-align:left;font:inherit;color:inherit;background:non
 .prof .pk{fill:var(--ink);stroke:var(--card);stroke-width:2}
 .prof .pl{font-size:10.5px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:3px}
 .prof .pl.s{font-weight:500;font-size:9.5px;fill:var(--muted)}
+.prof .fd circle{fill:var(--p4);stroke:var(--card);stroke-width:1.5}
+.prof .fd line{stroke:var(--p4);stroke-width:1.5}
+.prof .fd rect{fill:var(--p4)}
+.prof .fd text{font-size:9.5px;font-weight:800;fill:var(--bg)}
+.prof .fd.opt rect{fill:var(--card);stroke:var(--p4);stroke-width:1.2;stroke-dasharray:3 2}
+.prof .fd.opt text{fill:var(--p4)}
+.pf-lg i.fd{background:var(--p4)}
 .prof .cur{stroke:var(--ink);stroke-width:1;opacity:.6}
 .pf-lg{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 0;font-size:12px;color:var(--muted)}
 .pf-lg i{display:inline-block;width:12px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
@@ -708,12 +715,17 @@ function vCourse(k){
     if (m.rav) svg += '<line class="rv" x1="' + x.toFixed(1) + '" x2="' + x.toFixed(1) + '" y1="16" y2="' + (H - B) + '"/><text class="rl" x="' + x.toFixed(1) + '" y="11" text-anchor="middle">' + esc(m.n.replace('Ravito ', 'R')) + ' · ' + m.t + '</text>';
     else svg += '<circle class="pk" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4"/>' + (m.small ? '' : '<text class="pl" x="' + (x + 7).toFixed(1) + '" y="' + (y - 15).toFixed(1) + '">' + esc(m.n) + ' ' + nf(at(m.km)) + ' m</text><text class="pl s" x="' + (x + 7).toFixed(1) + '" y="' + (y - 3).toFixed(1) + '">' + m.t + (m.bar ? ' · ' + esc(m.bar) : '') + '</text>');
   });
+  (c.food || []).forEach(f => {
+    const x = X(f.km), y = Y(at(f.km)), w = f.l.length * 5.6 + 12;
+    svg += '<g class="fd' + (f.opt ? ' opt' : '') + '"><circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3.5"/><line x1="' + x.toFixed(1) + '" x2="' + x.toFixed(1) + '" y1="' + y.toFixed(1) + '" y2="' + (y + 9).toFixed(1) + '"/>' +
+      '<rect x="' + (x - w / 2).toFixed(1) + '" y="' + (y + 9).toFixed(1) + '" width="' + w.toFixed(1) + '" height="15" rx="7.5"/><text x="' + x.toFixed(1) + '" y="' + (y + 20).toFixed(1) + '" text-anchor="middle">' + esc(f.l) + '</text></g>';
+  });
   [0, 5, 10, 15, 20].forEach(km => svg += '<text class="ax" x="' + Math.max(6, X(km)).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="middle">' + km + (km ? '' : ' km') + '</text>');
   svg += '<line class="cur" id="pf-l" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" visibility="hidden"/></svg>';
   const tot = c.segs.reduce((s, x) => s + x.g, 0) + 25;
   let h = BACK('Saison') + '<div class="page-h"><p class="eyebrow">' + esc(c.date) + '</p><h1>' + esc(c.titre) + '</h1><p class="sub">' + nf(c.km) + ' km · ' + nf(c.dp) + ' m D+ · ' + esc(c.obj) + '</p></div>';
   h += '<div class="card blk pf"><div class="pf-h"><span class="k">Le profil</span><span class="pf-t" id="pf-t">glisse le doigt sur le profil</span></div>' + svg +
-    '<div class="pf-lg"><span><i class="up"></i>Montée : Maurten</span><span><i class="dn"></i>Descente : eau claire</span><span><i class="rv"></i>Ravito</span></div></div>';
+    '<div class="pf-lg"><span><i class="up"></i>Montée : Maurten</span><span><i class="dn"></i>Descente : eau claire</span><span><i class="rv"></i>Ravito</span><span><i class="fd"></i>Je mange</span></div></div>';
   h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~60 g/h</b><span>la cible</span></div><div><b>1 L</b><span>au départ</span></div></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Avant le départ</h2></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + t + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Tronçon par tronçon</h2><span>heure de départ du tronçon</span></div>' + c.segs.map(sg => {
