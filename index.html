@@ -232,6 +232,48 @@ li.is-done .dt{color:var(--muted)}
 .race .rn{font-weight:600;font-size:15px;line-height:1.25}
 .race .f{grid-column:2;font-size:12.5px;color:var(--muted)}
 .race .r{grid-row:1 / 3;grid-column:3;text-align:right;font-size:12.5px;color:var(--muted);white-space:nowrap}
+button.race{width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer}
+.race .plk{display:block;font-style:normal;font-weight:700;font-size:12px;color:var(--p2);margin-top:3px}
+.pf{padding:14px 12px 12px}
+.pf-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 4px 6px}
+.pf-t{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.prof{width:100%;height:auto;display:block;touch-action:pan-y;overflow:visible}
+.prof .g{stroke:var(--line);stroke-width:1}
+.prof .ga,.prof .ax{font-size:9px;fill:var(--muted)}
+.prof .ar.up{fill:color-mix(in srgb,var(--p0) 24%,transparent)}
+.prof .ar.dn{fill:color-mix(in srgb,var(--p1) 20%,transparent)}
+.prof .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.prof .ln.up{stroke:var(--p0)} .prof .ln.dn{stroke:var(--p1)}
+.prof .rv{stroke:var(--p2);stroke-width:1.5;stroke-dasharray:3 3}
+.prof .rl{font-size:10px;font-weight:700;fill:var(--p2)}
+.prof .pk{fill:var(--ink);stroke:var(--card);stroke-width:2}
+.prof .pl{font-size:10.5px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:3px}
+.prof .pl.s{font-weight:500;font-size:9.5px;fill:var(--muted)}
+.prof .cur{stroke:var(--ink);stroke-width:1;opacity:.6}
+.pf-lg{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 0;font-size:12px;color:var(--muted)}
+.pf-lg i{display:inline-block;width:12px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.pf-lg i.up{background:var(--p0)} .pf-lg i.dn{background:var(--p1)} .pf-lg i.rv{background:var(--p2)}
+.nstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.nstats div{padding:12px 10px;border-radius:16px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.nstats b{font-family:var(--display);font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+.nstats span{font-size:11.5px;color:var(--muted)}
+.nrow{display:grid;grid-template-columns:50px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.nrow:last-child{border-bottom:0}
+.nrow .nt{font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+.nseg{padding:14px 16px;display:flex;flex-direction:column;gap:9px;border-left:3px solid var(--p0)}
+.nseg.dn{border-left-color:var(--p1)}
+.ns-h{display:flex;align-items:center;gap:10px}
+.ns-h .pi{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none;font-size:15px;font-weight:800}
+.ns-h .pi.up{background:color-mix(in srgb,var(--p0) 22%,transparent);color:var(--p0)}
+.ns-h .pi.dn{background:color-mix(in srgb,var(--p1) 22%,transparent);color:var(--p1)}
+.ns-h .pt2{font-family:var(--display);font-size:14.5px;font-weight:800;font-stretch:110%;text-transform:uppercase;letter-spacing:.02em}
+.ns-h .pk{font-size:12px;color:var(--muted)}
+.ns-t{margin-left:auto;font-family:var(--display);font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}
+.ns-w{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:9px 11px;border-radius:12px;background:var(--card-2);font-size:13.5px;font-weight:600}
+.ns-w b{flex:none;font-family:var(--display);font-variant-numeric:tabular-nums}
+.nseg p{margin:0;font-size:14px}
+.tst{border:1px solid color-mix(in srgb,var(--p2) 30%,var(--line))}
+.tst p{margin:4px 0 0;font-size:14px}
 .race .r b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);font-weight:800}
 .race.key .rn::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-left:7px;transform:translateY(-2px)}
 .race.past .d,.race.past .rn{color:var(--muted)}
@@ -623,8 +665,10 @@ function vSaison(){
   const row = ([k,r], i, past) => {
     const res = RESULTS[k], days = Math.ceil((D(r.d) - today) / DAY), isNext = !past && i === 0;
     const right = past ? (res ? '<b>' + esc(res.temps || '') + '</b>' + esc(res.place || '') : '') : r.final ? '<span class="ok-tag">Inscrit</span>' : (isNext ? '<b>J-' + days + '</b>' : '');
-    return '<div class="race' + (r.key ? ' key' : '') + (past ? ' past' : '') + (isNext && !r.final ? ' next' : '') + (r.final ? ' final' : '') + '" style="--c:var(' + colorOf(k) + ')"><span class="d">' + esc(r.label) + '</span>' +
-      '<span class="rn">' + esc(r.name) + '</span><span class="r">' + right + '</span><span class="f">' + esc(r.f) + (r.note && !past ? ' · ' + esc(r.note) : '') + '</span></div>';
+    const link = !past && (typeof RACEPLAN !== 'undefined' && RACEPLAN[k] ? '#saison/course/' + k : r.final ? '#saison/restonica' : '');
+    const tag = link ? 'button' : 'div';
+    return '<' + tag + ' class="race' + (r.key ? ' key' : '') + (past ? ' past' : '') + (isNext && !r.final ? ' next' : '') + (r.final ? ' final' : '') + (link ? ' lk' : '') + '"' + (link ? ' data-go="' + link + '"' : '') + ' style="--c:var(' + colorOf(k) + ')"><span class="d">' + esc(r.label) + '</span>' +
+      '<span class="rn">' + esc(r.name) + '</span><span class="r">' + right + '</span><span class="f">' + esc(r.f) + (r.note && !past ? ' · ' + esc(r.note) : '') + (link ? '<em class="plk">' + (RACEPLAN && RACEPLAN[k] ? 'Profil et plan nutri' : 'Plan de course') + ' ›</em>' : '') + '</span></' + tag + '>';
   };
   h += '<div class="sec"><div class="sec-h"><h2>Courses à venir</h2><span>le point = course clé</span></div><div class="card races">' + todo.map((x,i) => row(x, i, false)).join('') + '</div></div>';
   if (done.length) h += '<div class="sec"><div class="sec-h"><h2>Résultats</h2></div><div class="card races">' + done.map((x,i) => row(x, i, true)).join('') + '</div></div>';
@@ -643,6 +687,51 @@ function vResto(){
     '<p>' + esc(p.note) + '</p><div class="se"><b>À l\'entraînement</b>' + esc(p.seance) + '</div></div>').join('') + '</div>';
   h += '<p class="foot">Heures estimées à partir du GPX : on les recalera avec les sorties longues et Pietralba.</p>';
   $('view').innerHTML = h;
+}
+
+/* Sous-page : fiche course (profil + plan nutri), données dans RACEPLAN (plan.js) */
+function vCourse(k){
+  const c = RACEPLAN[k]; if (!c) return go('saison');
+  const W = 340, H = 186, T = 26, B = 22, amin = 200, amax = 1800, n = c.prof.length;
+  const X = km => (km / c.km * W), Y = a => T + (1 - (a - amin) / (amax - amin)) * (H - T - B);
+  const at = km => c.prof[Math.min(n - 1, Math.round(km / c.step))];
+  const pts = (a, b) => { const r = []; for (let i = Math.round(a / c.step); i <= Math.min(n - 1, Math.round(b / c.step)); i++) r.push([Math.min(c.km, i * c.step), c.prof[i]]); return r; };
+  let svg = '<svg class="prof" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Profil de la course">';
+  [500, 1000, 1500].forEach(a => svg += '<line class="g" x1="0" x2="' + W + '" y1="' + Y(a).toFixed(1) + '" y2="' + Y(a).toFixed(1) + '"/><text class="ga" x="2" y="' + (Y(a) - 3).toFixed(1) + '">' + nf(a) + ' m</text>');
+  c.segs.forEach(sg => {
+    const p = pts(sg.a, sg.b), line = p.map(([x, a]) => X(x).toFixed(1) + ',' + Y(a).toFixed(1)).join(' ');
+    svg += '<polygon class="ar ' + (sg.up ? 'up' : 'dn') + '" points="' + X(p[0][0]).toFixed(1) + ',' + (H - B) + ' ' + line + ' ' + X(p[p.length - 1][0]).toFixed(1) + ',' + (H - B) + '"/>' +
+      '<polyline class="ln ' + (sg.up ? 'up' : 'dn') + '" points="' + line + '"/>';
+  });
+  c.marks.slice().sort((a, b) => (b.rav ? 1 : 0) - (a.rav ? 1 : 0)).forEach(m => {
+    const x = X(m.km), y = Y(at(m.km));
+    if (m.rav) svg += '<line class="rv" x1="' + x.toFixed(1) + '" x2="' + x.toFixed(1) + '" y1="16" y2="' + (H - B) + '"/><text class="rl" x="' + x.toFixed(1) + '" y="11" text-anchor="middle">' + esc(m.n.replace('Ravito ', 'R')) + ' · ' + m.t + '</text>';
+    else svg += '<circle class="pk" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4"/>' + (m.small ? '' : '<text class="pl" x="' + (x + 7).toFixed(1) + '" y="' + (y - 15).toFixed(1) + '">' + esc(m.n) + ' ' + nf(at(m.km)) + ' m</text><text class="pl s" x="' + (x + 7).toFixed(1) + '" y="' + (y - 3).toFixed(1) + '">' + m.t + (m.bar ? ' · ' + esc(m.bar) : '') + '</text>');
+  });
+  [0, 5, 10, 15, 20].forEach(km => svg += '<text class="ax" x="' + Math.max(6, X(km)).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="middle">' + km + (km ? '' : ' km') + '</text>');
+  svg += '<line class="cur" id="pf-l" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" visibility="hidden"/></svg>';
+  const tot = c.segs.reduce((s, x) => s + x.g, 0) + 25;
+  let h = BACK('Saison') + '<div class="page-h"><p class="eyebrow">' + esc(c.date) + '</p><h1>' + esc(c.titre) + '</h1><p class="sub">' + nf(c.km) + ' km · ' + nf(c.dp) + ' m D+ · ' + esc(c.obj) + '</p></div>';
+  h += '<div class="card blk pf"><div class="pf-h"><span class="k">Le profil</span><span class="pf-t" id="pf-t">glisse le doigt sur le profil</span></div>' + svg +
+    '<div class="pf-lg"><span><i class="up"></i>Montée : Maurten</span><span><i class="dn"></i>Descente : eau claire</span><span><i class="rv"></i>Ravito</span></div></div>';
+  h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~60 g/h</b><span>la cible</span></div><div><b>1 L</b><span>au départ</span></div></div>';
+  h += '<div class="sec"><div class="sec-h"><h2>Avant le départ</h2></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + t + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
+  h += '<div class="sec"><div class="sec-h"><h2>Tronçon par tronçon</h2><span>heure de départ du tronçon</span></div>' + c.segs.map(sg => {
+    const m = c.marks.find(x => Math.abs(x.km - sg.a) < .05), t0 = sg.a === 0 ? '9h00' : m ? m.t : '';
+    return '<div class="card nseg ' + (sg.up ? 'up' : 'dn') + '"><div class="ns-h"><span class="pi ' + (sg.up ? 'up' : 'dn') + '">' + (sg.up ? '↗' : '↘') + '</span><div><div class="pt2">' + esc(sg.n) + '</div><div class="pk">km ' + String(sg.a).replace('.', ',') + ' → ' + String(sg.b).replace('.', ',') + ' · ' + sg.dv + ' · ' + sg.t + '</div></div><span class="ns-t">' + t0 + '</span></div>' +
+      '<div class="ns-w">' + esc(sg.what) + '<b>' + sg.g + ' g</b></div><p>' + esc(sg.how) + '</p></div>';
+  }).join('') + '</div>';
+  h += '<div class="sec"><div class="sec-h"><h2>Dans la ceinture</h2></div><div class="card blk"><ul class="focus">' + c.sac.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></div></div>';
+  h += '<div class="card blk tst"><div class="k">À tester samedi</div><p>' + esc(c.test) + '</p></div>';
+  h += '<p class="foot">Profil et heures estimés à partir du GPX (22,2 km / 1 830 D+ ; le règlement annonce 23 km / 1 958 D+).</p>';
+  $('view').innerHTML = h;
+  const el = $('view').querySelector('.prof'), ln = $('pf-l'), tt = $('pf-t');
+  const scrub = e => { const r = el.getBoundingClientRect(), km = Math.max(0, Math.min(c.km, (e.clientX - r.left) / r.width * c.km)), x = X(km);
+    ln.setAttribute('x1', x); ln.setAttribute('x2', x); ln.setAttribute('visibility', 'visible');
+    const sg = c.segs.find(s => km >= s.a && km <= s.b);
+    tt.textContent = 'km ' + km.toFixed(1).replace('.', ',') + ' · ' + nf(at(km)) + ' m' + (sg ? ' · ' + (sg.up ? 'Maurten' : 'eau claire') : ''); };
+  el.addEventListener('pointerdown', scrub); el.addEventListener('pointermove', scrub);
+  el.addEventListener('pointerleave', () => { ln.setAttribute('visibility', 'hidden'); tt.textContent = 'glisse le doigt sur le profil'; });
 }
 
 /* Sous-page : une phase */
@@ -682,6 +771,7 @@ function route(){
   else if (tab === 'forme' || parts[1] === 'forme') vForme();
   else if (tab === 'saison' && parts[1] === 'phase') vPhase(parts[2]);
   else if (tab === 'saison' && parts[1] === 'restonica') vResto();
+  else if (tab === 'saison' && parts[1] === 'course') vCourse(parts[2]);
   else if (tab === 'saison') vSaison();
   else vSemaine();
   const isSub = parts.length > 1;

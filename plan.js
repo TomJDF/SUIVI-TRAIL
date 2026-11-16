@@ -53,6 +53,31 @@ const RACES = {
 };
 
 
+/* Fiche course San Parteu (29/11) : profil tiré du GPX (un point tous les 200 m), passages estimés, plan nutri.
+   Le GPX donne 22,2 km / 1 830 D+ (le règlement annonce 23 km / 1 958 D+). */
+const RACEPLAN = {
+  parteu: {
+    titre:'San Parteu', date:'Dim. 29/11 · départ 9h · Felicetu', obj:'Arrivée vers 12h30-12h45', km:22.2, dp:1830, step:0.2,
+    prof:[357,376,410,447,466,521,553,601,618,658,704,712,693,670,667,675,682,689,732,793,866,934,1004,1100,1217,1292,1361,1446,1515,1592,1625,1533,1421,1330,1251,1205,1188,1121,1109,1074,1071,1058,1055,1050,1038,1014,989,959,938,912,900,861,821,805,779,754,761,767,764,754,764,762,789,805,832,858,886,918,938,968,1011,1059,1082,1092,1055,1027,1022,998,972,959,941,911,879,884,900,900,872,843,832,822,783,736,694,638,579,526,483,450,432,390,375,357,318,307,296,281,284,285,291,312,341,353],
+    marks:[
+      { km:6.0, n:'San Parteu', t:'10h30', bar:'barrière 12h30', top:true },
+      { km:10.3, n:'Ravito 1', s:'Bocca di Scuperta', t:'11h10', rav:true },
+      { km:14.6, n:'Col', t:'11h45', top:true, small:true },
+      { km:15.8, n:'Ravito 2', s:'Croce d\'Olu', t:'11h50', bar:'barrière 14h45', rav:true }
+    ],
+    // tronçons : up = montée (Maurten), sinon descente (eau claire)
+    segs:[
+      { a:0, b:6.0, up:true, n:'Montée au San Parteu', dv:'+1 290 m', t:'1h30', what:'Flasque A : toute la Maurten 320 (80 g)', how:'Une gorgée toutes les 8-10 min, même dans le mur du km 4 → 6 (+760 m sur 2 km). Rien à mâcher.', g:80 },
+      { a:6.0, b:10.3, up:false, n:'Grande descente', dv:'−900 m', t:'40 min', what:'Au sommet : 2-3 bouchées de Naak en marchant', how:'Puis eau claire seulement, tête sur les pieds.', g:10 },
+      { a:10.3, b:14.6, up:true, n:'Ravito 1 et remontée', dv:'+350 m', t:'35 min', what:'Sachet 320 dans la flasque A · eau dans la B · fin de la Naak', how:'Debout, 1 min max. La moitié de la flasque A dans la remontée (40 g).', g:60 },
+      { a:14.6, b:22.2, up:false, n:'Ravito 2 et descente finale', dv:'−815 m', t:'45 min', what:'Eau complétée, tu repars vite', how:'Le reste de la Maurten par gorgées dans les passages roulants. Gel au km 19-20 si besoin.', g:40 }
+    ],
+    avant:[ ['6h00','Petit-déj ~120 g : pain blanc + miel ou confiture, compote, café. Peu de fibres.'], ['8h40','Un gel ou 3 bouchées de Naak (~25 g).'] ],
+    sac:['Flasque A en main : Maurten 320','Flasque B en ceinture : eau (1 L au total)','1 sachet de 320 pour le ravito 1','1 gel de secours','2 barres Naak (1 course + 1 réserve)','Veste à capuche, couverture, sifflet, gobelet, tél. chargé'],
+    test:'Samedi à la Zucca : même petit-déj, même timing, et la Naak au même moment (haut de la 1re montée, début de la 2e). Si elle passe mal, retour aux dattes.'
+  }
+};
+
 /* Plan de course Restonica (objectif sub 13h, départ 2h). Heures et rythmes estimés à partir du GPX de la course :
    à recaler avec les sorties longues de l'hiver et Pietralba. Chaque partie a sa séance type pour imprimer le rythme. */
 const RESTO = {
