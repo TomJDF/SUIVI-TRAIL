@@ -67,6 +67,8 @@ const RACEPLAN = {
     ],
     // où je mange sur le profil
     food:[ { km:6.0, l:'½ Naak' }, { km:11.0, l:'½ Naak' }, { km:15.8, l:'½ Naak' } ],
+    // cardio visé, affiché en bande sous le profil (lvl 0 = libre, 1 = modéré, 2 = fort, 3 = à fond)
+    fcz:[ { a:0, b:4, l:'160-165', lvl:1 }, { a:4, b:6, l:'165-170 (plafond 172)', s:'170', lvl:2 }, { a:6, b:10.3, l:'libre', lvl:0 }, { a:10.3, b:14.6, l:'165-170', lvl:2 }, { a:14.6, b:20.9, l:'libre', lvl:0 }, { a:20.9, b:22.2, l:'170+, tout ce qui reste', s:'max', lvl:3 } ],
     // tronçons : up = montée (Maurten), sinon descente (eau claire)
     segs:[
       { a:0, b:6.0, up:true, fc:'160-165 puis 165-170', n:'Montée au San Parteu', dv:'+1 290 m', t:'1h30', what:'Flasque A : toute la Maurten 320 (80 g)', how:'Km 0-4 roulant : 160-165, ne pars pas avec les premiers. Le mur du km 4 → 6 (+760 m sur 2 km) : 165-170, plafond 172. Une gorgée toutes les 8-10 min, même dans le mur. Rien à mâcher.', g:80 },

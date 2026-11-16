@@ -256,6 +256,11 @@ button.race{width:100%;text-align:left;font:inherit;color:inherit;background:non
 .prof .fd.opt rect{fill:var(--card);stroke:var(--p4);stroke-width:1.2;stroke-dasharray:3 2}
 .prof .fd.opt text{fill:var(--p4)}
 .pf-lg i.fd{background:var(--p4)}
+.prof .fzk{font-size:8px;font-weight:800;letter-spacing:.12em;fill:var(--p3)}
+.prof .fz.l0{fill:var(--card-2)} .prof .fz.l1{fill:color-mix(in srgb,var(--p3) 35%,transparent)}
+.prof .fz.l2{fill:color-mix(in srgb,var(--p3) 70%,transparent)} .prof .fz.l3{fill:var(--p3)}
+.prof .fzt{font-size:8.5px;font-weight:800;font-variant-numeric:tabular-nums;fill:var(--ink)}
+.prof .fzt.l0{fill:var(--muted);font-weight:600} .prof .fzt.l3{fill:var(--bg)}
 .prof .cur{stroke:var(--ink);stroke-width:1;opacity:.6}
 .pf-lg{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 0;font-size:12px;color:var(--muted)}
 .pf-lg i{display:inline-block;width:12px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
@@ -704,7 +709,7 @@ function vResto(){
 /* Sous-page : fiche course (profil + plan nutri), données dans RACEPLAN (plan.js) */
 function vCourse(k){
   const c = RACEPLAN[k]; if (!c) return go('saison');
-  const W = 340, H = 186, T = 26, B = 22, amin = 200, amax = 1800, n = c.prof.length;
+  const LN = c.fcz ? 22 : 0, W = 340, H = 186 + LN, T = 26, B = 22 + LN, amin = 200, amax = 1800, n = c.prof.length;
   const X = km => (km / c.km * W), Y = a => T + (1 - (a - amin) / (amax - amin)) * (H - T - B);
   const at = km => c.prof[Math.min(n - 1, Math.round(km / c.step))];
   const pts = (a, b) => { const r = []; for (let i = Math.round(a / c.step); i <= Math.min(n - 1, Math.round(b / c.step)); i++) r.push([Math.min(c.km, i * c.step), c.prof[i]]); return r; };
@@ -725,6 +730,9 @@ function vCourse(k){
     svg += '<g class="fd' + (f.opt ? ' opt' : '') + '"><circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3.5"/><line x1="' + x.toFixed(1) + '" x2="' + x.toFixed(1) + '" y1="' + y.toFixed(1) + '" y2="' + (y + 9).toFixed(1) + '"/>' +
       '<rect x="' + (x - w / 2).toFixed(1) + '" y="' + (y + 9).toFixed(1) + '" width="' + w.toFixed(1) + '" height="15" rx="7.5"/><text x="' + x.toFixed(1) + '" y="' + (y + 20).toFixed(1) + '" text-anchor="middle">' + esc(f.l) + '</text></g>';
   });
+  if (c.fcz) { svg += '<text class="fzk" x="0" y="' + (H - B + 8) + '">FC</text>';
+    c.fcz.forEach(z => { const x0 = X(z.a) + 1, x1 = X(z.b) - 1, y0 = H - B + 11;
+      svg += '<rect class="fz l' + z.lvl + '" x="' + x0.toFixed(1) + '" y="' + y0 + '" width="' + (x1 - x0).toFixed(1) + '" height="14" rx="4"/><text class="fzt l' + z.lvl + '" x="' + ((x0 + x1) / 2).toFixed(1) + '" y="' + (y0 + 10) + '" text-anchor="middle">' + esc(x1 - x0 < 40 && z.s ? z.s : z.l) + '</text>'; }); }
   [0, 5, 10, 15, 20].forEach(km => svg += '<text class="ax" x="' + Math.max(6, X(km)).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="middle">' + km + (km ? '' : ' km') + '</text>');
   svg += '<line class="cur" id="pf-l" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" visibility="hidden"/></svg>';
   const tot = c.segs.reduce((s, x) => s + x.g, 0);
@@ -747,7 +755,8 @@ function vCourse(k){
   const scrub = e => { const r = el.getBoundingClientRect(), km = Math.max(0, Math.min(c.km, (e.clientX - r.left) / r.width * c.km)), x = X(km);
     ln.setAttribute('x1', x); ln.setAttribute('x2', x); ln.setAttribute('visibility', 'visible');
     const sg = c.segs.find(s => km >= s.a && km <= s.b);
-    tt.textContent = 'km ' + km.toFixed(1).replace('.', ',') + ' · ' + nf(at(km)) + ' m' + (sg ? ' · ' + (sg.up ? 'Maurten' : 'eau claire') : ''); };
+    const z = (c.fcz || []).find(s => km >= s.a && km <= s.b);
+    tt.textContent = 'km ' + km.toFixed(1).replace('.', ',') + ' · ' + nf(at(km)) + ' m' + (z ? ' · FC ' + z.l : '') + (sg ? ' · ' + (sg.up ? 'Maurten' : 'eau') : ''); };
   el.addEventListener('pointerdown', scrub); el.addEventListener('pointermove', scrub);
   el.addEventListener('pointerleave', () => { ln.setAttribute('visibility', 'hidden'); tt.textContent = 'glisse le doigt sur le profil'; });
 }
