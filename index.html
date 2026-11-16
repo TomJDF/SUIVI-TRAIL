@@ -722,11 +722,11 @@ function vCourse(k){
   });
   [0, 5, 10, 15, 20].forEach(km => svg += '<text class="ax" x="' + Math.max(6, X(km)).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="middle">' + km + (km ? '' : ' km') + '</text>');
   svg += '<line class="cur" id="pf-l" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" visibility="hidden"/></svg>';
-  const tot = c.segs.reduce((s, x) => s + x.g, 0) + 25;
+  const tot = c.segs.reduce((s, x) => s + x.g, 0);
   let h = BACK('Saison') + '<div class="page-h"><p class="eyebrow">' + esc(c.date) + '</p><h1>' + esc(c.titre) + '</h1><p class="sub">' + nf(c.km) + ' km · ' + nf(c.dp) + ' m D+ · ' + esc(c.obj) + '</p></div>';
   h += '<div class="card blk pf"><div class="pf-h"><span class="k">Le profil</span><span class="pf-t" id="pf-t">glisse le doigt sur le profil</span></div>' + svg +
     '<div class="pf-lg"><span><i class="up"></i>Montée : Maurten</span><span><i class="dn"></i>Descente : eau claire</span><span><i class="rv"></i>Ravito</span><span><i class="fd"></i>Je mange</span></div></div>';
-  h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~60 g/h</b><span>la cible</span></div><div><b>1 L</b><span>au départ</span></div></div>';
+  h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~55 g/h</b><span>sur 3h30</span></div><div><b>1 L</b><span>au départ</span></div></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Avant le départ</h2></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + t + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Tronçon par tronçon</h2><span>heure de départ du tronçon</span></div>' + c.segs.map(sg => {
     const m = c.marks.find(x => Math.abs(x.km - sg.a) < .05), t0 = sg.a === 0 ? '9h00' : m ? m.t : '';
