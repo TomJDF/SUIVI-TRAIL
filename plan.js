@@ -69,15 +69,16 @@ const RACEPLAN = {
     food:[ { km:6.0, l:'½ Naak' }, { km:11.0, l:'½ Naak' }, { km:15.8, l:'½ Naak' } ],
     // tronçons : up = montée (Maurten), sinon descente (eau claire)
     segs:[
-      { a:0, b:6.0, up:true, n:'Montée au San Parteu', dv:'+1 290 m', t:'1h30', what:'Flasque A : toute la Maurten 320 (80 g)', how:'Une gorgée toutes les 8-10 min, même dans le mur du km 4 → 6 (+760 m sur 2 km). Rien à mâcher.', g:80 },
-      { a:6.0, b:10.3, up:false, n:'Grande descente', dv:'−900 m', t:'40 min', what:'Au sommet : ½ barre Naak en marchant', how:'Avant de basculer. Puis eau claire seulement, tête sur les pieds.', g:15 },
-      { a:10.3, b:14.6, up:true, n:'Ravito 1 et remontée', dv:'+350 m', t:'35 min', what:'Sachet 320 dans la flasque A · eau dans la B · l\'autre ½ Naak', how:'Debout, 1 min max. La ½ Naak en repartant, au pied de la remontée (km 11), puis la moitié de la flasque A dans la montée (40 g).', g:55 },
-      { a:14.6, b:22.2, up:false, n:'Ravito 2 et descente finale', dv:'−815 m', t:'45 min', what:'Eau complétée · ½ Naak en repartant', how:'La ½ Naak au ravito, pas dans la descente : c\'est trop technique pour mâcher. Puis le reste de la Maurten par gorgées dans les passages roulants.', g:55 }
+      { a:0, b:6.0, up:true, fc:'160-165 puis 165-170', n:'Montée au San Parteu', dv:'+1 290 m', t:'1h30', what:'Flasque A : toute la Maurten 320 (80 g)', how:'Km 0-4 roulant : 160-165, ne pars pas avec les premiers. Le mur du km 4 → 6 (+760 m sur 2 km) : 165-170, plafond 172. Une gorgée toutes les 8-10 min, même dans le mur. Rien à mâcher.', g:80 },
+      { a:6.0, b:10.3, up:false, fc:'libre, ~155-165', n:'Grande descente', dv:'−900 m', t:'40 min', what:'Au sommet : ½ barre Naak en marchant', how:'Avant de basculer. Le cardio redescend tout seul, ne le regarde pas : en descente tu cours au feeling, c\'est ta force. Eau claire, tête sur les pieds.', g:15 },
+      { a:10.3, b:14.6, up:true, fc:'165-170', n:'Ravito 1 et remontée', dv:'+350 m', t:'35 min', what:'Sachet 320 dans la flasque A · eau dans la B · l\'autre ½ Naak', how:'Debout, 1 min max. La ½ Naak en repartant, au pied de la remontée (km 11), puis la moitié de la flasque A dans la montée (40 g). Montée courte : tu peux tenir 165-170 jusqu\'au col.', g:55 },
+      { a:14.6, b:22.2, up:false, fc:'libre, puis tout', n:'Ravito 2 et descente finale', dv:'−815 m', t:'45 min', what:'Eau complétée · ½ Naak en repartant', how:'La ½ Naak au ravito, pas dans la descente : c\'est trop technique pour mâcher. Puis le reste de la Maurten par gorgées dans les passages roulants. La petite remontée finale (+75 m) : tout ce qui reste, 170 et plus.', g:55 }
     ],
+    fc:'Repère : U Periplu (1h45) à 165 de moyenne, montées à 168-172, max 175. Calvi (1h02) à 170. Ici 2 fois plus long que le Periplu : vise ~163-165 de moyenne. Au-dessus de 172 dans le mur, tu lèves le pied.',
     avant:[ ['6h00','Petit-déj ~120 g : pain blanc + miel ou confiture, compote, café. Peu de fibres.'], ['8h30','½ barre Naak (~15 g), l\'autre moitié pour le ravito 2.'] ],
-    sac:['Flasque A en main : Maurten 320','Flasque B en ceinture : eau (1 L au total)','1 sachet de 320 pour le ravito 1','2 barres Naak coupées en deux (sommet, km 11, ravito 2 ; la ½ d\'avant le départ est déjà mangée)','1 pâte de fruits en réserve obligatoire',
+    sac:['Flasque A en main : Maurten 320','Flasque B en ceinture : eau (1 L au total)','1 sachet de 320 pour le ravito 1','3 demi-barres Naak (sommet, km 11, ravito 2)','1 pâte de fruits en réserve obligatoire',
       'Veste à capuche, couverture, sifflet, gobelet, tél. chargé'],
-    test:'Samedi à la Zucca : même petit-déj, même timing, et la Naak coupée en deux au même moment (½ en haut de la 1re montée, ½ au pied de la 2e). Si elle passe mal, retour aux dattes.'
+    test:'Samedi à la Zucca : même petit-déj, même timing, ½ Naak avant de partir, ½ en haut, et les 3 × 8 min à 165-170 pour caler le cardio du mur. Si elle passe mal, retour aux dattes.'
   }
 };
 

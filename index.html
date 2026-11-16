@@ -279,6 +279,11 @@ button.race{width:100%;text-align:left;font:inherit;color:inherit;background:non
 .ns-w{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:9px 11px;border-radius:12px;background:var(--card-2);font-size:13.5px;font-weight:600}
 .ns-w b{flex:none;font-family:var(--display);font-variant-numeric:tabular-nums}
 .nseg p{margin:0;font-size:14px}
+.ns-fc{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.ns-fc span{font-size:10px;letter-spacing:.14em;font-weight:800;padding:3px 7px;border-radius:8px;background:color-mix(in srgb,var(--p3) 18%,transparent);color:var(--p3)}
+.fcb{border:1px solid color-mix(in srgb,var(--p3) 30%,var(--line))}
+.fcb .k{color:var(--p3)}
+.fcb p{margin:4px 0 0;font-size:14px}
 .tst{border:1px solid color-mix(in srgb,var(--p2) 30%,var(--line))}
 .tst p{margin:4px 0 0;font-size:14px}
 .race .r b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);font-weight:800}
@@ -727,10 +732,11 @@ function vCourse(k){
   h += '<div class="card blk pf"><div class="pf-h"><span class="k">Le profil</span><span class="pf-t" id="pf-t">glisse le doigt sur le profil</span></div>' + svg +
     '<div class="pf-lg"><span><i class="up"></i>Montée : Maurten</span><span><i class="dn"></i>Descente : eau claire</span><span><i class="rv"></i>Ravito</span><span><i class="fd"></i>Je mange</span></div></div>';
   h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~60 g/h</b><span>sur 3h30</span></div><div><b>1 L</b><span>au départ</span></div></div>';
+  if (c.fc) h += '<div class="card blk fcb"><div class="k">Le cardio</div><p>' + esc(c.fc) + '</p></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Avant le départ</h2></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + t + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Tronçon par tronçon</h2><span>heure de départ du tronçon</span></div>' + c.segs.map(sg => {
     const m = c.marks.find(x => Math.abs(x.km - sg.a) < .05), t0 = sg.a === 0 ? '9h00' : m ? m.t : '';
-    return '<div class="card nseg ' + (sg.up ? 'up' : 'dn') + '"><div class="ns-h"><span class="pi ' + (sg.up ? 'up' : 'dn') + '">' + (sg.up ? '↗' : '↘') + '</span><div><div class="pt2">' + esc(sg.n) + '</div><div class="pk">km ' + String(sg.a).replace('.', ',') + ' → ' + String(sg.b).replace('.', ',') + ' · ' + sg.dv + ' · ' + sg.t + '</div></div><span class="ns-t">' + t0 + '</span></div>' +
+    return '<div class="card nseg ' + (sg.up ? 'up' : 'dn') + '"><div class="ns-h"><span class="pi ' + (sg.up ? 'up' : 'dn') + '">' + (sg.up ? '↗' : '↘') + '</span><div><div class="pt2">' + esc(sg.n) + '</div><div class="pk">km ' + String(sg.a).replace('.', ',') + ' → ' + String(sg.b).replace('.', ',') + ' · ' + sg.dv + ' · ' + sg.t + '</div></div><span class="ns-t">' + t0 + '</span></div>' + (sg.fc ? '<div class="ns-fc"><span>FC</span>' + esc(sg.fc) + '</div>' : '') +
       '<div class="ns-w">' + esc(sg.what) + '<b>' + sg.g + ' g</b></div><p>' + esc(sg.how) + '</p></div>';
   }).join('') + '</div>';
   h += '<div class="sec"><div class="sec-h"><h2>Dans la ceinture</h2></div><div class="card blk"><ul class="focus">' + c.sac.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></div></div>';
