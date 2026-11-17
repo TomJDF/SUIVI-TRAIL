@@ -1,5 +1,5 @@
 {
- "maj": "16/11/2026",
+ "maj": "17/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -534,6 +534,16 @@
    "coucher": "23:51",
    "lever": "07:20",
    "score": 81
+  },
+  "2026-11-17": {
+   "vfc": 95,
+   "fc_min": 49,
+   "fc_moy": 51,
+   "duree": "7h33",
+   "coucher": "23:51",
+   "lever": "07:24",
+   "score": 80,
+   "note": "Doliprane à 21h sans effet sur le dos, mais rien au réveil"
   }
  },
  "pas": {
@@ -633,6 +643,11 @@
    "etat": "douleur",
    "score": 4,
    "note": "4/10 sur la journée : localisé côté droit mais diffus, permanent, pas plus en se penchant ni selon la position (2/10 au réveil)"
+  },
+  "2026-11-17": {
+   "etat": "ok",
+   "score": 0,
+   "note": "au réveil : aucune douleur (à compléter ce soir sur la journée)"
   }
  },
  "seances": {
