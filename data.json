@@ -642,7 +642,7 @@
   "2026-11-16": {
    "etat": "douleur",
    "score": 4,
-   "note": "4/10 sur la journée : localisé côté droit mais diffus, permanent, pas plus en se penchant ni selon la position (2/10 au réveil)"
+   "note": "4/10 sur la journée : pas la douleur habituelle, plutôt une contracture sur le flanc droit (plus haut, niveau abdos), permanente, sans pincement à la bascule ; partie pendant la nuit"
   },
   "2026-11-17": {
    "etat": "ok",
@@ -867,6 +867,14 @@
     "km": 9.9,
     "dp": 517,
     "duree": "2h40"
+   }
+  ],
+  "2026-11-16": [
+   {
+    "nom": "Renfo Récup",
+    "type": "Renfo",
+    "duree": "15 min",
+    "note": "n'a pas augmenté la douleur"
    }
   ]
  },
