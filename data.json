@@ -193,8 +193,8 @@
     },
     {
      "jour": "Jeu",
-     "titre": "Renfo P1 Hanches léger",
-     "seance": "Pas de GUMP cette semaine. Renfo kiné Programme 1 Hanches, 2 tours tranquilles, sans aller à l'échec, + 10 min de mobilité. Au lit avant 23h"
+     "titre": "Renfo Récup + mobilité",
+     "seance": "Le dos a parlé après le CAB : séance Récup (15 min) à la place du P1, + 10 min de mobilité. Au lit avant 23h"
     },
     {
      "jour": "Ven",
@@ -900,6 +900,17 @@
     "dp": 36,
     "duree": "1h00",
     "fc": 132
+   }
+  ],
+  "2026-11-18": [
+   {
+    "nom": "CAB fractionné",
+    "type": "Run",
+    "km": 7.0,
+    "dp": 47,
+    "duree": "49 min",
+    "fc": 147,
+    "note": "5 × 200 + 5 min au seuil (~3'55/km, FC 170, max 174). Raide, dos qui parle après"
    }
   ]
  },
