@@ -655,9 +655,9 @@
    "note": "4/10 sur la journée : pas la douleur habituelle, plutôt une contracture sur le flanc droit (plus haut, niveau abdos), permanente, sans pincement à la bascule ; partie pendant la nuit"
   },
   "2026-11-17": {
-   "etat": "ok",
-   "score": 0,
-   "note": "au réveil : aucune douleur (à compléter ce soir sur la journée)"
+   "etat": "gene",
+   "score": 2,
+   "note": "2/10 max sur la journée (0 au réveil)"
   },
   "2026-11-18": {
    "etat": "ok",
