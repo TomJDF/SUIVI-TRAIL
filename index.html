@@ -289,6 +289,34 @@ button.race{width:100%;text-align:left;font:inherit;color:inherit;background:non
 .fcb{border:1px solid color-mix(in srgb,var(--p3) 30%,var(--line))}
 .fcb .k{color:var(--p3)}
 .fcb p{margin:4px 0 0;font-size:14px}
+.pr-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pr-c{padding:14px 13px;display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--p2)}
+.pr-c.ari{border-top-color:var(--p4)}
+.pr-n{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pr-big{font-family:var(--display);font-size:28px;font-weight:800;font-stretch:110%;line-height:1;font-variant-numeric:tabular-nums}
+.pr-c.tom .pr-big{color:var(--p2)} .pr-c.ari .pr-big{color:var(--p4)}
+.pr-big small{display:block;font-size:12px;font-weight:600;color:var(--muted);font-stretch:100%;margin-top:3px}
+.pr-row{display:flex;justify-content:space-between;gap:6px;font-size:12.5px;color:var(--muted)}
+.pr-row b{color:var(--ink);font-variant-numeric:tabular-nums}
+.pr-c p{margin:2px 0 0;font-size:12.5px;line-height:1.4}
+.pr-l{padding:10px 12px;display:flex;flex-direction:column;gap:2px;margin-top:8px}
+.pr-i{display:grid;grid-template-columns:22px minmax(0,1fr) 34% 34px;align-items:center;gap:8px;padding:4px 6px;border-radius:9px;font-size:13px}
+.pr-r{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px;text-align:right}
+.pr-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-nm em{font-style:normal;font-size:10px;font-weight:800;color:var(--muted)}
+.pr-nm em.dn{color:var(--p3)}
+.pr-bar{height:6px;border-radius:3px;background:var(--card-2);overflow:hidden}
+.pr-bar i{display:block;height:100%;border-radius:3px;background:color-mix(in srgb,var(--ink) 28%,transparent)}
+.pr-v{font-variant-numeric:tabular-nums;font-size:12.5px;text-align:right;color:var(--muted)}
+.pr-i.tom{background:color-mix(in srgb,var(--p2) 16%,transparent);font-weight:800}
+.pr-i.tom .pr-bar i{background:var(--p2)} .pr-i.tom .pr-v,.pr-i.tom .pr-r{color:var(--ink)}
+.pr-i.ari{background:color-mix(in srgb,var(--p4) 16%,transparent);font-weight:800}
+.pr-i.ari .pr-bar i{background:var(--p4)} .pr-i.ari .pr-v,.pr-i.ari .pr-r{color:var(--ink)}
+.pr-lg{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 6px 2px;font-size:11.5px;color:var(--muted)}
+.pr-lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.pr-lg i.tom{background:var(--p2)} .pr-lg i.ari{background:var(--p4)}
+.pr-lg em{font-style:normal;font-weight:800}
+.pr-lg em.dn{color:var(--p3)}
 .tst{border:1px solid color-mix(in srgb,var(--p2) 30%,var(--line))}
 .tst p{margin:4px 0 0;font-size:14px}
 .race .r b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);font-weight:800}
@@ -749,6 +777,19 @@ function vCourse(k){
   }).join('') + '</div>';
   h += '<div class="sec"><div class="sec-h"><h2>Dans la ceinture</h2></div><div class="card blk"><ul class="focus">' + c.sac.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></div></div>';
   h += '<div class="card blk tst"><div class="k">À tester samedi</div><p>' + esc(c.test) + '</p></div>';
+  if (c.prono) {
+    const P = c.prono, lo = 45, hi = 82;
+    h += '<div class="sec"><div class="sec-h"><h2>Pronostic</h2><span>niveaux Betrail au ' + P.maj + '</span></div>';
+    h += '<div class="pr-cards">' + P.cards.map(x => '<div class="card pr-c ' + x.k + '"><div class="pr-n">' + esc(x.nom) + '</div>' +
+      '<div class="pr-big">' + esc(x.prono) + '<small>' + esc(x.cat) + '</small></div>' +
+      '<div class="pr-row"><span>À la cote</span><b>' + esc(x.theo) + ' scratch</b></div><div class="pr-row"><span>Temps visé</span><b>' + esc(x.temps) + '</b></div>' +
+      '<p>' + esc(x.obj) + '</p></div>').join('') + '</div>';
+    h += '<div class="card blk pr-l">' + P.liste.map((r, n) => {
+      const w = Math.max(4, (r[1] - lo) / (hi - lo) * 100), cls = r[2] || '';
+      return '<div class="pr-i ' + cls + '"><span class="pr-r">' + (n + 1) + '</span><span class="pr-nm">' + esc(r[0]) + (cls === 'f' || cls === 'ari' ? ' <em>F</em>' : '') + (cls === 'b' ? ' <em class="dn">↘</em>' : '') + '</span>' +
+        '<span class="pr-bar"><i style="width:' + w.toFixed(1) + '%"></i></span><span class="pr-v">' + String(r[1]).replace('.', ',') + '</span></div>';
+    }).join('') + '<div class="pr-lg"><span><i class="tom"></i>Tom</span><span><i class="ari"></i>Ariane</span><span><em>F</em> femme</span><span><em class="dn">↘</em> forme 2026 sous sa cote</span></div></div></div>';
+  }
   h += '<p class="foot">Profil et heures estimés à partir du GPX (22,2 km / 1 830 D+ ; le règlement annonce 23 km / 1 958 D+).</p>';
   $('view').innerHTML = h;
   const el = $('view').querySelector('.prof'), ln = $('pf-l'), tt = $('pf-t');

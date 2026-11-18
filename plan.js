@@ -77,6 +77,22 @@ const RACEPLAN = {
       { a:14.6, b:22.2, up:false, fc:'lâche les chevaux, puis tout', n:'Ravito 2 et descente finale', dv:'−815 m', t:'45 min', what:'Eau complétée · ½ Naak en repartant', how:'La ½ Naak au ravito, pas dans la descente : c\'est trop technique pour mâcher. Ici plus rien derrière : tu descends comme tu sais, à fond. Le reste de la Maurten par gorgées dans les passages roulants. La petite remontée finale (+75 m) : tout ce qui reste, 170 et plus.', g:55 }
     ],
     fc:'Repère : U Periplu (1h45) à 165 de moyenne, montées à 168-172, max 175. Calvi (1h02) à 170. Ici 2 fois plus long et 2 fois plus de D+ : le cardio sert de plafond, ce sont les jambes qui décident. La grosse montée arrive jambes fraîches, la remontée ne fait que 350 m : c\'est là que tu peux appuyer. Moyenne attendue ~160-163.',
+    // Pronostic (niveaux Betrail des inscrits, relevés le 18/11/2026). f = femme, b = forme récente plus basse que la cote
+    prono:{
+      maj:'18/11',
+      liste:[
+        ['Lambert Santelli',80.8],['Noël Giordano',76.8],['Quentin Pécheul',68.2],['Antony Ceccaldi',63.3],['Joseph Lovati',63.1],
+        ['Ange Riu',62.5,'b'],['Sébastien Dumont',61.2],['Tiger-Lily Keyser',60.3,'f'],['Xavier Saint-Antonin',59.4],['Émile Bahaji',57.9],
+        ['Sylvain Bonachera',55.5],['F.-Xavier Farrucci',55.3,'b'],['Morad Boustatin',55.1],['Fabien Duvalet',55.1,'b'],['Petru Byrde',54.6],
+        ['Nathalie Quilghini',53.5,'f'],['Timao Glavieux',53.2],['J.-François Bernardini',52.6,'b'],['Tom Paillasson',52.5,'tom'],
+        ['Andrea Forneris',51.9],['Sébastien Baudino',51.9],['Jean-Noël Santelli',50.5],['Dumenicu Frediani',49.8],['Nicolas Vertu',49.8],
+        ['Clémence Imard',49.3,'f'],['Ariane Verzura',49.3,'ari']
+      ],
+      cards:[
+        { k:'tom', nom:'Tom', theo:'19e', prono:'12e-15e', cat:'au scratch', temps:'3h30-3h40', obj:'Top 10 : il faut ta meilleure course (~57 de niveau, ≈ 3h20). Ton repère : Boustatin, 3 places devant toi au Periplu.' },
+        { k:'ari', nom:'Ariane', theo:'25e', prono:'3e-4e', cat:'femme', temps:'3h50-4h05', obj:'Podium jouable : Quilghini favorite, Keyser inconnue, puis Ariane, Imard et Calabio dans un mouchoir.' }
+      ]
+    },
     avant:[ ['6h00','Petit-déj ~120 g : pain blanc + miel ou confiture, compote, café. Peu de fibres.'], ['8h30','½ barre Naak (~15 g), l\'autre moitié pour le ravito 2.'] ],
     sac:['Flasque A en main : Maurten 320 CAF (ou normale si le test caféine n\'a pas été bon)','Flasque B en ceinture : eau (1 L au total)','1 sachet de 320 pour le ravito 1','3 demi-barres Naak (sommet, km 11, ravito 2)','1 pâte de fruits en réserve obligatoire',
       'Veste à capuche, couverture, sifflet, gobelet, tél. chargé'],
