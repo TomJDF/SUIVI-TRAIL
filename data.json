@@ -1,5 +1,5 @@
 {
- "maj": "17/11/2026",
+ "maj": "18/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -544,6 +544,16 @@
    "lever": "07:24",
    "score": 80,
    "note": "Doliprane à 21h sans effet sur le dos, mais rien au réveil"
+  },
+  "2026-11-18": {
+   "vfc": 70,
+   "fc_min": 54,
+   "fc_moy": 61,
+   "duree": "6h11",
+   "coucher": "00:49",
+   "lever": "07:00",
+   "score": 79,
+   "note": "3 verres de vin, couché tard"
   }
  },
  "pas": {
@@ -875,6 +885,16 @@
     "type": "Renfo",
     "duree": "15 min",
     "note": "n'a pas augmenté la douleur"
+   }
+  ],
+  "2026-11-17": [
+   {
+    "nom": "Footing GUMP",
+    "type": "Run",
+    "km": 8.2,
+    "dp": 36,
+    "duree": "1h00",
+    "fc": 132
    }
   ]
  },
