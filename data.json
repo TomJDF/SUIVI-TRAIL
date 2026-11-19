@@ -198,8 +198,8 @@
     },
     {
      "jour": "Ven",
-     "titre": "Repos actif",
-     "seance": "Veille de la Zucca : pas de renfo. 20-30 min de marche ou mobilité douce si envie. Grosse nuit, zéro alcool. Prépare le matériel : 320 CAF, Naak coupée, gobelet, couverture, sifflet"
+     "titre": "Repos actif (ou 25 min très facile)",
+     "seance": "Veille de la Zucca. Repos actif, ou 25-30 min très facile sous 141 si les jambes le demandent, pas plus. Grosse nuit, zéro alcool. Prépare le matériel : 320 CAF, Naak coupée, gobelet, couverture, sifflet"
     },
     {
      "jour": "Sam",
@@ -208,12 +208,12 @@
     },
     {
      "jour": "Dim",
-     "titre": "Repos actif + mobilité",
-     "seance": "Repos actif : marche 30-45 min + mobilité 10 min"
+     "titre": "Footing très facile 40-45 min",
+     "seance": "Le lendemain de la Zucca : 40-45 min sur le plat, sous 141, pour dégourdir les jambes et ajouter des km sans fatigue. Pluie annoncée : si ça tombe fort, 30 min suffisent. + 10 min de mobilité"
     }
    ],
    "quotidien": "Le soir : dos sur la journée (sur 10) et autre douleur. Test du mollet avant de courir",
-   "prevu": "~28-32 km · ~1 300 m D+ (semaine allégée après les 2 630 m de la semaine du 9)"
+   "prevu": "~30-32 km · ~1 000 m D+"
   }
  },
  "sommeil": {
