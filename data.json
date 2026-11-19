@@ -1,5 +1,5 @@
 {
- "maj": "18/11/2026",
+ "maj": "19/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -554,6 +554,16 @@
    "lever": "07:00",
    "score": 79,
    "note": "3 verres de vin, couché tard"
+  },
+  "2026-11-19": {
+   "vfc": 91,
+   "fc_min": 48,
+   "fc_moy": 52,
+   "duree": "8h35",
+   "coucher": "22:35",
+   "lever": "07:10",
+   "score": 79,
+   "note": "presque d'une traite (4 min d'éveil)"
   }
  },
  "pas": {
@@ -663,6 +673,11 @@
    "etat": "ok",
    "score": 1,
    "note": "1/10 voire rien sur la journée"
+  },
+  "2026-11-19": {
+   "etat": "ok",
+   "score": 0,
+   "note": "au réveil : aucune douleur (à compléter ce soir)"
   }
  },
  "seances": {
