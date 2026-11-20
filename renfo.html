@@ -471,11 +471,13 @@ const SESSIONS = {
     meta: 'Planche latérale, fente bulgare, adducteurs, hip thrust, farmer walk',
     blocks: [
       { label: 'Circuit', when: 'round', items: [
-        { name: 'Planche latérale + jambe', sides: true, time: 35, rest: 30,
-          warn: 'Si le bas du dos lance, passe en appui sur le genou.',
+        { name: 'Planche latérale (sur le genou)', sides: true, time: 25, rest: 30,
+          warn: 'On repart sur le genou (nov. 2026). Palier suivant quand 3 × 30 s passent propres : genou 40 s → pieds décalés 20 s → pieds superposés + jambe.',
           cues: [
-            'Sur l\'avant-bras, et tu montes et descends la jambe du dessus pendant 30-40 s.',
-            'Laisse le bassin dans l\'axe épaule-hanche-genou : il ne s\'affaisse pas et ne recule pas.' ] },
+            'Sur l\'avant-bras, coude sous l\'épaule, appui sur le genou du dessous, genoux fléchis.',
+            'Ligne épaule-hanche-genou : le bassin ne s\'affaisse pas et ne recule pas.',
+            'Pousse le sol avec l\'avant-bras et monte la hanche du dessous.',
+            'Si le bas du dos lance, raccourcis le temps, ne force pas.' ] },
         { name: 'Fente bulgare', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 60, cues: [
           'Pied arrière posé sur une chaise ou le canapé.',
           'Penche bien le buste en avant.',
@@ -488,11 +490,14 @@ const SESSIONS = {
             'Jambe du dessus posée sur le canapé, sur le genou ou sur le pied.',
             '40 s en statique, ou 15-20 montées-descentes de la jambe du dessous.',
             'Bassin aligné avec les genoux et les épaules.' ] },
-        { name: 'Hip thrust', reps: 10, unit: 'répétitions (8-12)', rest: 60, cues: [
-          'Omoplates sur le canapé ou une chaise, un coussin derrière.',
-          'Bassin stable, monte le plus haut possible.',
-          'Tout le travail est dans les fessiers, à la montée comme à la descente.',
-          'Si 12 sont faciles, ajoute une charge sur le bassin.' ] },
+        { name: 'Hip thrust 1 jambe', sides: true, reps: 10, unit: 'répétitions (8-12)', rest: 45,
+          warn: 'Version 1 jambe à vide : meilleures sensations dans la fesse (nov. 2026). À deux jambes avec la kettle, c\'est le dos qui chargeait.',
+          cues: [
+            'Omoplates sur le canapé ou une chaise, un pied au sol, l\'autre jambe pliée en l\'air.',
+            'Côtes basses, menton rentré : en haut, tu rentres le bassin, tu ne creuses PAS le dos.',
+            'Monte jusqu\'à l\'alignement épaules-hanches-genou, pas plus haut.',
+            'Pause 2 s en haut, descente lente en 3 s.',
+            'Quand 12 sont faciles des deux côtés : la kettle de 8 sur la hanche, toujours sur 1 jambe.' ] },
         { name: 'Farmer walk', sides: true, time: 45, unit: 'secondes', load: 'sac de course chargé', rest: 45, cues: [
           'Grosse charge dans une seule main, par exemple le sac de course rempli.',
           'Tu marches GAINÉ, le buste ne penche pas du côté de la charge.',
