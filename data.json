@@ -1,5 +1,5 @@
 {
- "maj": "19/11/2026",
+ "maj": "20/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -564,6 +564,15 @@
    "lever": "07:10",
    "score": 79,
    "note": "presque d'une traite (4 min d'éveil)"
+  },
+  "2026-11-20": {
+   "vfc": 87,
+   "fc_min": 49,
+   "fc_moy": 54,
+   "duree": "8h09",
+   "coucher": "23:12",
+   "lever": "07:21",
+   "note": "ventre pas terrible au réveil"
   }
  },
  "pas": {
@@ -675,9 +684,14 @@
    "note": "1/10 voire rien sur la journée"
   },
   "2026-11-19": {
+   "etat": "gene",
+   "score": 1,
+   "note": "1/10 : senti après la journée au bureau et pendant le renfo, rien après"
+  },
+  "2026-11-20": {
    "etat": "ok",
    "score": 0,
-   "note": "au réveil : aucune douleur (à compléter ce soir)"
+   "note": "au réveil : rien (à compléter ce soir)"
   }
  },
  "seances": {
@@ -926,6 +940,13 @@
     "duree": "49 min",
     "fc": 147,
     "note": "5 × 200 + 5 min au seuil (~3'55/km, FC 170, max 174). Raide, dos qui parle après"
+   }
+  ],
+  "2026-11-19": [
+   {
+    "nom": "Renfo P1 Hanches (léger)",
+    "type": "Renfo",
+    "note": "dos senti pendant, rien après"
    }
   ]
  },
