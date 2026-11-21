@@ -203,8 +203,8 @@
     },
     {
      "jour": "Sam",
-     "titre": "Repos (mal de ventre)",
-     "seance": "Mal de ventre depuis jeudi soir : repos. Mange simple, bois. La répétition générale est annulée, pas de séance de qualité à rattraper."
+     "titre": "Zucca aller-retour (test CAF)",
+     "seance": "Fait finalement l'après-midi, ventre mieux : 11,3 km / 937 m D+, Maurten 320 CAF validée."
     },
     {
      "jour": "Dim",
@@ -947,6 +947,17 @@
     "nom": "Renfo P1 Hanches (léger)",
     "type": "Renfo",
     "note": "dos senti pendant, rien après"
+   }
+  ],
+  "2026-11-21": [
+   {
+    "nom": "Zucca aller-retour",
+    "type": "Trail",
+    "km": 11.3,
+    "dp": 937,
+    "duree": "1h45",
+    "fc": 151,
+    "note": "Ventre mieux après les pâtes du midi. Maurten 320 CAF 100 bien passée. Jambes lourdes et cardio haut les 30 premières min, puis ok. Montée ~845 m/h à ~156, descente ~39 min"
    }
   ]
  },
