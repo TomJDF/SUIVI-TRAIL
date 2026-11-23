@@ -1,5 +1,5 @@
 {
- "maj": "20/11/2026",
+ "maj": "23/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -208,12 +208,52 @@
     },
     {
      "jour": "Dim",
-     "titre": "Footing facile si le ventre va",
-     "seance": "Seulement si le ventre va mieux : 30-45 min très facile sur le plat, sous 141, eau seulement. Sinon repos."
+     "titre": "Repos",
+     "seance": "Repos (pas de footing). Ventre mieux."
     }
    ],
    "quotidien": "Le soir : dos sur la journée (sur 10) et autre douleur. Test du mollet avant de courir",
    "prevu": "~30-32 km · ~1 000 m D+"
+  },
+  "2026-11-23": {
+   "prevu": "~20 km + la course (22 km · 1 830 D+)",
+   "jours": [
+    {
+     "jour": "Lun",
+     "titre": "Repos ou Récup 15 min",
+     "seance": "Semaine de course. Séance Récup (15 min) si envie, sinon repos. Coucher avant 23h toute la semaine."
+    },
+    {
+     "jour": "Mar",
+     "titre": "GUMP footing facile",
+     "seance": "40-45 min sous 145, avec le groupe. Rien de plus."
+    },
+    {
+     "jour": "Mer",
+     "titre": "CAB court : réveil musculaire",
+     "seance": "Échauffement 15 min, puis 4 × 1 min à allure seuil (≈ 165), récup 1 min 30. Pas de 200 m ni de sprint. Retour au calme. 40 min au total."
+    },
+    {
+     "jour": "Jeu",
+     "titre": "Repos + mobilité",
+     "seance": "Repos. 10 min de mobilité (carnet de renfo). Repas normaux, pas besoin de surcharger en pâtes."
+    },
+    {
+     "jour": "Ven",
+     "titre": "20 min + 3 accélérations",
+     "seance": "20-25 min très facile + 3 accélérations de 15 s. Prépare tout le matériel ce soir-là : c'est la nuit qui compte le plus."
+    },
+    {
+     "jour": "Sam",
+     "titre": "Repos · dossard",
+     "seance": "Repos ou 20 min de marche. Retrait du dossard à Felicetu 15h-18h (sinon dimanche dès 7h30), avec pièce d'identité et licence ou PPS. Dîner simple (pâtes, riz), zéro alcool, au lit tôt."
+    },
+    {
+     "jour": "Dim",
+     "titre": "COURSE · San Parteu 9h",
+     "seance": "Réveil 5h-5h30, petit-déj à 6h, ½ Naak à 8h30, échauffement à 8h35, départ 9h. Tout le plan est dans Saison → San Parteu."
+    }
+   ]
   }
  },
  "sommeil": {
@@ -573,6 +613,20 @@
    "coucher": "23:12",
    "lever": "07:21",
    "note": "ventre pas terrible au réveil"
+  },
+  "2026-11-22": {
+   "duree": "~8h",
+   "coucher": "01:00",
+   "lever": "09:00",
+   "note": "sans montre, réveil naturel, bien dormi"
+  },
+  "2026-11-23": {
+   "vfc": 93,
+   "fc_min": 46,
+   "duree": "7h05",
+   "coucher": "00:05",
+   "lever": "07:10",
+   "note": "tempête : du mal à s'endormir à cause du vent (16 min d'éveil)"
   }
  },
  "pas": {
@@ -692,6 +746,16 @@
    "etat": "ok",
    "score": 0,
    "note": "au réveil : rien (à compléter ce soir)"
+  },
+  "2026-11-21": {
+   "etat": "gene",
+   "score": 1,
+   "note": "1/10"
+  },
+  "2026-11-22": {
+   "etat": "gene",
+   "score": 2,
+   "note": "2/10, beaucoup de canapé l'après-midi"
   }
  },
  "seances": {
