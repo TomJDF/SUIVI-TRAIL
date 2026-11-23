@@ -57,10 +57,11 @@ const RACES = {
    Le GPX donne 22,2 km / 1 830 D+ (le règlement annonce 23 km / 1 958 D+). */
 const RACEPLAN = {
   parteu: {
-    titre:'San Parteu', date:'Dim. 29/11 · départ 9h · Felicetu', obj:'Arrivée vers 12h30-12h45', km:22.2, dp:1830, step:0.2,
+    titre:'San Parteu', date:'Dim. 29/11 · départ 9h · place de Felicetu', obj:'Arrivée vers 12h30-12h45', km:22.2, dp:1830, step:0.2,
+    officiel:'23,5 km · 1 950 m D+', // règlement v3 (le site annonce 23,05 km / 1 958 m) ; le profil vient du GPX lissé (22,2 km / 1 830 m)
     prof:[357,376,410,447,466,521,553,601,618,658,704,712,693,670,667,675,682,689,732,793,866,934,1004,1100,1217,1292,1361,1446,1515,1592,1625,1533,1421,1330,1251,1205,1188,1121,1109,1074,1071,1058,1055,1050,1038,1014,989,959,938,912,900,861,821,805,779,754,761,767,764,754,764,762,789,805,832,858,886,918,938,968,1011,1059,1082,1092,1055,1027,1022,998,972,959,941,911,879,884,900,900,872,843,832,822,783,736,694,638,579,526,483,450,432,390,375,357,318,307,296,281,284,285,291,312,341,353],
     marks:[
-      { km:6.0, n:'San Parteu', t:'10h30', bar:'barrière 12h30', top:true },
+      { km:6.0, n:'San Parteu', alt:1688, t:'10h30', bar:'barrière 12h30', top:true },
       { km:10.3, n:'Ravito 1', s:'Bocca di Scuperta', t:'11h10', rav:true },
       { km:14.6, n:'Col', t:'11h45', top:true, small:true },
       { km:15.8, n:'Ravito 2', s:'Croce d\'Olu', t:'11h50', bar:'barrière 14h45', rav:true }
@@ -93,10 +94,52 @@ const RACEPLAN = {
         { k:'ari', nom:'Ariane', theo:'25e', prono:'3e-4e', cat:'femme', temps:'3h50-4h05', obj:'Podium jouable : Quilghini favorite, Keyser inconnue, puis Ariane, Imard et Calabio dans un mouchoir.' }
       ]
     },
-    avant:[ ['6h00','Petit-déj ~120 g : pain blanc + miel ou confiture, compote, café. Peu de fibres.'], ['8h30','½ barre Naak ou une banane (~15-20 g), c\'est le seul solide de la journée.'],['8h35','Échauffement 15 min : 10 min de trot très facile + 3-4 accélérations en montée. Le 21/11, jambes lourdes et cardio haut pendant les 30 premières minutes : on règle ça avant le départ.'] ],
+    avant:[
+      ['Sam.','Retrait du dossard place du village, 15h-18h, avec pièce d\'identité + licence ou PPS (sinon dimanche dès 7h30). Demande si la boisson compte dans le litre d\'eau obligatoire.'],
+      ['Sam. soir','Dîner simple : pâtes ou riz, pas de crudités ni de lentilles. Zéro alcool. Sac prêt, flasques et sachets posés, tenue sortie. Au lit vers 22h.'],
+      ['5h15','Lever.'],
+      ['5h30','Petit-déj ~120 g, peu de fibres : pain blanc + miel ou confiture, compote. Pas de café : la caféine est gardée pour le ravito 1.'],
+      ['6h15','Départ de Biguglia (compte ~1h15 de route, à vérifier sur le GPS).'],
+      ['7h30','Arrivée au village : contrôle du matériel obligatoire (et dossard si pas retiré samedi), toilettes.'],
+      ['8h00','Flasques : A = 320 (500 ml) en main, B = 160 (500 ml) en ceinture. Sachets 320 CAF + 160 dans la ceinture. Dossard devant, bien visible.'],
+      ['8h30','½ Naak ou une banane (~15-20 g), le seul solide de la journée.'],
+      ['8h35','Échauffement 15 min : 10 min de trot très facile + 3-4 accélérations en montée. Le 21/11, jambes lourdes et cardio haut pendant 30 min : on règle ça avant le départ.'],
+      ['8h50','Dans le sas : premier tiers, pas en première ligne. Veste dans le dos, bâtons prêts.']
+    ],
+    essentiel:[
+      'Km 0-4 : 160-165. Tu laisses partir, beaucoup vont exploser dans le mur.',
+      'Le mur (km 4 → 6) : aux jambes, plafond 170. Il y a un prix pour le premier au sommet : ce n\'est pas ta course, ne te fais pas aspirer.',
+      'Une gorgée toutes les 8-10 min : la flasque A (320) vide au sommet.',
+      'Grande descente à 80 % : un cran sous la Zucca du 21/11. Tu ne doubles personne.',
+      'Ravito 1 en 1 min : 320 CAF + 160, un gobelet d\'eau. Remontée à 165-170.',
+      'Descente finale : là, tu lâches tout. C\'est là que se joue le top 10.'
+    ],
+    planb:[
+      ['Dos qui lance dans le mur','Quelques pas mains sur les genoux, foulée plus courte, et les bâtons poussent vraiment. S\'il dépasse 5/10 et ne redescend pas dans la descente : tu finis en gestion, le classement n\'en vaut pas la peine.'],
+      ['Ventre qui tourne','Plus rien de concentré pendant 15 min : eau du ravito et petites gorgées de 160. Pas de solide. Ça repart presque toujours.'],
+      ['Crampes ou cuisses qui brûlent','Foulée plus courte, cadence haute, tu lèves le pied. Bois, et prends du salé au ravito s\'il y en a (bouillon, chips).'],
+      ['Froid et vent au sommet','Veste fermée AVANT le sommet, dans le dernier hectomètre du mur, gants et bonnet si tu les as. Deux minutes perdues valent mieux qu\'une descente frigorifiée.'],
+      ['Coup de mou dans la remontée','Ta Naak de réserve est faite pour ça : tu la manges. Le matériel obligatoire, c\'est d\'en avoir une au départ.'],
+      ['Parcours modifié (météo)','L\'organisation peut neutraliser la partie haute. Le plan reste : 320 en montée, 160 en descente, eau aux ravitos.'],
+      ['Chute ou blessure','Tu préviens un signaleur, un poste de secours ou le PC course (numéro sur le dossard). Abandon = toujours signalé, dossard rendu.']
+    ],
+    infos:[
+      ['Distance officielle','23,5 km · 1 950 m D+ (règlement v3), sommet du Monte San Parteo à 1 688 m'],
+      ['Barrières','Sommet 12h30 · ravito 2 (Croce d\'Olu) 14h45 · fermeture 16h30 : à ton rythme, environ 2h de marge'],
+      ['Pointages','Départ, sommet, ravito 1 (Bocca di Scuperta, km 10,3), ravito 2 (km 15,8), arrivée'],
+      ['Semi-autosuffisance','Pas d\'eau entre le départ et le km 10,3. Sans gobelet jetable : ton gobelet à chaque ravito'],
+      ['Matériel contrôlé au départ','1 L d\'eau, veste à capuche imperméable ou déperlante, couverture de survie, sifflet, téléphone chargé avec le n° du PC course, gobelet, réserve alimentaire'],
+      ['Recommandé','Bonnet, gants, veste chaude, bâtons (autorisés)'],
+      ['Défi de la montée','Classement à part du segment d\'ascension, prix au premier homme et à la première femme au sommet'],
+      ['Après','Repas coureur inclus (dès 12h30), récompenses à 15h30 (3 premiers scratch H/F). Nuit vers 17h'],
+      ['Contact','felicetutrail@gmail.com · n° du PC course sur le dossard, à enregistrer dans le téléphone']
+    ],
     sac:['Flasque A en main : Maurten 320 (80 g)','Flasque B en ceinture : Maurten 160 (40 g) — 1 L de liquide au total','Pour le ravito 1 : 1 sachet 320 CAF 100 + 1 sachet 160','1 Naak en réserve alimentaire obligatoire (on n\'y touche pas)',
-      'Veste à capuche, couverture, sifflet, gobelet, tél. chargé'],
-    test:'Fait le 21/11 : Maurten 320 CAF bien passée, montée à ~845 m/h vers 156. Jambes lourdes au départ pendant 30 min : d\'où l\'échauffement à 8h35.'
+      'Veste à capuche, couverture, sifflet, gobelet, tél. chargé avec le n° du PC course',
+      'Bonnet et gants (recommandés, il fera 0-5 °C au sommet), dossard devant',
+      'Bâtons, chaussures validées sur la Zucca'],
+    testk:'Validé à l\'entraînement',
+    test:'14/11 : double Zucca avec tout le matériel, bâtons et Maurten 320 (80 g en 50 min sans souci). 21/11 : Maurten 320 CAF bien passée, montée record (54\'35 à 156), descente rapide payée en courbatures le lendemain. Le 23/11 : passage au 100 % liquide (320 en montée, 160 en descente), la 160 est déjà connue.'
   }
 };
 

@@ -317,6 +317,13 @@ button.race{width:100%;text-align:left;font:inherit;color:inherit;background:non
 .pr-lg i.tom{background:var(--p2)} .pr-lg i.ari{background:var(--p4)}
 .pr-lg em{font-style:normal;font-weight:800}
 .pr-lg em.dn{color:var(--p3)}
+.ess ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:7px;font-size:14px}
+.ess ol li::marker{font-weight:800;color:var(--p2)}
+.ess{border:1px solid color-mix(in srgb,var(--p2) 30%,var(--line))}
+.ess .k{color:var(--p2)}
+.pbr{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.pbr:last-child{border-bottom:0}
+.pbr span{color:var(--muted);line-height:1.4}
 .tst{border:1px solid color-mix(in srgb,var(--p2) 30%,var(--line))}
 .tst p{margin:4px 0 0;font-size:14px}
 .race .r b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);font-weight:800}
@@ -751,7 +758,7 @@ function vCourse(k){
   c.marks.slice().sort((a, b) => (b.rav ? 1 : 0) - (a.rav ? 1 : 0)).forEach(m => {
     const x = X(m.km), y = Y(at(m.km));
     if (m.rav) svg += '<line class="rv" x1="' + x.toFixed(1) + '" x2="' + x.toFixed(1) + '" y1="16" y2="' + (H - B) + '"/><text class="rl" x="' + x.toFixed(1) + '" y="11" text-anchor="middle">' + esc(m.n.replace('Ravito ', 'R')) + ' · ' + m.t + '</text>';
-    else svg += '<circle class="pk" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4"/>' + (m.small ? '' : '<text class="pl" x="' + (x + 7).toFixed(1) + '" y="' + (y - 15).toFixed(1) + '">' + esc(m.n) + ' ' + nf(at(m.km)) + ' m</text><text class="pl s" x="' + (x + 7).toFixed(1) + '" y="' + (y - 3).toFixed(1) + '">' + m.t + (m.bar ? ' · ' + esc(m.bar) : '') + '</text>');
+    else svg += '<circle class="pk" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4"/>' + (m.small ? '' : '<text class="pl" x="' + (x + 7).toFixed(1) + '" y="' + (y - 15).toFixed(1) + '">' + esc(m.n) + ' ' + nf(m.alt || at(m.km)) + ' m</text><text class="pl s" x="' + (x + 7).toFixed(1) + '" y="' + (y - 3).toFixed(1) + '">' + m.t + (m.bar ? ' · ' + esc(m.bar) : '') + '</text>');
   });
   (c.food || []).forEach(f => {
     const x = X(f.km), y = Y(at(f.km)), w = f.l.length * 5.6 + 12;
@@ -764,19 +771,22 @@ function vCourse(k){
   [0, 5, 10, 15, 20].forEach(km => svg += '<text class="ax" x="' + Math.max(6, X(km)).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="middle">' + km + (km ? '' : ' km') + '</text>');
   svg += '<line class="cur" id="pf-l" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" visibility="hidden"/></svg>';
   const tot = c.segs.reduce((s, x) => s + x.g, 0);
-  let h = BACK('Saison') + '<div class="page-h"><p class="eyebrow">' + esc(c.date) + '</p><h1>' + esc(c.titre) + '</h1><p class="sub">' + nf(c.km) + ' km · ' + nf(c.dp) + ' m D+ · ' + esc(c.obj) + '</p></div>';
+  let h = BACK('Saison') + '<div class="page-h"><p class="eyebrow">' + esc(c.date) + '</p><h1>' + esc(c.titre) + '</h1><p class="sub">' + (c.officiel ? esc(c.officiel) : nf(c.km) + ' km · ' + nf(c.dp) + ' m D+') + ' · ' + esc(c.obj) + '</p></div>';
   h += '<div class="card blk pf"><div class="pf-h"><span class="k">Le profil</span><span class="pf-t" id="pf-t">glisse le doigt sur le profil</span></div>' + svg +
     '<div class="pf-lg"><span><i class="up"></i>Montée : flasque 320</span><span><i class="dn"></i>Descente : flasque 160</span><span><i class="rv"></i>Ravito</span><span><i class="fd"></i>Recharge / boisson</span></div></div>';
   h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~60 g/h</b><span>sur 3h30</span></div><div><b>1 L</b><span>au départ</span></div></div>';
+  if (c.essentiel) h += '<div class="card blk ess"><div class="k">L\'essentiel en 6 lignes</div><ol>' + c.essentiel.map(x => '<li>' + esc(x) + '</li>').join('') + '</ol></div>';
   if (c.fc) h += '<div class="card blk fcb"><div class="k">Le cardio</div><p>' + esc(c.fc) + '</p></div>';
-  h += '<div class="sec"><div class="sec-h"><h2>Avant le départ</h2></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + t + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
+  h += '<div class="sec"><div class="sec-h"><h2>Le jour J</h2><span>veille et matin</span></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + esc(t) + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Tronçon par tronçon</h2><span>heure de départ du tronçon</span></div>' + c.segs.map(sg => {
     const m = c.marks.find(x => Math.abs(x.km - sg.a) < .05), t0 = sg.a === 0 ? '9h00' : m ? m.t : '';
     return '<div class="card nseg ' + (sg.up ? 'up' : 'dn') + '"><div class="ns-h"><span class="pi ' + (sg.up ? 'up' : 'dn') + '">' + (sg.up ? '↗' : '↘') + '</span><div><div class="pt2">' + esc(sg.n) + '</div><div class="pk">km ' + String(sg.a).replace('.', ',') + ' → ' + String(sg.b).replace('.', ',') + ' · ' + sg.dv + ' · ' + sg.t + '</div></div><span class="ns-t">' + t0 + '</span></div>' + (sg.fc ? '<div class="ns-fc"><span>FC</span>' + esc(sg.fc) + '</div>' : '') +
       '<div class="ns-w">' + esc(sg.what) + '<b>' + sg.g + ' g</b></div><p>' + esc(sg.how) + '</p></div>';
   }).join('') + '</div>';
   h += '<div class="sec"><div class="sec-h"><h2>Dans la ceinture</h2></div><div class="card blk"><ul class="focus">' + c.sac.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></div></div>';
-  h += '<div class="card blk tst"><div class="k">À tester samedi</div><p>' + esc(c.test) + '</p></div>';
+  if (c.planb) h += '<div class="sec"><div class="sec-h"><h2>Plans B</h2><span>si ça ne se passe pas comme prévu</span></div><div class="card blk">' + c.planb.map(([t, x]) => '<div class="pbr"><b>' + esc(t) + '</b><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
+  h += '<div class="card blk tst"><div class="k">' + esc(c.testk || 'À tester') + '</div><p>' + esc(c.test) + '</p></div>';
+  if (c.infos) h += '<div class="sec"><div class="sec-h"><h2>Infos officielles</h2><span>règlement v3</span></div><div class="card blk">' + c.infos.map(([t, x]) => '<div class="pbr"><b>' + esc(t) + '</b><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
   if (c.prono) {
     const P = c.prono, lo = 45, hi = 82;
     h += '<div class="sec"><div class="sec-h"><h2>Pronostic</h2><span>niveaux Betrail au ' + P.maj + '</span></div>';
@@ -790,7 +800,7 @@ function vCourse(k){
         '<span class="pr-bar"><i style="width:' + w.toFixed(1) + '%"></i></span><span class="pr-v">' + String(r[1]).replace('.', ',') + '</span></div>';
     }).join('') + '<div class="pr-lg"><span><i class="tom"></i>Tom</span><span><i class="ari"></i>Ariane</span><span><em>F</em> femme</span><span><em class="dn">↘</em> forme 2026 sous sa cote</span></div></div></div>';
   }
-  h += '<p class="foot">Profil et heures estimés à partir du GPX (22,2 km / 1 830 D+ ; le règlement annonce 23 km / 1 958 D+).</p>';
+  h += '<p class="foot">Profil et heures estimés à partir du GPX lissé (22,2 km / 1 830 m D+) ; le règlement annonce 23,5 km / 1 950 m D+, sommet à 1 688 m.</p>';
   $('view').innerHTML = h;
   const el = $('view').querySelector('.prof'), ln = $('pf-l'), tt = $('pf-t');
   const scrub = e => { const r = el.getBoundingClientRect(), km = Math.max(0, Math.min(c.km, (e.clientX - r.left) / r.width * c.km)), x = X(km);
