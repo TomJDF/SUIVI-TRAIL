@@ -766,7 +766,7 @@ function vCourse(k){
   const tot = c.segs.reduce((s, x) => s + x.g, 0);
   let h = BACK('Saison') + '<div class="page-h"><p class="eyebrow">' + esc(c.date) + '</p><h1>' + esc(c.titre) + '</h1><p class="sub">' + nf(c.km) + ' km · ' + nf(c.dp) + ' m D+ · ' + esc(c.obj) + '</p></div>';
   h += '<div class="card blk pf"><div class="pf-h"><span class="k">Le profil</span><span class="pf-t" id="pf-t">glisse le doigt sur le profil</span></div>' + svg +
-    '<div class="pf-lg"><span><i class="up"></i>Montée : Maurten</span><span><i class="dn"></i>Descente : eau claire</span><span><i class="rv"></i>Ravito</span><span><i class="fd"></i>Je mange</span></div></div>';
+    '<div class="pf-lg"><span><i class="up"></i>Montée : flasque 320</span><span><i class="dn"></i>Descente : flasque 160</span><span><i class="rv"></i>Ravito</span><span><i class="fd"></i>Recharge / boisson</span></div></div>';
   h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~60 g/h</b><span>sur 3h30</span></div><div><b>1 L</b><span>au départ</span></div></div>';
   if (c.fc) h += '<div class="card blk fcb"><div class="k">Le cardio</div><p>' + esc(c.fc) + '</p></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Avant le départ</h2></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + t + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
@@ -797,7 +797,7 @@ function vCourse(k){
     ln.setAttribute('x1', x); ln.setAttribute('x2', x); ln.setAttribute('visibility', 'visible');
     const sg = c.segs.find(s => km >= s.a && km <= s.b);
     const z = (c.fcz || []).find(s => km >= s.a && km <= s.b);
-    tt.textContent = 'km ' + km.toFixed(1).replace('.', ',') + ' · ' + nf(at(km)) + ' m' + (z ? ' · FC ' + z.l : '') + (sg ? ' · ' + (sg.up ? 'Maurten' : 'eau') : ''); };
+    tt.textContent = 'km ' + km.toFixed(1).replace('.', ',') + ' · ' + nf(at(km)) + ' m' + (z ? ' · FC ' + z.l : '') + (sg ? ' · ' + (sg.up ? 'flasque 320' : 'flasque 160') : ''); };
   el.addEventListener('pointerdown', scrub); el.addEventListener('pointermove', scrub);
   el.addEventListener('pointerleave', () => { ln.setAttribute('visibility', 'hidden'); tt.textContent = 'glisse le doigt sur le profil'; });
 }
