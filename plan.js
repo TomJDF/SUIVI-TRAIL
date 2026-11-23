@@ -95,12 +95,11 @@ const RACEPLAN = {
       ]
     },
     avant:[
-      ['Sam.','Retrait du dossard place du village, 15h-18h, avec pièce d\'identité + licence ou PPS (sinon dimanche dès 7h30). Demande si la boisson compte dans le litre d\'eau obligatoire.'],
       ['Sam. soir','Dîner simple : pâtes ou riz, pas de crudités ni de lentilles. Zéro alcool. Sac prêt, flasques et sachets posés, tenue sortie. Au lit vers 22h.'],
       ['5h15','Lever.'],
       ['5h30','Petit-déj ~120 g, peu de fibres : pain blanc + miel ou confiture, compote. Pas de café : la caféine est gardée pour le ravito 1.'],
       ['6h15','Départ de Biguglia (compte ~1h15 de route, à vérifier sur le GPS).'],
-      ['7h30','Arrivée au village : contrôle du matériel obligatoire (et dossard si pas retiré samedi), toilettes.'],
+      ['7h30','Arrivée au village : retrait du dossard (pièce d\'identité + licence ou PPS) et contrôle du matériel. Demande si la boisson compte dans le litre d\'eau obligatoire. Toilettes.'],
       ['8h00','Flasques : A = 320 (500 ml) en main, B = 160 (500 ml) en ceinture. Sachets 320 CAF + 160 dans la ceinture. Dossard devant, bien visible.'],
       ['8h30','½ Naak ou une banane (~15-20 g), le seul solide de la journée.'],
       ['8h35','Échauffement 15 min : 10 min de trot très facile + 3-4 accélérations en montée. Le 21/11, jambes lourdes et cardio haut pendant 30 min : on règle ça avant le départ.'],
@@ -137,7 +136,7 @@ const RACEPLAN = {
     sac:['Flasque A en main : Maurten 320 (80 g)','Flasque B en ceinture : Maurten 160 (40 g) — 1 L de liquide au total','Pour le ravito 1 : 1 sachet 320 CAF 100 + 1 sachet 160','1 Naak en réserve alimentaire obligatoire (on n\'y touche pas)',
       'Veste à capuche, couverture, sifflet, gobelet, tél. chargé avec le n° du PC course',
       'Bonnet et gants (recommandés, il fera 0-5 °C au sommet), dossard devant',
-      'Bâtons, chaussures validées sur la Zucca'],
+      'Bâtons, Merrell MTL Long Sky 2 (celles de la Zucca)'],
     testk:'Validé à l\'entraînement',
     test:'14/11 : double Zucca avec tout le matériel, bâtons et Maurten 320 (80 g en 50 min sans souci). 21/11 : Maurten 320 CAF bien passée, montée record (54\'35 à 156), descente rapide payée en courbatures le lendemain. Le 23/11 : passage au 100 % liquide (320 en montée, 160 en descente), la 160 est déjà connue.'
   }
