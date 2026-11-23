@@ -35,6 +35,11 @@
    "km": 46.6,
    "dplus": 2634,
    "note": "GUMP mardi à 148 · soirée mardi (VFC 42 mercredi, 101 jeudi) · renfo P2 lundi et P3 mercredi · côtes GUMP jeudi · samedi double Zucca : 18,5 km / 1 743 m D+ en 4h, 1re montée à ~700 m/h (FC 148), 2e à ~810 m/h (FC 158) · test Maurten 320 : 2 flasques (160 g), dont 80 g en 50 min dans la 2e montée, aucun souci de ventre · eau claire en descente (1 flasque par tour) · tenue de course complète testée, avec les bâtons · dos 2/10 max · dimanche rando GUMP sous la pluie : 9,9 km / 517 m D+"
+  },
+  "2026-11-16": {
+   "km": 26.5,
+   "dplus": 1020,
+   "note": "Semaine allégée, prévue 30 km, faite 26,5 km · contracture au flanc droit lundi (4/10, bâtons de la Zucca), partie en 2 jours · GUMP mardi à 132, le plus bas de l'automne · CAB mercredi prévu léger mais fait au seuil (raide) · mal de ventre jeudi soir → samedi (crudités) · samedi Zucca aller-retour : montée record en 54'35 à 156, Maurten 320 CAF validée, descente rapide payée en courbatures dimanche · dimanche repos"
   }
  },
  "resultats": {
@@ -627,6 +632,9 @@
    "coucher": "00:05",
    "lever": "07:10",
    "note": "tempête : du mal à s'endormir à cause du vent (16 min d'éveil)"
+  },
+  "2026-11-21": {
+   "note": "montre non portée : pas de données (bien dormi selon Tom)"
   }
  },
  "pas": {
@@ -642,7 +650,12 @@
   "2026-11-11": 1932,
   "2026-11-12": 13872,
   "2026-11-13": 3051,
-  "2026-11-15": 18004
+  "2026-11-15": 18004,
+  "2026-11-16": 3248,
+  "2026-11-17": 12013,
+  "2026-11-18": 8517,
+  "2026-11-21": 11058,
+  "2026-11-22": 2548
  },
  "dos": {
   "2026-10-27": {
@@ -1003,7 +1016,7 @@
     "dp": 47,
     "duree": "49 min",
     "fc": 147,
-    "note": "5 × 200 + 5 min au seuil (~3'55/km, FC 170, max 174). Raide, dos qui parle après"
+    "note": "5 × 200 (pointes ~21 km/h) + 5 min au seuil (~3'55/km, FC 170, max 174). Prévu léger, fait au seuil. Raide, dos qui parle après puis plus rien"
    }
   ],
   "2026-11-19": [
@@ -1016,12 +1029,12 @@
   "2026-11-21": [
    {
     "nom": "Zucca aller-retour",
-    "type": "Trail",
+    "type": "TrailRun",
     "km": 11.3,
     "dp": 937,
     "duree": "1h45",
     "fc": 151,
-    "note": "Ventre mieux après les pâtes du midi. Maurten 320 CAF 100 bien passée. Jambes lourdes et cardio haut les 30 premières min, puis ok. Montée ~845 m/h à ~156, descente ~39 min"
+    "note": "Départ de la maison, ventre mieux après les pâtes du midi. Maurten 320 CAF 100 bien passée (80 g bus en 1h10, vide au sommet). Jambes lourdes et cardio haut les 30 premières min, puis ok. Montée (segment palette → sommet, +877 m) en 54'35 à 156 de FC, ~965 m/h, record. Descente ~32 min à ~149 : confortable mais courbatures aux cuisses le lendemain"
    }
   ]
  },
@@ -1073,6 +1086,13 @@
     "zone": "cuisses",
     "etat": "gene",
     "note": "courbatures au squat après le week-end, rien aux genoux"
+   }
+  ],
+  "2026-11-22": [
+   {
+    "zone": "cuisses",
+    "etat": "gene",
+    "note": "courbatures après la descente rapide de la Zucca, parties le lundi"
    }
   ]
  }
