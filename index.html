@@ -775,7 +775,7 @@ function vCourse(k){
   h += '<div class="card blk pf"><div class="pf-h"><span class="k">Le profil</span><span class="pf-t" id="pf-t">glisse le doigt sur le profil</span></div>' + svg +
     '<div class="pf-lg"><span><i class="up"></i>Montée : flasque 320</span><span><i class="dn"></i>Descente : flasque 160</span><span><i class="rv"></i>Ravito</span><span><i class="fd"></i>Recharge / boisson</span></div></div>';
   h += '<div class="nstats"><div><b>~' + tot + ' g</b><span>glucides en course</span></div><div><b>~60 g/h</b><span>sur 3h30</span></div><div><b>1 L</b><span>au départ</span></div></div>';
-  if (c.essentiel) h += '<div class="card blk ess"><div class="k">L\'essentiel en 6 lignes</div><ol>' + c.essentiel.map(x => '<li>' + esc(x) + '</li>').join('') + '</ol></div>';
+  if (c.essentiel) h += '<div class="card blk ess"><div class="k">L\'essentiel</div><ol>' + c.essentiel.map(x => '<li>' + esc(x) + '</li>').join('') + '</ol></div>';
   if (c.fc) h += '<div class="card blk fcb"><div class="k">Le cardio</div><p>' + esc(c.fc) + '</p></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Le jour J</h2><span>veille et matin</span></div><div class="card blk">' + c.avant.map(([t, x]) => '<div class="nrow"><span class="nt">' + esc(t) + '</span><span>' + esc(x) + '</span></div>').join('') + '</div></div>';
   h += '<div class="sec"><div class="sec-h"><h2>Tronçon par tronçon</h2><span>heure de départ du tronçon</span></div>' + c.segs.map(sg => {

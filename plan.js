@@ -103,10 +103,10 @@ const RACEPLAN = {
       ['8h00','Flasques : A = 320 (500 ml) en main, B = 160 (500 ml) en ceinture. Sachets 320 CAF + 160 dans la ceinture. Dossard devant, bien visible.'],
       ['8h30','½ Naak ou une banane (~15-20 g), le seul solide de la journée.'],
       ['8h35','Échauffement 15 min : 10 min de trot très facile + 3-4 accélérations en montée. Le 21/11, jambes lourdes et cardio haut pendant 30 min : on règle ça avant le départ.'],
-      ['8h50','Dans le sas : premier tiers, pas en première ligne. Veste dans le dos, bâtons prêts.']
+      ['8h50','Dans le sas : 2e-3e rang, pour entrer dans le single autour de la 15e-20e place (ton niveau). Derrière les cadors, devant le gros du peloton. Veste dans le dos, bâtons prêts.']
     ],
     essentiel:[
-      'Km 0-2 (+350 m) : tu cours le doux, tu marches fort aux bâtons au-dessus de ~15 %, 160-165. Km 2-3,4 : replat, tu cours. Tu laisses partir ceux qui courent tout.',
+      'Single dès le départ : les 200-300 premiers mètres un peu vite pour entrer dans le single vers la 15e-20e place, puis tu te poses. Km 0-2 (+350 m) : tu cours le doux, tu marches fort aux bâtons au-dessus de ~15 %, 160-165. Km 2-3,4 : replat, tu cours. Tu laisses partir ceux qui courent tout.',
       'Le mur (km 3,4 → 6, +930 m) : aux jambes, plafond 170. Il y a un prix pour le premier au sommet : ce n\'est pas ta course, ne te fais pas aspirer.',
       'Une gorgée toutes les 8-10 min : la flasque A (320) vide au sommet.',
       'Grande descente à 80 % : un cran sous la Zucca du 21/11. Tu ne doubles personne.',
