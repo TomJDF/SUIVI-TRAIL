@@ -69,10 +69,10 @@ const RACEPLAN = {
     // ce que je bois sur le profil (100 % liquide depuis le 23/11)
     food:[ { km:6.0, l:'160' }, { km:10.3, l:'320 CAF' }, { km:15.8, l:'eau' } ],
     // cardio visé, affiché en bande sous le profil (lvl 0 = libre, 1 = modéré, 2 = fort, 3 = à fond)
-    fcz:[ { a:0, b:4, l:'160-165', lvl:1 }, { a:4, b:6, l:'160-167, aux jambes (plafond 170)', s:'167', lvl:2 }, { a:6, b:10.3, l:'libre', lvl:0 }, { a:10.3, b:14.6, l:'165-170', lvl:2 }, { a:14.6, b:20.9, l:'libre', lvl:0 }, { a:20.9, b:22.2, l:'170+, tout ce qui reste', s:'max', lvl:3 } ],
+    fcz:[ { a:0, b:2, l:'160-165, marche active dans les passages raides', s:'165', lvl:1 }, { a:2, b:3.4, l:'155-165, ça se court', s:'cours', lvl:1 }, { a:3.4, b:6, l:'160-167, aux jambes (plafond 170)', s:'167', lvl:2 }, { a:6, b:10.3, l:'libre', lvl:0 }, { a:10.3, b:14.6, l:'165-170', lvl:2 }, { a:14.6, b:20.9, l:'libre', lvl:0 }, { a:20.9, b:22.2, l:'170+, tout ce qui reste', s:'max', lvl:3 } ],
     // tronçons : up = montée (flasque A, 320), sinon descente (flasque B, 160)
     segs:[
-      { a:0, b:6.0, up:true, fc:'160-165 puis 160-167', n:'Montée au San Parteu', dv:'+1 290 m', t:'1h30', what:'Flasque A : toute la Maurten 320 (80 g), sans caféine', how:'Km 0-4 roulant : 160-165, ne pars pas avec les premiers. Le mur du km 4 → 6 (+760 m sur 2 km) : 160-167, plafond 170. Ce sont tes jambes qui fixent le rythme, pas le cardio : si les cuisses brûlent, tu lèves le pied même à 160. Une gorgée toutes les 8-10 min, la flasque doit être vide au sommet (testé le 21/11 : 80 g en 1h10, sans souci).', g:80 },
+      { a:0, b:6.0, up:true, fc:'160-165 puis 160-167', n:'Montée au San Parteu', dv:'+1 290 m', t:'1h30', what:'Flasque A : toute la Maurten 320 (80 g), sans caféine', how:'Km 0-2 : ça monte déjà (+350 m, 17 % de moyenne, des passages à 20-28 %) : tu cours les replats et les pentes douces, tu marches fort aux bâtons dès que ça dépasse ~15 %, 160-165. Km 2-3,4 : replat puis petite descente, là tu cours. Le mur du km 3,4 → 6 (+930 m sur 2,6 km) : 160-167, plafond 170. Ce sont tes jambes qui fixent le rythme, pas le cardio : si les cuisses brûlent, tu lèves le pied même à 160. Une gorgée toutes les 8-10 min, la flasque doit être vide au sommet (testé le 21/11 : 80 g en 1h10, sans souci).', g:80 },
       { a:6.0, b:10.3, up:false, fc:'libre · jambes à 80 %', n:'Grande descente', dv:'−900 m', t:'40 min', what:'Flasque B : Maurten 160 par gorgées', how:'Rien à mâcher. Descente à 80 % : petits pas rapides, pas de sauts ni de grandes marches, tu ne doubles personne. Repère : un cran en dessous de la descente de la Zucca du 21/11 (les cuisses l\'ont sentie le lendemain). Attendu 38-42 min avec la fatigue de la montée. Si les cuisses brûlent, tu lèves le pied.', g:30 },
       { a:10.3, b:14.6, up:true, fc:'165-170', n:'Ravito 1 et remontée', dv:'+350 m', t:'35 min', what:'Sachet 320 CAF dans la A · sachet 160 dans la B · un gobelet d\'eau', how:'Debout, 1 min max : sachets ouverts dans la descente, tu remplis, tu bois un gobelet d\'eau sur place et tu repars en secouant. La caféine arrive pour la remontée et la descente finale, là où se joue le classement. La moitié de la A dans la remontée (40 g). Montée courte : 165-170 jusqu\'au col.', g:45 },
       { a:14.6, b:22.2, up:false, fc:'lâche les chevaux, puis tout', n:'Ravito 2 et descente finale', dv:'−815 m', t:'45 min', what:'Un gobelet d\'eau au ravito 2 et tu repars', how:'Ici plus rien derrière : tu descends comme tu sais, à fond. Le reste de la A (CAF) et de la B par gorgées dans les passages roulants. La petite remontée finale (+75 m) : tout ce qui reste, 170 et plus.', g:55 },
@@ -106,8 +106,8 @@ const RACEPLAN = {
       ['8h50','Dans le sas : premier tiers, pas en première ligne. Veste dans le dos, bâtons prêts.']
     ],
     essentiel:[
-      'Km 0-4 : 160-165. Tu laisses partir, beaucoup vont exploser dans le mur.',
-      'Le mur (km 4 → 6) : aux jambes, plafond 170. Il y a un prix pour le premier au sommet : ce n\'est pas ta course, ne te fais pas aspirer.',
+      'Km 0-2 (+350 m) : tu cours le doux, tu marches fort aux bâtons au-dessus de ~15 %, 160-165. Km 2-3,4 : replat, tu cours. Tu laisses partir ceux qui courent tout.',
+      'Le mur (km 3,4 → 6, +930 m) : aux jambes, plafond 170. Il y a un prix pour le premier au sommet : ce n\'est pas ta course, ne te fais pas aspirer.',
       'Une gorgée toutes les 8-10 min : la flasque A (320) vide au sommet.',
       'Grande descente à 80 % : un cran sous la Zucca du 21/11. Tu ne doubles personne.',
       'Ravito 1 en 1 min : 320 CAF + 160, un gobelet d\'eau. Remontée à 165-170.',
