@@ -791,6 +791,16 @@
    "etat": "gene",
    "score": 2,
    "note": "2/10, beaucoup de canapé l'après-midi"
+  },
+  "2026-11-23": {
+   "etat": "gene",
+   "score": 2,
+   "note": "2/10"
+  },
+  "2026-11-24": {
+   "etat": "ok",
+   "score": 0,
+   "note": "rien du tout"
   }
  },
  "seances": {
@@ -1072,9 +1082,10 @@
   ],
   "2026-11-23": [
    {
-    "nom": "Renfo",
+    "nom": "Renfo Récup",
     "type": "Renfo",
-    "note": "courbature à la fesse droite le lendemain"
+    "note": "courbature à la fesse droite le lendemain (sans doute la planche latérale + jambe, nouvelle)",
+    "duree": "15 min"
    }
   ]
  },
@@ -1139,7 +1150,7 @@
    {
     "zone": "fesse droite",
     "etat": "gene",
-    "note": "courbature, sans doute le renfo de lundi"
+    "note": "courbature, sans doute la planche latérale + montée de jambe (moyen fessier), nouvelle dans la Récup"
    }
   ]
  }
