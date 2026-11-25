@@ -1,5 +1,5 @@
 {
- "maj": "24/11/2026",
+ "maj": "25/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -40,6 +40,10 @@
    "km": 26.5,
    "dplus": 1020,
    "note": "Semaine allégée, prévue 30 km, faite 26,5 km · contracture au flanc droit lundi (4/10, bâtons de la Zucca), partie en 2 jours · GUMP mardi à 132, le plus bas de l'automne · CAB mercredi prévu léger mais fait au seuil (raide) · mal de ventre jeudi soir → samedi (crudités) · samedi Zucca aller-retour : montée record en 54'35 à 156, Maurten 320 CAF validée, descente rapide payée en courbatures dimanche · dimanche repos"
+  },
+  "2026-11-23": {
+   "km": 9.3,
+   "dplus": 25
   }
  },
  "resultats": {
@@ -221,7 +225,7 @@
    "prevu": "~30-32 km · ~1 000 m D+"
   },
   "2026-11-23": {
-   "prevu": "~20 km + la course (22 km · 1 830 D+)",
+   "prevu": "~15 km + la course (23,5 km · 1 950 D+)",
    "jours": [
     {
      "jour": "Lun",
@@ -235,18 +239,18 @@
     },
     {
      "jour": "Mer",
-     "titre": "Santu Stefanu : rythme du départ",
-     "seance": "À la place du CAB. 15 min d'échauffement, puis UNE montée de Santu Stefanu (+310 m sur 1,6 km, ~20 %, comme les km 0-2 du San Parteu) au rythme de course : tu cours le doux, tu marches fort aux bâtons au-dessus de ~15 %, 160-165, plafond 168. Repère : 19'30 le 09/11/2025 à 160-170. Redescente tranquille, 45-50 min en tout. Une seule montée."
+     "titre": "Repos (VFC 63)",
+     "seance": "VFC 63, FC min 56, jambes lourdes et courbature à la fesse : repos. Santu Stefanu annulé. 10 min de mobilité si envie, au lit avant 22h30."
     },
     {
      "jour": "Jeu",
      "titre": "Repos + mobilité",
-     "seance": "Repos. 10 min de mobilité (carnet de renfo). Montre : mettre la trace GPX du San Parteu et le cardio dans le profil Trail (FC max à 183). Repas normaux."
+     "seance": "Repos. 10 min de mobilité (carnet de renfo). Au lit avant 22h30, zéro alcool jusqu'à dimanche."
     },
     {
      "jour": "Ven",
-     "titre": "20 min + 3 accélérations",
-     "seance": "20-25 min très facile + 3 accélérations de 15 s. Prépare tout le matériel ce soir-là : c'est la nuit qui compte le plus."
+     "titre": "20 min + 4 min de montée + 3 accélérations",
+     "seance": "20 min très facile, dont 4-5 min en montée au rythme du départ (tu cours le doux, tu marches fort au-dessus de ~15 %, 160-165), puis 3 accélérations de 15 s. C'est le réveil musculaire. Prépare tout le matériel le soir."
     },
     {
      "jour": "Sam",
@@ -640,10 +644,18 @@
    "vfc": 82,
    "fc_min": 50,
    "fc_moy": 55,
-   "duree": "7h54",
+   "duree": "8h01",
    "coucher": "23:19",
    "lever": "07:20",
    "score": 81
+  },
+  "2026-11-25": {
+   "vfc": 63,
+   "fc_min": 56,
+   "duree": "7h04",
+   "coucher": "00:11",
+   "lever": "07:15",
+   "note": "GUMP + 2 verres de vin, couché tard"
   }
  },
  "pas": {
@@ -1046,6 +1058,24 @@
     "fc": 151,
     "note": "Départ de la maison, ventre mieux après les pâtes du midi. Maurten 320 CAF 100 bien passée (80 g bus en 1h10, vide au sommet). Jambes lourdes et cardio haut les 30 premières min, puis ok. Montée (segment palette → sommet, +877 m) en 54'35 à 156 de FC, ~965 m/h, record. Descente ~32 min à ~149 : confortable mais courbatures aux cuisses le lendemain"
    }
+  ],
+  "2026-11-24": [
+   {
+    "nom": "Footing GUMP",
+    "type": "Run",
+    "km": 9.3,
+    "dp": 25,
+    "duree": "1h01",
+    "fc": 142,
+    "note": "jambes très lourdes"
+   }
+  ],
+  "2026-11-23": [
+   {
+    "nom": "Renfo",
+    "type": "Renfo",
+    "note": "courbature à la fesse droite le lendemain"
+   }
   ]
  },
  "douleurs": {
@@ -1103,6 +1133,13 @@
     "zone": "cuisses",
     "etat": "gene",
     "note": "courbatures après la descente rapide de la Zucca, parties le lundi"
+   }
+  ],
+  "2026-11-24": [
+   {
+    "zone": "fesse droite",
+    "etat": "gene",
+    "note": "courbature, sans doute le renfo de lundi"
    }
   ]
  }
