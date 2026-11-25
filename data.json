@@ -652,10 +652,12 @@
   "2026-11-25": {
    "vfc": 63,
    "fc_min": 56,
-   "duree": "7h04",
+   "duree": "7h02",
    "coucher": "00:11",
    "lever": "07:15",
-   "note": "GUMP + 2 verres de vin, couché tard"
+   "note": "GUMP + 2 verres de vin, couché tard",
+   "fc_moy": 64,
+   "score": 80
   }
  },
  "pas": {
@@ -677,7 +679,8 @@
   "2026-11-18": 8517,
   "2026-11-21": 11058,
   "2026-11-22": 2548,
-  "2026-11-23": 32
+  "2026-11-23": 32,
+  "2026-11-24": 12593
  },
  "dos": {
   "2026-10-27": {
@@ -1071,13 +1074,12 @@
   ],
   "2026-11-24": [
    {
-    "nom": "Footing GUMP",
+    "nom": "Course à pied en soirée",
     "type": "Run",
     "km": 9.3,
     "dp": 25,
     "duree": "1h01",
-    "fc": 142,
-    "note": "jambes très lourdes"
+    "fc": 142
    }
   ],
   "2026-11-23": [
