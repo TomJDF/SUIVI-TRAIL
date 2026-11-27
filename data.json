@@ -1,5 +1,5 @@
 {
- "maj": "26/11/2026",
+ "maj": "27/11/2026",
  "semaines": {
   "2026-09-28": {
    "km": 29.7,
@@ -42,7 +42,7 @@
    "note": "Semaine allégée, prévue 30 km, faite 26,5 km · contracture au flanc droit lundi (4/10, bâtons de la Zucca), partie en 2 jours · GUMP mardi à 132, le plus bas de l'automne · CAB mercredi prévu léger mais fait au seuil (raide) · mal de ventre jeudi soir → samedi (crudités) · samedi Zucca aller-retour : montée record en 54'35 à 156, Maurten 320 CAF validée, descente rapide payée en courbatures dimanche · dimanche repos"
   },
   "2026-11-23": {
-   "km": 9.3,
+   "km": 16.9,
    "dplus": 25
   }
  },
@@ -681,7 +681,8 @@
   "2026-11-22": 2548,
   "2026-11-23": 32,
   "2026-11-24": 12593,
-  "2026-11-25": 11
+  "2026-11-25": 11,
+  "2026-11-26": 8250
  },
  "dos": {
   "2026-10-27": {
@@ -1089,6 +1090,16 @@
     "type": "Renfo",
     "note": "courbature à la fesse droite le lendemain (sans doute la planche latérale + jambe, nouvelle)",
     "duree": "15 min"
+   }
+  ],
+  "2026-11-26": [
+   {
+    "nom": "Course à pied en soirée",
+    "type": "Run",
+    "km": 7.6,
+    "dp": 0,
+    "duree": "47 min",
+    "fc": 144
    }
   ]
  },
