@@ -244,13 +244,13 @@
     },
     {
      "jour": "Jeu",
-     "titre": "Repos + mobilité",
-     "seance": "Repos. 10 min de mobilité (carnet de renfo). Au lit avant 22h30, zéro alcool jusqu'à dimanche."
+     "titre": "CAB tranquille (fait)",
+     "seance": "Fait au stade avec le CAB : 7,6 km, tours vers 5'10/km à 150-160, quelques accélérations."
     },
     {
      "jour": "Ven",
-     "titre": "20 min + 4 min de montée + 3 accélérations",
-     "seance": "20 min très facile, dont 4-5 min en montée au rythme du départ (tu cours le doux, tu marches fort au-dessus de ~15 %, 160-165), puis 3 accélérations de 15 s. C'est le réveil musculaire. Prépare tout le matériel le soir."
+     "titre": "Repos (ou 15 min très facile)",
+     "seance": "Le réveil musculaire a été fait jeudi au CAB : repos. Si les jambes le demandent, 15 min très facile, rien de plus. Prépare tout le matériel ce soir, au lit tôt."
     },
     {
      "jour": "Sam",
@@ -1104,12 +1104,13 @@
   ],
   "2026-11-26": [
    {
-    "nom": "Course à pied en soirée",
+    "nom": "CAB au stade (tranquille)",
     "type": "Run",
     "km": 7.6,
     "dp": 0,
     "duree": "47 min",
-    "fc": 144
+    "fc": 144,
+    "note": "échauffement, tours vers 5'10/km à 150-160, quelques accélérations (max 168)"
    }
   ]
  },
