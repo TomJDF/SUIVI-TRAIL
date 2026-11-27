@@ -244,8 +244,8 @@
     },
     {
      "jour": "Jeu",
-     "titre": "CAB tranquille (fait)",
-     "seance": "Fait au stade avec le CAB : 7,6 km, tours vers 5'10/km à 150-160, quelques accélérations."
+     "titre": "GUMP tranquille (fait)",
+     "seance": "Fait au stade avec le GUMP : 7,6 km, tours vers 5'10/km à 150-160, quelques accélérations."
     },
     {
      "jour": "Ven",
@@ -1104,7 +1104,7 @@
   ],
   "2026-11-26": [
    {
-    "nom": "CAB au stade (tranquille)",
+    "nom": "GUMP au stade (tranquille)",
     "type": "Run",
     "km": 7.6,
     "dp": 0,
